@@ -17,6 +17,7 @@
 
         <textarea
             name="text"
+            id="inputText"
             rows="10"
             placeholder="Paste your text here..."
             required>
@@ -47,19 +48,37 @@
         <div class="spinner"></div>
         <p>Generating summary...</p>
     </div>
+    <hr>
 
+    <h3>Upload PDF</h3>
+
+    <form
+    action="/upload-pdf"
+    method="post"
+    enctype="multipart/form-data">
+
+        <input
+            type="file"
+            name="file"
+            accept=".pdf">
+
+        <br><br>
+
+        <button type="submit">
+            Summarize PDF
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/history">
+        View Summary History
+    </a>
 </div>
 
-<script>
-document
-.getElementById("summaryForm")
-.addEventListener("submit", function () {
 
-    document
-    .getElementById("loading")
-    .classList.remove("hidden");
-});
-</script>
+
 <script>
 const input =
 document.getElementById("inputText");
@@ -72,5 +91,16 @@ input.addEventListener("input", () => {
         input.value.length;
 });
 </script>
+<script>
+document
+.getElementById("summaryForm")
+.addEventListener("submit", function () {
+
+    document
+    .getElementById("loading")
+    .classList.remove("hidden");
+});
+</script>
+
 </body>
 </html>
