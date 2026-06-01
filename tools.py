@@ -3,7 +3,10 @@ import re
 
 def extract_actions(text):
 
-    sentences = re.split(r'[.!?]\s+', text)
+    sentences = re.split(
+        r'[.!?]\s+|\n+',
+        text
+    )
 
     keywords = [
         "should",
@@ -20,12 +23,21 @@ def extract_actions(text):
     for s in sentences:
 
         s = s.strip()
+        lower = s.lower()
 
-        if any(
-            keyword in s.lower()
-            for keyword in keywords
+        if (
+            "should" in lower
+            or "must" in lower
+            or "need to" in lower
+            or "needs to" in lower
         ):
-            actions.append(s)
+            s = re.sub(
+                r"^[A-Za-z\s]+:\s*",
+                "",
+                s
+            )
+
+            actions.append(s.strip())
 
     return list(dict.fromkeys(actions))
 
@@ -34,22 +46,38 @@ def business_insight_tool(text):
 
     insights = []
 
-    lower_text = text.lower()
+    lower = text.lower()
 
-    if "revenue" in lower_text:
+    # Revenue
+    revenue = re.search(r"revenue.*?(\d+%)", lower)
+    if revenue:
+        insights.append(f"Revenue changed by {revenue.group(1)}")
+    elif "revenue" in lower:
+        insights.append("Revenue movement detected")
+
+    # Profit
+    profit_match = re.search(
+        r"profit.*?(\d+%)",
+        text,
+        flags=re.IGNORECASE
+    )
+
+    if profit_match:
         insights.append(
-            "Revenue trend identified"
+            f"Profit changed by {profit_match.group(1)}"
+        )
+    elif "profit" in lower:
+        insights.append(
+            "Profit improvement detected"
         )
 
-    if "%" in text:
-        insights.append(
-            "Percentage change detected"
-        )
+    # Market
+    if "market share" in lower or "market" in lower:
+        insights.append("Market expansion detected")
 
-    if "profit" in lower_text:
-        insights.append(
-            "Profit-related information found"
-        )
+    # Generic fallback
+    if not insights:
+        insights.append("Business activity detected")
 
     return insights
 
@@ -58,6 +86,11 @@ def research_finding_tool(text):
 
     findings = []
 
+    sentences = re.split(
+        r"[.!?]\s+",
+        text
+    )
+
     keywords = [
         "research",
         "study",
@@ -65,10 +98,14 @@ def research_finding_tool(text):
         "result"
     ]
 
-    for keyword in keywords:
-        if keyword in text.lower():
+    for sentence in sentences:
+
+        if any(
+            keyword in sentence.lower()
+            for keyword in keywords
+        ):
             findings.append(
-                f"Contains {keyword}-related information"
+                sentence.strip()
             )
 
-    return findings
+    return list(dict.fromkeys(findings))

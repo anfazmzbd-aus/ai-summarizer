@@ -6,7 +6,14 @@ from .agents import (
     findings_agent,
     plan_agent
 )
+from app.services.registry.agent_registry import (
+    AGENT_REGISTRY
+)
+from app.services.routers.semantic_router import (
+    semantic_router
+)
 import logging
+
 logger = logging.getLogger(__name__)
 
 AGENTS = {
@@ -20,22 +27,35 @@ AGENTS = {
 
 def run_graph(state):
 
-    state = plan_agent(state)
+    plan = semantic_router(
+        state["text"]
+    )
 
-    state["metadata"]["route"] = state["selected_agents"]
+    state["plan"] = plan
 
-    selected = state["selected_agents"]
+    selected = plan["selected_agents"]
+
+    state["selected_agents"] = selected
+    
+    state["execution"] = {
+        "agents_executed": selected
+    }
+    #state = plan_agent(state)
+
+    #state["metadata"]["route"] = state["selected_agents"]
+
+    #selected = state["selected_agents"]
 
     logger.info(f"ROUTE: {selected}")
 
-    if "summary" in selected:
-        state = summary_agent(state)
+    for agent_name in selected:
 
-    if "actions" in selected:
-        state = actions_agent(state)
+        agent = AGENT_REGISTRY.get(
+            agent_name
+        )
 
-    if "insights" in selected:
-        state = insights_agent(state)
+        if agent:
+            state = agent(state)
 
     if "findings" in selected:
         state = findings_agent(state)

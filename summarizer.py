@@ -1,58 +1,121 @@
-import os
-from openai import OpenAI
-from dotenv import load_dotenv
-import logging
+from transformers import pipeline
+import re
 
-load_dotenv()
 
-logging.basicConfig(
-    filename="app.log",
-    level=logging.INFO
+# Load model once at startup
+summarizer_model = pipeline(
+    "summarization",
+    model="facebook/bart-large-cnn"
 )
 
-#client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-client = OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=os.getenv("OPENROUTER_API_KEY"), # Recommended env variable name
-)
 
-def summarize_text(text, summary_length="medium"):
+def classify_content(text):
 
-    length_instruction = {
-        "short": "Summarize in 2-3 sentences.",
-        "medium": "Summarize clearly in one paragraph.",
-        "long": "Provide a detailed summary with key points."
+    text_lower = text.lower()
+
+    if any(word in text_lower for word in [
+        "meeting",
+        "agenda",
+        "follow up",
+        "action item"
+    ]):
+        return "Meeting Notes"
+
+    elif any(word in text_lower for word in [
+        "revenue",
+        "profit",
+        "market",
+        "sales"
+    ]):
+        return "Business Report"
+
+    elif any(word in text_lower for word in [
+        "research",
+        "study",
+        "analysis"
+    ]):
+        return "Research Article"
+
+    return "General Content"
+
+
+def extract_action_items(text):
+
+    sentences = re.split(r'[.!?]\s+', text)
+
+    keywords = [
+        "should",
+        "must",
+        "need to",
+        "needs to",
+        "follow up",
+        "action",
+        "required",
+        "todo",
+        "task"
+    ]
+
+    actions = []
+
+    for sentence in sentences:
+
+        sentence = sentence.strip()
+
+        if sentence and any(
+            keyword in sentence.lower()
+            for keyword in keywords
+        ):
+            actions.append(sentence)
+
+    # remove duplicates while preserving order
+    return list(dict.fromkeys(actions))[:5]
+
+
+def summarize_text(text, summary_length):
+
+    content_type = classify_content(text)
+
+    input_words = len(text.split())
+
+    if len(text.split()) < 60:
+        return {
+            "content_type": content_type,
+            "summary": text,  # avoid over-compression
+            "actions": extract_action_items(text)
+        }
+    
+    # dynamic summary sizing
+    settings = {
+        "short": {
+            "max": min(60, input_words),
+            "min": min(25, input_words // 3)
+        },
+        "medium": {
+            "max": min(100, input_words),
+            "min": min(40, input_words // 3)
+        },
+        "long": {
+            "max": min(150, input_words),
+            "min": min(60, input_words // 3)
+        }
     }
 
-    prompt = f"""
-    {length_instruction.get(summary_length)}
+    config = settings.get(summary_length)
 
-    Text:
-    {text}
-    """
-
-    logging.info(
-        f"Summary request: {summary_length}"
+    result = summarizer_model(
+        text,
+        max_length=config["max"],
+        min_length=config["min"],
+        do_sample=False,
+        truncation=True
     )
 
-    try:
-        response = client.chat.completions.create(
-            model="openai/gpt-4.1-mini",
-            messages=[
-                {
-                    "role": "system",
-                    "content": "You are a professional text summarizer."
-                },
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ],
-            temperature=0.3
-        )
+    summary = result[0]["summary_text"]
 
-        return response.choices[0].message.content
+    actions = extract_action_items(text)
 
-    except Exception as e:
-        logging.error(str(e))
-        return f"Error: {str(e)}"
+    return {
+        "content_type": content_type,
+        "summary": summary,
+        "actions": actions
+    }

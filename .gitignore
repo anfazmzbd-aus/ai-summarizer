@@ -2,3 +2,10 @@ venv/
 .env
 __pycache__/
 app.log
+venv311/
+Bsummaries.db.bak
+Csummaries.db.bak
+node_modules/
+other.txt
+package-lock.json
+package.json

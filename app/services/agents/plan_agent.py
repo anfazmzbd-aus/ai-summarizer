@@ -4,6 +4,47 @@ def plan_agent(state):
 
     selected = ["summary"]  # always run summary
 
+    business_signals = [
+        "revenue",
+        "profit",
+        "margin",
+        "sales",
+        "market",
+        "growth",
+        "performance",
+        "%"
+    ]
+
+    signal_count = sum(
+        1 for w in business_signals if w in text
+    )
+
+    is_business = signal_count > 0
+    is_strong_business = signal_count >= 3
+
+    if is_business:
+        selected.append("insights")
+
+    if "meeting" in text or "should" in text or "must" in text:
+        selected.append("actions")
+
+    if "research" in text or "study" in text:
+        selected.append("findings")
+
+    # 🔥 NEW RULE: full KPI report
+    if is_strong_business:
+        selected = ["summary", "insights"]
+
+    state["selected_agents"] = selected
+
+    state["plan"] = {
+        "selected_agents": selected
+    }
+    print("PLAN Selected Agents:", state["selected_agents"])
+    print("PLAN State:", state["plan"])
+    return state
+
+"""
     # -------------------------
     # ACTIONS SIGNALS
     # -------------------------
@@ -21,16 +62,27 @@ def plan_agent(state):
     # -------------------------
     # INSIGHTS SIGNALS
     # -------------------------
-    if any(word in text for word in [
+    business_keywords = [
         "revenue",
         "profit",
+        "margin",
         "sales",
         "market",
         "growth",
         "increase",
-        "decrease"
-    ]):
-        selected.append("insights")
+        "decrease",
+        "expanded",
+        "performance",
+        "%"
+    ]
+
+    is_business = any(
+        word in text for word in business_keywords
+    )
+    # If business data exists, treat as implicit analysis context
+    if is_business:
+        if "actions" not in selected:
+            selected.append("insights")
 
     # -------------------------
     # FINDINGS SIGNALS
@@ -44,11 +96,4 @@ def plan_agent(state):
         "report"
     ]):
         selected.append("findings")
-
-    state["selected_agents"] = selected
-
-    state["plan"] = {
-        "selected_agents": selected
-    }
-
-    return state
+"""

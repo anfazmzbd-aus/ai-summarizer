@@ -46,5 +46,12 @@ def semantic_router(text):
 
     return {
         "selected_agents": selected,
-        "scores": scores
+        "scores": scores,
+        "reasons": {
+            "insights": [
+                "revenue detected",
+                "profit detected",
+                "market detected"
+            ]
+        }
     }

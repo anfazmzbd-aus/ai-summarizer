@@ -1,9 +1,25 @@
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Form, UploadFile, File
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from summarizer import summarize_text
+#from summarizer import summarize_text
+from agents import run_agents
+from fastapi.templating import Jinja2Templates
+from pypdf import PdfReader
+from database import engine, SessionLocal, Base
+from models import Summary
+from typing import Any
+from typing import Annotated
+import json
+from starlette.requests import Request
+#import os
+#print("TEMPLATE PATH:", os.path.abspath("templates"))
+
 
 app = FastAPI()
+
+templates = Jinja2Templates(directory="templates")
+
+Base.metadata.create_all(bind=engine)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -16,85 +32,62 @@ def home():
 
 @app.post("/summarize", response_class=HTMLResponse)
 def summarize(
+    request: Request,
     text: str = Form(...),
     summary_length: str = Form(...)
 ):
 
-    if len(text.strip()) < 20:
-        return """
-        <h2>Error</h2>
-        <p>Please enter at least 20 characters.</p>
-        <a href="/">Go Back</a>
-        """
+    result = run_agents(text, summary_length)
 
-    summary = summarize_text(text, summary_length)
+    summary = result.get("summary", "")
+    actions = result.get("actions", [])
+    insights = result.get("insights", [])
+    findings = result.get("findings", [])
+    plan = result.get("plan", {})
 
-    return f"""
-    <html>
-    <head>
-        <title>Summary Result</title>
-        <link rel="stylesheet" href="/static/style.css">
-    </head>
+    plan_text = f"""
+Content Type: {plan.get('content_type', 'Unknown')}
+Tools Selected: {', '.join(plan.get('tools', []))}
+"""
 
-    <body>
-        <div class="container">
+    db = SessionLocal()
+    db.add(Summary(
+        original_text=text,
+        summary=summary,
+        content_type=result.get("content_type", "General"),
+        agent_output=json.dumps(result)
+    ))
+    db.commit()
+    db.close()
 
-            <h1>Summary Result</h1>
+    return templates.TemplateResponse(
+        request=request,
+        name="result.html",
+        context={
+            "summary": summary,
+            "actions": actions,
+            "insights": insights,
+            "findings": findings,
+            "plan_text": plan_text
+        }
+    )
 
-            <textarea
-                id="summaryText"
-                rows="10">{summary}</textarea>
+@app.get("/summarize")
+def test(request: Request):
+    return templates.TemplateResponse(
+        "result.html",
+        {
+            "request": request,
+            "summary": "TEST"
+        }
+    )
 
-            <br><br>
-
-            <button onclick="copySummary()">
-                Copy Summary
-            </button>
-
-            <button onclick="downloadSummary()">
-                Download TXT
-            </button>
-
-            <br><br>
-
-            <a href="/">← Back</a>
-
-        </div>
-
-<script>
-function copySummary() {{
-    const text =
-        document.getElementById("summaryText");
-
-    navigator.clipboard.writeText(text.value);
-
-    alert("Summary copied!");
-}}
-
-function downloadSummary() {{
-    const text =
-        document.getElementById("summaryText").value;
-
-    const blob =
-        new Blob([text], {{type:"text/plain"}});
-
-    const link =
-        document.createElement("a");
-
-    link.href =
-        URL.createObjectURL(blob);
-
-    link.download =
-        "summary.txt";
-
-    link.click();
-}}
-</script>
-
-    </body>
-    </html>
-    """
-
+@app.get("/debug")
+def debug():
+    return {
+        "agents_loaded": True,
+        "status": "server running"
+    }
 
 @app.post("/api/summarize")
 def summarize_api(data: dict):
@@ -106,3 +99,58 @@ def summarize_api(data: dict):
     return JSONResponse({
         "summary": summary
     })
+
+@app.post("/upload-pdf")
+async def upload_pdf(file: UploadFile = File(...)):
+
+    pdf = PdfReader(file.file)
+
+    extracted_text = ""
+
+    for page in pdf.pages:
+        extracted_text += page.extract_text()
+
+    summary = summarize_text(
+        extracted_text,
+        "medium"
+    )
+
+    db = SessionLocal()
+
+    db_summary = Summary(
+        original_text=extracted_text[:1000],
+        summary=summary
+    )
+
+    db.add(db_summary)
+    db.commit()
+    db.close()
+
+    return {
+        "summary": summary
+    }
+
+#print("TEMPLATES TYPE:", type(templates))
+
+from starlette.requests import Request
+
+@app.get("/history")
+def history(request: Request):
+
+    db = SessionLocal()
+    rows = db.query(Summary).order_by(Summary.id.desc()).all()
+    db.close()
+
+    summaries = [
+        {
+            "original_text": r.original_text,
+            "summary": r.summary
+        }
+        for r in rows
+    ]
+
+    return templates.TemplateResponse(
+        request=request,
+        name="history.html",
+        context={"summaries": summaries}
+    )
