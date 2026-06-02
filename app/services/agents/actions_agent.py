@@ -4,7 +4,10 @@ from app.services.registry.registry import (
     register_agent
 )
 
-@register_agent("actions")
+@register_agent(
+    "actions",
+    depends_on=["summary"]
+)
 
 def actions_agent(state):
 

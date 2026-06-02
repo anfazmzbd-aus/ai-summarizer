@@ -15,6 +15,10 @@ from app.services.strategies.strategy_builder import (
     build_strategy
 )
 
+from app.services.graph.dependency_resolver import (
+    resolve_execution_order
+)
+
 import logging
 
 logger = logging.getLogger(__name__)
@@ -40,6 +44,13 @@ def run_graph(state):
 
     selected = plan["selected_agents"]
 
+    plan["execution_order"] = selected
+
+    selected = resolve_execution_order(
+        selected,
+        AGENT_REGISTRY
+    )
+
     state["selected_agents"] = selected
 
     state["execution"] = {
@@ -51,7 +62,11 @@ def run_graph(state):
 
     for agent_name in selected:
 
-        agent = AGENT_REGISTRY.get(agent_name)
+        agent_info = AGENT_REGISTRY.get(
+            agent_name
+        )
+
+        agent = agent_info["function"]
 
         if agent:
 
@@ -69,6 +84,7 @@ def run_graph(state):
     #logger.info(f"AFTER FINDINGS: {state.get('findings')}")
     logger.info(f"EXECUTION METADATA: {state.get('execution')}")
     print("EXECUTION:", state.get("execution"))
+    print("EXECUTION ORDER:", state.get("plan", {}).get("execution_order"))
     print("REGISTERED:", AGENT_REGISTRY.keys())
     return state
 
