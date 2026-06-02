@@ -2,6 +2,7 @@
   "agents": [
     "summary",
     "actions",
-    "insights"
+    "insights",
+    "findings"
   ]
 }

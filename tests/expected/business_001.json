@@ -1,0 +1,8 @@
+{
+  "agents": ["summary", "insights"],
+  "insights": [
+    "Revenue changed by 22%",
+    "Profit changed by 8%",
+    "Market expansion detected"
+  ]
+}
