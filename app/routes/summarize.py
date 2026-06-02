@@ -24,6 +24,10 @@ def summarize(
     insights = result.get("insights", [])
     findings = result.get("findings", [])
     plan = result.get("plan", {})
+    execution = result.get(
+        "execution",
+        {}
+    )
 
     actions_html = "".join([f"<li>{a}</li>" for a in actions])
     insights_html = "".join([f"<li>{i}</li>" for i in insights])
@@ -47,6 +51,9 @@ def summarize(
 
         <h3>Execution Plan</h3>
         <pre>{plan}</pre>
+        
+        <h3>Execution Metadata</h3>
+        <pre>{execution}</pre>
         
         <a href="/">Back</a>
 

@@ -36,26 +36,25 @@ def run_graph(state):
     selected = plan["selected_agents"]
 
     state["selected_agents"] = selected
-    
+
     state["execution"] = {
-        "agents_executed": selected
+        "agents_executed": [],
+        "agent_count": 0
     }
-    #state = plan_agent(state)
-
-    #state["metadata"]["route"] = state["selected_agents"]
-
-    #selected = state["selected_agents"]
 
     logger.info(f"ROUTE: {selected}")
 
     for agent_name in selected:
 
-        agent = AGENT_REGISTRY.get(
-            agent_name
-        )
+        agent = AGENT_REGISTRY.get(agent_name)
 
         if agent:
+
             state = agent(state)
+
+            state["execution"]["agents_executed"].append(agent_name)
+
+    state["execution"]["agent_count"] = len(state["execution"]["agents_executed"])
 
     if "findings" in selected:
         state = findings_agent(state)
@@ -63,6 +62,7 @@ def run_graph(state):
     logger.info(f"AFTER ACTIONS: {state.get('actions')}")
     logger.info(f"AFTER INSIGHTS: {state.get('insights')}")
     logger.info(f"AFTER FINDINGS: {state.get('findings')}")
-
+    logger.info(f"EXECUTION METADATA: {state.get('execution')}")
+    print("EXECUTION:", state.get("execution"))
     return state
 

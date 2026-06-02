@@ -53,7 +53,8 @@ def run_agents(
         "actions": result["actions"],
         "insights": result["insights"],
         "findings": result["findings"],
-        "plan": result["plan"]
+        "plan": result["plan"],
+        "execution": result["execution"]
     }
 
 def extract_actions(text: str):
