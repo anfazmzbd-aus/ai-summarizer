@@ -1,5 +1,10 @@
 import re
 from tools import extract_actions
+from app.services.registry.registry import (
+    register_agent
+)
+
+@register_agent("actions")
 
 def actions_agent(state):
 

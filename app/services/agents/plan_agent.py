@@ -1,3 +1,8 @@
+from app.services.registry.registry import (
+    register_agent
+)
+
+@register_agent("plan")
 def plan_agent(state):
 
     text = state["text"].lower()

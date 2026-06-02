@@ -64,5 +64,6 @@ def run_graph(state):
     logger.info(f"AFTER FINDINGS: {state.get('findings')}")
     logger.info(f"EXECUTION METADATA: {state.get('execution')}")
     print("EXECUTION:", state.get("execution"))
+    print("REGISTERED:", AGENT_REGISTRY.keys())
     return state
 

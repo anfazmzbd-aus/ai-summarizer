@@ -1,5 +1,9 @@
 from summarizer import summarizer_model
+from app.services.registry.registry import (
+    register_agent
+)
 
+@register_agent("summary")
 
 def summary_agent(state):
 
