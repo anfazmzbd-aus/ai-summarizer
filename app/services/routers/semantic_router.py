@@ -1,4 +1,8 @@
-def semantic_router(text):
+def semantic_router(
+    text,
+    intent_info,
+    strategy
+):
 
     text = text.lower()
 
@@ -14,12 +18,24 @@ def semantic_router(text):
         "findings": []
     }
 
-    # Actions
     action_keywords = [
         "should",
         "must",
         "follow up",
         "need to"
+    ]
+
+    insight_keywords = [
+        "revenue",
+        "profit",
+        "market",
+        "sales"
+    ]
+
+    finding_keywords = [
+        "research",
+        "study",
+        "analysis"
     ]
 
     for word in action_keywords:
@@ -29,27 +45,12 @@ def semantic_router(text):
                 f"{word} detected"
             )
 
-    # Insights
-    insight_keywords = [
-        "revenue",
-        "profit",
-        "market",
-        "sales"
-    ]
-
     for word in insight_keywords:
         if word in text:
             scores["insights"] += 1
             reasons["insights"].append(
                 f"{word} detected"
             )
-
-    # Findings
-    finding_keywords = [
-        "research",
-        "study",
-        "analysis"
-    ]
 
     for word in finding_keywords:
         if word in text:
@@ -58,29 +59,28 @@ def semantic_router(text):
                 f"{word} detected"
             )
 
-    selected = ["summary"]
-
-    for agent, score in scores.items():
-        if score > 0:
-            selected.append(agent)
-
     confidence = {}
 
-    for agent, score in scores.items():
+    confidence["actions"] = round(
+        scores["actions"] / len(action_keywords),
+        2
+    )
 
-        max_score = {
-            "actions": len(action_keywords),
-            "insights": len(insight_keywords),
-            "findings": len(finding_keywords)
-        }[agent]
+    confidence["insights"] = round(
+        scores["insights"] / len(insight_keywords),
+        2
+    )
 
-        confidence[agent] = round(
-            score / max_score,
-            2
-        )
+    confidence["findings"] = round(
+        scores["findings"] / len(finding_keywords),
+        2
+    )
 
     return {
-        "selected_agents": selected,
+        "primary_intent": intent_info["primary_intent"],
+        "intents": intent_info["intents"],
+        #"intent_confidence": intent_info["confidence"],
+        "selected_agents": strategy,
         "scores": scores,
         "confidence": confidence,
         "reasons": reasons
