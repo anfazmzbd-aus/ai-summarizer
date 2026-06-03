@@ -20,8 +20,7 @@
             id="inputText"
             rows="10"
             placeholder="Paste your text here..."
-            required>
-        </textarea>
+            required></textarea>
         <p>
         Characters:
         <span id="charCount">0</span>
@@ -38,7 +37,7 @@
 
         <br><br>
 
-        <button type="submit">
+        <button type="submit" onclick="showMessage()">
             Summarize
         </button>
 
@@ -103,6 +102,14 @@ document
     .classList.remove("hidden");
 });
 </script>
-
+<script>
+  function showMessage() {
+    if (document.getElementById("inputText").value.trim().length < 20) {
+        alert("Please enter more text before summarizing.");
+        document.getElementById("inputText").style.borderColor = "red";
+        return false;
+    }
+  }
+</script>
 </body>
 </html>

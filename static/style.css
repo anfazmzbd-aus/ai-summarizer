@@ -5,15 +5,15 @@ body {
 }
 
 .container {
-    max-width: 700px;
+    max-width: 500px;
     margin: auto;
     background: white;
-    padding: 30px;
+    padding: 10px;
     border-radius: 12px;
 }
 
 textarea {
-    width: 100%;
+    width: 750%;
     padding: 12px;
 }
 
