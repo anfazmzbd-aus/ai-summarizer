@@ -1,4 +1,4 @@
-from summarizer import summarizer_model
+from app.models.summarizer_model import summarizer_model
 from app.services.registry.registry import (
     register_agent
 )

@@ -179,13 +179,6 @@ def run_graph(state):
         results = execute_parallel(
             tasks
         )
-    # --------------------------------------------------
-    # debug prints
-    # --------------------------------------------------
-        #print(results)
-        #print("PARALLEL RESULTS")
-        #for r in results:
-        #    print(r)
 
         for index, result in enumerate(
             results
@@ -240,7 +233,4 @@ def run_graph(state):
     logger.info(f"AFTER ACTIONS: {state.get('actions')}")
     logger.info(f"AFTER INSIGHTS: {state.get('insights')}")
     logger.info(f"EXECUTION METADATA: {state.get('execution')}")
-    print("EXECUTION:", state.get("execution"))
-    print("EXECUTION ORDER:", state.get("plan", {}).get("execution_order"))
-    print("REGISTERED:", AGENT_REGISTRY.keys())
     return state
