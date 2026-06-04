@@ -15,6 +15,12 @@
 
         <div class="result-box">
 
+            <strong>Date:</strong>
+
+            <p>
+                {{ item.created_at }}
+            </p>
+
             <strong>Original:</strong>
 
             <p>
@@ -26,6 +32,70 @@
             <p>
                 {{ item.summary }}
             </p>
+
+            {% if item.actions %}
+
+            <strong>Actions:</strong>
+
+            <ul>
+
+            {% for action in item.actions %}
+
+            <li>{{ action }}</li>
+
+            {% endfor %}
+
+            </ul>
+
+            {% endif %}
+
+            {% if item.insights %}
+
+            <strong>Insights:</strong>
+
+            <ul>
+
+            {% for insight in item.insights %}
+
+            <li>{{ insight }}</li>
+
+            {% endfor %}
+
+            </ul>
+
+            {% endif %}
+
+            {% if item.findings %}
+
+            <strong>Findings:</strong>
+
+            <ul>
+
+            {% for finding in item.findings %}
+
+            <li>{{ finding }}</li>
+
+            {% endfor %}
+
+            </ul>
+
+            {% endif %}
+
+            {% if item.plan %}
+
+            <strong>Execution Plan:</strong>
+
+            <pre width="50%" wrap="on">{{ item.plan }}</pre>
+
+            {% endif %}
+
+            {% if item.execution %}
+
+            <strong>Execution Metadata:</strong>
+
+            <pre width="50%" wrap="on">{{ item.execution }}</pre>
+
+            {% endif %}
 
         </div>
 

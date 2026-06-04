@@ -96,7 +96,7 @@ def run_graph(state):
     }
 
     timings = {}
-
+    
     # --------------------------------------------------
     # Group 1
     # Usually Summary
@@ -215,10 +215,13 @@ def run_graph(state):
         "timings"
     ] = timings
     
-    execution_metadata["total_execution_time"] = round(
-    time.perf_counter() - graph_start,
-    6
-)
+    execution_metadata[
+        "total_execution_time"
+    ] = round(
+        time.perf_counter()
+        - graph_start,
+        6
+    )
     # --------------------------------------------------
     # Save Plan
     # --------------------------------------------------

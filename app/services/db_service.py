@@ -21,7 +21,8 @@ def save_summary(
                 "actions": result.get("actions", []),
                 "insights": result.get("insights", []),
                 "findings": result.get("findings", []),
-                "plan": result.get("plan", {})
+                "plan": result.get("plan", {}),
+                "execution": result.get("execution", {})
             })
         )
 
@@ -30,3 +31,47 @@ def save_summary(
 
     finally:
         db.close()
+
+def get_all_summaries():
+
+    db = SessionLocal()
+
+    try:
+
+        return (
+            db.query(Summary)
+            .order_by(
+                Summary.created_at.desc()
+            )
+            .all()
+        )
+
+    finally:
+
+        db.close()
+
+def get_statistics():
+
+    db = SessionLocal()
+
+    try:
+
+        summaries = db.query(
+            Summary
+        ).all()
+
+        total_runs = len(
+            summaries
+        )
+
+        return {
+            "total_runs": total_runs,
+            "avg_agent_count": "",
+            "avg_execution_time": "",
+            "most_common_intent": "meeting_notes"
+        }
+
+    finally:
+
+        db.close()
+
