@@ -1,3 +1,4 @@
+import re
 def research_finding_tool(text):
 
     findings = []

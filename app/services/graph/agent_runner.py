@@ -1,9 +1,10 @@
 import time
+import copy
 
 
 def run_agent(agent_name, agent_func, state):
 
-    local_state = state.copy()
+    local_state = copy.deepcopy(state)
 
     start = time.perf_counter()
 
@@ -17,8 +18,8 @@ def run_agent(agent_name, agent_func, state):
     return {
         "agent": agent_name,
         "duration": duration,
-        "actions": result.get("actions", []),
-        "insights": result.get("insights", []),
-        "findings": result.get("findings", []),
-        "trends": result.get("trends", [])
+        "artifacts": result.get(
+            "artifacts",
+            {}
+        )
     }

@@ -12,9 +12,11 @@ from app.services.tools.trend_tool import (
     depends_on=["summary"]
 )
 def trend_agent(state):
-
-    state["trends"] = detect_trends(
-        state["text"]
-    )
+    trends = detect_trends(state["text"])
+    state["trends"] = trends
+    state.setdefault(
+        "artifacts",
+        {}
+    )["trends"] = trends
     print(f"trend_agent: {state.get('trends')}")
     return state

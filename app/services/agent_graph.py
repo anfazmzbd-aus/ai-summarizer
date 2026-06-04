@@ -194,17 +194,17 @@ def run_graph(state):
                 agent_name
             )
 
-            if result.get("actions"):
-                state["actions"] = result["actions"]
+            artifacts = result.get(
+                "artifacts",
+                {}
+            )
 
-            if result.get("insights"):
-                state["insights"] = result["insights"]
+            for key, value in artifacts.items():
 
-            if result.get("findings"):
-                state["findings"] = result["findings"]
-            
-            if result.get("trends"):
-                state["trends"] = result["trends"]
+                state.setdefault(
+                    "artifacts",
+                    {}
+                )[key] = value
 
     execution_metadata[
         "agent_count"
@@ -240,9 +240,18 @@ def run_graph(state):
     logger.info(f"AFTER INSIGHTS: {state.get('insights')}")
     logger.info(f"EXECUTION METADATA: {state.get('execution')}")
     logger.info(f"AFTER TRENDS: {state.get('trends')}")
+    # --------------------------------------------------
+    # Debug prints
+    # --------------------------------------------------
+    print("=== DEBUG: AGENT GRAPH EXECUTION START===")
+    print("MERGED ARTIFACTS:", state["artifacts"])
+    print("REGISTERED:", AGENT_REGISTRY.keys())
+    print("EXECUTED AGENTS:", execution_metadata["agents_executed"])
     print(f"ROUTE: {plan['selected_agents']}")
     print(f"AFTER ACTIONS: {state.get('actions')}")
     print(f"AFTER INSIGHTS: {state.get('insights')}")
     print(f"EXECUTION METADATA: {state.get('execution')}")
     print(f"AFTER TRENDS: {state.get('trends')}")
+    print("ARTIFACTS:", state.get("artifacts"))
+    print("=== DEBUG: AGENT GRAPH EXECUTION END===")
     return state

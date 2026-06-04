@@ -9,9 +9,13 @@ class AgentState(TypedDict):
     selected_agents: list
 
     summary: str
+
+    artifacts: dict
+
     actions: list
     insights: list
     findings: list
     trends: list
+    
     plan: dict
     metadata: dict

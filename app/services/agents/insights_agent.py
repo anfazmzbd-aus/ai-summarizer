@@ -1,4 +1,3 @@
-from tools import business_insight_tool
 from app.services.registry.registry import (
     register_agent
 )
@@ -11,8 +10,13 @@ from app.services.tools.insight_tool import (
     depends_on=["summary"]
 )
 def insights_agent(state):
-
-    state["insights"] = business_insight_tool(state["text"])
+    insights = business_insight_tool(state["text"])
+    state["insights"] = insights
+    
+    state.setdefault(
+        "artifacts",
+        {}
+    )["insights"] = insights
 
     return state
 

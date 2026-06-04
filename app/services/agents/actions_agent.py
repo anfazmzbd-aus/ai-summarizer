@@ -1,5 +1,4 @@
 import re
-from tools import extract_actions
 from app.services.registry.registry import (
     register_agent
 )
@@ -30,5 +29,9 @@ def actions_agent(state):
         cleaned.append(action.strip())
 
     state["actions"] = cleaned
+    state.setdefault(
+        "artifacts",
+        {}
+    )["actions"] = cleaned
 
     return state

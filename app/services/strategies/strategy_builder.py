@@ -5,16 +5,19 @@ def build_strategy(intents):
     mapping = {
 
         "meeting_notes": {
-            "actions"
+            "actions",
+            "sentiment"
         },
 
         "business_report": {
             "insights",
-            "trend"
+            "trend",
+            "sentiment"
         },
 
         "research_report": {
-            "findings"
+            "findings",
+            "sentiment"
         }
     }
 
@@ -31,9 +34,10 @@ def build_strategy(intents):
         "actions",
         "insights",
         "findings",
-        "trend"
+        "trend",
+        "sentiment"
     ]
-
+    print("STRATEGY:", strategy)
     return [
         agent
         for agent in execution_order

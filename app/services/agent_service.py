@@ -31,26 +31,30 @@ def run_agents(
         "text": text,
         "summary_length": summary_length,
 
-        "selected_agents": [],
+         "summary": "",
 
-        "summary": "",
         "actions": [],
         "insights": [],
         "findings": [],
-        "plan": {},
-        #My entry
         "trends": [],
+
+        "artifacts": {},
+
+        "plan": {},
         "metadata": {}
     }
 
     result = run_graph(state)
-
+    print("agent_service artifacts:", result.get("artifacts", {}))
     return {
         "summary": result["summary"],
         "actions": result["actions"],
         "insights": result["insights"],
         "findings": result["findings"],
         "trends": result.get("trends", []),
+
+        "artifacts": result.get("artifacts", {}),
+
         "plan": result["plan"],
         "execution": result["execution"]
     }

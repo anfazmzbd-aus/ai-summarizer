@@ -3,7 +3,7 @@ def semantic_router(
     intent_info,
     strategy
 ):
-
+    print("INPUT STRATEGY:", strategy)
     text = text.lower()
 
     scores = {
@@ -79,21 +79,25 @@ def semantic_router(
     )
 
     if scores["actions"] > 0:
-        selected_agents.append(
+        strategy.append(
             "actions"
         )
 
-    if scores["findings"] > 0:
-        selected_agents.append(
-            "findings"
-        )  
-    print("semantic_router")
+    strategy = list(
+        dict.fromkeys(strategy)
+    )
+
+    # --------------------------------------------------
+    # Debug prints
+    # --------------------------------------------------
+    print("===semantic_router DEBUG: AGENT GRAPH EXECUTION START===")
     print(f"primary_intent: {intent_info['primary_intent']}")
     print(f"intents: {intent_info['intents']}")
     print(f"selected_agents: {strategy}")
     print(f"scores: {scores}")
     print(f"confidence: {confidence}")
     print(f"reasons: {reasons}")
+    print("===semantic_router DEBUG: AGENT GRAPH EXECUTION END===")
 
     return {
         "primary_intent": intent_info["primary_intent"],

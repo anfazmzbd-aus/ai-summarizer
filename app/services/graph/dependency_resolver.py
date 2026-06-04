@@ -6,18 +6,16 @@ def resolve_execution_order(
     resolved = []
     visited = set()
     
-    DEPENDENCIES = {
-
-        "summary": [],
-
-        "actions": ["summary"],
-
-        "insights": ["summary"],
-
-        "findings": ["summary"],
-
-        "trend": ["summary"]
-    }
+    def get_dependencies(
+        agent_name,
+        registry
+    ):
+        return registry[
+            agent_name
+        ].get(
+            "depends_on",
+            []
+        )
 
     def visit(agent_name):
 

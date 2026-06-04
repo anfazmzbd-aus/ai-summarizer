@@ -20,17 +20,29 @@ def summarize(
 
     summary = result.get("summary", "")
 
-    actions = result.get("actions", [])
-    insights = result.get("insights", [])
-    findings = result.get("findings", [])
+    artifacts = result.get(
+        "artifacts",
+        {}
+    )
+
     plan = result.get("plan", {})
     execution = result.get("execution" ,{})
-    trends = result.get("trends", [])
-    print(f"trends in summarize: {trends}")
-    actions_html = "".join([f"<li>{a}</li>" for a in actions])
-    insights_html = "".join([f"<li>{i}</li>" for i in insights])
-    findings_html = "".join([f"<li>{f}</li>" for f in findings])
-    trends_html = "".join([f"<li>{t}</li>"for t in trends])
+
+    artifact_html = ""
+
+    for name, values in artifacts.items():
+
+        items = "".join(
+            [
+                f"<li>{item}</li>"
+                for item in values
+            ]
+        )
+
+        artifact_html += f"""
+        <h3>{name.title()}</h3>
+        <ul>{items}</ul>
+        """
 
     return f"""
     <html>
@@ -39,17 +51,7 @@ def summarize(
         <h2>Summary</h2>
         <p>{summary}</p>
 
-        <h3>Actions</h3>
-        <ul>{actions_html}</ul>
-
-        <h3>Insights</h3>
-        <ul>{insights_html}</ul>
-
-        <h3>Findings</h3>
-        <ul>{findings_html}</ul>
-
-        <h3>Trends</h3>
-        <ul>{trends_html}</ul>
+        {artifact_html}
 
         <h3>Execution Plan</h3>
         <pre>{plan}</pre>
