@@ -9,7 +9,8 @@ def build_strategy(intents):
         },
 
         "business_report": {
-            "insights"
+            "insights",
+            "trend"
         },
 
         "research_report": {
@@ -29,7 +30,8 @@ def build_strategy(intents):
         "summary",
         "actions",
         "insights",
-        "findings"
+        "findings",
+        "trend"
     ]
 
     return [

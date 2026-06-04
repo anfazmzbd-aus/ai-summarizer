@@ -5,6 +5,19 @@ def resolve_execution_order(
 
     resolved = []
     visited = set()
+    
+    DEPENDENCIES = {
+
+        "summary": [],
+
+        "actions": ["summary"],
+
+        "insights": ["summary"],
+
+        "findings": ["summary"],
+
+        "trend": ["summary"]
+    }
 
     def visit(agent_name):
 

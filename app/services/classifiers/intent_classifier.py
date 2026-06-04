@@ -61,12 +61,3 @@ def classify_intent(text):
         "scores": scores
     }
 
-"""
-    total = sum(scores.values())
-
-    confidence = (
-        round(scores[intent] / total, 2)
-        if total > 0
-        else 0.0
-    )
-"""

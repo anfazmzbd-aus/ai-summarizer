@@ -2,6 +2,9 @@ from tools import research_finding_tool
 from app.services.registry.registry import (
     register_agent
 )
+from app.services.tools.finding_tool import (
+    research_finding_tool
+)
 
 @register_agent(
     "findings",

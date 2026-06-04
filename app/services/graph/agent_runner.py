@@ -19,5 +19,6 @@ def run_agent(agent_name, agent_func, state):
         "duration": duration,
         "actions": result.get("actions", []),
         "insights": result.get("insights", []),
-        "findings": result.get("findings", [])
+        "findings": result.get("findings", []),
+        "trends": result.get("trends", [])
     }

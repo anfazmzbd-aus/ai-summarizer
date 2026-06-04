@@ -15,7 +15,8 @@ def semantic_router(
     reasons = {
         "actions": [],
         "insights": [],
-        "findings": []
+        "findings": [],
+        "trends": []
     }
 
     action_keywords = [
@@ -58,6 +59,7 @@ def semantic_router(
             reasons["findings"].append(
                 f"{word} detected"
             )
+    
 
     confidence = {}
 
@@ -76,10 +78,26 @@ def semantic_router(
         2
     )
 
+    if scores["actions"] > 0:
+        selected_agents.append(
+            "actions"
+        )
+
+    if scores["findings"] > 0:
+        selected_agents.append(
+            "findings"
+        )  
+    print("semantic_router")
+    print(f"primary_intent: {intent_info['primary_intent']}")
+    print(f"intents: {intent_info['intents']}")
+    print(f"selected_agents: {strategy}")
+    print(f"scores: {scores}")
+    print(f"confidence: {confidence}")
+    print(f"reasons: {reasons}")
+
     return {
         "primary_intent": intent_info["primary_intent"],
         "intents": intent_info["intents"],
-        #"intent_confidence": intent_info["confidence"],
         "selected_agents": strategy,
         "scores": scores,
         "confidence": confidence,

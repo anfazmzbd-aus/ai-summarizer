@@ -1,7 +1,3 @@
-#from agents import run_agents
-#from app.services.planner_agent import planner_agent
-#from app.services.agent_state import AgentState
-#from app.services.agent_graph import run_agent_graph
 from .agent_graph import run_graph
 
 def run_ai(text, summary_length):
@@ -42,7 +38,8 @@ def run_agents(
         "insights": [],
         "findings": [],
         "plan": {},
-
+        #My entry
+        "trends": [],
         "metadata": {}
     }
 
@@ -53,6 +50,7 @@ def run_agents(
         "actions": result["actions"],
         "insights": result["insights"],
         "findings": result["findings"],
+        "trends": result.get("trends", []),
         "plan": result["plan"],
         "execution": result["execution"]
     }

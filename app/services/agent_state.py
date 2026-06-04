@@ -12,6 +12,6 @@ class AgentState(TypedDict):
     actions: list
     insights: list
     findings: list
+    trends: list
     plan: dict
-
     metadata: dict

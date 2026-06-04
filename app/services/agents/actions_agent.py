@@ -3,6 +3,9 @@ from tools import extract_actions
 from app.services.registry.registry import (
     register_agent
 )
+from app.services.tools.action_tool import (
+    extract_actions
+)
 
 @register_agent(
     "actions",

@@ -179,7 +179,7 @@ def run_graph(state):
         results = execute_parallel(
             tasks
         )
-
+        print(f"agent_graph Parallel execution results: {results}")
         for index, result in enumerate(
             results
         ):
@@ -202,6 +202,9 @@ def run_graph(state):
 
             if result.get("findings"):
                 state["findings"] = result["findings"]
+            
+            if result.get("trends"):
+                state["trends"] = result["trends"]
 
     execution_metadata[
         "agent_count"
@@ -236,4 +239,10 @@ def run_graph(state):
     logger.info(f"AFTER ACTIONS: {state.get('actions')}")
     logger.info(f"AFTER INSIGHTS: {state.get('insights')}")
     logger.info(f"EXECUTION METADATA: {state.get('execution')}")
+    logger.info(f"AFTER TRENDS: {state.get('trends')}")
+    print(f"ROUTE: {plan['selected_agents']}")
+    print(f"AFTER ACTIONS: {state.get('actions')}")
+    print(f"AFTER INSIGHTS: {state.get('insights')}")
+    print(f"EXECUTION METADATA: {state.get('execution')}")
+    print(f"AFTER TRENDS: {state.get('trends')}")
     return state
