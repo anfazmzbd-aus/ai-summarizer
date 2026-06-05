@@ -1,24 +1,24 @@
+import re
 from app.services.registry.registry import (
     register_agent
 )
-
-from app.services.tools.sentiment_tool import (
-    detect_sentiment
+from app.services.tools.risk_tool import (
+    detect_risk
 )
 
 @register_agent(
-    "sentiment",
+    "risk",
     depends_on=["summary"]
 )
-def sentiment_agent(state):
+def risk_agent(state):
 
-    sentiment = detect_sentiment(
+    risk = detect_risk(
         state["text"]
     )
 
     state.setdefault(
         "artifacts",
         {}
-    )["sentiment"] = sentiment
+    )["risk"] = risk
 
     return state

@@ -13,7 +13,7 @@ from app.services.tools.trend_tool import (
 )
 def trend_agent(state):
     trends = detect_trends(state["text"])
-    state["trends"] = trends
+
     state.setdefault(
         "artifacts",
         {}

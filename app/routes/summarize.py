@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse
 
 from app.services.agent_service import run_agents
 from app.services.db_service import save_summary
+from app.services.logging.logger import logger
 
 router = APIRouter()
 
@@ -14,7 +15,8 @@ def summarize(
 ):
 
     result = run_agents(text, summary_length)
-
+    logger.debug("=== DEBUG: FINAL RESULT ===")
+    logger.debug(f"SUMMARY result: {result}")
     # 🔴 CRITICAL: SAVE TO DB
     save_summary(text, result)
 
@@ -32,6 +34,9 @@ def summarize(
 
     for name, values in artifacts.items():
 
+        if not values:
+            continue
+
         items = "".join(
             [
                 f"<li>{item}</li>"
@@ -43,6 +48,9 @@ def summarize(
         <h3>{name.title()}</h3>
         <ul>{items}</ul>
         """
+
+    logger.info("==============Application AI Summarizer==============")
+    logger.info("==============EXECUTION END==============")
 
     return f"""
     <html>

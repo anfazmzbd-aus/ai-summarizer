@@ -31,9 +31,10 @@ from app.services.graph.parallel_executor import (
 from app.services.graph.agent_runner import (
     run_agent
 )
-import logging
+#import logging
+from app.services.logging.logger import logger
 
-logger = logging.getLogger(__name__)
+#logger = logging.getLogger(__name__)
 
 def run_graph(state):
     graph_start = time.perf_counter()
@@ -53,6 +54,10 @@ def run_graph(state):
         intent_info["intents"]
     )
 
+    logger.info(
+        f"STRATEGY: "
+        f"{strategy}"
+    )
     # --------------------------------------------------
     # Semantic Router
     # --------------------------------------------------
@@ -179,7 +184,8 @@ def run_graph(state):
         results = execute_parallel(
             tasks
         )
-        print(f"agent_graph Parallel execution results: {results}")
+        logger.info(f"PARALLEL EXECUTION RESULTS: {results}")
+
         for index, result in enumerate(
             results
         ):
@@ -235,23 +241,19 @@ def run_graph(state):
         "execution"
     ] = execution_metadata
 
-    #logger.info(f"ROUTE: {selected}")
-    logger.info(f"AFTER ACTIONS: {state.get('actions')}")
-    logger.info(f"AFTER INSIGHTS: {state.get('insights')}")
-    logger.info(f"EXECUTION METADATA: {state.get('execution')}")
-    logger.info(f"AFTER TRENDS: {state.get('trends')}")
     # --------------------------------------------------
     # Debug prints
     # --------------------------------------------------
-    print("=== DEBUG: AGENT GRAPH EXECUTION START===")
-    print("MERGED ARTIFACTS:", state["artifacts"])
-    print("REGISTERED:", AGENT_REGISTRY.keys())
-    print("EXECUTED AGENTS:", execution_metadata["agents_executed"])
-    print(f"ROUTE: {plan['selected_agents']}")
-    print(f"AFTER ACTIONS: {state.get('actions')}")
-    print(f"AFTER INSIGHTS: {state.get('insights')}")
-    print(f"EXECUTION METADATA: {state.get('execution')}")
-    print(f"AFTER TRENDS: {state.get('trends')}")
-    print("ARTIFACTS:", state.get("artifacts"))
-    print("=== DEBUG: AGENT GRAPH EXECUTION END===")
+    logger.info(f"ROUTE: {plan['selected_agents']}")
+    logger.info(f"AFTER ACTIONS: {state.get('actions')}")
+    logger.info(f"AFTER INSIGHTS: {state.get('insights')}")
+    logger.info(f"AFTER TRENDS: {state.get('trends')}")
+    logger.debug("=== DEBUG: AGENT GRAPH EXECUTION START===")
+    logger.debug(f"MERGED ARTIFACTS: {state['artifacts']}")
+    logger.debug(f"REGISTERED: {AGENT_REGISTRY.keys()}")
+    logger.debug(f"EXECUTED AGENTS: {execution_metadata['agents_executed']}")
+    logger.debug(f"EXECUTION METADATA: {state.get('execution')}")
+    logger.debug(f"ARTIFACTS: {state.get('artifacts', {})}")
+    logger.debug("=== DEBUG: AGENT GRAPH EXECUTION END===")
     return state
+

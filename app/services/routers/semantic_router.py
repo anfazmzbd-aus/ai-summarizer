@@ -1,9 +1,11 @@
+from app.services.logging.logger import logger
+
 def semantic_router(
     text,
     intent_info,
     strategy
 ):
-    print("INPUT STRATEGY:", strategy)
+    logger.info(f"INPUT STRATEGY: {strategy}")
     text = text.lower()
 
     scores = {
@@ -90,14 +92,14 @@ def semantic_router(
     # --------------------------------------------------
     # Debug prints
     # --------------------------------------------------
-    print("===semantic_router DEBUG: AGENT GRAPH EXECUTION START===")
-    print(f"primary_intent: {intent_info['primary_intent']}")
-    print(f"intents: {intent_info['intents']}")
-    print(f"selected_agents: {strategy}")
-    print(f"scores: {scores}")
-    print(f"confidence: {confidence}")
-    print(f"reasons: {reasons}")
-    print("===semantic_router DEBUG: AGENT GRAPH EXECUTION END===")
+    logger.info("===semantic_router DEBUG: AGENT GRAPH EXECUTION START===")
+    logger.info(f"PRIMARY INTENT: {intent_info['primary_intent']}")
+    logger.info(f"INTENTS: {intent_info['intents']}")
+    logger.info(f"SELECTED AGENTS: {strategy}")
+    logger.info(f"SCORES: {scores}")
+    logger.info(f"CONFIDENCE: {confidence}")
+    logger.info(f"REASONS: {reasons}")
+    logger.info("===semantic_router DEBUG: AGENT GRAPH EXECUTION END===")
 
     return {
         "primary_intent": intent_info["primary_intent"],

@@ -1,3 +1,5 @@
+from app.services.logging.logger import logger
+
 def build_strategy(intents):
 
     strategy = {"summary"}
@@ -12,12 +14,14 @@ def build_strategy(intents):
         "business_report": {
             "insights",
             "trend",
-            "sentiment"
+            "sentiment",
+            "risk"
         },
 
         "research_report": {
             "findings",
-            "sentiment"
+            "sentiment",
+            "risk"
         }
     }
 
@@ -29,18 +33,26 @@ def build_strategy(intents):
                 set()
             )
         )
-    execution_order = [
+
+    logger.info(
+        f"STRATEGY: {strategy}"
+    )
+
+    preferred_order = [
         "summary",
         "actions",
         "insights",
         "findings",
         "trend",
-        "sentiment"
+        "sentiment",
+        "risk"
     ]
-    print("STRATEGY:", strategy)
-    return [
-        agent
-        for agent in execution_order
-        if agent in strategy
-    ]
-    #return list(strategy)
+
+    return sorted(
+        strategy,
+        key=lambda x: (
+            preferred_order.index(x)
+            if x in preferred_order
+            else 999
+        )
+    )

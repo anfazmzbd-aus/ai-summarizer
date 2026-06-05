@@ -11,8 +11,6 @@ from app.services.tools.insight_tool import (
 )
 def insights_agent(state):
     insights = business_insight_tool(state["text"])
-    state["insights"] = insights
-    
     state.setdefault(
         "artifacts",
         {}

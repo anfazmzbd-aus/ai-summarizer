@@ -1,3 +1,4 @@
+from app.services.logging.logger import logger
 def build_parallel_groups(
     execution_order
 ):
@@ -17,5 +18,10 @@ def build_parallel_groups(
             ["summary"],
             remaining
         ]
+
+    logger.info(
+        f"EXECUTION ORDER: "
+        f"{execution_order}"
+    )
 
     return [execution_order]

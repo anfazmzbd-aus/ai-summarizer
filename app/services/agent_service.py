@@ -1,4 +1,5 @@
 from .agent_graph import run_graph
+from app.services.logging.logger import logger
 
 def run_ai(text, summary_length):
 
@@ -45,7 +46,9 @@ def run_agents(
     }
 
     result = run_graph(state)
-    print("agent_service artifacts:", result.get("artifacts", {}))
+
+    logger.info(f"====agent_service ARTIFACTS: {result.get('artifacts', {})}====")
+
     return {
         "summary": result["summary"],
         "actions": result["actions"],

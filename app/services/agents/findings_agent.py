@@ -11,7 +11,6 @@ from app.services.tools.finding_tool import (
 )
 def findings_agent(state):
     findings = research_finding_tool(state["text"])
-    state["findings"] = findings
     state.setdefault(
         "artifacts",
         {}

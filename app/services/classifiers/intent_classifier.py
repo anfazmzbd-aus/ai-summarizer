@@ -1,3 +1,5 @@
+from app.services.logging.logger import logger
+
 def classify_intent(text):
 
     text = text.lower()
@@ -47,16 +49,27 @@ def classify_intent(text):
         "research_report": research_score
     }
 
+    primary_intent = max(scores, key=scores.get)
+
     detected_intents = []
     for intent_name, score in scores.items():
         if score > 0:
             detected_intents.append(intent_name)
 
+    logger.info(
+        f"INTENT SCORES: {scores}"
+    )
+
+    logger.info(
+        f"PRIMARY INTENT: {primary_intent}"
+    )
+
+    logger.info(
+        f"SELECTED INTENTS: {detected_intents}"
+    )
+
     return {
-        "primary_intent": max(
-            scores, 
-            key=scores.get
-        ),
+        "primary_intent": primary_intent,
         "intents": detected_intents,
         "scores": scores
     }

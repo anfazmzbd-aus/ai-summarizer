@@ -5,3 +5,4 @@ from .findings_agent import findings_agent
 from .plan_agent import plan_agent
 from .trend_agent import trend_agent
 from .sentiment_agent import sentiment_agent
+from .risk_agent import risk_agent

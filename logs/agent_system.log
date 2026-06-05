@@ -1,0 +1,207 @@
+2026-06-05 18:25:16,682 | INFO | INTENT SCORES: {'business_report': 1, 'meeting_notes': 0, 'research_report': 3}
+2026-06-05 18:25:16,682 | INFO | PRIMARY INTENT: research_report
+2026-06-05 18:25:16,682 | INFO | SELECTED INTENTS: ['business_report', 'research_report']
+2026-06-05 18:25:16,682 | INFO | STRATEGY: {'insights', 'summary', 'sentiment', 'trend', 'findings', 'risk'}
+2026-06-05 18:25:16,682 | INFO | STRATEGY: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 18:25:16,682 | INFO | RUNNING AGENT: insights
+2026-06-05 18:25:16,682 | INFO | COMPLETED AGENT: insights in 0.00022s
+2026-06-05 18:25:16,682 | INFO | RUNNING AGENT: findings
+2026-06-05 18:25:16,682 | INFO | ARTIFACTS: {}
+2026-06-05 18:25:16,682 | INFO | RUNNING AGENT: trend
+2026-06-05 18:25:16,682 | INFO | COMPLETED AGENT: findings in 0.000138s
+2026-06-05 18:25:16,682 | INFO | RUNNING AGENT: sentiment
+2026-06-05 18:25:16,682 | INFO | RUNNING AGENT: risk
+2026-06-05 18:25:16,682 | INFO | COMPLETED AGENT: trend in 0.000204s
+2026-06-05 18:25:16,682 | INFO | ARTIFACTS: {}
+2026-06-05 18:25:16,682 | INFO | COMPLETED AGENT: sentiment in 9e-06s
+2026-06-05 18:25:16,682 | INFO | COMPLETED AGENT: risk in 9e-06s
+2026-06-05 18:25:16,682 | INFO | ARTIFACTS: {}
+2026-06-05 18:25:16,682 | INFO | ARTIFACTS: {}
+2026-06-05 18:25:16,682 | INFO | ARTIFACTS: {}
+2026-06-05 18:25:16,682 | INFO | PARALLEL EXECUTION RESULTS: [{'agent': 'insights', 'duration': 0.00022, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'findings', 'duration': 0.000138, 'artifacts': {'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends']}}, {'agent': 'trend', 'duration': 0.000204, 'artifacts': {'trends': []}}, {'agent': 'sentiment', 'duration': 9e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'risk', 'duration': 9e-06, 'artifacts': {'risk': ['Low Risk']}}]
+2026-06-05 18:25:16,682 | INFO | ROUTE: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 18:25:16,682 | INFO | AFTER ACTIONS: []
+2026-06-05 18:25:16,682 | INFO | AFTER INSIGHTS: []
+2026-06-05 18:25:16,682 | INFO | AFTER TRENDS: []
+2026-06-05 18:25:16,698 | INFO | === DEBUG: AGENT GRAPH EXECUTION START===
+2026-06-05 18:25:16,698 | INFO | MERGED ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends'], 'trends': [], 'sentiment': ['Positive'], 'risk': ['Low Risk']}
+2026-06-05 18:25:16,698 | INFO | REGISTERED: dict_keys(['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk'])
+2026-06-05 18:25:16,698 | INFO | EXECUTED AGENTS: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 18:25:16,699 | INFO | EXECUTION METADATA: {'agents_executed': ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk'], 'agent_count': 6, 'parallel_groups': [['summary'], ['insights', 'findings', 'trend', 'sentiment', 'risk']], 'timings': {'summary': 5e-06, 'insights': 0.00022, 'findings': 0.000138, 'trend': 0.000204, 'sentiment': 9e-06, 'risk': 9e-06}, 'total_execution_time': 0.010214}
+2026-06-05 18:25:16,699 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends'], 'trends': [], 'sentiment': ['Positive'], 'risk': ['Low Risk']}
+2026-06-05 18:25:16,699 | INFO | === DEBUG: AGENT GRAPH EXECUTION END===
+2026-06-05 18:25:16,699 | INFO | agent_service artifacts: {'insights': ['Market expansion detected'], 'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends'], 'trends': [], 'sentiment': ['Positive'], 'risk': ['Low Risk']}
+2026-06-05 18:25:16,700 | INFO | === DEBUG: FINAL RESULT ===
+2026-06-05 18:25:16,700 | INFO | SUMMARY result: {'summary': 'Research study shows customer satisfaction improved.\r\nAnalysis confirms positive trends.\r\nPotential market low risks remain.', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'artifacts': {'insights': ['Market expansion detected'], 'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends'], 'trends': [], 'sentiment': ['Positive'], 'risk': ['Low Risk']}, 'plan': {'primary_intent': 'research_report', 'intents': ['business_report', 'research_report'], 'selected_agents': ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk'], 'scores': {'actions': 0, 'insights': 1, 'findings': 3}, 'confidence': {'actions': 0.0, 'insights': 0.25, 'findings': 1.0}, 'reasons': {'actions': [], 'insights': ['market detected'], 'findings': ['research detected', 'study detected', 'analysis detected'], 'trends': []}, 'execution_order': ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']}, 'execution': {'agents_executed': ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk'], 'agent_count': 6, 'parallel_groups': [['summary'], ['insights', 'findings', 'trend', 'sentiment', 'risk']], 'timings': {'summary': 5e-06, 'insights': 0.00022, 'findings': 0.000138, 'trend': 0.000204, 'sentiment': 9e-06, 'risk': 9e-06}, 'total_execution_time': 0.010214}}
+2026-06-05 18:40:17,655 | INFO | INTENT SCORES: {'business_report': 1, 'meeting_notes': 0, 'research_report': 3}
+2026-06-05 18:40:17,655 | INFO | PRIMARY INTENT: research_report
+2026-06-05 18:40:17,655 | INFO | SELECTED INTENTS: ['business_report', 'research_report']
+2026-06-05 18:40:17,655 | INFO | STRATEGY: {'risk', 'insights', 'findings', 'trend', 'summary', 'sentiment'}
+2026-06-05 18:40:17,655 | INFO | STRATEGY: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 18:40:17,655 | INFO | INPUT STRATEGY: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 18:40:17,655 | INFO | ===semantic_router DEBUG: AGENT GRAPH EXECUTION START===
+2026-06-05 18:40:17,655 | INFO | primary_intent: research_report
+2026-06-05 18:40:17,655 | INFO | intents: ['business_report', 'research_report']
+2026-06-05 18:40:17,655 | INFO | selected_agents: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 18:40:17,655 | INFO | scores: {'actions': 0, 'insights': 1, 'findings': 3}
+2026-06-05 18:40:17,666 | INFO | confidence: {'actions': 0.0, 'insights': 0.25, 'findings': 1.0}
+2026-06-05 18:40:17,667 | INFO | reasons: {'actions': [], 'insights': ['market detected'], 'findings': ['research detected', 'study detected', 'analysis detected'], 'trends': []}
+2026-06-05 18:40:17,667 | INFO | ===semantic_router DEBUG: AGENT GRAPH EXECUTION END===
+2026-06-05 18:40:17,667 | INFO | RUNNING AGENT: insights
+2026-06-05 18:40:17,667 | INFO | COMPLETED AGENT: insights in 0.000391s
+2026-06-05 18:40:17,667 | INFO | RUNNING AGENT: findings
+2026-06-05 18:40:17,667 | INFO | ARTIFACTS: {}
+2026-06-05 18:40:17,667 | INFO | RUNNING AGENT: trend
+2026-06-05 18:40:17,667 | INFO | COMPLETED AGENT: findings in 8.7e-05s
+2026-06-05 18:40:17,667 | INFO | RUNNING AGENT: sentiment
+2026-06-05 18:40:17,667 | INFO | RUNNING AGENT: risk
+2026-06-05 18:40:17,667 | INFO | ARTIFACTS: {}
+2026-06-05 18:40:17,667 | INFO | COMPLETED AGENT: trend in 0.000363s
+2026-06-05 18:40:17,667 | INFO | COMPLETED AGENT: sentiment in 9e-06s
+2026-06-05 18:40:17,667 | INFO | COMPLETED AGENT: risk in 1.1e-05s
+2026-06-05 18:40:17,667 | INFO | ARTIFACTS: {}
+2026-06-05 18:40:17,667 | INFO | ARTIFACTS: {}
+2026-06-05 18:40:17,667 | INFO | ARTIFACTS: {}
+2026-06-05 18:40:17,667 | INFO | PARALLEL EXECUTION RESULTS: [{'agent': 'insights', 'duration': 0.000391, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'findings', 'duration': 8.7e-05, 'artifacts': {'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends']}}, {'agent': 'trend', 'duration': 0.000363, 'artifacts': {'trends': []}}, {'agent': 'sentiment', 'duration': 9e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'risk', 'duration': 1.1e-05, 'artifacts': {'risk': ['Moderate Risk']}}]
+2026-06-05 18:40:17,667 | INFO | ROUTE: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 18:40:17,667 | INFO | AFTER ACTIONS: []
+2026-06-05 18:40:17,667 | INFO | AFTER INSIGHTS: []
+2026-06-05 18:40:17,667 | INFO | AFTER TRENDS: []
+2026-06-05 18:40:17,667 | INFO | === DEBUG: AGENT GRAPH EXECUTION START===
+2026-06-05 18:40:17,667 | INFO | MERGED ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends'], 'trends': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}
+2026-06-05 18:40:17,667 | INFO | REGISTERED: dict_keys(['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk'])
+2026-06-05 18:40:17,667 | INFO | EXECUTED AGENTS: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 18:40:17,667 | INFO | EXECUTION METADATA: {'agents_executed': ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk'], 'agent_count': 6, 'parallel_groups': [['summary'], ['insights', 'findings', 'trend', 'sentiment', 'risk']], 'timings': {'summary': 2.3e-05, 'insights': 0.000391, 'findings': 8.7e-05, 'trend': 0.000363, 'sentiment': 9e-06, 'risk': 1.1e-05}, 'total_execution_time': 0.012096}
+2026-06-05 18:40:17,667 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends'], 'trends': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}
+2026-06-05 18:40:17,667 | INFO | === DEBUG: AGENT GRAPH EXECUTION END===
+2026-06-05 18:40:17,667 | INFO | agent_service artifacts: {'insights': ['Market expansion detected'], 'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends'], 'trends': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}
+2026-06-05 18:40:17,667 | INFO | === DEBUG: FINAL RESULT ===
+2026-06-05 18:40:17,667 | INFO | SUMMARY result: {'summary': 'Research study shows customer satisfaction improved.\r\nAnalysis confirms positive trends.\r\nPotential market risks remain on high.', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'artifacts': {'insights': ['Market expansion detected'], 'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends'], 'trends': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}, 'plan': {'primary_intent': 'research_report', 'intents': ['business_report', 'research_report'], 'selected_agents': ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk'], 'scores': {'actions': 0, 'insights': 1, 'findings': 3}, 'confidence': {'actions': 0.0, 'insights': 0.25, 'findings': 1.0}, 'reasons': {'actions': [], 'insights': ['market detected'], 'findings': ['research detected', 'study detected', 'analysis detected'], 'trends': []}, 'execution_order': ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']}, 'execution': {'agents_executed': ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk'], 'agent_count': 6, 'parallel_groups': [['summary'], ['insights', 'findings', 'trend', 'sentiment', 'risk']], 'timings': {'summary': 2.3e-05, 'insights': 0.000391, 'findings': 8.7e-05, 'trend': 0.000363, 'sentiment': 9e-06, 'risk': 1.1e-05}, 'total_execution_time': 0.012096}}
+2026-06-05 18:48:42,801 | INFO | INTENT SCORES: {'business_report': 1, 'meeting_notes': 0, 'research_report': 3}
+2026-06-05 18:48:42,802 | INFO | PRIMARY INTENT: research_report
+2026-06-05 18:48:42,802 | INFO | SELECTED INTENTS: ['business_report', 'research_report']
+2026-06-05 18:48:42,803 | INFO | STRATEGY: {'insights', 'risk', 'sentiment', 'findings', 'trend', 'summary'}
+2026-06-05 18:48:42,803 | INFO | STRATEGY: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 18:48:42,803 | INFO | INPUT STRATEGY: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 18:48:42,803 | INFO | ===semantic_router DEBUG: AGENT GRAPH EXECUTION START===
+2026-06-05 18:48:42,803 | INFO | primary_intent: research_report
+2026-06-05 18:48:42,803 | INFO | intents: ['business_report', 'research_report']
+2026-06-05 18:48:42,803 | INFO | selected_agents: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 18:48:42,803 | INFO | scores: {'actions': 0, 'insights': 1, 'findings': 3}
+2026-06-05 18:48:42,803 | INFO | confidence: {'actions': 0.0, 'insights': 0.25, 'findings': 1.0}
+2026-06-05 18:48:42,803 | INFO | reasons: {'actions': [], 'insights': ['market detected'], 'findings': ['research detected', 'study detected', 'analysis detected'], 'trends': []}
+2026-06-05 18:48:42,803 | INFO | ===semantic_router DEBUG: AGENT GRAPH EXECUTION END===
+2026-06-05 18:48:42,803 | INFO | RUNNING AGENT: insights
+2026-06-05 18:48:42,803 | INFO | COMPLETED AGENT: insights in 0.000239s
+2026-06-05 18:48:42,803 | INFO | RUNNING AGENT: findings
+2026-06-05 18:48:42,803 | INFO | ARTIFACTS: {}
+2026-06-05 18:48:42,803 | INFO | RUNNING AGENT: trend
+2026-06-05 18:48:42,803 | INFO | COMPLETED AGENT: findings in 0.000126s
+2026-06-05 18:48:42,803 | INFO | RUNNING AGENT: sentiment
+2026-06-05 18:48:42,803 | INFO | RUNNING AGENT: risk
+2026-06-05 18:48:42,803 | INFO | ARTIFACTS: {}
+2026-06-05 18:48:42,803 | INFO | COMPLETED AGENT: trend in 0.000865s
+2026-06-05 18:48:42,803 | INFO | COMPLETED AGENT: sentiment in 1.3e-05s
+2026-06-05 18:48:42,803 | INFO | COMPLETED AGENT: risk in 1.1e-05s
+2026-06-05 18:48:42,803 | INFO | ARTIFACTS: {}
+2026-06-05 18:48:42,803 | INFO | ARTIFACTS: {}
+2026-06-05 18:48:42,803 | INFO | ARTIFACTS: {}
+2026-06-05 18:48:42,803 | INFO | PARALLEL EXECUTION RESULTS: [{'agent': 'insights', 'duration': 0.000239, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'findings', 'duration': 0.000126, 'artifacts': {'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends']}}, {'agent': 'trend', 'duration': 0.000865, 'artifacts': {'trends': []}}, {'agent': 'sentiment', 'duration': 1.3e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'risk', 'duration': 1.1e-05, 'artifacts': {'risk': ['Moderate Risk']}}]
+2026-06-05 18:48:42,803 | INFO | ROUTE: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 18:48:42,803 | INFO | AFTER ACTIONS: []
+2026-06-05 18:48:42,803 | INFO | AFTER INSIGHTS: []
+2026-06-05 18:48:42,803 | INFO | AFTER TRENDS: []
+2026-06-05 18:48:42,803 | INFO | agent_service artifacts: {'insights': ['Market expansion detected'], 'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends'], 'trends': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}
+2026-06-05 19:00:26,001 | INFO | ==============Application AI Summarizer==============
+2026-06-05 19:00:26,001 | INFO | ==============Creating database tables==============
+2026-06-05 19:00:26,001 | INFO | ==============Application AI Summarizer==============
+2026-06-05 19:00:26,001 | INFO | ==============FastAPI app initialized==============
+2026-06-05 19:01:03,969 | INFO | ==============Application AI Summarizer==============
+2026-06-05 19:01:03,969 | INFO | ==============Creating database tables==============
+2026-06-05 19:01:03,969 | INFO | ==============Application AI Summarizer==============
+2026-06-05 19:01:03,969 | INFO | ==============FastAPI app initialized==============
+2026-06-05 19:01:54,517 | INFO | ==============Application AI Summarizer==============
+2026-06-05 19:01:54,517 | INFO | ==============Creating database tables==============
+2026-06-05 19:01:54,517 | INFO | ==============Application AI Summarizer==============
+2026-06-05 19:01:54,517 | INFO | ==============FastAPI app initialized==============
+2026-06-05 19:02:28,253 | INFO | INTENT SCORES: {'business_report': 1, 'meeting_notes': 0, 'research_report': 3}
+2026-06-05 19:02:28,253 | INFO | PRIMARY INTENT: research_report
+2026-06-05 19:02:28,253 | INFO | SELECTED INTENTS: ['business_report', 'research_report']
+2026-06-05 19:02:28,253 | INFO | STRATEGY: {'risk', 'trend', 'summary', 'sentiment', 'findings', 'insights'}
+2026-06-05 19:02:28,253 | INFO | STRATEGY: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 19:02:28,253 | INFO | INPUT STRATEGY: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 19:02:28,253 | INFO | ===semantic_router DEBUG: AGENT GRAPH EXECUTION START===
+2026-06-05 19:02:28,253 | INFO | PRIMARY INTENT: research_report
+2026-06-05 19:02:28,253 | INFO | INTENTS: ['business_report', 'research_report']
+2026-06-05 19:02:28,253 | INFO | SELECTED AGENTS: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 19:02:28,253 | INFO | SCORES: {'actions': 0, 'insights': 1, 'findings': 3}
+2026-06-05 19:02:28,253 | INFO | CONFIDENCE: {'actions': 0.0, 'insights': 0.25, 'findings': 1.0}
+2026-06-05 19:02:28,253 | INFO | REASONS: {'actions': [], 'insights': ['market detected'], 'findings': ['research detected', 'study detected', 'analysis detected'], 'trends': []}
+2026-06-05 19:02:28,253 | INFO | ===semantic_router DEBUG: AGENT GRAPH EXECUTION END===
+2026-06-05 19:02:28,253 | INFO | RUNNING AGENT: insights
+2026-06-05 19:02:28,253 | INFO | COMPLETED AGENT: insights in 0.000132s
+2026-06-05 19:02:28,253 | INFO | ARTIFACTS: {}
+2026-06-05 19:02:28,253 | INFO | RUNNING AGENT: findings
+2026-06-05 19:02:28,253 | INFO | COMPLETED AGENT: findings in 0.000124s
+2026-06-05 19:02:28,253 | INFO | RUNNING AGENT: trend
+2026-06-05 19:02:28,253 | INFO | RUNNING AGENT: sentiment
+2026-06-05 19:02:28,253 | INFO | ARTIFACTS: {}
+2026-06-05 19:02:28,253 | INFO | RUNNING AGENT: risk
+2026-06-05 19:02:28,253 | INFO | COMPLETED AGENT: trend in 0.00046s
+2026-06-05 19:02:28,253 | INFO | COMPLETED AGENT: sentiment in 9e-06s
+2026-06-05 19:02:28,253 | INFO | COMPLETED AGENT: risk in 6e-06s
+2026-06-05 19:02:28,253 | INFO | ARTIFACTS: {}
+2026-06-05 19:02:28,253 | INFO | ARTIFACTS: {}
+2026-06-05 19:02:28,253 | INFO | ARTIFACTS: {}
+2026-06-05 19:02:28,253 | INFO | PARALLEL EXECUTION RESULTS: [{'agent': 'insights', 'duration': 0.000132, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'findings', 'duration': 0.000124, 'artifacts': {'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends']}}, {'agent': 'trend', 'duration': 0.00046, 'artifacts': {'trends': []}}, {'agent': 'sentiment', 'duration': 9e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'risk', 'duration': 6e-06, 'artifacts': {'risk': ['Moderate Risk']}}]
+2026-06-05 19:02:28,253 | INFO | ROUTE: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 19:02:28,253 | INFO | AFTER ACTIONS: []
+2026-06-05 19:02:28,253 | INFO | AFTER INSIGHTS: []
+2026-06-05 19:02:28,253 | INFO | AFTER TRENDS: []
+2026-06-05 19:02:28,253 | INFO | ====agent_service ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends'], 'trends': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}====
+2026-06-05 19:02:28,271 | INFO | ==============Application AI Summarizer==============
+2026-06-05 19:02:28,271 | INFO | ==============EXECUTION END==============
+2026-06-05 19:04:20,301 | INFO | ==============Application AI Summarizer==============
+2026-06-05 19:04:20,301 | INFO | ==============Creating database tables==============
+2026-06-05 19:04:20,306 | INFO | ==============Application AI Summarizer==============
+2026-06-05 19:04:20,306 | INFO | ==============FastAPI app initialized==============
+2026-06-05 19:04:53,297 | INFO | ==============Application AI Summarizer==============
+2026-06-05 19:04:53,297 | INFO | ==============Serving home page==============
+2026-06-05 19:04:53,297 | INFO | ==============EXECUTION START==============
+2026-06-05 19:05:05,260 | INFO | INTENT SCORES: {'business_report': 1, 'meeting_notes': 0, 'research_report': 3}
+2026-06-05 19:05:05,260 | INFO | PRIMARY INTENT: research_report
+2026-06-05 19:05:05,260 | INFO | SELECTED INTENTS: ['business_report', 'research_report']
+2026-06-05 19:05:05,260 | INFO | STRATEGY: {'trend', 'summary', 'insights', 'risk', 'findings', 'sentiment'}
+2026-06-05 19:05:05,260 | INFO | STRATEGY: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 19:05:05,260 | INFO | INPUT STRATEGY: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 19:05:05,260 | INFO | ===semantic_router DEBUG: AGENT GRAPH EXECUTION START===
+2026-06-05 19:05:05,260 | INFO | PRIMARY INTENT: research_report
+2026-06-05 19:05:05,260 | INFO | INTENTS: ['business_report', 'research_report']
+2026-06-05 19:05:05,260 | INFO | SELECTED AGENTS: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 19:05:05,260 | INFO | SCORES: {'actions': 0, 'insights': 1, 'findings': 3}
+2026-06-05 19:05:05,260 | INFO | CONFIDENCE: {'actions': 0.0, 'insights': 0.25, 'findings': 1.0}
+2026-06-05 19:05:05,260 | INFO | REASONS: {'actions': [], 'insights': ['market detected'], 'findings': ['research detected', 'study detected', 'analysis detected'], 'trends': []}
+2026-06-05 19:05:05,260 | INFO | ===semantic_router DEBUG: AGENT GRAPH EXECUTION END===
+2026-06-05 19:05:05,260 | INFO | RUNNING AGENT: insights
+2026-06-05 19:05:05,260 | INFO | RUNNING AGENT: findings
+2026-06-05 19:05:05,260 | INFO | COMPLETED AGENT: insights in 0.000252s
+2026-06-05 19:05:05,260 | INFO | RUNNING AGENT: trend
+2026-06-05 19:05:05,265 | INFO | COMPLETED AGENT: findings in 0.000147s
+2026-06-05 19:05:05,266 | INFO | RUNNING AGENT: sentiment
+2026-06-05 19:05:05,266 | INFO | ARTIFACTS: {}
+2026-06-05 19:05:05,266 | INFO | RUNNING AGENT: risk
+2026-06-05 19:05:05,266 | INFO | ARTIFACTS: {}
+2026-06-05 19:05:05,266 | INFO | COMPLETED AGENT: sentiment in 9e-06s
+2026-06-05 19:05:05,266 | INFO | COMPLETED AGENT: trend in 0.000764s
+2026-06-05 19:05:05,266 | INFO | COMPLETED AGENT: risk in 1e-05s
+2026-06-05 19:05:05,266 | INFO | ARTIFACTS: {}
+2026-06-05 19:05:05,266 | INFO | ARTIFACTS: {}
+2026-06-05 19:05:05,266 | INFO | ARTIFACTS: {}
+2026-06-05 19:05:05,266 | INFO | PARALLEL EXECUTION RESULTS: [{'agent': 'insights', 'duration': 0.000252, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'findings', 'duration': 0.000147, 'artifacts': {'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends']}}, {'agent': 'trend', 'duration': 0.000764, 'artifacts': {'trends': []}}, {'agent': 'sentiment', 'duration': 9e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'risk', 'duration': 1e-05, 'artifacts': {'risk': ['Moderate Risk']}}]
+2026-06-05 19:05:05,266 | INFO | ROUTE: ['summary', 'insights', 'findings', 'trend', 'sentiment', 'risk']
+2026-06-05 19:05:05,266 | INFO | AFTER ACTIONS: []
+2026-06-05 19:05:05,266 | INFO | AFTER INSIGHTS: []
+2026-06-05 19:05:05,266 | INFO | AFTER TRENDS: []
+2026-06-05 19:05:05,266 | INFO | ====agent_service ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': ['Research study shows customer satisfaction improved', 'Analysis confirms positive trends'], 'trends': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}====
+2026-06-05 19:05:05,266 | INFO | ==============Application AI Summarizer==============
+2026-06-05 19:05:05,266 | INFO | ==============EXECUTION END==============
