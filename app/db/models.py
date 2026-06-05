@@ -3,6 +3,8 @@ from sqlalchemy import Integer
 from sqlalchemy import Text
 from sqlalchemy import String
 from sqlalchemy import DateTime
+from sqlalchemy import Float
+from sqlalchemy import func
 
 from datetime import datetime
 
@@ -34,6 +36,16 @@ class Summary(Base):
     agent_output = Column(
         Text
     )
+
+    execution_plan = Column(Text)
+
+    execution_metadata = Column(Text)
+
+    primary_intent = Column(String)
+
+    agent_count = Column(Integer)
+
+    execution_time = Column(Float)
 
     created_at = Column(
         DateTime,

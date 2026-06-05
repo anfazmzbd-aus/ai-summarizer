@@ -6,7 +6,7 @@ def detect_trends(text):
     trends = []
 
     percent_matches = re.findall(
-        r'(\d+)%',
+        r'([+-]?\d+)%',
         text
     )
 

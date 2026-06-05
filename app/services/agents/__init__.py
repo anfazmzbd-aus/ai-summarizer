@@ -6,3 +6,6 @@ from .plan_agent import plan_agent
 from .trend_agent import trend_agent
 from .sentiment_agent import sentiment_agent
 from .risk_agent import risk_agent
+from .root_cause_agent import root_cause_agent
+from .forecast_agent import forecast_agent
+from .recommendation_agent import recommendation_agent

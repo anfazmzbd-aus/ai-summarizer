@@ -15,13 +15,17 @@ def build_strategy(intents):
             "insights",
             "trend",
             "sentiment",
-            "risk"
+            "risk",
+            "root_cause",
+            "forecast",
+            "recommendation"
         },
 
         "research_report": {
             "findings",
             "sentiment",
-            "risk"
+            "risk",
+            "recommendation"
         }
     }
 

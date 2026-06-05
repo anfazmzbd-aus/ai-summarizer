@@ -42,10 +42,14 @@ def summarize(
                 f"<li>{item}</li>"
                 for item in values
             ]
+        )   
+        title = (
+            name
+            .replace("_", " ")
+            .title()
         )
-
         artifact_html += f"""
-        <h3>{name.title()}</h3>
+        <h3>{title}</h3>
         <ul>{items}</ul>
         """
 
