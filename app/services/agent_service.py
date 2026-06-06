@@ -29,20 +29,21 @@ def run_agents(
 ):
 
     state = {
+
         "text": text,
         "summary_length": summary_length,
 
-         "summary": "",
+        "summary": "",
 
         "actions": [],
         "insights": [],
         "findings": [],
         "trends": [],
 
-        "artifacts": {},
-
         "plan": {},
-        "metadata": {}
+        "metadata": {},
+
+        "artifacts": {}
     }
 
     result = run_graph(state)
@@ -51,10 +52,10 @@ def run_agents(
 
     return {
         "summary": result["summary"],
-        "actions": result["actions"],
-        "insights": result["insights"],
-        "findings": result["findings"],
-        "trends": result.get("trends", []),
+        #"actions": result["actions"],
+        #"insights": result["insights"],
+        #"findings": result["findings"],
+        #"trends": result.get("trends", []),
 
         "artifacts": result.get("artifacts", {}),
 

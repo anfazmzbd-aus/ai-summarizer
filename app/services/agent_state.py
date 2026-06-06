@@ -10,7 +10,12 @@ class AgentState(TypedDict):
 
     summary: str
 
-    artifacts: dict
-    
+    actions: list
+    insights: list
+    findings: list
+    trends: list
+
     plan: dict
     metadata: dict
+
+    artifacts: dict

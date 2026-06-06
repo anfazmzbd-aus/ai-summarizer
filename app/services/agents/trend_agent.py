@@ -13,7 +13,7 @@ from app.services.logging.logger import logger
 )
 def trend_agent(state):
     trends = detect_trends(state["text"])
-    print(f"***************TREND AGENT************: {trends}")
+    
     formatted_trends = []
 
     for trend in trends:
@@ -32,6 +32,7 @@ def trend_agent(state):
         "artifacts",
         {}
     )["trends"] = formatted_trends
+    
     logger.info(f"TREND AGENT: {state['artifacts']['trends']}")
     logger.info(f"FORMATTED TREND AGENT: {formatted_trends}")
     return state

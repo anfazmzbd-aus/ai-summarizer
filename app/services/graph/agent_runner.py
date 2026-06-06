@@ -27,16 +27,18 @@ def run_agent(agent_name, agent_func, state):
         f"{agent_name} "
         f"in {duration}s"
     )
+    artifacts = result.get(
+        "artifacts",
+        {}
+    )
     logger.info(
         f"ARTIFACTS: "
-        f"{state.get('artifacts', {})}"
+        f"{artifacts}"
     )
 
     return {
         "agent": agent_name,
         "duration": duration,
-        "artifacts": result.get(
-            "artifacts",
-            {}
-        )
+        "artifacts": artifacts
     }
+
