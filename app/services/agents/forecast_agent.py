@@ -8,7 +8,8 @@ from app.services.tools.forecast_tool import (
 
 @register_agent(
     "forecast",
-    depends_on=["summary"]
+    depends_on=["trend"],
+    produces=["forecasts"]
 )
 def forecast_agent(state):
     forecasts = forecast_tool(state["text"])

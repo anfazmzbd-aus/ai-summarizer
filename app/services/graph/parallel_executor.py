@@ -1,5 +1,5 @@
 from concurrent.futures import ThreadPoolExecutor
-
+from app.services.logging.logger import logger
 
 def execute_parallel(tasks):
 
@@ -20,4 +20,8 @@ def execute_parallel(tasks):
                 future.result()
             )
 
+    logger.info(
+        f"PARALLEL EXECUTION:" 
+        f"{results}"
+    )
     return results

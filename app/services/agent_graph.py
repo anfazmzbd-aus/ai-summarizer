@@ -86,7 +86,8 @@ def run_graph(state):
     # --------------------------------------------------
 
     groups = build_parallel_groups(
-        execution_order
+        execution_order,
+        AGENT_REGISTRY
     )
 
     # --------------------------------------------------
@@ -148,12 +149,15 @@ def run_graph(state):
     # Parallel
     # --------------------------------------------------
 
-    if len(groups) > 1:
+    for group_index in range(
+        1,
+        len(groups)
+    ):
 
         tasks = []
 
         parallel_agents = (
-            groups[1]
+            groups[group_index]
         )
 
         for agent_name in parallel_agents:
@@ -184,15 +188,19 @@ def run_graph(state):
         results = execute_parallel(
             tasks
         )
-        logger.info(f"PARALLEL EXECUTION RESULTS: {results}")
 
-        for index, result in enumerate(
-            results
-        ):
+        logger.info(
+            f"GROUP {group_index} RESULTS: "
+            f"{results}"
+        )
+
+        for result in results:
 
             agent_name = result["agent"]
 
-            timings[agent_name] = result["duration"]
+            timings[
+                agent_name
+            ] = result["duration"]
 
             execution_metadata[
                 "agents_executed"
@@ -252,7 +260,7 @@ def run_graph(state):
     logger.debug(f"MERGED ARTIFACTS: {state['artifacts']}")
     logger.debug(f"REGISTERED: {AGENT_REGISTRY.keys()}")
     logger.debug(f"EXECUTED AGENTS: {execution_metadata['agents_executed']}")
-    logger.debug(f"EXECUTION METADATA: {state.get('execution')}")
+    logger.info(f"EXECUTION METADATA: {state.get('execution')}")
     logger.debug(f"ARTIFACTS: {state.get('artifacts', {})}")
     logger.debug("=== DEBUG: AGENT GRAPH EXECUTION END===")
     return state

@@ -8,7 +8,12 @@ from app.services.tools.root_cause_tool import (
 
 @register_agent(
     "root_cause",
-    depends_on=["summary"]
+    depends_on=[
+        "insights"
+    ],
+    produces=[
+        "root_causes"
+    ]
 )
 def root_cause_agent(state):
 

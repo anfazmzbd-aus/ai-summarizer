@@ -7,7 +7,8 @@ from app.services.tools.insight_tool import (
 
 @register_agent(
     "insights",
-    depends_on=["summary"]
+    depends_on=["summary"],
+    produces=["insights"]
 )
 def insights_agent(state):
     insights = business_insight_tool(state["text"])

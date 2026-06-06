@@ -1,3 +1,5 @@
+from app.services.logging.logger import logger
+
 def resolve_execution_order(
     selected_agents,
     registry
@@ -41,5 +43,5 @@ def resolve_execution_order(
 
     for agent in selected_agents:
         visit(agent)
-
+    logger.info(f"Resolved execution order: {resolved}")
     return resolved

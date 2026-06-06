@@ -9,7 +9,8 @@ from app.services.logging.logger import logger
 
 @register_agent(
     "trend",
-    depends_on=["summary"]
+    depends_on=["insights"],
+    produces=["trends"]
 )
 def trend_agent(state):
     trends = detect_trends(state["text"])

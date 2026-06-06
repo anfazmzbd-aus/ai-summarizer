@@ -8,7 +8,13 @@ from app.services.tools.recommendation_tool import (
 
 @register_agent(
     "recommendation",
-    depends_on=["summary"]
+    depends_on=[
+        "forecast",
+        "risk"
+    ],
+    produces=[
+        "recommendations"
+    ]
 )
 def recommendation_agent(state):
     recommendations = recommendation_tool(state["text"])
