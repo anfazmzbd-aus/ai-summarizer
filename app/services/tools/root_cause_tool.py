@@ -1,23 +1,18 @@
-def root_cause_tool(text):
+def root_cause_tool(
+    insights
+):
 
     causes = []
 
-    lower = text.lower()
+    for insight in insights:
 
-    if (
-        "revenue" in lower
-        and "market" in lower
-    ):
-        causes.append(
-            "Revenue growth appears linked to market expansion."
-        )
+        if (
+            "Market expansion"
+            in insight
+        ):
 
-    if (
-        "profit" in lower
-        and "sales" in lower
-    ):
-        causes.append(
-            "Profit growth may be driven by increased sales."
-        )
+            causes.append(
+                "Revenue growth appears linked to market expansion."
+            )
 
     return causes

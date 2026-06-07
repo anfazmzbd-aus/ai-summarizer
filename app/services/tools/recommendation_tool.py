@@ -1,19 +1,23 @@
-def recommendation_tool(text):
+def recommendation_tool(
+    forecasts,
+    risks
+):
 
-    recs = []
+    recommendations = []
 
-    lower = text.lower()
+    if forecasts:
 
-    if "market" in lower:
-
-        recs.append(
+        recommendations.append(
             "Increase investment in growth channels."
         )
 
-    if "revenue" in lower:
+    if (
+        "High Risk"
+        in risks
+    ):
 
-        recs.append(
-            "Monitor sustainability of revenue growth."
+        recommendations.append(
+            "Develop risk mitigation plans."
         )
 
-    return recs
+    return recommendations

@@ -17,7 +17,23 @@ from app.services.tools.recommendation_tool import (
     ]
 )
 def recommendation_agent(state):
-    recommendations = recommendation_tool(state["text"])
+    artifacts = state.get(
+        "artifacts",
+        {}
+    )
+
+    recommendations = (
+        recommendation_tool(
+            artifacts.get(
+                "forecasts",
+                []
+            ),
+            artifacts.get(
+                "risk",
+                []
+            )
+        )
+    )
 
     state.setdefault(
         "artifacts",

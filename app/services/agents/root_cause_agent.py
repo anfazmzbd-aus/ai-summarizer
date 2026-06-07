@@ -5,22 +5,34 @@ from app.services.registry.registry import (
 from app.services.tools.root_cause_tool import (
     root_cause_tool
 )
+from app.services.logging.logger import logger
 
 @register_agent(
     "root_cause",
-    depends_on=[
-        "insights"
-    ],
-    produces=[
-        "root_causes"
-    ]
+    depends_on=["insights"],
+    produces=["root_causes"]
 )
 def root_cause_agent(state):
 
-    state["artifacts"][
-        "root_cause"
-    ] = root_cause_tool(
-        state["text"]
+    insights = (
+        state.get(
+            "artifacts",
+            {}
+        ).get(
+            "insights",
+            []
+        )
     )
 
+    root_causes = (
+        root_cause_tool(
+            insights
+        )
+    )
+
+    state.setdefault(
+        "artifacts",
+        {}
+    )["root_causes"] = root_causes
+    logger.info(f"ROOT CAUSES: {root_causes}")
     return state

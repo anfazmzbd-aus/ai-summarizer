@@ -1,20 +1,22 @@
 import re
 
-def forecast_tool(text):
-
-    percentages = re.findall(
-        r"(\d+)%",
-        text
-    )
+def forecast_tool(trends):
 
     forecasts = []
 
-    for p in percentages:
+    for trend in trends:
 
-        if int(p) > 10:
+        match = re.search(
+            r"(\d+)%",
+            trend
+        )
+
+        if match:
+
+            value = match.group(1)
 
             forecasts.append(
-                f"Growth trend of {p}% may continue."
+                f"Growth trend of {value}% may continue."
             )
 
     return forecasts
