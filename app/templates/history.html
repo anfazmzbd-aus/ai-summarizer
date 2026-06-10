@@ -25,8 +25,8 @@
 
             <strong>Original:</strong>
 
-            <p>
-                {{ item.original_text[:150] }}
+            <p style="white-space: pre-wrap;">
+            {{ item.original_text }}
             </p>
 
             <strong>Summary:</strong>
@@ -83,19 +83,87 @@
 
             {% endif %}
 
+            {% if item.trends %}
+
+            <strong>Trends:</strong>
+
+            <ul>
+
+            {% for trend in item.trends %}
+
+            <li>{{ trend }}</li>
+
+            {% endfor %}
+
+            </ul>
+
+            {% endif %}
+            
+            {% if item.sentiment %}
+
+            <strong>Sentiment:</strong>
+
+            <ul>
+
+            {% for sentiment in item.sentiment %}
+
+            <li>{{ sentiment }}</li>
+
+            {% endfor %}
+
+            </ul>
+
+            {% endif %}
+
+            {% if item.risk %}
+
+            <strong>Risk:</strong>
+
+            <ul>
+
+            {% for risk in item.risk %}
+
+            <li>{{ risk }}</li>
+
+            {% endfor %}
+
+            </ul>
+
+            {% endif %}
+
+            {% if item.root_cause %}
+
+            <strong>Root Cause:</strong>
+
+            <ul>
+
+            {% for root_cause in item.root_cause %}
+
+            <li>{{ root_cause }}</li>
+
+            {% endfor %}
+
+            </ul>
+
+            {% endif %}
+
             {% if item.plan %}
 
-            <strong>Execution Plan:</strong>
+            <h4>Execution Plan</h4>
 
-            <pre width="50%" wrap="on">{{ item.plan }}</pre>
+            <pre width="50%" wrap="on">
+            {{ item.plan | tojson(indent=2) }}
+            </pre>
 
             {% endif %}
 
             {% if item.execution %}
 
-            <strong>Execution Metadata:</strong>
+           <h4>Execution Metadata</h4>
 
-            <pre width="50%" wrap="on">{{ item.execution }}</pre>
+            <pre width="50%" wrap="on">
+            {{ item.execution | tojson(indent=2) }}
+            </pre>
 
             {% endif %}
 

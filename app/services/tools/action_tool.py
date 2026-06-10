@@ -1,42 +1,75 @@
+from app.services.logging.logger import logger
 import re
 
-
 def extract_actions(text):
-
-    sentences = re.split(
-        r'[.!?]\s+',
-        text
-    )
 
     keywords = [
         "should",
         "must",
         "need to",
         "needs to",
-        "follow up",
-        "action",
-        "task"
+        "follow up"
     ]
 
     actions = []
 
-    for s in sentences:
+    for line in text.splitlines():
 
-        s = s.strip()
-        lower = s.lower()
+        line = line.strip()
 
-        if (
-            "should" in lower
-            or "must" in lower
-            or "need to" in lower
-            or "needs to" in lower
-        ):
-            s = re.sub(
-                r"^[A-Za-z\s]+:\s*",
-                "",
-                s
+        if not line:
+            continue
+
+        lower = line.lower()
+        print("LINE:", repr(line))
+        print("LOWER:", repr(lower))
+        matched = [
+            keyword
+            for keyword in keywords
+            if keyword in lower
+        ]
+
+        print("MATCHED KEYWORDS:", matched)
+        
+        matched = []
+
+        for keyword in keywords:
+
+            pattern = (
+                r"\b"
+                + re.escape(keyword)
+                + r"\b"
             )
 
-            actions.append(s.strip())
+            if re.search(
+                pattern,
+                lower
+            ):
+                matched.append(
+                    keyword
+                )
 
-    return list(dict.fromkeys(actions))
+        print(
+            "MATCHED KEYWORDS:",
+            matched
+        )
+
+        if matched:
+
+            line = re.sub(
+                r"^[A-Za-z\s]+:\s*",
+                "",
+                line
+            )
+            print(
+                "ACTION MATCH:",
+                line
+            )
+            actions.append(
+                line.strip()
+            )
+
+    logger.info(f"ACTION TOOL: {actions}")
+    return list(
+        dict.fromkeys(actions)
+    )

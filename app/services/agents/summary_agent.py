@@ -2,6 +2,9 @@ from app.models.summarizer_model import summarizer_model
 from app.services.registry.registry import (
     register_agent
 )
+from app.services.tools.summary_cleaner import (
+    clean_summary
+)
 
 @register_agent("summary")
 
@@ -14,7 +17,11 @@ def summary_agent(state):
     input_words = len(text.split())
 
     if input_words < 40:
-        state["summary"] = text
+
+        state["summary"] = clean_summary(
+            text
+        )
+        print(f"=== SUMMARY AGENT: Generated summary {state['summary']} words ===")
         return state
 
     if summary_length == "short":
@@ -37,6 +44,12 @@ def summary_agent(state):
         truncation=True
     )
 
-    state["summary"] = result[0]["summary_text"]
+    summary_text = result[0]["summary_text"]
+
+    state["summary"] = clean_summary(
+        summary_text
+    )
+
+    print(f"=== SUMMARY AGENT: Generated summary {state['summary']} words ===")
 
     return state

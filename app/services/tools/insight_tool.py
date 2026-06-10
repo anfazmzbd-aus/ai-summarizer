@@ -34,6 +34,46 @@ def business_insight_tool(text):
     if "market share" in lower or "market" in lower:
         insights.append("Market expansion detected")
 
+    if (
+        "csat" in lower
+        or "customer satisfaction" in lower
+    ):
+
+        lines = text.splitlines()
+
+        for line in lines:
+
+            lower = line.lower()
+
+            if (
+                "csat" in lower
+                or
+                "customer satisfaction" in lower
+            ):
+
+                match = re.search(
+                    r"(-?\d+)%?",
+                    line
+                )
+
+                if match:
+
+                    value = int(
+                        match.group(1)
+                    )
+
+                    if value > 0:
+
+                        insights.append(
+                            f"CSAT increased by {value}%"
+                        )
+
+                    elif value < 0:
+
+                        insights.append(
+                            f"CSAT decreased by {abs(value)}%"
+                        )
+
     # Generic fallback
     if not insights:
         insights.append("Business activity detected")

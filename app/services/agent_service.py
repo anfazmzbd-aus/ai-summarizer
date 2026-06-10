@@ -52,10 +52,6 @@ def run_agents(
 
     return {
         "summary": result["summary"],
-        #"actions": result["actions"],
-        #"insights": result["insights"],
-        #"findings": result["findings"],
-        #"trends": result.get("trends", []),
 
         "artifacts": result.get("artifacts", {}),
 

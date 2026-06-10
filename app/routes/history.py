@@ -60,16 +60,42 @@ def history(request: Request):
                 "findings":
                     output.get("findings", []),
 
+                "trends":
+                    output.get("trends", []),
+
+                "sentiment":
+                    output.get("sentiment", []),
+
+                "risk":
+                    output.get("risk", []),
+
+                "root_causes":
+                    output.get("root_causes", []),
+
+                "forecasts":
+                    output.get("forecasts", []),
+
+                "recommendations":
+                    output.get("recommendations", []),
+
                 "plan":
                     json.dumps(
-                        output.get("plan", {}),
+                        json.loads(
+                            row.execution_plan
+                        )
+                        if row.execution_plan
+                        else {},
                         indent=2,
                         ensure_ascii=False
                     ),
 
                 "execution":
                     json.dumps(
-                        output.get("execution", {}),
+                        json.loads(
+                            row.execution_metadata
+                        )
+                        if row.execution_metadata
+                        else {},
                         indent=2,
                         ensure_ascii=False
                     ),
@@ -78,7 +104,7 @@ def history(request: Request):
                     row.created_at
             }
         )
-
+    #print(F"HISTORY SUMMARY: {summaries}")
     return templates.TemplateResponse(
         request=request,
         name="history.html",

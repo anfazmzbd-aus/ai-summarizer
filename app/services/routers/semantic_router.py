@@ -32,7 +32,10 @@ def semantic_router(
         "revenue",
         "profit",
         "market",
-        "sales"
+        "sales",
+        "csat",
+        "nps",
+        "customer satisfaction"
     ]
 
     finding_keywords = [
