@@ -14,6 +14,17 @@ def save_summary(
 
     db = SessionLocal()
 
+    execution_metadata = dict(
+        result["execution"]
+    )
+
+    execution_metadata[
+        "summary_metrics"
+    ] = result.get(
+        "summary_metrics",
+        {}
+    )
+
     try:
         db_summary = Summary(
             original_text=text,
@@ -45,7 +56,7 @@ def save_summary(
             ),
 
             execution_metadata=json.dumps(
-                result["execution"]
+                execution_metadata
             ),
 
             agent_output=json.dumps(

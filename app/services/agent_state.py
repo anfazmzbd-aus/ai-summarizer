@@ -5,7 +5,7 @@ class AgentState(TypedDict):
 
     text: str
     summary_length: str
-
+    summary_metrics: dict
     selected_agents: list
 
     summary: str
