@@ -1,22 +1,36 @@
 import re
 
 
-def detect_trends(text):
+def detect_trends(insights):
 
     trends = []
 
-    percent_matches = re.findall(
-        r'([+-]?\d+)%',
-        text
-    )
+    for insight in insights:
 
-    for value in percent_matches:
-
-        trends.append(
-            {
-                "metric": "percentage",
-                "value": int(value)
-            }
+        matches = re.findall(
+            r"-?\d+%",
+            insight
         )
-    print(f"trend_tool: {trends}")
+
+        for match in matches:
+
+            value = int(
+                match.replace(
+                    "%",
+                    ""
+                )
+            )
+
+            if value >= 0:
+
+                trends.append(
+                    f"{value}% increase detected"
+                )
+
+            else:
+
+                trends.append(
+                    f"{abs(value)}% decrease detected"
+                )
+    print(f"TREND TOOL Trends: {trends}")
     return trends

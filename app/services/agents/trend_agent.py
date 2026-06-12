@@ -1,10 +1,5 @@
-from app.services.registry.registry import (
-    register_agent
-)
-
-from app.services.tools.trend_tool import (
-    detect_trends
-)
+from app.services.registry.registry import register_agent
+from app.services.tools.trend_tool import detect_trends
 from app.services.logging.logger import logger
 
 @register_agent(
@@ -12,28 +7,27 @@ from app.services.logging.logger import logger
     depends_on=["insights"],
     produces=["trends"]
 )
+
 def trend_agent(state):
-    trends = detect_trends(state["text"])
+    insights = (
+        state.get(
+            "artifacts",
+            {}
+        ).get(
+            "insights",
+            []
+        )
+    )
+
+    trends = detect_trends(
+        insights
+    )
     
-    formatted_trends = []
-
-    for trend in trends:
-        if trend["metric"] == "percentage":
-            value = trend["value"]
-
-            if value >= 0:
-                formatted_trends.append(
-                    f"{value}% increase detected"
-                )
-            else:
-                formatted_trends.append(
-                    f"{abs(value)}% decrease detected"
-                )
     state.setdefault(
         "artifacts",
         {}
-    )["trends"] = formatted_trends
+    )["trends"] = trends
     
     logger.info(f"TREND AGENT: {state['artifacts']['trends']}")
-    logger.info(f"FORMATTED TREND AGENT: {formatted_trends}")
+    logger.info(f"FORMATTED TREND AGENT: {trends}")
     return state

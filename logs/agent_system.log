@@ -5892,3 +5892,56 @@ Research study shows customer satisfaction decreased.
 2026-06-11 11:16:46,238 | INFO | ====agent_service ARTIFACTS: {'findings': ['Research study shows customer satisfaction improved.'], 'risk': ['Moderate Risk'], 'actions': ['John should prepare the report.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}====
 2026-06-11 11:16:46,246 | INFO | ==============Application AI Summarizer==============
 2026-06-11 11:16:46,246 | INFO | ==============EXECUTION END==============
+2026-06-12 00:23:07,249 | INFO | ==============Application AI Summarizer==============
+2026-06-12 00:23:07,250 | INFO | ==============Creating database tables==============
+2026-06-12 00:23:07,260 | INFO | ==============Application AI Summarizer==============
+2026-06-12 00:23:07,260 | INFO | ==============FastAPI app initialized==============
+2026-06-12 00:23:15,107 | INFO | ==============Application AI Summarizer==============
+2026-06-12 00:23:15,107 | INFO | ==============Creating database tables==============
+2026-06-12 00:23:15,111 | INFO | ==============Application AI Summarizer==============
+2026-06-12 00:23:15,111 | INFO | ==============FastAPI app initialized==============
+2026-06-12 00:23:28,898 | INFO | ==============Application AI Summarizer==============
+2026-06-12 00:23:28,900 | INFO | ==============Serving home page==============
+2026-06-12 00:23:28,900 | INFO | ==============EXECUTION START==============
+2026-06-12 00:23:37,534 | INFO | INTENT SCORES: {'business_report': 4, 'meeting_notes': 0, 'research_report': 0}
+2026-06-12 00:23:37,536 | INFO | PRIMARY INTENT: business_report
+2026-06-12 00:23:37,536 | INFO | SELECTED INTENTS: ['business_report']
+2026-06-12 00:23:37,536 | INFO | STRATEGY: {'risk', 'recommendation', 'trend', 'forecast', 'sentiment', 'insights', 'root_cause', 'summary'}
+2026-06-12 00:23:37,536 | INFO | STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'forecast', 'root_cause']
+2026-06-12 00:23:37,538 | INFO | INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'forecast', 'root_cause']
+2026-06-12 00:23:37,538 | INFO | ===semantic_router DEBUG: AGENT GRAPH EXECUTION START===
+2026-06-12 00:23:37,538 | INFO | PRIMARY INTENT: business_report
+2026-06-12 00:23:37,538 | INFO | INTENTS: ['business_report']
+2026-06-12 00:23:37,538 | INFO | SELECTED AGENTS: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'forecast', 'root_cause']
+2026-06-12 00:23:37,538 | INFO | SCORES: {'actions': 0, 'insights': 3, 'findings': 0}
+2026-06-12 00:23:37,538 | INFO | CONFIDENCE: {'actions': 0.0, 'insights': 0.43, 'findings': 0.0}
+2026-06-12 00:23:37,538 | INFO | REASONS: {'actions': [], 'insights': ['revenue detected', 'profit detected', 'market detected'], 'findings': [], 'trends': []}
+2026-06-12 00:23:37,541 | INFO | ===semantic_router DEBUG: AGENT GRAPH EXECUTION END===
+2026-06-12 00:23:37,541 | INFO | Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-12 00:23:37,541 | INFO | PARALLEL GROUPS: [['summary'], ['findings', 'sentiment', 'insights'], ['risk', 'trend', 'root_cause'], ['forecast'], ['recommendation']]
+2026-06-12 00:23:42,225 | INFO | SUMMARY METRICS: {'input_words': 11, 'summary_words': 6, 'compression_ratio': 0.55}
+2026-06-12 00:23:42,225 | INFO | RUNNING AGENT: findings
+2026-06-12 00:23:42,225 | INFO | FINDING TOOL OUTPUT: []
+2026-06-12 00:23:42,225 | INFO | RUNNING AGENT: sentiment
+2026-06-12 00:23:42,225 | INFO | FINDING TOOL RETURN: []
+2026-06-12 00:23:42,227 | INFO | COMPLETED AGENT: sentiment in 1e-05s
+2026-06-12 00:23:42,227 | INFO | RUNNING AGENT: insights
+2026-06-12 00:23:42,227 | INFO | COMPLETED AGENT: findings in 0.000982s
+2026-06-12 00:23:42,227 | INFO | ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-12 00:23:42,227 | INFO | COMPLETED AGENT: insights in 0.00021s
+2026-06-12 00:23:42,227 | INFO | ARTIFACTS: {'findings': []}
+2026-06-12 00:23:42,229 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Profit improvement detected', 'Market expansion detected']}
+2026-06-12 00:23:42,229 | INFO | PARALLEL EXECUTION:[{'agent': 'findings', 'duration': 0.000982, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 1e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.00021, 'artifacts': {'insights': ['Revenue changed by 22%', 'Profit improvement detected', 'Market expansion detected']}}]
+2026-06-12 00:23:42,229 | INFO | GROUP 1 RESULTS: [{'agent': 'findings', 'duration': 0.000982, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 1e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.00021, 'artifacts': {'insights': ['Revenue changed by 22%', 'Profit improvement detected', 'Market expansion detected']}}]
+2026-06-12 00:23:42,231 | INFO | RUNNING AGENT: risk
+2026-06-12 00:23:42,231 | INFO | COMPLETED AGENT: risk in 1.1e-05s
+2026-06-12 00:23:42,231 | INFO | RUNNING AGENT: trend
+2026-06-12 00:23:42,231 | INFO | ARTIFACTS: {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Profit improvement detected', 'Market expansion detected'], 'risk': ['Moderate Risk']}
+2026-06-12 00:23:42,231 | INFO | RUNNING AGENT: root_cause
+2026-06-12 00:23:42,233 | INFO | ROOT CAUSES: ['Revenue growth appears linked to market expansion.']
+2026-06-12 00:23:42,233 | INFO | COMPLETED AGENT: root_cause in 0.000177s
+2026-06-12 00:23:42,233 | INFO | ARTIFACTS: {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Profit improvement detected', 'Market expansion detected'], 'root_causes': ['Revenue growth appears linked to market expansion.']}
+2026-06-12 00:30:07,579 | INFO | ==============Application AI Summarizer==============
+2026-06-12 00:30:07,579 | INFO | ==============Creating database tables==============
+2026-06-12 00:30:07,583 | INFO | ==============Application AI Summarizer==============
+2026-06-12 00:30:07,583 | INFO | ==============FastAPI app initialized==============

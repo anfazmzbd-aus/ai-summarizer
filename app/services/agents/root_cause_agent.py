@@ -1,10 +1,5 @@
-from app.services.registry.registry import (
-    register_agent
-)
-
-from app.services.tools.root_cause_tool import (
-    root_cause_tool
-)
+from app.services.registry.registry import register_agent
+from app.services.tools.root_cause_tool import root_cause_tool
 from app.services.logging.logger import logger
 
 @register_agent(

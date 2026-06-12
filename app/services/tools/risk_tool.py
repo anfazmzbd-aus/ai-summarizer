@@ -1,9 +1,14 @@
 import re
 
 
-def detect_risk(text):
-
-    text = text.lower()
+def detect_risk(
+    insights,
+    findings
+):
+    content = " ".join(
+        insights + findings
+    ).lower()
+    text = content
 
     if any(
         word in text

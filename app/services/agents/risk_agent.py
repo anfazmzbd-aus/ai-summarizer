@@ -8,12 +8,35 @@ from app.services.tools.risk_tool import (
 
 @register_agent(
     "risk",
-    depends_on=["summary"]
+    depends_on=["insights", "findings"],
+    produces=["risk"]
 )
+
 def risk_agent(state):
 
+    insights = (
+        state.get(
+            "artifacts",
+            {}
+        ).get(
+            "insights",
+            []
+        )
+    )
+
+    findings = (
+        state.get(
+            "artifacts",
+            {}
+        ).get(
+            "findings",
+            []
+        )
+    )
+
     risk = detect_risk(
-        state["text"]
+        insights,
+        findings
     )
 
     state.setdefault(
