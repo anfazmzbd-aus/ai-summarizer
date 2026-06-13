@@ -51,9 +51,17 @@ async def upload_pdf(file: UploadFile = File(...)):
     # 4. Response
     # ----------------------------
     return {
-        "summary": result.get("summary", ""),
-        "actions": result.get("actions", []),
-        "insights": result.get("insights", []),
-        "findings": result.get("findings", []),
-        "plan": result.get("plan", {})
+        "summary": result["summary"],
+        "artifacts": result.get(
+            "artifacts",
+            {}
+        ),
+        "plan": result.get(
+            "plan",
+            {}
+        ),
+        "execution": result.get(
+            "execution",
+            {}
+        )
     }

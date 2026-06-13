@@ -19,66 +19,11 @@ def summary_agent(state):
     text = preprocess_summary_input(
         raw_text
     )
+
     print(
         "PREPROCESSED SUMMARY INPUT:"
     )
     print(text)
-    summary_length = state["summary_length"]
-
-    input_words = len(text.split())
-    input_tokens = len(text.split())
-    print(
-        f"**************INPUT WORDS: {input_words}**************"
-    )
-    print(
-        f"**************INPUT TOKENS: {input_tokens}**************"
-    )
-    
-    if summary_length == "short":
-
-        max_len = min(
-            max(10, input_tokens - 2),
-            40
-        )
-
-        min_len = max(
-            5,
-            max_len // 2
-        )
-
-    elif summary_length == "medium":
-
-        max_len = min(
-            max(20, input_tokens),
-            80
-        )
-
-        min_len = max(
-            10,
-            max_len // 2
-        )
-
-    else:
-
-        max_len = min(
-            max(30, input_tokens),
-            120
-        )
-
-        min_len = max(
-            15,
-            max_len // 2
-        )
-
-    max_len = min(
-        max_len,
-        input_words
-    )
-
-    min_len = min(
-        min_len,
-        max_len - 1
-    )
 
     if not text.strip():
 
@@ -93,34 +38,107 @@ def summary_agent(state):
         }
 
         return state
+    
+    summary_length = state["summary_length"]
 
-    input_tokens = max(
-        1,
-        len(text.split())
+    input_words = len(text.split())
+    input_tokens = len(text.split())
+    print(
+        f"**************INPUT WORDS: {input_words}**************"
     )
-
-    max_len = min(
-        max_len,
-        input_tokens
+    print(
+        f"**************INPUT TOKENS: {input_tokens}**************"
     )
-
-    min_len = min(
-        min_len,
-        max_len - 1
-    )
-
+    
     result = summarizer_model(
         text,
-        max_length=max_len,
-        min_length=min_len,
+
+        max_new_tokens=min(
+            50,
+            input_tokens
+        ),
+
+        min_new_tokens=max(
+            10,
+            int(
+                input_tokens * 0.6
+            )
+        ),
+
         do_sample=False,
-        truncation=True
+
+        truncation=False
     )
 
     summary_text = result[0]["summary_text"]
 
     state["summary"] = postprocess_summary(
         summary_text
+    )
+
+    summary = (
+        result[0]["summary_text"]
+    )
+
+    summary_sentences = {
+        s.strip()
+        for s in summary.split(".")
+        if s.strip()
+    }
+
+    original_sentences = [
+        s.strip()
+        for s in text.split(".")
+        if s.strip()
+    ]
+
+    preserve_keywords = [
+        "revenue",
+        "profit",
+        "market",
+        "risk",
+        "research"
+    ]
+
+    for sentence in original_sentences:
+
+        lower = sentence.lower()
+
+        if (
+            any(
+                k in lower
+                for k in preserve_keywords
+            )
+            and not any(
+                sentence in x
+                for x in summary_sentences
+            )
+        ):
+            summary_sentences.add(
+                sentence
+            )
+
+    ordered = []
+
+    for sentence in original_sentences:
+
+        if any(
+            sentence in x
+            for x in summary_sentences
+        ):
+            ordered.append(
+                sentence
+            )
+
+    state["summary"] = (
+        ". ".join(
+            ordered
+        ) + "."
+    )
+
+    input_count = max(
+        1,
+        len(raw_text.split())
     )
 
     state["summary_metrics"] = {
@@ -130,7 +148,7 @@ def summary_agent(state):
 
         "summary_words":
             len(
-                state["summary"].split()
+                summary.split()
             ),
 
         "compression_ratio":
@@ -139,9 +157,7 @@ def summary_agent(state):
                     state["summary"].split()
                 )
                 /
-                len(
-                    raw_text.split()
-                ),
+                input_count,
                 2
             )
     }

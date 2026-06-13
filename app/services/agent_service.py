@@ -48,7 +48,7 @@ def run_agents(
 
     result = run_graph(state)
 
-    logger.info(f"====agent_service ARTIFACTS: {result.get('artifacts', {})}====")
+    logger.info(f"====FINAL ARTIFACTS:: {result.get('artifacts', {})}====")
 
     return {
         "summary": result["summary"],
