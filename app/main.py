@@ -11,8 +11,8 @@ from app.db.database import Base, engine
 
 from fastapi.staticfiles import StaticFiles
 
-logger.info("==============Application AI Summarizer==============")
-logger.info("==============Creating database tables==============")
+logger.debug("==============Application AI Summarizer==============")
+logger.debug("==============Creating database tables==============")
 
 Base.metadata.create_all(
     bind=engine

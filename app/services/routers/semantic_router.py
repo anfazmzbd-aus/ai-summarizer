@@ -9,14 +9,14 @@ def semantic_router(
     strategy
 ):
     logger.info(
-        f"INPUT STRATEGY: {strategy}"
+        f"****INPUT STRATEGY: {strategy}"
     )
 
     sections = split_sections(
         text
     )
     logger.info(
-        f"PARSED SECTIONS: {sections}"
+        f"****PARSED SECTIONS: {sections}"
     )
     text = text.lower()
 
@@ -115,7 +115,7 @@ def semantic_router(
     logger.debug(f"CONFIDENCE: {confidence}")
     logger.debug(f"REASONS: {reasons}")
     logger.debug("===semantic_router DEBUG: AGENT GRAPH EXECUTION END===")
-    logger.info(f"SECTIONS: {sections}")
+    logger.info(f"****SECTIONS: {sections}")
 
     return {
         "primary_intent": intent_info[

@@ -1,18 +1,81 @@
 def root_cause_tool(
-    insights
+    insights,
+    trends=None,
+    risk=None
 ):
+
+    trends = trends or []
+    risk = risk or []
 
     causes = []
 
-    for insight in insights:
+    text = (
+        " ".join(insights)
+        + " "
+        + " ".join(trends)
+        + " "
+        + " ".join(risk)
+    ).lower()
 
-        if (
-            "Market expansion"
-            in insight
-        ):
+    has_revenue = (
+        "revenue"
+        in text
+    )
 
-            causes.append(
-                "Revenue growth appears linked to market expansion."
-            )
+    has_growth = (
+        "increase"
+        in text
+        or "growth"
+        in text
+    )
 
-    return causes
+    has_market = (
+        "market"
+        in text
+        or "expansion"
+        in text
+    )
+
+    if (
+        has_revenue
+        and (
+            has_growth
+            or has_market
+        )
+    ):
+
+        causes.append(
+            "Revenue growth appears linked to market expansion."
+        )
+
+    if (
+        "decline"
+        in text
+        or "decrease"
+        in text
+    ):
+        causes.append(
+            "Performance decline may indicate weakening demand."
+        )
+
+    if (
+        "risk"
+        in text
+        or "high risk"
+        in text
+        or "moderate risk"
+        in text
+    ):
+        causes.append(
+            "Observed risks may be affecting outcomes."
+        )
+
+    if not causes:
+
+        causes.append(
+            "No clear root cause identified."
+        )
+
+    return list(
+        dict.fromkeys(causes)
+    )

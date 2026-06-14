@@ -16,23 +16,23 @@ from app.services.tools.recommendation_tool import (
         "recommendations"
     ]
 )
-def recommendation_agent(state):
-    artifacts = state.get(
-        "artifacts",
-        {}
-    )
 
-    recommendations = (
-        recommendation_tool(
-            artifacts.get(
-                "forecasts",
-                []
-            ),
-            artifacts.get(
-                "risk",
-                []
-            )
-        )
+def recommendation_agent(state):
+
+    context = state.get("context", {})
+    artifacts = state.get("artifacts", {})
+
+    recommendations = recommendation_tool(
+        forecasts=(
+            artifacts.get("forecasts", [])
+            or context.get("forecast", [])
+        ),
+        risk=(
+            artifacts.get("risk", [])
+            or context.get("risk", [])
+        ),
+        trends=context.get("trends", []),
+        insights=context.get("insights", [])
     )
 
     state.setdefault(

@@ -6,6 +6,12 @@ def build_parallel_groups(
     registry
 ):
 
+    # ONLY include agents that exist in registry
+    execution_order = [
+        a for a in execution_order
+        if a in registry
+    ]
+
     remaining = set(
         execution_order
     )
@@ -22,12 +28,23 @@ def build_parallel_groups(
             remaining
         ):
 
-            dependencies = registry[
-                agent
-            ].get(
-                "depends_on",
-                []
+            agent_info = registry.get(
+                agent,
+                {}
             )
+
+            dependencies = (
+                agent_info.get(
+                    "depends_on",
+                    []
+                )
+            )
+
+            # SAFE: ignore unknown dependencies
+            dependencies = [
+                d for d in dependencies
+                if d in registry
+            ]
 
             if all(
                 dep in completed
@@ -41,7 +58,7 @@ def build_parallel_groups(
         if not current_group:
 
             raise Exception(
-                "Circular dependency detected"
+                f"Circular or invalid dependency graph: {remaining}"
             )
 
         groups.append(
@@ -57,7 +74,7 @@ def build_parallel_groups(
         )
 
     logger.info(
-        f"PARALLEL GROUPS: "
+        f"****PARALLEL GROUPS: "
         f"{groups}"
     )
 

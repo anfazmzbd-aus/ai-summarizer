@@ -69,7 +69,7 @@ def extract_actions(text):
                 line.strip()
             )
 
-    logger.info(f"ACTION TOOL: {actions}")
+    logger.info(f"****ACTION TOOL: {actions}")
     return list(
         dict.fromkeys(actions)
     )

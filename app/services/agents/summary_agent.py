@@ -59,7 +59,7 @@ def summary_agent(state):
         ]
 
     logger.info(
-        f"SUMMARY INPUT:\n"
+        f"****SUMMARY INPUT:\n"
         f"{summary_input}"
     )
 
@@ -68,7 +68,7 @@ def summary_agent(state):
     )
 
     logger.info(
-        f"SUMMARY WORDS: "
+        f"****SUMMARY WORDS: "
         f"{word_count}"
     )
 
@@ -82,30 +82,38 @@ def summary_agent(state):
         )
 
     else:
-
+        max_length=min(
+            150,
+            int(
+                word_count * 0.7
+            )
+        )
+        min_length=max(
+            8,
+            int(
+                word_count * 0.3
+            )
+        )
         result = (
             summarizer_model(
 
                 summary_input,
 
-                max_length=min(
-                    60,
-                    int(
-                        word_count * 0.7
-                    )
-                ),
+                max_length,
 
-                min_length=max(
-                    8,
-                    int(
-                        word_count * 0.3
-                    )
-                ),
+                min_length,
 
                 do_sample=False
             )
         )
-
+        logger.info(
+            f"****SUMMARY WORDS MAX: "
+            f"{max_length}"
+        )
+        logger.info(
+            f"****SUMMARY WORDS MIN: "
+            f"{min_length}"
+        )
         state["summary"] = (
             result[0][
                 "summary_text"

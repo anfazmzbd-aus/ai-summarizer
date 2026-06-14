@@ -1,4 +1,5 @@
 from .agent_graph import run_graph
+from app.services.registry.registry import AGENT_REGISTRY
 from app.services.logging.logger import logger
 
 def run_ai(text, summary_length):
@@ -31,26 +32,27 @@ def run_agents(
     state = {
 
         "text": text,
-
         "summary_length": summary_length,
-
         "summary": "",
-
         "actions": [],
         "insights": [],
         "findings": [],
         "trends": [],
-
         "plan": {},
         "metadata": {},
-
-        "artifacts": {}
+        "artifacts": {},
+        "context": {}   
     }
 
+    print(
+        "\nREGISTERED AGENTS:",
+        list(AGENT_REGISTRY.keys())
+    )
     result = run_graph(state)
 
-    logger.info(f"====FINAL ARTIFACTS:: {result.get('artifacts', {})}====")
-
+    logger.info(f"====FINAL ARTIFACTS:====")
+    logger.info(f"{result.get('artifacts', {})}")
+    
     return {
         "summary": result["summary"],
 

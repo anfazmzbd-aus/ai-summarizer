@@ -7,7 +7,7 @@ logger = logging.getLogger("agent_system")
 
 def run_agent(agent_name, agent_func, state):
     logger.info(
-        f"RUNNING AGENT: "
+        f"****RUNNING AGENT: "
         f"{agent_name}"
     )
 
@@ -37,16 +37,21 @@ def run_agent(agent_name, agent_func, state):
     )
 
     logger.info(
-        f"COMPLETED AGENT: "
+        f"****COMPLETED AGENT: "
         f"{agent_name} "
         f"in {duration}s"
     )
+
+    logger.info(
+        f"****AGENT CONTEXT SNAPSHOT: "
+        f"{state.get('context', {})}"
+    )
     artifacts = result.get(
-        "artifacts",
-        {}
+    "artifacts",
+    {}
     )
     logger.info(
-        f"ARTIFACTS: "
+        f"****ARTIFACTS: "
         f"{artifacts}"
     )
 

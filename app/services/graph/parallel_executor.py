@@ -21,7 +21,7 @@ def execute_parallel(tasks):
             )
 
     logger.info(
-        f"PARALLEL EXECUTION:" 
+        f"****PARALLEL EXECUTION:" 
         f"{results}"
     )
     return results

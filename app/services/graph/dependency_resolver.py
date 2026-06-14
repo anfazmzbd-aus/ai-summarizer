@@ -43,5 +43,5 @@ def resolve_execution_order(
 
     for agent in selected_agents:
         visit(agent)
-    logger.info(f"Resolved execution order: {resolved}")
+    logger.info(f"****Resolved execution order: {resolved}")
     return resolved

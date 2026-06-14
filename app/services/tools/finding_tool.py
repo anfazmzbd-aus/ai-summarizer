@@ -31,6 +31,6 @@ def research_finding_tool(text):
         ):
             findings.append(line)
 
-    logger.info(f"FINDING TOOL OUTPUT: {findings}")
-    logger.info(f"FINDING TOOL RETURN: {list(dict.fromkeys(findings))}")
+    logger.info(f"****FINDING TOOL OUTPUT: {findings}")
+    logger.info(f"****FINDING TOOL RETURN: {list(dict.fromkeys(findings))}")
     return list(dict.fromkeys(findings))

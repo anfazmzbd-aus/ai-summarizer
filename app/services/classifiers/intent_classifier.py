@@ -57,15 +57,15 @@ def classify_intent(text):
             detected_intents.append(intent_name)
 
     logger.info(
-        f"INTENT SCORES: {scores}"
+        f"****INTENT SCORES: {scores}"
     )
 
     logger.info(
-        f"PRIMARY INTENT: {primary_intent}"
+        f"****PRIMARY INTENT: {primary_intent}"
     )
 
     logger.info(
-        f"SELECTED INTENTS: {detected_intents}"
+        f"****SELECTED INTENTS: {detected_intents}"
     )
 
     return {

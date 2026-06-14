@@ -6861,3 +6861,838 @@ John should prepare report.
 2026-06-14 07:09:52,142 | INFO | ====FINAL ARTIFACTS:: {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}====
 2026-06-14 07:09:52,157 | INFO | ==============Application AI Summarizer==============
 2026-06-14 07:09:52,157 | INFO | ==============EXECUTION END==============
+2026-06-14 07:31:18,830 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:31:18,830 | INFO | ==============Serving home page==============
+2026-06-14 07:31:18,830 | INFO | ==============EXECUTION START==============
+2026-06-14 07:31:25,599 | INFO | INTENT SCORES: {'business_report': 2, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 07:31:25,599 | INFO | PRIMARY INTENT: business_report
+2026-06-14 07:31:25,603 | INFO | SELECTED INTENTS: ['business_report']
+2026-06-14 07:31:25,603 | INFO | STRATEGY: {'forecast', 'risk', 'insights', 'root_cause', 'recommendation', 'trend', 'sentiment', 'summary'}
+2026-06-14 07:31:25,603 | INFO | STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:31:25,605 | INFO | INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:31:25,605 | INFO | PARSED SECTIONS: {'general': 'Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. With the expansion of global private capital flows into high demand Capital Market product categories, Capital Markets have become important sources for tapping into domestic and foreign funds. Therefore, businesses willing to adhere to Shariah principles can raise funds by utilizing the growing demand and popularity enjoyed by ICMPs, especially Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.'}
+2026-06-14 07:31:25,605 | INFO | SECTIONS: {'general': 'Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. With the expansion of global private capital flows into high demand Capital Market product categories, Capital Markets have become important sources for tapping into domestic and foreign funds. Therefore, businesses willing to adhere to Shariah principles can raise funds by utilizing the growing demand and popularity enjoyed by ICMPs, especially Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.'}
+2026-06-14 07:31:25,605 | INFO | Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:31:25,605 | INFO | PARALLEL GROUPS: [['summary'], ['insights', 'findings', 'sentiment'], ['risk', 'root_cause', 'trend'], ['forecast'], ['recommendation']]
+2026-06-14 07:31:25,605 | INFO | SUMMARY INPUT:
+Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. With the expansion of global private capital flows into high demand Capital Market product categories, Capital Markets have become important sources for tapping into domestic and foreign funds. Therefore, businesses willing to adhere to Shariah principles can raise funds by utilizing the growing demand and popularity enjoyed by ICMPs, especially Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.
+2026-06-14 07:31:25,605 | INFO | SUMMARY WORDS: 221
+2026-06-14 07:31:33,775 | INFO | RUNNING AGENT: insights
+2026-06-14 07:31:33,775 | INFO | COMPLETED AGENT: insights in 0.000424s
+2026-06-14 07:31:33,775 | INFO | RUNNING AGENT: findings
+2026-06-14 07:31:33,777 | INFO | ARTIFACTS: {'insights': ['Market expansion detected']}
+2026-06-14 07:31:33,777 | INFO | RUNNING AGENT: sentiment
+2026-06-14 07:31:33,777 | INFO | FINDING TOOL OUTPUT: []
+2026-06-14 07:31:33,777 | INFO | COMPLETED AGENT: sentiment in 4.6e-05s
+2026-06-14 07:31:33,777 | INFO | FINDING TOOL RETURN: []
+2026-06-14 07:31:33,777 | INFO | ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 07:31:33,777 | INFO | COMPLETED AGENT: findings in 0.001138s
+2026-06-14 07:31:33,779 | INFO | ARTIFACTS: {'findings': []}
+2026-06-14 07:31:33,779 | INFO | PARALLEL EXECUTION:[{'agent': 'insights', 'duration': 0.000424, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'findings', 'duration': 0.001138, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 4.6e-05, 'artifacts': {'sentiment': ['Positive']}}]
+2026-06-14 07:31:33,779 | INFO | GROUP 1 RESULTS: [{'agent': 'insights', 'duration': 0.000424, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'findings', 'duration': 0.001138, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 4.6e-05, 'artifacts': {'sentiment': ['Positive']}}]
+2026-06-14 07:31:33,779 | INFO | RUNNING AGENT: risk
+2026-06-14 07:31:33,781 | INFO | COMPLETED AGENT: risk in 1.4e-05s
+2026-06-14 07:31:33,781 | INFO | RUNNING AGENT: root_cause
+2026-06-14 07:31:33,781 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}
+2026-06-14 07:31:33,782 | INFO | RUNNING AGENT: trend
+2026-06-14 07:31:33,782 | INFO | ROOT CAUSES: ['Revenue growth appears linked to market expansion.']
+2026-06-14 07:31:33,782 | INFO | TREND AGENT: []
+2026-06-14 07:31:33,782 | INFO | COMPLETED AGENT: root_cause in 0.000522s
+2026-06-14 07:31:33,782 | INFO | FORMATTED TREND AGENT: []
+2026-06-14 07:31:33,782 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.']}
+2026-06-14 07:31:33,782 | INFO | COMPLETED AGENT: trend in 0.000611s
+2026-06-14 07:31:33,783 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'trends': []}
+2026-06-14 07:31:33,783 | INFO | PARALLEL EXECUTION:[{'agent': 'risk', 'duration': 1.4e-05, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000522, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.']}}, {'agent': 'trend', 'duration': 0.000611, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'trends': []}}]
+2026-06-14 07:31:33,783 | INFO | GROUP 2 RESULTS: [{'agent': 'risk', 'duration': 1.4e-05, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000522, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.']}}, {'agent': 'trend', 'duration': 0.000611, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'trends': []}}]
+2026-06-14 07:31:33,783 | INFO | RUNNING AGENT: forecast
+2026-06-14 07:31:33,783 | INFO | FORECAST INPUT: []
+2026-06-14 07:31:33,786 | INFO | COMPLETED AGENT: forecast in 0.000259s
+2026-06-14 07:31:33,786 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': []}
+2026-06-14 07:31:33,786 | INFO | PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000259, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': []}}]
+2026-06-14 07:31:33,786 | INFO | GROUP 3 RESULTS: [{'agent': 'forecast', 'duration': 0.000259, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': []}}]
+2026-06-14 07:31:33,786 | INFO | RUNNING AGENT: recommendation
+2026-06-14 07:31:33,786 | INFO | COMPLETED AGENT: recommendation in 4e-06s
+2026-06-14 07:31:33,786 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': [], 'recommendations': []}
+2026-06-14 07:31:33,788 | INFO | PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 4e-06, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': [], 'recommendations': []}}]
+2026-06-14 07:31:33,788 | INFO | GROUP 4 RESULTS: [{'agent': 'recommendation', 'duration': 4e-06, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': [], 'recommendations': []}}]
+2026-06-14 07:31:33,788 | INFO | ROUTE: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:31:33,788 | INFO | AFTER ACTIONS: []
+2026-06-14 07:31:33,788 | INFO | AFTER INSIGHTS: []
+2026-06-14 07:31:33,788 | INFO | AFTER TRENDS: []
+2026-06-14 07:31:33,788 | INFO | EXECUTION METADATA: {'agents_executed': ['summary', 'insights', 'findings', 'sentiment', 'risk', 'root_cause', 'trend', 'forecast', 'recommendation'], 'agent_count': 9, 'parallel_groups': [['summary'], ['insights', 'findings', 'sentiment'], ['risk', 'root_cause', 'trend'], ['forecast'], ['recommendation']], 'timings': {'summary': 8.16495, 'insights': 0.000424, 'findings': 0.001138, 'sentiment': 4.6e-05, 'risk': 1.4e-05, 'root_cause': 0.000522, 'trend': 0.000611, 'forecast': 0.000259, 'recommendation': 4e-06}, 'total_execution_time': 8.190682}
+2026-06-14 07:31:33,788 | INFO | ====FINAL ARTIFACTS:: {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': [], 'recommendations': []}====
+2026-06-14 07:31:33,795 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:31:33,795 | INFO | ==============EXECUTION END==============
+2026-06-14 07:33:21,570 | INFO | INTENT SCORES: {'business_report': 2, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 07:33:21,570 | INFO | PRIMARY INTENT: business_report
+2026-06-14 07:33:21,574 | INFO | SELECTED INTENTS: ['business_report']
+2026-06-14 07:33:21,574 | INFO | STRATEGY: {'forecast', 'risk', 'insights', 'root_cause', 'recommendation', 'trend', 'sentiment', 'summary'}
+2026-06-14 07:33:21,574 | INFO | STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:33:21,574 | INFO | INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:33:21,574 | INFO | PARSED SECTIONS: {'general': 'Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. With the expansion of global private capital flows into high demand Capital Market product categories, Capital Markets have become important sources for tapping into domestic and foreign funds. Therefore, businesses willing to adhere to Shariah principles can raise funds by utilizing the growing demand and popularity enjoyed by ICMPs, especially Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.'}
+2026-06-14 07:33:21,576 | INFO | SECTIONS: {'general': 'Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. With the expansion of global private capital flows into high demand Capital Market product categories, Capital Markets have become important sources for tapping into domestic and foreign funds. Therefore, businesses willing to adhere to Shariah principles can raise funds by utilizing the growing demand and popularity enjoyed by ICMPs, especially Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.'}
+2026-06-14 07:33:21,576 | INFO | Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:33:21,576 | INFO | PARALLEL GROUPS: [['summary'], ['insights', 'findings', 'sentiment'], ['risk', 'root_cause', 'trend'], ['forecast'], ['recommendation']]
+2026-06-14 07:33:21,576 | INFO | SUMMARY INPUT:
+Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. With the expansion of global private capital flows into high demand Capital Market product categories, Capital Markets have become important sources for tapping into domestic and foreign funds. Therefore, businesses willing to adhere to Shariah principles can raise funds by utilizing the growing demand and popularity enjoyed by ICMPs, especially Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.
+2026-06-14 07:33:21,576 | INFO | SUMMARY WORDS: 221
+2026-06-14 07:33:25,134 | INFO | RUNNING AGENT: insights
+2026-06-14 07:33:25,134 | INFO | COMPLETED AGENT: insights in 7.9e-05s
+2026-06-14 07:33:25,134 | INFO | RUNNING AGENT: findings
+2026-06-14 07:33:25,134 | INFO | ARTIFACTS: {'insights': ['Market expansion detected']}
+2026-06-14 07:33:25,134 | INFO | RUNNING AGENT: sentiment
+2026-06-14 07:33:25,134 | INFO | FINDING TOOL OUTPUT: []
+2026-06-14 07:33:25,136 | INFO | COMPLETED AGENT: sentiment in 3.8e-05s
+2026-06-14 07:33:25,136 | INFO | FINDING TOOL RETURN: []
+2026-06-14 07:33:25,136 | INFO | ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 07:33:25,136 | INFO | COMPLETED AGENT: findings in 0.00106s
+2026-06-14 07:33:25,136 | INFO | ARTIFACTS: {'findings': []}
+2026-06-14 07:33:25,136 | INFO | PARALLEL EXECUTION:[{'agent': 'insights', 'duration': 7.9e-05, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'findings', 'duration': 0.00106, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 3.8e-05, 'artifacts': {'sentiment': ['Positive']}}]
+2026-06-14 07:33:25,136 | INFO | GROUP 1 RESULTS: [{'agent': 'insights', 'duration': 7.9e-05, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'findings', 'duration': 0.00106, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 3.8e-05, 'artifacts': {'sentiment': ['Positive']}}]
+2026-06-14 07:33:25,136 | INFO | RUNNING AGENT: risk
+2026-06-14 07:33:25,136 | INFO | COMPLETED AGENT: risk in 1.4e-05s
+2026-06-14 07:33:25,136 | INFO | RUNNING AGENT: root_cause
+2026-06-14 07:33:25,140 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}
+2026-06-14 07:33:25,140 | INFO | RUNNING AGENT: trend
+2026-06-14 07:33:25,140 | INFO | ROOT CAUSES: ['Revenue growth appears linked to market expansion.']
+2026-06-14 07:33:25,140 | INFO | TREND AGENT: []
+2026-06-14 07:33:25,140 | INFO | COMPLETED AGENT: root_cause in 0.000697s
+2026-06-14 07:33:25,140 | INFO | FORMATTED TREND AGENT: []
+2026-06-14 07:33:25,140 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.']}
+2026-06-14 07:33:25,140 | INFO | COMPLETED AGENT: trend in 0.000739s
+2026-06-14 07:33:25,142 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'trends': []}
+2026-06-14 07:33:25,142 | INFO | PARALLEL EXECUTION:[{'agent': 'risk', 'duration': 1.4e-05, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000697, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.']}}, {'agent': 'trend', 'duration': 0.000739, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'trends': []}}]
+2026-06-14 07:33:25,142 | INFO | GROUP 2 RESULTS: [{'agent': 'risk', 'duration': 1.4e-05, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000697, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.']}}, {'agent': 'trend', 'duration': 0.000739, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'trends': []}}]
+2026-06-14 07:33:25,142 | INFO | RUNNING AGENT: forecast
+2026-06-14 07:33:25,142 | INFO | FORECAST INPUT: []
+2026-06-14 07:33:25,142 | INFO | COMPLETED AGENT: forecast in 0.000225s
+2026-06-14 07:33:25,142 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': []}
+2026-06-14 07:33:25,142 | INFO | PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000225, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': []}}]
+2026-06-14 07:33:25,142 | INFO | GROUP 3 RESULTS: [{'agent': 'forecast', 'duration': 0.000225, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': []}}]
+2026-06-14 07:33:25,142 | INFO | RUNNING AGENT: recommendation
+2026-06-14 07:33:25,142 | INFO | COMPLETED AGENT: recommendation in 4e-06s
+2026-06-14 07:33:25,142 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': [], 'recommendations': []}
+2026-06-14 07:33:25,142 | INFO | PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 4e-06, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': [], 'recommendations': []}}]
+2026-06-14 07:33:25,142 | INFO | GROUP 4 RESULTS: [{'agent': 'recommendation', 'duration': 4e-06, 'artifacts': {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': [], 'recommendations': []}}]
+2026-06-14 07:33:25,146 | INFO | ROUTE: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:33:25,146 | INFO | AFTER ACTIONS: []
+2026-06-14 07:33:25,146 | INFO | AFTER INSIGHTS: []
+2026-06-14 07:33:25,146 | INFO | AFTER TRENDS: []
+2026-06-14 07:33:25,146 | INFO | EXECUTION METADATA: {'agents_executed': ['summary', 'insights', 'findings', 'sentiment', 'risk', 'root_cause', 'trend', 'forecast', 'recommendation'], 'agent_count': 9, 'parallel_groups': [['summary'], ['insights', 'findings', 'sentiment'], ['risk', 'root_cause', 'trend'], ['forecast'], ['recommendation']], 'timings': {'summary': 3.556574, 'insights': 7.9e-05, 'findings': 0.00106, 'sentiment': 3.8e-05, 'risk': 1.4e-05, 'root_cause': 0.000697, 'trend': 0.000739, 'forecast': 0.000225, 'recommendation': 4e-06}, 'total_execution_time': 3.571782}
+2026-06-14 07:33:25,146 | INFO | ====FINAL ARTIFACTS:: {'insights': ['Market expansion detected'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'forecasts': [], 'recommendations': []}====
+2026-06-14 07:33:25,157 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:33:25,157 | INFO | ==============EXECUTION END==============
+2026-06-14 07:41:44,726 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:41:44,726 | INFO | ==============Creating database tables==============
+2026-06-14 07:41:44,726 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:41:44,726 | INFO | ==============FastAPI app initialized==============
+2026-06-14 07:41:55,189 | INFO | INTENT SCORES: {'business_report': 2, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 07:41:55,189 | INFO | PRIMARY INTENT: business_report
+2026-06-14 07:41:55,189 | INFO | SELECTED INTENTS: ['business_report']
+2026-06-14 07:41:55,189 | INFO | STRATEGY: {'forecast', 'root_cause', 'trend', 'recommendation', 'risk', 'summary', 'sentiment', 'insights'}
+2026-06-14 07:41:55,189 | INFO | STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:41:55,189 | INFO | INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:41:55,189 | INFO | PARSED SECTIONS: {'general': 'Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. With the expansion of global private capital flows into high demand Capital Market product categories, Capital Markets have become important sources for tapping into domestic and foreign funds. Therefore, businesses willing to adhere to Shariah principles can raise funds by utilizing the growing demand and popularity enjoyed by ICMPs, especially Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.'}
+2026-06-14 07:41:55,189 | INFO | SECTIONS: {'general': 'Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. With the expansion of global private capital flows into high demand Capital Market product categories, Capital Markets have become important sources for tapping into domestic and foreign funds. Therefore, businesses willing to adhere to Shariah principles can raise funds by utilizing the growing demand and popularity enjoyed by ICMPs, especially Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.'}
+2026-06-14 07:41:55,189 | INFO | Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:41:55,189 | INFO | PARALLEL GROUPS: [['summary'], ['findings', 'insights', 'sentiment'], ['root_cause', 'trend', 'risk'], ['forecast'], ['recommendation']]
+2026-06-14 07:41:55,189 | INFO | SUMMARY INPUT:
+Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. With the expansion of global private capital flows into high demand Capital Market product categories, Capital Markets have become important sources for tapping into domestic and foreign funds. Therefore, businesses willing to adhere to Shariah principles can raise funds by utilizing the growing demand and popularity enjoyed by ICMPs, especially Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.
+2026-06-14 07:41:55,189 | INFO | SUMMARY WORDS: 221
+2026-06-14 07:42:01,455 | INFO | RUNNING AGENT: findings
+2026-06-14 07:42:01,455 | INFO | FINDING TOOL OUTPUT: []
+2026-06-14 07:42:01,456 | INFO | RUNNING AGENT: insights
+2026-06-14 07:42:01,456 | INFO | FINDING TOOL RETURN: []
+2026-06-14 07:42:01,457 | INFO | COMPLETED AGENT: insights in 0.000253s
+2026-06-14 07:42:01,457 | INFO | RUNNING AGENT: sentiment
+2026-06-14 07:42:01,457 | INFO | COMPLETED AGENT: findings in 0.001499s
+2026-06-14 07:42:01,457 | INFO | ARTIFACTS: {'insights': ['Market expansion detected']}
+2026-06-14 07:42:01,457 | INFO | COMPLETED AGENT: sentiment in 3.8e-05s
+2026-06-14 07:42:01,458 | INFO | ARTIFACTS: {'findings': []}
+2026-06-14 07:42:01,458 | INFO | ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 07:42:01,459 | INFO | PARALLEL EXECUTION:[{'agent': 'findings', 'duration': 0.001499, 'artifacts': {'findings': []}}, {'agent': 'insights', 'duration': 0.000253, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'sentiment', 'duration': 3.8e-05, 'artifacts': {'sentiment': ['Positive']}}]
+2026-06-14 07:42:01,459 | INFO | GROUP 1 RESULTS: [{'agent': 'findings', 'duration': 0.001499, 'artifacts': {'findings': []}}, {'agent': 'insights', 'duration': 0.000253, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'sentiment', 'duration': 3.8e-05, 'artifacts': {'sentiment': ['Positive']}}]
+2026-06-14 07:42:01,460 | INFO | RUNNING AGENT: root_cause
+2026-06-14 07:42:01,460 | INFO | RUNNING AGENT: trend
+2026-06-14 07:42:01,460 | INFO | ROOT CAUSES: ['Revenue growth appears linked to market expansion.']
+2026-06-14 07:42:01,461 | INFO | RUNNING AGENT: risk
+2026-06-14 07:42:01,461 | INFO | TREND AGENT: []
+2026-06-14 07:42:01,461 | INFO | COMPLETED AGENT: root_cause in 0.000904s
+2026-06-14 07:42:01,461 | INFO | COMPLETED AGENT: risk in 1.5e-05s
+2026-06-14 07:42:01,462 | INFO | FORMATTED TREND AGENT: []
+2026-06-14 07:42:01,462 | INFO | ARTIFACTS: {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.']}
+2026-06-14 07:42:01,462 | INFO | ARTIFACTS: {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}
+2026-06-14 07:42:01,462 | INFO | COMPLETED AGENT: trend in 0.0015s
+2026-06-14 07:42:01,463 | INFO | ARTIFACTS: {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'trends': []}
+2026-06-14 07:42:01,463 | INFO | PARALLEL EXECUTION:[{'agent': 'root_cause', 'duration': 0.000904, 'artifacts': {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.']}}, {'agent': 'trend', 'duration': 0.0015, 'artifacts': {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'trends': []}}, {'agent': 'risk', 'duration': 1.5e-05, 'artifacts': {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}}]
+2026-06-14 07:42:01,463 | INFO | GROUP 2 RESULTS: [{'agent': 'root_cause', 'duration': 0.000904, 'artifacts': {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.']}}, {'agent': 'trend', 'duration': 0.0015, 'artifacts': {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'trends': []}}, {'agent': 'risk', 'duration': 1.5e-05, 'artifacts': {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}}]
+2026-06-14 07:42:01,463 | INFO | RUNNING AGENT: forecast
+2026-06-14 07:42:01,463 | INFO | FORECAST INPUT: []
+2026-06-14 07:42:01,463 | INFO | COMPLETED AGENT: forecast in 0.000276s
+2026-06-14 07:42:01,463 | INFO | ARTIFACTS: {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'risk': ['Moderate Risk'], 'forecasts': []}
+2026-06-14 07:42:01,466 | INFO | PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000276, 'artifacts': {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'risk': ['Moderate Risk'], 'forecasts': []}}]
+2026-06-14 07:42:01,466 | INFO | GROUP 3 RESULTS: [{'agent': 'forecast', 'duration': 0.000276, 'artifacts': {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'risk': ['Moderate Risk'], 'forecasts': []}}]
+2026-06-14 07:42:01,466 | INFO | RUNNING AGENT: recommendation
+2026-06-14 07:42:01,466 | INFO | COMPLETED AGENT: recommendation in 5e-06s
+2026-06-14 07:42:01,466 | INFO | ARTIFACTS: {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'risk': ['Moderate Risk'], 'forecasts': [], 'recommendations': []}
+2026-06-14 07:42:01,466 | INFO | PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 5e-06, 'artifacts': {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'risk': ['Moderate Risk'], 'forecasts': [], 'recommendations': []}}]
+2026-06-14 07:42:01,468 | INFO | GROUP 4 RESULTS: [{'agent': 'recommendation', 'duration': 5e-06, 'artifacts': {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'risk': ['Moderate Risk'], 'forecasts': [], 'recommendations': []}}]
+2026-06-14 07:42:01,468 | INFO | ROUTE: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:42:01,468 | INFO | AFTER ACTIONS: []
+2026-06-14 07:42:01,468 | INFO | AFTER INSIGHTS: []
+2026-06-14 07:42:01,468 | INFO | AFTER TRENDS: []
+2026-06-14 07:42:01,468 | INFO | EXECUTION METADATA: {'agents_executed': ['summary', 'findings', 'insights', 'sentiment', 'root_cause', 'trend', 'risk', 'forecast', 'recommendation'], 'agent_count': 9, 'parallel_groups': [['summary'], ['findings', 'insights', 'sentiment'], ['root_cause', 'trend', 'risk'], ['forecast'], ['recommendation']], 'timings': {'summary': 6.262119, 'findings': 0.001499, 'insights': 0.000253, 'sentiment': 3.8e-05, 'root_cause': 0.000904, 'trend': 0.0015, 'risk': 1.5e-05, 'forecast': 0.000276, 'recommendation': 5e-06}, 'total_execution_time': 6.278112}
+2026-06-14 07:42:01,468 | INFO | ====FINAL ARTIFACTS:: {'findings': [], 'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'trends': [], 'risk': ['Moderate Risk'], 'forecasts': [], 'recommendations': []}====
+2026-06-14 07:42:01,478 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:42:01,478 | INFO | ==============EXECUTION END==============
+2026-06-14 07:46:11,537 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:46:11,537 | INFO | ==============Creating database tables==============
+2026-06-14 07:46:11,537 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:46:11,537 | INFO | ==============FastAPI app initialized==============
+2026-06-14 07:46:52,154 | INFO | INTENT SCORES: {'business_report': 2, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 07:46:52,154 | INFO | PRIMARY INTENT: business_report
+2026-06-14 07:46:52,154 | INFO | SELECTED INTENTS: ['business_report']
+2026-06-14 07:46:52,154 | INFO | STRATEGY: {'summary', 'recommendation', 'root_cause', 'insights', 'risk', 'trend', 'sentiment', 'forecast'}
+2026-06-14 07:46:52,154 | INFO | STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 07:46:52,154 | INFO | INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 07:46:52,154 | INFO | PARSED SECTIONS: {'general': 'Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. With the expansion of global private capital flows into high demand Capital Market product categories, Capital Markets have become important sources for tapping into domestic and foreign funds. Therefore, businesses willing to adhere to Shariah principles can raise funds by utilizing the growing demand and popularity enjoyed by ICMPs, especially Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.'}
+2026-06-14 07:46:52,154 | INFO | SECTIONS: {'general': 'Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. With the expansion of global private capital flows into high demand Capital Market product categories, Capital Markets have become important sources for tapping into domestic and foreign funds. Therefore, businesses willing to adhere to Shariah principles can raise funds by utilizing the growing demand and popularity enjoyed by ICMPs, especially Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.'}
+2026-06-14 07:46:52,154 | INFO | Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 07:46:52,154 | INFO | PARALLEL GROUPS: [['summary'], ['insights', 'sentiment', 'findings'], ['root_cause', 'risk', 'trend'], ['forecast'], ['recommendation']]
+2026-06-14 07:46:52,154 | INFO | SUMMARY INPUT:
+Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. With the expansion of global private capital flows into high demand Capital Market product categories, Capital Markets have become important sources for tapping into domestic and foreign funds. Therefore, businesses willing to adhere to Shariah principles can raise funds by utilizing the growing demand and popularity enjoyed by ICMPs, especially Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.
+2026-06-14 07:46:52,154 | INFO | SUMMARY WORDS: 221
+2026-06-14 07:46:58,161 | INFO | SUMMARY WORDS MAX: 150
+2026-06-14 07:46:58,161 | INFO | SUMMARY WORDS MIN: 66
+2026-06-14 07:46:58,161 | INFO | RUNNING AGENT: insights
+2026-06-14 07:46:58,163 | INFO | COMPLETED AGENT: insights in 0.000369s
+2026-06-14 07:46:58,163 | INFO | RUNNING AGENT: sentiment
+2026-06-14 07:46:58,163 | INFO | ARTIFACTS: {'insights': ['Market expansion detected']}
+2026-06-14 07:46:58,163 | INFO | RUNNING AGENT: findings
+2026-06-14 07:46:58,163 | INFO | COMPLETED AGENT: sentiment in 4e-05s
+2026-06-14 07:46:58,163 | INFO | FINDING TOOL OUTPUT: []
+2026-06-14 07:46:58,163 | INFO | ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 07:46:58,163 | INFO | FINDING TOOL RETURN: []
+2026-06-14 07:46:58,171 | INFO | COMPLETED AGENT: findings in 0.000976s
+2026-06-14 07:46:58,171 | INFO | ARTIFACTS: {'findings': []}
+2026-06-14 07:46:58,172 | INFO | PARALLEL EXECUTION:[{'agent': 'insights', 'duration': 0.000369, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'sentiment', 'duration': 4e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'findings', 'duration': 0.000976, 'artifacts': {'findings': []}}]
+2026-06-14 07:46:58,172 | INFO | GROUP 1 RESULTS: [{'agent': 'insights', 'duration': 0.000369, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'sentiment', 'duration': 4e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'findings', 'duration': 0.000976, 'artifacts': {'findings': []}}]
+2026-06-14 07:46:58,173 | INFO | RUNNING AGENT: root_cause
+2026-06-14 07:46:58,173 | INFO | ROOT CAUSES: ['Revenue growth appears linked to market expansion.']
+2026-06-14 07:46:58,173 | INFO | RUNNING AGENT: risk
+2026-06-14 07:46:58,174 | INFO | COMPLETED AGENT: root_cause in 0.00068s
+2026-06-14 07:46:58,174 | INFO | RUNNING AGENT: trend
+2026-06-14 07:46:58,174 | INFO | COMPLETED AGENT: risk in 1.6e-05s
+2026-06-14 07:46:58,175 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.']}
+2026-06-14 07:46:58,175 | INFO | TREND AGENT: []
+2026-06-14 07:46:58,175 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'risk': ['Moderate Risk']}
+2026-06-14 07:46:58,176 | INFO | FORMATTED TREND AGENT: []
+2026-06-14 07:46:58,176 | INFO | COMPLETED AGENT: trend in 0.001195s
+2026-06-14 07:46:58,176 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': []}
+2026-06-14 07:46:58,177 | INFO | PARALLEL EXECUTION:[{'agent': 'root_cause', 'duration': 0.00068, 'artifacts': {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.']}}, {'agent': 'risk', 'duration': 1.6e-05, 'artifacts': {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'risk': ['Moderate Risk']}}, {'agent': 'trend', 'duration': 0.001195, 'artifacts': {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': []}}]
+2026-06-14 07:46:58,177 | INFO | GROUP 2 RESULTS: [{'agent': 'root_cause', 'duration': 0.00068, 'artifacts': {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.']}}, {'agent': 'risk', 'duration': 1.6e-05, 'artifacts': {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'risk': ['Moderate Risk']}}, {'agent': 'trend', 'duration': 0.001195, 'artifacts': {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': []}}]
+2026-06-14 07:46:58,178 | INFO | RUNNING AGENT: forecast
+2026-06-14 07:46:58,178 | INFO | FORECAST INPUT: []
+2026-06-14 07:46:58,178 | INFO | COMPLETED AGENT: forecast in 0.000264s
+2026-06-14 07:46:58,178 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'trends': [], 'forecasts': []}
+2026-06-14 07:46:58,179 | INFO | PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000264, 'artifacts': {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'trends': [], 'forecasts': []}}]
+2026-06-14 07:46:58,179 | INFO | GROUP 3 RESULTS: [{'agent': 'forecast', 'duration': 0.000264, 'artifacts': {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'trends': [], 'forecasts': []}}]
+2026-06-14 07:46:58,180 | INFO | RUNNING AGENT: recommendation
+2026-06-14 07:46:58,180 | INFO | COMPLETED AGENT: recommendation in 5e-06s
+2026-06-14 07:46:58,180 | INFO | ARTIFACTS: {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'trends': [], 'forecasts': [], 'recommendations': []}
+2026-06-14 07:46:58,180 | INFO | PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 5e-06, 'artifacts': {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'trends': [], 'forecasts': [], 'recommendations': []}}]
+2026-06-14 07:46:58,181 | INFO | GROUP 4 RESULTS: [{'agent': 'recommendation', 'duration': 5e-06, 'artifacts': {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'trends': [], 'forecasts': [], 'recommendations': []}}]
+2026-06-14 07:46:58,181 | INFO | ROUTE: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 07:46:58,181 | INFO | AFTER ACTIONS: []
+2026-06-14 07:46:58,181 | INFO | AFTER INSIGHTS: []
+2026-06-14 07:46:58,181 | INFO | AFTER TRENDS: []
+2026-06-14 07:46:58,182 | INFO | EXECUTION METADATA: {'agents_executed': ['summary', 'insights', 'sentiment', 'findings', 'root_cause', 'risk', 'trend', 'forecast', 'recommendation'], 'agent_count': 9, 'parallel_groups': [['summary'], ['insights', 'sentiment', 'findings'], ['root_cause', 'risk', 'trend'], ['forecast'], ['recommendation']], 'timings': {'summary': 6.000804, 'insights': 0.000369, 'sentiment': 4e-05, 'findings': 0.000976, 'root_cause': 0.00068, 'risk': 1.6e-05, 'trend': 0.001195, 'forecast': 0.000264, 'recommendation': 5e-06}, 'total_execution_time': 6.022868}
+2026-06-14 07:46:58,182 | INFO | ====FINAL ARTIFACTS:: {'insights': ['Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'trends': [], 'forecasts': [], 'recommendations': []}====
+2026-06-14 07:46:58,193 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:46:58,193 | INFO | ==============EXECUTION END==============
+2026-06-14 07:48:55,994 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:48:55,994 | INFO | ==============Serving home page==============
+2026-06-14 07:48:55,995 | INFO | ==============EXECUTION START==============
+2026-06-14 07:51:46,005 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:51:46,005 | INFO | ==============Creating database tables==============
+2026-06-14 07:51:46,005 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:51:46,005 | INFO | ==============FastAPI app initialized==============
+2026-06-14 07:52:39,479 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:52:39,481 | INFO | ==============Creating database tables==============
+2026-06-14 07:52:39,481 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:52:39,481 | INFO | ==============FastAPI app initialized==============
+2026-06-14 07:55:32,735 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:55:32,735 | INFO | ==============FastAPI app initialized==============
+2026-06-14 07:58:01,159 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:58:01,161 | INFO | ==============FastAPI app initialized==============
+2026-06-14 07:58:50,149 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:58:50,149 | INFO | ==============FastAPI app initialized==============
+2026-06-14 07:59:11,422 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:59:11,422 | INFO | ==============FastAPI app initialized==============
+2026-06-14 07:59:45,832 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:59:45,832 | INFO | ==============FastAPI app initialized==============
+2026-06-14 08:00:08,204 | INFO | ==============Application AI Summarizer==============
+2026-06-14 08:00:08,204 | INFO | ==============FastAPI app initialized==============
+2026-06-14 08:00:35,559 | INFO | ==============Application AI Summarizer==============
+2026-06-14 08:00:35,559 | INFO | ==============FastAPI app initialized==============
+2026-06-14 08:01:10,332 | INFO | ==============Application AI Summarizer==============
+2026-06-14 08:01:10,332 | INFO | ==============FastAPI app initialized==============
+2026-06-14 08:02:36,295 | INFO | ==============Application AI Summarizer==============
+2026-06-14 08:02:36,295 | INFO | ==============FastAPI app initialized==============
+2026-06-14 08:03:20,960 | INFO | ****INTENT SCORES: {'business_report': 2, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 08:03:20,960 | INFO | ****PRIMARY INTENT: business_report
+2026-06-14 08:03:20,960 | INFO | ****SELECTED INTENTS: ['business_report']
+2026-06-14 08:03:20,960 | INFO | ****STRATEGY: {'sentiment', 'insights', 'recommendation', 'trend', 'summary', 'risk', 'forecast', 'root_cause'}
+2026-06-14 08:03:20,960 | INFO | ====STRATEGY:==== ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'forecast', 'root_cause']
+2026-06-14 08:03:20,960 | INFO | ****INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'forecast', 'root_cause']
+2026-06-14 08:03:20,960 | INFO | ****PARSED SECTIONS: {'general': 'Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.'}
+2026-06-14 08:03:20,960 | INFO | ****SECTIONS: {'general': 'Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.'}
+2026-06-14 08:03:20,960 | INFO | ****Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 08:03:20,960 | INFO | ****PARALLEL GROUPS: [['summary'], ['sentiment', 'insights', 'findings'], ['trend', 'risk', 'root_cause'], ['forecast'], ['recommendation']]
+2026-06-14 08:03:20,960 | INFO | ****SUMMARY INPUT:
+Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.
+2026-06-14 08:03:20,960 | INFO | ****SUMMARY WORDS: 170
+2026-06-14 08:03:26,245 | INFO | ****SUMMARY WORDS MAX: 118
+2026-06-14 08:03:26,246 | INFO | ****SUMMARY WORDS MIN: 51
+2026-06-14 08:03:26,246 | INFO | ****RUNNING AGENT: sentiment
+2026-06-14 08:03:26,247 | INFO | ****COMPLETED AGENT: sentiment in 2.5e-05s
+2026-06-14 08:03:26,247 | INFO | ****RUNNING AGENT: insights
+2026-06-14 08:03:26,247 | INFO | ****ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 08:03:26,248 | INFO | ****RUNNING AGENT: findings
+2026-06-14 08:03:26,248 | INFO | ****COMPLETED AGENT: insights in 0.000246s
+2026-06-14 08:03:26,249 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-14 08:03:26,249 | INFO | ****ARTIFACTS: {'insights': ['Market expansion detected']}
+2026-06-14 08:03:26,249 | INFO | ****FINDING TOOL RETURN: []
+2026-06-14 08:03:26,249 | INFO | ****COMPLETED AGENT: findings in 0.000604s
+2026-06-14 08:03:26,249 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-14 08:03:26,249 | INFO | ****PARALLEL EXECUTION:[{'agent': 'sentiment', 'duration': 2.5e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.000246, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'findings', 'duration': 0.000604, 'artifacts': {'findings': []}}]
+2026-06-14 08:03:26,249 | INFO | ====GROUP 1 RESULTS:==== [{'agent': 'sentiment', 'duration': 2.5e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.000246, 'artifacts': {'insights': ['Market expansion detected']}}, {'agent': 'findings', 'duration': 0.000604, 'artifacts': {'findings': []}}]
+2026-06-14 08:03:26,249 | INFO | ****RUNNING AGENT: trend
+2026-06-14 08:03:26,251 | INFO | ****RUNNING AGENT: risk
+2026-06-14 08:03:26,251 | INFO | ****TREND AGENT: []
+2026-06-14 08:03:26,251 | INFO | ****RUNNING AGENT: root_cause
+2026-06-14 08:03:26,251 | INFO | ****COMPLETED AGENT: risk in 1.3e-05s
+2026-06-14 08:03:26,251 | INFO | ****FORMATTED TREND AGENT: []
+2026-06-14 08:03:26,251 | INFO | ****ROOT CAUSES: ['Revenue growth appears linked to market expansion.']
+2026-06-14 08:03:26,251 | INFO | ****ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'risk': ['Moderate Risk']}
+2026-06-14 08:03:26,253 | INFO | ****COMPLETED AGENT: trend in 0.00175s
+2026-06-14 08:03:26,253 | INFO | ****COMPLETED AGENT: root_cause in 0.000647s
+2026-06-14 08:03:26,253 | INFO | ****ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'trends': []}
+2026-06-14 08:03:26,253 | INFO | ****ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.']}
+2026-06-14 08:03:26,253 | INFO | ****PARALLEL EXECUTION:[{'agent': 'trend', 'duration': 0.00175, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'trends': []}}, {'agent': 'risk', 'duration': 1.3e-05, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000647, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.']}}]
+2026-06-14 08:03:26,253 | INFO | ====GROUP 2 RESULTS:==== [{'agent': 'trend', 'duration': 0.00175, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'trends': []}}, {'agent': 'risk', 'duration': 1.3e-05, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000647, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.']}}]
+2026-06-14 08:03:26,255 | INFO | ****RUNNING AGENT: forecast
+2026-06-14 08:03:26,255 | INFO | ****FORECAST INPUT: []
+2026-06-14 08:03:26,255 | INFO | ****COMPLETED AGENT: forecast in 0.000144s
+2026-06-14 08:03:26,255 | INFO | ****ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'trends': [], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': []}
+2026-06-14 08:03:26,255 | INFO | ****PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000144, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'trends': [], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': []}}]
+2026-06-14 08:03:26,255 | INFO | ====GROUP 3 RESULTS:==== [{'agent': 'forecast', 'duration': 0.000144, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'trends': [], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': []}}]
+2026-06-14 08:03:26,255 | INFO | ****RUNNING AGENT: recommendation
+2026-06-14 08:03:26,255 | INFO | ****COMPLETED AGENT: recommendation in 4e-06s
+2026-06-14 08:03:26,255 | INFO | ****ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'trends': [], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': [], 'recommendations': []}
+2026-06-14 08:03:26,255 | INFO | ****PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 4e-06, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'trends': [], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': [], 'recommendations': []}}]
+2026-06-14 08:03:26,255 | INFO | ====GROUP 4 RESULTS:==== [{'agent': 'recommendation', 'duration': 4e-06, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'trends': [], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': [], 'recommendations': []}}]
+2026-06-14 08:03:26,259 | INFO | ****ROUTE: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'forecast', 'root_cause']
+2026-06-14 08:03:26,259 | INFO | ****AFTER ACTIONS: []
+2026-06-14 08:03:26,259 | INFO | ****AFTER INSIGHTS: []
+2026-06-14 08:03:26,259 | INFO | ****AFTER TRENDS: []
+2026-06-14 08:03:26,259 | INFO | ****EXECUTION METADATA: {'agents_executed': ['summary', 'sentiment', 'insights', 'findings', 'trend', 'risk', 'root_cause', 'forecast', 'recommendation'], 'agent_count': 9, 'parallel_groups': [['summary'], ['sentiment', 'insights', 'findings'], ['trend', 'risk', 'root_cause'], ['forecast'], ['recommendation']], 'timings': {'summary': 5.281772, 'sentiment': 2.5e-05, 'insights': 0.000246, 'findings': 0.000604, 'trend': 0.00175, 'risk': 1.3e-05, 'root_cause': 0.000647, 'forecast': 0.000144, 'recommendation': 4e-06}, 'total_execution_time': 5.295943}
+2026-06-14 08:03:26,259 | INFO | ====FINAL ARTIFACTS:====
+2026-06-14 08:03:26,259 | INFO | {'sentiment': ['Positive'], 'insights': ['Market expansion detected'], 'findings': [], 'trends': [], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': [], 'recommendations': []}
+2026-06-14 08:03:26,271 | INFO | ==============Application AI Summarizer==============
+2026-06-14 08:03:26,271 | INFO | ==============EXECUTION END==============
+2026-06-14 12:46:53,241 | INFO | ==============Application AI Summarizer==============
+2026-06-14 12:46:53,241 | INFO | ==============FastAPI app initialized==============
+2026-06-14 12:46:59,828 | INFO | ==============Application AI Summarizer==============
+2026-06-14 12:46:59,828 | INFO | ==============FastAPI app initialized==============
+2026-06-14 12:47:21,710 | INFO | ****INTENT SCORES: {'business_report': 2, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 12:47:21,710 | INFO | ****PRIMARY INTENT: business_report
+2026-06-14 12:47:21,710 | INFO | ****SELECTED INTENTS: ['business_report']
+2026-06-14 12:47:21,710 | INFO | ****STRATEGY: {'sentiment', 'risk', 'forecast', 'recommendation', 'trend', 'root_cause', 'summary', 'insights'}
+2026-06-14 12:47:21,710 | INFO | ====STRATEGY:==== ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 12:47:21,710 | INFO | ****INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 12:47:21,710 | INFO | ****PARSED SECTIONS: {'general': 'Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.'}
+2026-06-14 12:47:21,710 | INFO | ****SECTIONS: {'general': 'Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.'}
+2026-06-14 12:47:21,710 | INFO | ****Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 12:47:21,710 | INFO | ****PARALLEL GROUPS: [['summary'], ['sentiment', 'findings', 'insights'], ['risk', 'trend', 'root_cause'], ['forecast'], ['recommendation']]
+2026-06-14 12:47:21,710 | INFO | ****SUMMARY INPUT:
+Islamic Capital Market Products (ICMP)are securities which are developed incompliance with Islamic Law, and ICMPs play an important role in the development of the Capital Market and the economy as it opens up opportunities for investment and fundraising. Many countries have introduced different types of ICMPs, such as Shariah-compliant equities, Islamic Collective Investment Schemes (ICIS) and Sukuk. As per the Islamic Finance Development Indicator Report 2022 by Refinitiv, at present the global Islamic finance industry’s assets amount to over USD 3 trillion, and according to Fitch Ratings, the value of Sukuk outstanding globally at the end of year2022 was USD 765 billion; a 7.6% increase from the outstanding value in 2021. Further, there is an increasing trend in the issuance of sustainable Sukuk fueled by the emergence of green projects in need of funds and high demand driven by Environment, Social and Governance (ESG) centric investors. Accordingly, the total ESG Sukuk volume as at year 2022 stood at USD 24.5 billion, which is approximately3% of the global Sukuk outstanding value.
+2026-06-14 12:47:21,710 | INFO | ****SUMMARY WORDS: 170
+2026-06-14 12:47:28,263 | INFO | ****SUMMARY WORDS MAX: 118
+2026-06-14 12:47:28,263 | INFO | ****SUMMARY WORDS MIN: 51
+2026-06-14 12:47:28,263 | INFO | ****RUNNING AGENT: sentiment
+2026-06-14 12:47:28,263 | INFO | ****COMPLETED AGENT: sentiment in 2.9e-05s
+2026-06-14 12:47:28,265 | INFO | ****RUNNING AGENT: findings
+2026-06-14 12:47:28,265 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:47:28,265 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-14 12:47:28,265 | INFO | ****RUNNING AGENT: insights
+2026-06-14 12:47:28,265 | INFO | ****ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 12:47:28,265 | INFO | ****FINDING TOOL RETURN: []
+2026-06-14 12:47:28,265 | INFO | ****COMPLETED AGENT: insights in 0.000639s
+2026-06-14 12:47:28,265 | INFO | ****COMPLETED AGENT: findings in 0.002234s
+2026-06-14 12:47:28,265 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:47:28,265 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:47:28,269 | INFO | ****ARTIFACTS: {'insights': ['Market expansion detected']}
+2026-06-14 12:47:28,269 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-14 12:47:28,269 | INFO | ****PARALLEL EXECUTION:[{'agent': 'sentiment', 'duration': 2.9e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'findings', 'duration': 0.002234, 'artifacts': {'findings': []}}, {'agent': 'insights', 'duration': 0.000639, 'artifacts': {'insights': ['Market expansion detected']}}]
+2026-06-14 12:47:28,269 | INFO | ====GROUP 1 RESULTS:==== [{'agent': 'sentiment', 'duration': 2.9e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'findings', 'duration': 0.002234, 'artifacts': {'findings': []}}, {'agent': 'insights', 'duration': 0.000639, 'artifacts': {'insights': ['Market expansion detected']}}]
+2026-06-14 12:47:28,269 | INFO | ****RUNNING AGENT: risk
+2026-06-14 12:47:28,269 | INFO | ****COMPLETED AGENT: risk in 1.4e-05s
+2026-06-14 12:47:28,269 | INFO | ****RUNNING AGENT: trend
+2026-06-14 12:47:28,269 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:47:28,273 | INFO | ****RUNNING AGENT: root_cause
+2026-06-14 12:47:28,273 | INFO | ****TREND AGENT: []
+2026-06-14 12:47:28,273 | INFO | ****ARTIFACTS: {'sentiment': ['Positive'], 'findings': [], 'insights': ['Market expansion detected'], 'risk': ['Moderate Risk']}
+2026-06-14 12:47:28,274 | INFO | ****FORMATTED TREND AGENT: []
+2026-06-14 12:47:28,274 | INFO | ****COMPLETED AGENT: trend in 0.001109s
+2026-06-14 12:47:28,274 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:47:28,274 | INFO | ****ARTIFACTS: {'sentiment': ['Positive'], 'findings': [], 'insights': ['Market expansion detected'], 'trends': []}
+2026-06-14 12:51:47,388 | INFO | ==============Application AI Summarizer==============
+2026-06-14 12:51:47,388 | INFO | ==============FastAPI app initialized==============
+2026-06-14 12:51:56,041 | INFO | ==============Serving home page==============
+2026-06-14 12:51:56,041 | INFO | ==============EXECUTION START==============
+2026-06-14 12:51:58,924 | INFO | ****INTENT SCORES: {'business_report': 3, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 12:51:58,924 | INFO | ****PRIMARY INTENT: business_report
+2026-06-14 12:51:58,924 | INFO | ****SELECTED INTENTS: ['business_report']
+2026-06-14 12:51:58,924 | INFO | ****STRATEGY: {'insights', 'sentiment', 'recommendation', 'root_cause', 'summary', 'risk', 'trend', 'forecast'}
+2026-06-14 12:51:58,924 | INFO | ====STRATEGY:==== ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 12:51:58,924 | INFO | ****INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 12:51:58,924 | INFO | ****PARSED SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 12:51:58,924 | INFO | ****SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 12:51:58,924 | INFO | ****Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 12:51:58,924 | INFO | ****PARALLEL GROUPS: [['summary'], ['insights', 'sentiment', 'findings'], ['root_cause', 'trend', 'risk'], ['forecast'], ['recommendation']]
+2026-06-14 12:51:58,924 | INFO | ****SUMMARY INPUT:
+Revenue increased by 22% Market expanded High Risk
+2026-06-14 12:51:58,924 | INFO | ****SUMMARY WORDS: 8
+2026-06-14 12:51:58,924 | INFO | ****RUNNING AGENT: insights
+2026-06-14 12:51:58,924 | INFO | ****COMPLETED AGENT: insights in 0.000245s
+2026-06-14 12:51:58,931 | INFO | ****RUNNING AGENT: sentiment
+2026-06-14 12:51:58,931 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:51:58,931 | INFO | ****RUNNING AGENT: findings
+2026-06-14 12:51:58,931 | INFO | ****COMPLETED AGENT: sentiment in 8e-06s
+2026-06-14 12:51:58,932 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected']}
+2026-06-14 12:51:58,932 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-14 12:51:58,932 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:51:58,932 | INFO | ****FINDING TOOL RETURN: []
+2026-06-14 12:51:58,932 | INFO | ****ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 12:51:58,932 | INFO | ****COMPLETED AGENT: findings in 0.001788s
+2026-06-14 12:51:58,932 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:51:58,932 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-14 12:51:58,932 | INFO | ****PARALLEL EXECUTION:[{'agent': 'insights', 'duration': 0.000245, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected']}}, {'agent': 'sentiment', 'duration': 8e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'findings', 'duration': 0.001788, 'artifacts': {'findings': []}}]
+2026-06-14 12:51:58,932 | INFO | ====GROUP 1 RESULTS:==== [{'agent': 'insights', 'duration': 0.000245, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected']}}, {'agent': 'sentiment', 'duration': 8e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'findings', 'duration': 0.001788, 'artifacts': {'findings': []}}]
+2026-06-14 12:51:58,932 | INFO | ****RUNNING AGENT: root_cause
+2026-06-14 12:51:58,932 | INFO | ****ROOT CAUSES: ['No clear root cause identified.']
+2026-06-14 12:51:58,932 | INFO | ****COMPLETED AGENT: root_cause in 0.000303s
+2026-06-14 12:51:58,932 | INFO | ****RUNNING AGENT: trend
+2026-06-14 12:51:58,932 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:51:58,932 | INFO | ****RUNNING AGENT: risk
+2026-06-14 12:51:58,932 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['No clear root cause identified.']}
+2026-06-14 12:51:58,932 | INFO | ****TREND AGENT: ['22% increase detected']
+2026-06-14 12:51:58,932 | INFO | ****COMPLETED AGENT: risk in 1.6e-05s
+2026-06-14 12:51:58,932 | INFO | ****FORMATTED TREND AGENT: ['22% increase detected']
+2026-06-14 12:51:58,932 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:51:58,932 | INFO | ****COMPLETED AGENT: trend in 0.002222s
+2026-06-14 12:51:58,932 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'risk': ['Moderate Risk']}
+2026-06-14 12:51:58,932 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:51:58,932 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': ['22% increase detected']}
+2026-06-14 12:51:58,932 | INFO | ****PARALLEL EXECUTION:[{'agent': 'root_cause', 'duration': 0.000303, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['No clear root cause identified.']}}, {'agent': 'trend', 'duration': 0.002222, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': ['22% increase detected']}}, {'agent': 'risk', 'duration': 1.6e-05, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'risk': ['Moderate Risk']}}]
+2026-06-14 12:51:58,932 | INFO | ====GROUP 2 RESULTS:==== [{'agent': 'root_cause', 'duration': 0.000303, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['No clear root cause identified.']}}, {'agent': 'trend', 'duration': 0.002222, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': ['22% increase detected']}}, {'agent': 'risk', 'duration': 1.6e-05, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'risk': ['Moderate Risk']}}]
+2026-06-14 12:51:58,932 | INFO | ****RUNNING AGENT: forecast
+2026-06-14 12:51:58,932 | INFO | ****FORECAST INPUT: ['22% increase detected']
+2026-06-14 12:51:58,932 | INFO | ****COMPLETED AGENT: forecast in 0.000452s
+2026-06-14 12:51:58,932 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:51:58,932 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['No clear root cause identified.'], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.']}
+2026-06-14 12:51:58,946 | INFO | ****PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000452, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['No clear root cause identified.'], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 12:51:58,946 | INFO | ====GROUP 3 RESULTS:==== [{'agent': 'forecast', 'duration': 0.000452, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['No clear root cause identified.'], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 12:51:58,948 | INFO | ****RUNNING AGENT: recommendation
+2026-06-14 12:56:00,891 | INFO | ==============Application AI Summarizer==============
+2026-06-14 12:56:00,891 | INFO | ==============FastAPI app initialized==============
+2026-06-14 12:56:25,688 | INFO | ****INTENT SCORES: {'business_report': 3, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 12:56:25,688 | INFO | ****PRIMARY INTENT: business_report
+2026-06-14 12:56:25,688 | INFO | ****SELECTED INTENTS: ['business_report']
+2026-06-14 12:56:25,688 | INFO | ****STRATEGY: {'summary', 'forecast', 'trend', 'root_cause', 'risk', 'insights', 'recommendation', 'sentiment'}
+2026-06-14 12:56:25,688 | INFO | ====STRATEGY:==== ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 12:56:25,688 | INFO | ****INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 12:56:25,688 | INFO | ****PARSED SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 12:56:25,688 | INFO | ****SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 12:56:25,688 | INFO | ****Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 12:56:25,700 | INFO | ****PARALLEL GROUPS: [['summary'], ['findings', 'insights', 'sentiment'], ['trend', 'root_cause', 'risk'], ['forecast'], ['recommendation']]
+2026-06-14 12:56:25,700 | INFO | ****SUMMARY INPUT:
+Revenue increased by 22% Market expanded High Risk
+2026-06-14 12:56:25,700 | INFO | ****SUMMARY WORDS: 8
+2026-06-14 12:56:25,702 | INFO | ****RUNNING AGENT: findings
+2026-06-14 12:56:25,702 | INFO | ****RUNNING AGENT: insights
+2026-06-14 12:56:25,702 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-14 12:56:25,702 | INFO | ****COMPLETED AGENT: insights in 0.000346s
+2026-06-14 12:56:25,702 | INFO | ****RUNNING AGENT: sentiment
+2026-06-14 12:56:25,702 | INFO | ****FINDING TOOL RETURN: []
+2026-06-14 12:56:25,702 | INFO | ****COMPLETED AGENT: findings in 0.001593s
+2026-06-14 12:56:25,702 | INFO | ****COMPLETED AGENT: sentiment in 1.5e-05s
+2026-06-14 12:56:25,702 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:56:25,702 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:56:25,708 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:56:25,708 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected']}
+2026-06-14 12:56:25,708 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-14 12:56:25,708 | INFO | ****ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 12:56:25,710 | INFO | ****PARALLEL EXECUTION:[{'agent': 'findings', 'duration': 0.001593, 'artifacts': {'findings': []}}, {'agent': 'insights', 'duration': 0.000346, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected']}}, {'agent': 'sentiment', 'duration': 1.5e-05, 'artifacts': {'sentiment': ['Positive']}}]
+2026-06-14 12:56:25,710 | INFO | ====GROUP 1 RESULTS:==== [{'agent': 'findings', 'duration': 0.001593, 'artifacts': {'findings': []}}, {'agent': 'insights', 'duration': 0.000346, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected']}}, {'agent': 'sentiment', 'duration': 1.5e-05, 'artifacts': {'sentiment': ['Positive']}}]
+2026-06-14 12:56:25,710 | INFO | ****RUNNING AGENT: trend
+2026-06-14 12:56:25,710 | INFO | ****RUNNING AGENT: root_cause
+2026-06-14 12:56:25,710 | INFO | ****TREND AGENT: ['22% increase detected']
+2026-06-14 12:56:25,710 | INFO | ****ROOT CAUSES: ['No clear root cause identified.']
+2026-06-14 12:56:25,710 | INFO | ****RUNNING AGENT: risk
+2026-06-14 12:56:25,710 | INFO | ****FORMATTED TREND AGENT: ['22% increase detected']
+2026-06-14 12:56:25,710 | INFO | ****COMPLETED AGENT: root_cause in 0.000627s
+2026-06-14 12:56:25,710 | INFO | ****COMPLETED AGENT: risk in 1.3e-05s
+2026-06-14 12:56:25,710 | INFO | ****COMPLETED AGENT: trend in 0.002328s
+2026-06-14 12:56:25,714 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:56:25,714 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:56:25,714 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:56:25,714 | INFO | ****ARTIFACTS: {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['No clear root cause identified.']}
+2026-06-14 12:56:25,714 | INFO | ****ARTIFACTS: {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}
+2026-06-14 12:56:25,716 | INFO | ****ARTIFACTS: {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected']}
+2026-06-14 12:56:25,719 | INFO | ****PARALLEL EXECUTION:[{'agent': 'trend', 'duration': 0.002328, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected']}}, {'agent': 'root_cause', 'duration': 0.000627, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['No clear root cause identified.']}}, {'agent': 'risk', 'duration': 1.3e-05, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}}]
+2026-06-14 12:56:25,719 | INFO | ====GROUP 2 RESULTS:==== [{'agent': 'trend', 'duration': 0.002328, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected']}}, {'agent': 'root_cause', 'duration': 0.000627, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['No clear root cause identified.']}}, {'agent': 'risk', 'duration': 1.3e-05, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}}]
+2026-06-14 12:56:25,719 | INFO | ****RUNNING AGENT: forecast
+2026-06-14 12:56:25,719 | INFO | ****FORECAST INPUT: ['22% increase detected']
+2026-06-14 12:56:25,719 | INFO | ****COMPLETED AGENT: forecast in 0.00035s
+2026-06-14 12:56:25,719 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:56:25,719 | INFO | ****ARTIFACTS: {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['No clear root cause identified.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.']}
+2026-06-14 12:56:25,719 | INFO | ****PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.00035, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['No clear root cause identified.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 12:56:25,719 | INFO | ====GROUP 3 RESULTS:==== [{'agent': 'forecast', 'duration': 0.00035, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['No clear root cause identified.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 12:56:25,722 | INFO | ****RUNNING AGENT: recommendation
+2026-06-14 12:56:25,722 | INFO | ****COMPLETED AGENT: recommendation in 1.1e-05s
+2026-06-14 12:56:25,722 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 12:56:25,722 | INFO | ****ARTIFACTS: {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['No clear root cause identified.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-14 12:56:25,722 | INFO | ****PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 1.1e-05, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['No clear root cause identified.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-14 12:56:25,722 | INFO | ====GROUP 4 RESULTS:==== [{'agent': 'recommendation', 'duration': 1.1e-05, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['No clear root cause identified.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-14 12:56:25,722 | INFO | ****ROUTE: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 12:56:25,722 | INFO | ****AFTER ACTIONS: []
+2026-06-14 12:56:25,722 | INFO | ****AFTER INSIGHTS: []
+2026-06-14 12:56:25,722 | INFO | ****AFTER TRENDS: []
+2026-06-14 12:56:25,722 | INFO | ****EXECUTION METADATA: {'agents_executed': ['summary', 'findings', 'insights', 'sentiment', 'trend', 'root_cause', 'risk', 'forecast', 'recommendation'], 'agent_count': 9, 'parallel_groups': [['summary'], ['findings', 'insights', 'sentiment'], ['trend', 'root_cause', 'risk'], ['forecast'], ['recommendation']], 'timings': {'summary': 0.000752, 'findings': 0.001593, 'insights': 0.000346, 'sentiment': 1.5e-05, 'trend': 0.002328, 'root_cause': 0.000627, 'risk': 1.3e-05, 'forecast': 0.00035, 'recommendation': 1.1e-05}, 'total_execution_time': 0.027884}
+2026-06-14 12:56:25,722 | INFO | ====FINAL ARTIFACTS:====
+2026-06-14 12:56:25,722 | INFO | {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['No clear root cause identified.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-14 12:56:25,735 | INFO | ==============Application AI Summarizer==============
+2026-06-14 12:56:25,735 | INFO | ==============EXECUTION END==============
+2026-06-14 13:00:05,584 | INFO | ==============Application AI Summarizer==============
+2026-06-14 13:00:05,584 | INFO | ==============FastAPI app initialized==============
+2026-06-14 13:02:26,399 | INFO | ==============Application AI Summarizer==============
+2026-06-14 13:02:26,401 | INFO | ==============FastAPI app initialized==============
+2026-06-14 13:03:42,167 | INFO | ==============Serving home page==============
+2026-06-14 13:03:42,167 | INFO | ==============EXECUTION START==============
+2026-06-14 13:03:44,906 | INFO | ****INTENT SCORES: {'business_report': 3, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 13:03:44,906 | INFO | ****PRIMARY INTENT: business_report
+2026-06-14 13:03:44,906 | INFO | ****SELECTED INTENTS: ['business_report']
+2026-06-14 13:03:44,906 | INFO | ****STRATEGY: {'risk', 'summary', 'trend', 'forecast', 'sentiment', 'root_cause', 'insights', 'recommendation'}
+2026-06-14 13:03:44,906 | INFO | ====STRATEGY:==== ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 13:03:44,908 | INFO | ****INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 13:03:44,908 | INFO | ****PARSED SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 13:03:44,908 | INFO | ****SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 13:03:44,908 | INFO | ****Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 13:47:24,796 | INFO | ==============Application AI Summarizer==============
+2026-06-14 13:47:24,796 | INFO | ==============FastAPI app initialized==============
+2026-06-14 13:47:31,034 | INFO | ****INTENT SCORES: {'business_report': 3, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 13:47:31,034 | INFO | ****PRIMARY INTENT: business_report
+2026-06-14 13:47:31,036 | INFO | ****SELECTED INTENTS: ['business_report']
+2026-06-14 13:47:31,036 | INFO | ****STRATEGY: {'forecast', 'root_cause', 'risk', 'recommendation', 'sentiment', 'insights', 'summary', 'trend'}
+2026-06-14 13:47:31,036 | INFO | ====STRATEGY:==== ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 13:47:31,036 | INFO | ****INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 13:47:31,036 | INFO | ****PARSED SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 13:47:31,036 | INFO | ****SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 13:47:31,036 | INFO | ****Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 13:52:39,855 | INFO | ==============Application AI Summarizer==============
+2026-06-14 13:52:39,855 | INFO | ==============FastAPI app initialized==============
+2026-06-14 13:52:55,538 | INFO | ****INTENT SCORES: {'business_report': 3, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 13:52:55,538 | INFO | ****PRIMARY INTENT: business_report
+2026-06-14 13:52:55,538 | INFO | ****SELECTED INTENTS: ['business_report']
+2026-06-14 13:52:55,538 | INFO | ****STRATEGY: {'forecast', 'summary', 'trend', 'sentiment', 'insights', 'recommendation', 'risk', 'root_cause'}
+2026-06-14 13:52:55,538 | INFO | ====STRATEGY:==== ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 13:52:55,538 | INFO | ****INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 13:52:55,538 | INFO | ****PARSED SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 13:52:55,541 | INFO | ****SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 13:52:55,541 | INFO | ****Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 13:52:55,541 | INFO | ****PARALLEL GROUPS: [['summary', 'root_cause'], ['findings', 'sentiment', 'insights'], ['trend', 'risk'], ['forecast'], ['recommendation']]
+2026-06-14 13:52:55,541 | INFO | ****SUMMARY INPUT:
+Revenue increased by 22% Market expanded High Risk
+2026-06-14 13:52:55,541 | INFO | ****SUMMARY WORDS: 8
+2026-06-14 13:54:54,274 | INFO | ==============Application AI Summarizer==============
+2026-06-14 13:54:54,275 | INFO | ==============FastAPI app initialized==============
+2026-06-14 13:55:23,595 | INFO | ****INTENT SCORES: {'business_report': 3, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 13:55:23,595 | INFO | ****PRIMARY INTENT: business_report
+2026-06-14 13:55:23,595 | INFO | ****SELECTED INTENTS: ['business_report']
+2026-06-14 13:55:23,595 | INFO | ****STRATEGY: {'trend', 'root_cause', 'insights', 'forecast', 'recommendation', 'risk', 'sentiment', 'summary'}
+2026-06-14 13:55:23,595 | INFO | ====STRATEGY:==== ['summary', 'insights', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-14 13:55:23,595 | INFO | ****INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-14 13:55:23,595 | INFO | ****PARSED SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 13:55:23,595 | INFO | ****SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 13:55:23,595 | INFO | ****Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-14 13:55:23,595 | INFO | ****PARALLEL GROUPS: [['summary'], ['insights', 'sentiment', 'findings'], ['trend', 'root_cause', 'risk'], ['forecast'], ['recommendation']]
+2026-06-14 13:55:23,595 | INFO | ****SUMMARY INPUT:
+Revenue increased by 22% Market expanded High Risk
+2026-06-14 13:55:23,595 | INFO | ****SUMMARY WORDS: 8
+2026-06-14 13:55:23,595 | INFO | ****RUNNING AGENT: insights
+2026-06-14 13:55:23,595 | INFO | ****COMPLETED AGENT: insights in 0.00012s
+2026-06-14 13:55:23,595 | INFO | ****RUNNING AGENT: sentiment
+2026-06-14 13:55:23,595 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:55:23,595 | INFO | ****RUNNING AGENT: findings
+2026-06-14 13:55:23,595 | INFO | ****COMPLETED AGENT: sentiment in 6e-06s
+2026-06-14 13:55:23,595 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected']}
+2026-06-14 13:55:23,595 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-14 13:55:23,595 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:55:23,595 | INFO | ****FINDING TOOL RETURN: []
+2026-06-14 13:55:23,595 | INFO | ****ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 13:55:23,595 | INFO | ****COMPLETED AGENT: findings in 0.000912s
+2026-06-14 13:55:23,595 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:55:23,595 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-14 13:55:23,595 | INFO | ****PARALLEL EXECUTION:[{'agent': 'insights', 'duration': 0.00012, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected']}}, {'agent': 'sentiment', 'duration': 6e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'findings', 'duration': 0.000912, 'artifacts': {'findings': []}}]
+2026-06-14 13:55:23,609 | INFO | ====GROUP 1 RESULTS:==== [{'agent': 'insights', 'duration': 0.00012, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected']}}, {'agent': 'sentiment', 'duration': 6e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'findings', 'duration': 0.000912, 'artifacts': {'findings': []}}]
+2026-06-14 13:55:23,611 | INFO | ****RUNNING AGENT: trend
+2026-06-14 13:55:23,611 | INFO | ****RUNNING AGENT: root_cause
+2026-06-14 13:55:23,611 | INFO | ****TREND AGENT: ['22% increase detected']
+2026-06-14 13:55:23,611 | INFO | ****RUNNING AGENT: risk
+2026-06-14 13:55:23,611 | INFO | ****FORMATTED TREND AGENT: ['22% increase detected']
+2026-06-14 13:55:23,611 | INFO | ****COMPLETED AGENT: root_cause in 0.000607s
+2026-06-14 13:55:23,611 | INFO | ****COMPLETED AGENT: risk in 1.3e-05s
+2026-06-14 13:55:23,611 | INFO | ****COMPLETED AGENT: trend in 0.001623s
+2026-06-14 13:55:23,611 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:55:23,611 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:55:23,611 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:55:23,611 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.']}
+2026-06-14 13:55:23,611 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'risk': ['Moderate Risk']}
+2026-06-14 13:55:23,611 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': ['22% increase detected']}
+2026-06-14 13:55:23,611 | INFO | ****PARALLEL EXECUTION:[{'agent': 'trend', 'duration': 0.001623, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': ['22% increase detected']}}, {'agent': 'root_cause', 'duration': 0.000607, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.']}}, {'agent': 'risk', 'duration': 1.3e-05, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'risk': ['Moderate Risk']}}]
+2026-06-14 13:55:23,611 | INFO | ====GROUP 2 RESULTS:==== [{'agent': 'trend', 'duration': 0.001623, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': ['22% increase detected']}}, {'agent': 'root_cause', 'duration': 0.000607, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.']}}, {'agent': 'risk', 'duration': 1.3e-05, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'risk': ['Moderate Risk']}}]
+2026-06-14 13:55:23,611 | INFO | ****RUNNING AGENT: forecast
+2026-06-14 13:55:23,611 | INFO | ****FORECAST INPUT: ['22% increase detected']
+2026-06-14 13:55:23,611 | INFO | ****COMPLETED AGENT: forecast in 0.000265s
+2026-06-14 13:55:23,611 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:55:23,611 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.']}
+2026-06-14 13:55:23,611 | INFO | ****PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000265, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 13:55:23,611 | INFO | ====GROUP 3 RESULTS:==== [{'agent': 'forecast', 'duration': 0.000265, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 13:55:23,619 | INFO | ****RUNNING AGENT: recommendation
+2026-06-14 13:55:23,619 | INFO | ****COMPLETED AGENT: recommendation in 7e-06s
+2026-06-14 13:55:23,619 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:55:23,619 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-14 13:55:23,619 | INFO | ****PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 7e-06, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-14 13:55:23,619 | INFO | ====GROUP 4 RESULTS:==== [{'agent': 'recommendation', 'duration': 7e-06, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-14 13:55:23,619 | INFO | ****ROUTE: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-14 13:55:23,619 | INFO | ****AFTER ACTIONS: []
+2026-06-14 13:55:23,619 | INFO | ****AFTER INSIGHTS: []
+2026-06-14 13:55:23,619 | INFO | ****AFTER TRENDS: []
+2026-06-14 13:55:23,621 | INFO | ****EXECUTION METADATA: {'agents_executed': ['summary', 'insights', 'sentiment', 'findings', 'trend', 'root_cause', 'risk', 'forecast', 'recommendation'], 'agent_count': 9, 'parallel_groups': [['summary'], ['insights', 'sentiment', 'findings'], ['trend', 'root_cause', 'risk'], ['forecast'], ['recommendation']], 'timings': {'summary': 0.000329, 'insights': 0.00012, 'sentiment': 6e-06, 'findings': 0.000912, 'trend': 0.001623, 'root_cause': 0.000607, 'risk': 1.3e-05, 'forecast': 0.000265, 'recommendation': 7e-06}, 'total_execution_time': 0.019263}
+2026-06-14 13:55:23,621 | INFO | ====FINAL ARTIFACTS:====
+2026-06-14 13:55:23,621 | INFO | {'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'findings': [], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-14 13:55:23,628 | INFO | ==============Application AI Summarizer==============
+2026-06-14 13:55:23,628 | INFO | ==============EXECUTION END==============
+2026-06-14 13:58:47,257 | INFO | ==============Application AI Summarizer==============
+2026-06-14 13:58:47,257 | INFO | ==============FastAPI app initialized==============
+2026-06-14 13:58:50,863 | INFO | ****INTENT SCORES: {'business_report': 3, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 13:58:50,863 | INFO | ****PRIMARY INTENT: business_report
+2026-06-14 13:58:50,863 | INFO | ****SELECTED INTENTS: ['business_report']
+2026-06-14 13:58:50,863 | INFO | ****STRATEGY: {'summary', 'recommendation', 'trend', 'root_cause', 'insights', 'sentiment', 'risk', 'forecast'}
+2026-06-14 13:58:50,863 | INFO | ====STRATEGY:==== ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 13:58:50,863 | INFO | ****INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 13:58:50,863 | INFO | ****PARSED SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 13:58:50,863 | INFO | ****SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 13:58:50,863 | INFO | ****Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 13:58:50,863 | INFO | ****PARALLEL GROUPS: [['summary'], ['findings', 'insights', 'sentiment'], ['trend', 'root_cause', 'risk'], ['forecast'], ['recommendation']]
+2026-06-14 13:58:50,863 | INFO | ****SUMMARY INPUT:
+Revenue increased by 22% Market expanded High Risk
+2026-06-14 13:58:50,863 | INFO | ****SUMMARY WORDS: 8
+2026-06-14 13:58:50,872 | INFO | ****RUNNING AGENT: findings
+2026-06-14 13:58:50,872 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-14 13:58:50,872 | INFO | ****RUNNING AGENT: insights
+2026-06-14 13:58:50,872 | INFO | ****FINDING TOOL RETURN: []
+2026-06-14 13:58:50,872 | INFO | ****RUNNING AGENT: sentiment
+2026-06-14 13:58:50,872 | INFO | ****COMPLETED AGENT: insights in 0.000245s
+2026-06-14 13:58:50,872 | INFO | ****COMPLETED AGENT: findings in 0.001799s
+2026-06-14 13:58:50,872 | INFO | ****COMPLETED AGENT: sentiment in 1.3e-05s
+2026-06-14 13:58:50,872 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:58:50,872 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:58:50,872 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:58:50,872 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected']}
+2026-06-14 13:58:50,872 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-14 13:58:50,872 | INFO | ****ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 13:58:50,872 | INFO | ****PARALLEL EXECUTION:[{'agent': 'findings', 'duration': 0.001799, 'artifacts': {'findings': []}}, {'agent': 'insights', 'duration': 0.000245, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected']}}, {'agent': 'sentiment', 'duration': 1.3e-05, 'artifacts': {'sentiment': ['Positive']}}]
+2026-06-14 13:58:50,882 | INFO | ====GROUP 1 RESULTS:==== [{'agent': 'findings', 'duration': 0.001799, 'artifacts': {'findings': []}}, {'agent': 'insights', 'duration': 0.000245, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected']}}, {'agent': 'sentiment', 'duration': 1.3e-05, 'artifacts': {'sentiment': ['Positive']}}]
+2026-06-14 13:58:50,883 | INFO | ****RUNNING AGENT: trend
+2026-06-14 13:58:50,885 | INFO | ****RUNNING AGENT: root_cause
+2026-06-14 13:58:50,886 | INFO | ****TREND AGENT: ['22% increase detected']
+2026-06-14 13:58:50,888 | INFO | ****RUNNING AGENT: risk
+2026-06-14 13:58:50,888 | INFO | ****FORMATTED TREND AGENT: ['22% increase detected']
+2026-06-14 13:58:50,890 | INFO | ****COMPLETED AGENT: root_cause in 0.001541s
+2026-06-14 13:58:50,890 | INFO | ****COMPLETED AGENT: risk in 1.4e-05s
+2026-06-14 13:58:50,890 | INFO | ****COMPLETED AGENT: trend in 0.006137s
+2026-06-14 13:58:50,890 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:58:50,892 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:58:50,892 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:58:50,892 | INFO | ****ARTIFACTS: {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.']}
+2026-06-14 13:58:50,892 | INFO | ****ARTIFACTS: {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}
+2026-06-14 13:58:50,892 | INFO | ****ARTIFACTS: {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected']}
+2026-06-14 13:58:50,894 | INFO | ****PARALLEL EXECUTION:[{'agent': 'trend', 'duration': 0.006137, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected']}}, {'agent': 'root_cause', 'duration': 0.001541, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.']}}, {'agent': 'risk', 'duration': 1.4e-05, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}}]
+2026-06-14 13:58:50,896 | INFO | ====GROUP 2 RESULTS:==== [{'agent': 'trend', 'duration': 0.006137, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected']}}, {'agent': 'root_cause', 'duration': 0.001541, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'root_causes': ['Revenue growth appears linked to market expansion.']}}, {'agent': 'risk', 'duration': 1.4e-05, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}}]
+2026-06-14 13:58:50,896 | INFO | ****RUNNING AGENT: forecast
+2026-06-14 13:58:50,896 | INFO | ****FORECAST INPUT: ['22% increase detected']
+2026-06-14 13:58:50,896 | INFO | ****COMPLETED AGENT: forecast in 0.000357s
+2026-06-14 13:58:50,898 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:58:50,898 | INFO | ****ARTIFACTS: {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.']}
+2026-06-14 13:58:50,898 | INFO | ****PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000357, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 13:58:50,898 | INFO | ====GROUP 3 RESULTS:==== [{'agent': 'forecast', 'duration': 0.000357, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 13:58:50,898 | INFO | ****RUNNING AGENT: recommendation
+2026-06-14 13:58:50,900 | INFO | ****COMPLETED AGENT: recommendation in 9e-06s
+2026-06-14 13:58:50,900 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 13:58:50,900 | INFO | ****ARTIFACTS: {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-14 13:58:50,900 | INFO | ****PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 9e-06, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-14 13:58:50,901 | INFO | ====GROUP 4 RESULTS:==== [{'agent': 'recommendation', 'duration': 9e-06, 'artifacts': {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-14 13:58:50,901 | INFO | ****ROUTE: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 13:58:50,902 | INFO | ****AFTER ACTIONS: []
+2026-06-14 13:58:50,902 | INFO | ****AFTER INSIGHTS: []
+2026-06-14 13:58:50,902 | INFO | ****AFTER TRENDS: []
+2026-06-14 13:58:50,902 | INFO | ****EXECUTION METADATA: {'agents_executed': ['summary', 'findings', 'insights', 'sentiment', 'trend', 'root_cause', 'risk', 'forecast', 'recommendation'], 'agent_count': 9, 'parallel_groups': [['summary'], ['findings', 'insights', 'sentiment'], ['trend', 'root_cause', 'risk'], ['forecast'], ['recommendation']], 'timings': {'summary': 0.000483, 'findings': 0.001799, 'insights': 0.000245, 'sentiment': 1.3e-05, 'trend': 0.006137, 'root_cause': 0.001541, 'risk': 1.4e-05, 'forecast': 0.000357, 'recommendation': 9e-06}, 'total_execution_time': 0.034459}
+2026-06-14 13:58:50,902 | INFO | ====FINAL ARTIFACTS:====
+2026-06-14 13:58:50,904 | INFO | {'findings': [], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'sentiment': ['Positive'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-14 13:58:50,910 | INFO | ==============Application AI Summarizer==============
+2026-06-14 13:58:50,910 | INFO | ==============EXECUTION END==============
+2026-06-14 14:06:16,280 | INFO | ==============Application AI Summarizer==============
+2026-06-14 14:06:16,280 | INFO | ==============FastAPI app initialized==============
+2026-06-14 14:10:13,538 | INFO | ==============Application AI Summarizer==============
+2026-06-14 14:10:13,538 | INFO | ==============FastAPI app initialized==============
+2026-06-14 14:38:20,924 | INFO | ****INTENT SCORES: {'business_report': 3, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 14:38:20,924 | INFO | ****PRIMARY INTENT: business_report
+2026-06-14 14:38:20,928 | INFO | ****SELECTED INTENTS: ['business_report']
+2026-06-14 14:38:20,928 | INFO | ****STRATEGY: {'sentiment', 'trend', 'risk', 'summary', 'recommendation', 'root_cause', 'forecast', 'insights'}
+2026-06-14 14:38:20,928 | INFO | ====STRATEGY:==== ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 14:38:20,928 | INFO | ****INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 14:38:20,930 | INFO | ****PARSED SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 14:38:20,930 | INFO | ****SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 14:38:20,930 | INFO | ****Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 14:38:20,932 | INFO | ****PARALLEL GROUPS: [['summary'], ['sentiment', 'insights', 'findings'], ['trend', 'risk', 'root_cause'], ['forecast'], ['recommendation']]
+2026-06-14 14:38:20,932 | INFO | ****SUMMARY INPUT:
+Revenue increased by 22% Market expanded High Risk
+2026-06-14 14:38:20,932 | INFO | ****SUMMARY WORDS: 8
+2026-06-14 14:38:20,934 | INFO | ****RUNNING AGENT: sentiment
+2026-06-14 14:38:20,936 | INFO | ****COMPLETED AGENT: sentiment in 2.5e-05s
+2026-06-14 14:38:20,936 | INFO | ****RUNNING AGENT: insights
+2026-06-14 14:38:20,936 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 14:38:20,936 | INFO | ****COMPLETED AGENT: insights in 0.000553s
+2026-06-14 14:38:20,936 | INFO | ****RUNNING AGENT: findings
+2026-06-14 14:38:20,936 | INFO | ****ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 14:38:20,936 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 14:38:20,936 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-14 14:38:20,936 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected']}
+2026-06-14 14:38:20,941 | INFO | ****FINDING TOOL RETURN: []
+2026-06-14 14:38:20,943 | INFO | ****COMPLETED AGENT: findings in 0.003747s
+2026-06-14 14:38:20,943 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 14:38:20,943 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-14 14:38:20,943 | INFO | ****PARALLEL EXECUTION:[{'agent': 'sentiment', 'duration': 2.5e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.000553, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected']}}, {'agent': 'findings', 'duration': 0.003747, 'artifacts': {'findings': []}}]
+2026-06-14 14:38:20,943 | INFO | ====GROUP 1 RESULTS:==== [{'agent': 'sentiment', 'duration': 2.5e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.000553, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected']}}, {'agent': 'findings', 'duration': 0.003747, 'artifacts': {'findings': []}}]
+2026-06-14 14:38:20,946 | INFO | ****RUNNING AGENT: trend
+2026-06-14 14:38:20,946 | INFO | ****TREND AGENT: ['22% increase detected']
+2026-06-14 14:38:20,946 | INFO | ****RUNNING AGENT: risk
+2026-06-14 14:38:20,946 | INFO | ****FORMATTED TREND AGENT: ['22% increase detected']
+2026-06-14 14:38:20,946 | INFO | ****COMPLETED AGENT: risk in 2.4e-05s
+2026-06-14 14:38:20,946 | INFO | ****RUNNING AGENT: root_cause
+2026-06-14 14:38:20,950 | INFO | ****COMPLETED AGENT: trend in 0.002662s
+2026-06-14 14:38:20,950 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 14:38:20,950 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 14:38:20,950 | INFO | ****COMPLETED AGENT: root_cause in 0.000971s
+2026-06-14 14:38:20,957 | INFO | ****ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'risk': ['Moderate Risk']}
+2026-06-14 14:38:20,957 | INFO | ****ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'trends': ['22% increase detected']}
+2026-06-14 14:38:20,957 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 14:38:20,959 | INFO | ****ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.']}
+2026-06-14 14:38:20,960 | INFO | ****PARALLEL EXECUTION:[{'agent': 'trend', 'duration': 0.002662, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'trends': ['22% increase detected']}}, {'agent': 'risk', 'duration': 2.4e-05, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000971, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.']}}]
+2026-06-14 14:38:20,961 | INFO | ====GROUP 2 RESULTS:==== [{'agent': 'trend', 'duration': 0.002662, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'trends': ['22% increase detected']}}, {'agent': 'risk', 'duration': 2.4e-05, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000971, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'root_causes': ['Revenue growth appears linked to market expansion.']}}]
+2026-06-14 14:38:20,961 | INFO | ****RUNNING AGENT: forecast
+2026-06-14 14:38:20,962 | INFO | ****FORECAST INPUT: ['22% increase detected']
+2026-06-14 14:38:20,963 | INFO | ****COMPLETED AGENT: forecast in 0.000809s
+2026-06-14 14:38:20,963 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 14:38:20,963 | INFO | ****ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.']}
+2026-06-14 14:38:20,964 | INFO | ****PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000809, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 14:38:20,964 | INFO | ====GROUP 3 RESULTS:==== [{'agent': 'forecast', 'duration': 0.000809, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 14:38:20,965 | INFO | ****RUNNING AGENT: recommendation
+2026-06-14 14:38:20,965 | INFO | ****COMPLETED AGENT: recommendation in 1.9e-05s
+2026-06-14 14:38:20,967 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 14:38:20,967 | INFO | ****ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-14 14:38:20,967 | INFO | ****PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 1.9e-05, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-14 14:38:20,969 | INFO | ====GROUP 4 RESULTS:==== [{'agent': 'recommendation', 'duration': 1.9e-05, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-14 14:38:20,969 | INFO | ****ROUTE: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 14:38:20,969 | INFO | ****AFTER ACTIONS: []
+2026-06-14 14:38:20,969 | INFO | ****AFTER INSIGHTS: []
+2026-06-14 14:38:20,969 | INFO | ****AFTER TRENDS: []
+2026-06-14 14:38:20,969 | INFO | ****EXECUTION METADATA: {'agents_executed': ['summary', 'sentiment', 'insights', 'findings', 'trend', 'risk', 'root_cause', 'forecast', 'recommendation'], 'agent_count': 9, 'parallel_groups': [['summary'], ['sentiment', 'insights', 'findings'], ['trend', 'risk', 'root_cause'], ['forecast'], ['recommendation']], 'timings': {'summary': 0.000921, 'sentiment': 2.5e-05, 'insights': 0.000553, 'findings': 0.003747, 'trend': 0.002662, 'risk': 2.4e-05, 'root_cause': 0.000971, 'forecast': 0.000809, 'recommendation': 1.9e-05}, 'total_execution_time': 0.044152}
+2026-06-14 14:38:20,969 | INFO | ====FINAL ARTIFACTS:====
+2026-06-14 14:38:20,969 | INFO | {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'findings': [], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-14 14:38:20,989 | INFO | ==============Application AI Summarizer==============
+2026-06-14 14:38:20,989 | INFO | ==============EXECUTION END==============
+2026-06-14 16:39:53,770 | INFO | ==============Application AI Summarizer==============
+2026-06-14 16:39:53,770 | INFO | ==============FastAPI app initialized==============
+2026-06-14 16:41:17,200 | INFO | ==============Serving home page==============
+2026-06-14 16:41:17,201 | INFO | ==============EXECUTION START==============
+2026-06-14 16:41:21,081 | INFO | ****INTENT SCORES: {'business_report': 3, 'meeting_notes': 0, 'research_report': 0}
+2026-06-14 16:41:21,083 | INFO | ****PRIMARY INTENT: business_report
+2026-06-14 16:41:21,083 | INFO | ****SELECTED INTENTS: ['business_report']
+2026-06-14 16:41:21,083 | INFO | ****STRATEGY: {'recommendation', 'risk', 'sentiment', 'trend', 'root_cause', 'summary', 'forecast', 'insights'}
+2026-06-14 16:41:21,084 | INFO | ====STRATEGY:==== ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 16:41:21,084 | INFO | ****INPUT STRATEGY: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 16:41:21,084 | INFO | ****PARSED SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 16:41:21,085 | INFO | ****SECTIONS: {'general': 'Revenue increased by 22% Market expanded High Risk'}
+2026-06-14 16:41:21,085 | INFO | ****Resolved execution order: ['summary', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 16:41:21,085 | INFO | ****PARALLEL GROUPS: [['summary'], ['findings', 'sentiment', 'insights'], ['risk', 'trend', 'root_cause'], ['forecast'], ['recommendation']]
+2026-06-14 16:41:21,085 | INFO | ****SUMMARY INPUT:
+Revenue increased by 22% Market expanded High Risk
+2026-06-14 16:41:21,085 | INFO | ****SUMMARY WORDS: 8
+2026-06-14 16:41:21,085 | INFO | ****RUNNING AGENT: findings
+2026-06-14 16:41:21,085 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-14 16:41:21,085 | INFO | ****FINDING TOOL RETURN: []
+2026-06-14 16:41:21,085 | INFO | ****RUNNING AGENT: sentiment
+2026-06-14 16:41:21,085 | INFO | ****COMPLETED AGENT: findings in 0.000562s
+2026-06-14 16:41:21,085 | INFO | ****RUNNING AGENT: insights
+2026-06-14 16:41:21,085 | INFO | ****COMPLETED AGENT: sentiment in 7e-06s
+2026-06-14 16:41:21,085 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 16:41:21,085 | INFO | ****ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 16:41:21,085 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 16:41:21,085 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-14 16:41:21,085 | INFO | ****COMPLETED AGENT: insights in 0.000123s
+2026-06-14 16:41:21,085 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 16:41:21,085 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 22%', 'Market expansion detected']}
+2026-06-14 16:41:21,085 | INFO | ****PARALLEL EXECUTION:[{'agent': 'findings', 'duration': 0.000562, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 7e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.000123, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected']}}]
+2026-06-14 16:41:21,085 | INFO | ====GROUP 1 RESULTS:==== [{'agent': 'findings', 'duration': 0.000562, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 7e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.000123, 'artifacts': {'insights': ['Revenue changed by 22%', 'Market expansion detected']}}]
+2026-06-14 16:41:21,085 | INFO | ****RUNNING AGENT: risk
+2026-06-14 16:41:21,085 | INFO | ****COMPLETED AGENT: risk in 7e-06s
+2026-06-14 16:41:21,092 | INFO | ****RUNNING AGENT: trend
+2026-06-14 16:41:21,092 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 16:41:21,093 | INFO | ****RUNNING AGENT: root_cause
+2026-06-14 16:41:21,093 | INFO | ****TREND AGENT: ['22% increase detected']
+2026-06-14 16:41:21,093 | INFO | ****ARTIFACTS: {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'risk': ['Moderate Risk']}
+2026-06-14 16:41:21,094 | INFO | ****FORMATTED TREND AGENT: ['22% increase detected']
+2026-06-14 16:41:21,094 | INFO | ****COMPLETED AGENT: root_cause in 0.000248s
+2026-06-14 16:41:21,094 | INFO | ****COMPLETED AGENT: trend in 0.002637s
+2026-06-14 16:41:21,094 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 16:41:21,094 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 16:41:21,094 | INFO | ****ARTIFACTS: {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'root_causes': ['Revenue growth appears linked to market expansion.']}
+2026-06-14 16:41:21,094 | INFO | ****ARTIFACTS: {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'trends': ['22% increase detected']}
+2026-06-14 16:41:21,094 | INFO | ****PARALLEL EXECUTION:[{'agent': 'risk', 'duration': 7e-06, 'artifacts': {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'risk': ['Moderate Risk']}}, {'agent': 'trend', 'duration': 0.002637, 'artifacts': {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'trends': ['22% increase detected']}}, {'agent': 'root_cause', 'duration': 0.000248, 'artifacts': {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'root_causes': ['Revenue growth appears linked to market expansion.']}}]
+2026-06-14 16:41:21,094 | INFO | ====GROUP 2 RESULTS:==== [{'agent': 'risk', 'duration': 7e-06, 'artifacts': {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'risk': ['Moderate Risk']}}, {'agent': 'trend', 'duration': 0.002637, 'artifacts': {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'trends': ['22% increase detected']}}, {'agent': 'root_cause', 'duration': 0.000248, 'artifacts': {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'root_causes': ['Revenue growth appears linked to market expansion.']}}]
+2026-06-14 16:41:21,094 | INFO | ****RUNNING AGENT: forecast
+2026-06-14 16:41:21,094 | INFO | ****FORECAST INPUT: ['22% increase detected']
+2026-06-14 16:41:21,094 | INFO | ****COMPLETED AGENT: forecast in 0.000439s
+2026-06-14 16:41:21,094 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 16:41:21,094 | INFO | ****ARTIFACTS: {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.']}
+2026-06-14 16:41:21,094 | INFO | ****PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000439, 'artifacts': {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 16:41:21,094 | INFO | ====GROUP 3 RESULTS:==== [{'agent': 'forecast', 'duration': 0.000439, 'artifacts': {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 16:41:21,094 | INFO | ****RUNNING AGENT: recommendation
+2026-06-14 16:41:21,094 | INFO | ****COMPLETED AGENT: recommendation in 1.5e-05s
+2026-06-14 16:41:21,094 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-14 16:41:21,094 | INFO | ****ARTIFACTS: {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-14 16:41:21,094 | INFO | ****PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 1.5e-05, 'artifacts': {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-14 16:41:21,094 | INFO | ====GROUP 4 RESULTS:==== [{'agent': 'recommendation', 'duration': 1.5e-05, 'artifacts': {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-14 16:41:21,094 | INFO | ****ROUTE: ['summary', 'insights', 'trend', 'sentiment', 'risk', 'recommendation', 'root_cause', 'forecast']
+2026-06-14 16:41:21,094 | INFO | ****AFTER ACTIONS: []
+2026-06-14 16:41:21,094 | INFO | ****AFTER INSIGHTS: []
+2026-06-14 16:41:21,094 | INFO | ****AFTER TRENDS: []
+2026-06-14 16:41:21,094 | INFO | ****EXECUTION METADATA: {'agents_executed': ['summary', 'findings', 'sentiment', 'insights', 'risk', 'trend', 'root_cause', 'forecast', 'recommendation'], 'agent_count': 9, 'parallel_groups': [['summary'], ['findings', 'sentiment', 'insights'], ['risk', 'trend', 'root_cause'], ['forecast'], ['recommendation']], 'timings': {'summary': 0.0007, 'findings': 0.000562, 'sentiment': 7e-06, 'insights': 0.000123, 'risk': 7e-06, 'trend': 0.002637, 'root_cause': 0.000248, 'forecast': 0.000439, 'recommendation': 1.5e-05}, 'total_execution_time': 0.01919}
+2026-06-14 16:41:21,094 | INFO | ====FINAL ARTIFACTS:====
+2026-06-14 16:41:21,094 | INFO | {'findings': [], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%', 'Market expansion detected'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-14 16:41:21,112 | INFO | ==============Application AI Summarizer==============
+2026-06-14 16:41:21,112 | INFO | ==============EXECUTION END==============

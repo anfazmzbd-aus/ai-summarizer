@@ -28,6 +28,6 @@ def trend_agent(state):
         {}
     )["trends"] = trends
     
-    logger.info(f"TREND AGENT: {state['artifacts']['trends']}")
-    logger.info(f"FORMATTED TREND AGENT: {trends}")
+    logger.info(f"****TREND AGENT: {state['artifacts']['trends']}")
+    logger.info(f"****FORMATTED TREND AGENT: {trends}")
     return state

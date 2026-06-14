@@ -11,7 +11,6 @@ def home():
         "app/templates/index.html",
         encoding="utf-8"
     ) as f:
-        logger.info("==============Application AI Summarizer==============")
         logger.info("==============Serving home page==============")
         logger.info("==============EXECUTION START==============")
         return f.read()

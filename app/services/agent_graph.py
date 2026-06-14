@@ -55,7 +55,7 @@ def run_graph(state):
     )
 
     logger.info(
-        f"STRATEGY: "
+        f"====STRATEGY:==== "
         f"{strategy}"
     )
     # --------------------------------------------------
@@ -67,13 +67,21 @@ def run_graph(state):
         intent_info,
         strategy
     )
-    
+
     state["sections"] = (
         plan.get(
             "sections",
             {}
         )
     )
+
+    state["context"] = {
+        "insights": state["artifacts"].get("insights", []),
+        "findings": state["artifacts"].get("findings", []),
+        "actions": state["artifacts"].get("actions", []),
+        "trends": state["artifacts"].get("trends", []),
+        "risk": state["artifacts"].get("risk", []),
+    }
     # --------------------------------------------------
     # Dependency Resolution
     # --------------------------------------------------
@@ -90,7 +98,15 @@ def run_graph(state):
     # --------------------------------------------------
     # Parallel Groups
     # --------------------------------------------------
+    print(
+        "\nEXECUTION ORDER:",
+        execution_order
+    )
 
+    print(
+        "AGENT_REGISTRY:",
+        list(AGENT_REGISTRY.keys())
+    )
     groups = build_parallel_groups(
         execution_order,
         AGENT_REGISTRY
@@ -196,7 +212,7 @@ def run_graph(state):
         )
 
         logger.info(
-            f"GROUP {group_index} RESULTS: "
+            f"====GROUP {group_index} RESULTS:==== "
             f"{results}"
         )
 
@@ -258,15 +274,15 @@ def run_graph(state):
     # --------------------------------------------------
     # Debug prints
     # --------------------------------------------------
-    logger.info(f"ROUTE: {plan['selected_agents']}")
-    logger.info(f"AFTER ACTIONS: {state.get('actions')}")
-    logger.info(f"AFTER INSIGHTS: {state.get('insights')}")
-    logger.info(f"AFTER TRENDS: {state.get('trends')}")
+    logger.info(f"****ROUTE: {plan['selected_agents']}")
+    logger.info(f"****AFTER ACTIONS: {state.get('actions')}")
+    logger.info(f"****AFTER INSIGHTS: {state.get('insights')}")
+    logger.info(f"****AFTER TRENDS: {state.get('trends')}")
     logger.debug("=== DEBUG: AGENT GRAPH EXECUTION START===")
     logger.debug(f"MERGED ARTIFACTS: {state['artifacts']}")
     logger.debug(f"REGISTERED: {AGENT_REGISTRY.keys()}")
     logger.debug(f"EXECUTED AGENTS: {execution_metadata['agents_executed']}")
-    logger.info(f"EXECUTION METADATA: {state.get('execution')}")
+    logger.info(f"****EXECUTION METADATA: {state.get('execution')}")
     logger.debug(f"ARTIFACTS: {state.get('artifacts', {})}")
     logger.debug("=== DEBUG: AGENT GRAPH EXECUTION END===")
     return state

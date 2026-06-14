@@ -15,8 +15,10 @@ def summarize(
 ):
 
     result = run_agents(text, summary_length)
+
     logger.debug("=== DEBUG: FINAL RESULT ===")
     logger.debug(f"SUMMARY result: {result}")
+    
     # 🔴 CRITICAL: SAVE TO DB
     save_summary(text, result)
 
