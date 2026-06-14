@@ -10,8 +10,22 @@ def run_agent(agent_name, agent_func, state):
         f"RUNNING AGENT: "
         f"{agent_name}"
     )
-    
+
+    sections = state.get(
+        "sections",
+        {}
+    )
+
     local_state = copy.deepcopy(state)
+
+    local_state["active_section"] = (
+        sections.get(
+            state.get(
+                "primary_intent"
+            ),
+            state["text"]
+        )
+    )
 
     start = time.perf_counter()
 

@@ -31,6 +31,7 @@ def run_agents(
     state = {
 
         "text": text,
+
         "summary_length": summary_length,
 
         "summary": "",

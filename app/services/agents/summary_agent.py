@@ -1,169 +1,115 @@
-from app.models.summarizer_model import summarizer_model
-from app.services.tools.summary_preprocessor import (
-    preprocess_summary_input
-)
-from app.services.tools.summary_postprocessor import (
-    postprocess_summary
-)
 from app.services.registry.registry import (
     register_agent
 )
-from app.services.logging.logger import logger
 
-@register_agent("summary")
+from app.models.summarizer_model import (
+    summarizer_model
+)
 
+from app.services.logging.logger import (
+    logger
+)
+
+
+@register_agent(
+    "summary"
+)
 def summary_agent(state):
 
-    raw_text = state["text"]
-
-    text = preprocess_summary_input(
-        raw_text
+    sections = state.get(
+        "sections",
+        {}
     )
 
-    print(
-        "PREPROCESSED SUMMARY INPUT:"
-    )
-    print(text)
+    if sections:
 
-    if not text.strip():
+        priority = [
 
-        state["summary"] = (
-            "No summary content available."
+            "business_report",
+
+            "research_report",
+
+            "meeting_notes",
+
+            "general"
+        ]
+
+        blocks = []
+
+        for name in priority:
+
+            if sections.get(
+                name
+            ):
+
+                blocks.append(
+                    sections[
+                        name
+                    ]
+                )
+
+        summary_input = "\n".join(
+            blocks
         )
 
-        state["summary_metrics"] = {
-            "input_words": 0,
-            "summary_words": 0,
-            "compression_ratio": 0
-        }
+    else:
 
-        return state
-    
-    summary_length = state["summary_length"]
-
-    input_words = len(text.split())
-    input_tokens = len(text.split())
-    print(
-        f"**************INPUT WORDS: {input_words}**************"
-    )
-    print(
-        f"**************INPUT TOKENS: {input_tokens}**************"
-    )
-    
-    result = summarizer_model(
-        text,
-
-        max_new_tokens=min(
-            50,
-            input_tokens
-        ),
-
-        min_new_tokens=max(
-            10,
-            int(
-                input_tokens * 0.6
-            )
-        ),
-
-        do_sample=False,
-
-        truncation=False
-    )
-
-    summary_text = result[0]["summary_text"]
-
-    state["summary"] = postprocess_summary(
-        summary_text
-    )
-
-    summary = (
-        result[0]["summary_text"]
-    )
-
-    summary_sentences = {
-        s.strip()
-        for s in summary.split(".")
-        if s.strip()
-    }
-
-    original_sentences = [
-        s.strip()
-        for s in text.split(".")
-        if s.strip()
-    ]
-
-    preserve_keywords = [
-        "revenue",
-        "profit",
-        "market",
-        "risk",
-        "research"
-    ]
-
-    for sentence in original_sentences:
-
-        lower = sentence.lower()
-
-        if (
-            any(
-                k in lower
-                for k in preserve_keywords
-            )
-            and not any(
-                sentence in x
-                for x in summary_sentences
-            )
-        ):
-            summary_sentences.add(
-                sentence
-            )
-
-    ordered = []
-
-    for sentence in original_sentences:
-
-        if any(
-            sentence in x
-            for x in summary_sentences
-        ):
-            ordered.append(
-                sentence
-            )
-
-    state["summary"] = (
-        ". ".join(
-            ordered
-        ) + "."
-    )
-
-    input_count = max(
-        1,
-        len(raw_text.split())
-    )
-
-    state["summary_metrics"] = {
-
-        "input_words":
-            len(raw_text.split()),
-
-        "summary_words":
-            len(
-                summary.split()
-            ),
-
-        "compression_ratio":
-            round(
-                len(
-                    state["summary"].split()
-                )
-                /
-                input_count,
-                2
-            )
-    }
+        summary_input = state[
+            "text"
+        ]
 
     logger.info(
-        f"SUMMARY METRICS: "
-        f"{state['summary_metrics']}"
+        f"SUMMARY INPUT:\n"
+        f"{summary_input}"
     )
+
+    word_count = len(
+        summary_input.split()
+    )
+
+    logger.info(
+        f"SUMMARY WORDS: "
+        f"{word_count}"
+    )
+
+    # Structured summaries:
+    # preserve order instead of model rewriting
+
+    if word_count <= 30:
+
+        state["summary"] = (
+            summary_input
+        )
+
+    else:
+
+        result = (
+            summarizer_model(
+
+                summary_input,
+
+                max_length=min(
+                    60,
+                    int(
+                        word_count * 0.7
+                    )
+                ),
+
+                min_length=max(
+                    8,
+                    int(
+                        word_count * 0.3
+                    )
+                ),
+
+                do_sample=False
+            )
+        )
+
+        state["summary"] = (
+            result[0][
+                "summary_text"
+            ]
+        )
+
     return state

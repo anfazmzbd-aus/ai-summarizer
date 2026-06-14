@@ -21,7 +21,13 @@ def summarize(
     save_summary(text, result)
 
     summary = result.get("summary", "")
-
+    summary = (
+        summary
+        .replace(
+            "\n",
+            "<br><br>"
+        )
+    )
     artifacts = result.get(
         "artifacts",
         {}
@@ -66,10 +72,10 @@ def summarize(
         {artifact_html}
 
         <h3>Execution Plan</h3>
-        <pre>{plan}</pre>
+        <pre width="75%" wrap="on">{plan}</pre>
         
         <h3>Execution Metadata</h3>
-        <pre>{execution}</pre>
+        <pre width="75%" wrap="on">{execution}</pre>
 
         <a href="/">Back</a>
 

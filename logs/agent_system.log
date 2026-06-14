@@ -6453,3 +6453,411 @@ Research study shows customer satisfaction decreased.
 2026-06-13 11:09:51,769 | INFO | ==============Creating database tables==============
 2026-06-13 11:09:51,780 | INFO | ==============Application AI Summarizer==============
 2026-06-13 11:09:51,780 | INFO | ==============FastAPI app initialized==============
+2026-06-13 11:10:55,221 | INFO | ==============Application AI Summarizer==============
+2026-06-13 11:10:55,223 | INFO | ==============Creating database tables==============
+2026-06-13 11:10:55,224 | INFO | ==============Application AI Summarizer==============
+2026-06-13 11:10:55,227 | INFO | ==============FastAPI app initialized==============
+2026-06-13 18:31:34,565 | INFO | ==============Application AI Summarizer==============
+2026-06-13 18:31:34,565 | INFO | ==============Creating database tables==============
+2026-06-13 18:31:34,628 | INFO | ==============Application AI Summarizer==============
+2026-06-13 18:31:34,630 | INFO | ==============FastAPI app initialized==============
+2026-06-13 18:36:25,612 | INFO | ==============Application AI Summarizer==============
+2026-06-13 18:36:25,612 | INFO | ==============Creating database tables==============
+2026-06-13 18:36:25,620 | INFO | ==============Application AI Summarizer==============
+2026-06-13 18:36:25,623 | INFO | ==============FastAPI app initialized==============
+2026-06-13 18:43:53,719 | INFO | ==============Application AI Summarizer==============
+2026-06-13 18:43:53,719 | INFO | ==============Creating database tables==============
+2026-06-13 18:43:53,725 | INFO | ==============Application AI Summarizer==============
+2026-06-13 18:43:53,725 | INFO | ==============FastAPI app initialized==============
+2026-06-13 18:44:36,268 | INFO | ==============Application AI Summarizer==============
+2026-06-13 18:44:36,268 | INFO | ==============Serving home page==============
+2026-06-13 18:44:36,268 | INFO | ==============EXECUTION START==============
+2026-06-13 18:44:41,637 | INFO | INTENT SCORES: {'business_report': 2, 'meeting_notes': 2, 'research_report': 1}
+2026-06-13 18:44:41,637 | INFO | PRIMARY INTENT: business_report
+2026-06-13 18:44:41,637 | INFO | SELECTED INTENTS: ['business_report', 'meeting_notes', 'research_report']
+2026-06-13 18:44:41,637 | INFO | STRATEGY: {'risk', 'root_cause', 'recommendation', 'summary', 'findings', 'sentiment', 'trend', 'forecast', 'actions', 'insights'}
+2026-06-13 18:44:41,637 | INFO | STRATEGY: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'root_cause', 'recommendation', 'forecast']
+2026-06-13 18:44:41,637 | INFO | INPUT STRATEGY: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'root_cause', 'recommendation', 'forecast']
+2026-06-13 18:44:41,637 | INFO | SECTIONS: {'general': 'Business Report:\nRevenue increased by 22%.\n\nMeeting Notes:\nJohn should prepare report.\n\nResearch Report:\nCustomer satisfaction improved.'}
+2026-06-13 18:44:41,640 | INFO | Resolved execution order: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-13 18:44:41,640 | INFO | PARALLEL GROUPS: [['summary'], ['findings', 'sentiment', 'actions', 'insights'], ['risk', 'root_cause', 'trend'], ['forecast'], ['recommendation']]
+2026-06-13 18:44:45,530 | INFO | SUMMARY METRICS: {'input_words': 17, 'summary_words': 12, 'compression_ratio': 1.0}
+2026-06-13 18:44:45,533 | INFO | RUNNING AGENT: findings
+2026-06-13 18:44:45,533 | INFO | RUNNING AGENT: sentiment
+2026-06-13 18:44:45,533 | INFO | RUNNING AGENT: actions
+2026-06-13 18:44:45,533 | INFO | RUNNING AGENT: insights
+2026-06-13 18:45:37,600 | INFO | ==============Application AI Summarizer==============
+2026-06-13 18:45:37,602 | INFO | ==============Creating database tables==============
+2026-06-13 18:45:37,604 | INFO | ==============Application AI Summarizer==============
+2026-06-13 18:45:37,604 | INFO | ==============FastAPI app initialized==============
+2026-06-13 18:45:49,076 | INFO | INTENT SCORES: {'business_report': 2, 'meeting_notes': 2, 'research_report': 1}
+2026-06-13 18:45:49,076 | INFO | PRIMARY INTENT: business_report
+2026-06-13 18:45:49,076 | INFO | SELECTED INTENTS: ['business_report', 'meeting_notes', 'research_report']
+2026-06-13 18:45:49,076 | INFO | STRATEGY: {'sentiment', 'insights', 'risk', 'recommendation', 'summary', 'trend', 'findings', 'forecast', 'actions', 'root_cause'}
+2026-06-13 18:45:49,076 | INFO | STRATEGY: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'recommendation', 'forecast', 'root_cause']
+2026-06-13 18:45:49,076 | INFO | INPUT STRATEGY: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'recommendation', 'forecast', 'root_cause']
+2026-06-13 18:45:49,076 | INFO | SECTIONS: {'general': 'Business Report:\nRevenue increased by 22%.\n\nMeeting Notes:\nJohn should prepare report.\n\nResearch Report:\nCustomer satisfaction improved.'}
+2026-06-13 18:45:49,076 | INFO | Resolved execution order: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-13 18:45:49,076 | INFO | PARALLEL GROUPS: [['summary'], ['sentiment', 'insights', 'findings', 'actions'], ['risk', 'trend', 'root_cause'], ['forecast'], ['recommendation']]
+2026-06-13 18:45:51,824 | INFO | SUMMARY METRICS: {'input_words': 17, 'summary_words': 12, 'compression_ratio': 1.0}
+2026-06-13 18:45:51,824 | INFO | RUNNING AGENT: sentiment
+2026-06-13 18:45:51,825 | INFO | COMPLETED AGENT: sentiment in 1.2e-05s
+2026-06-13 18:45:51,825 | INFO | RUNNING AGENT: insights
+2026-06-13 18:45:51,825 | INFO | ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-13 18:45:51,825 | INFO | COMPLETED AGENT: insights in 0.000287s
+2026-06-13 18:45:51,825 | INFO | RUNNING AGENT: findings
+2026-06-13 18:45:51,826 | INFO | RUNNING AGENT: actions
+2026-06-13 18:45:51,826 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%']}
+2026-06-13 18:45:51,830 | INFO | FINDING TOOL OUTPUT: ['Research Report:']
+2026-06-13 18:45:51,830 | INFO | FINDING TOOL RETURN: ['Research Report:']
+2026-06-13 18:45:51,832 | INFO | COMPLETED AGENT: findings in 0.000893s
+2026-06-13 18:45:51,832 | INFO | ARTIFACTS: {'findings': ['Research Report:']}
+2026-06-13 18:45:51,832 | INFO | ACTION TOOL: ['John should prepare report.']
+2026-06-13 18:45:51,832 | INFO | COMPLETED AGENT: actions in 0.002266s
+2026-06-13 18:45:51,834 | INFO | ARTIFACTS: {'actions': ['John should prepare report.']}
+2026-06-13 18:45:51,834 | INFO | PARALLEL EXECUTION:[{'agent': 'sentiment', 'duration': 1.2e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.000287, 'artifacts': {'insights': ['Revenue changed by 22%']}}, {'agent': 'findings', 'duration': 0.000893, 'artifacts': {'findings': ['Research Report:']}}, {'agent': 'actions', 'duration': 0.002266, 'artifacts': {'actions': ['John should prepare report.']}}]
+2026-06-13 18:45:51,834 | INFO | GROUP 1 RESULTS: [{'agent': 'sentiment', 'duration': 1.2e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.000287, 'artifacts': {'insights': ['Revenue changed by 22%']}}, {'agent': 'findings', 'duration': 0.000893, 'artifacts': {'findings': ['Research Report:']}}, {'agent': 'actions', 'duration': 0.002266, 'artifacts': {'actions': ['John should prepare report.']}}]
+2026-06-13 18:45:51,834 | INFO | RUNNING AGENT: risk
+2026-06-13 18:45:51,834 | INFO | COMPLETED AGENT: risk in 1e-05s
+2026-06-13 18:45:51,834 | INFO | RUNNING AGENT: trend
+2026-06-13 18:45:51,834 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk']}
+2026-06-13 18:45:51,836 | INFO | RUNNING AGENT: root_cause
+2026-06-13 18:45:51,836 | INFO | TREND AGENT: ['22% increase detected']
+2026-06-13 18:45:51,836 | INFO | ROOT CAUSES: []
+2026-06-13 18:45:51,836 | INFO | FORMATTED TREND AGENT: ['22% increase detected']
+2026-06-13 18:45:51,836 | INFO | COMPLETED AGENT: root_cause in 0.000219s
+2026-06-13 18:45:51,836 | INFO | COMPLETED AGENT: trend in 0.000808s
+2026-06-13 18:45:51,836 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'root_causes': []}
+2026-06-13 18:45:51,836 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'trends': ['22% increase detected']}
+2026-06-13 18:45:51,836 | INFO | PARALLEL EXECUTION:[{'agent': 'risk', 'duration': 1e-05, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk']}}, {'agent': 'trend', 'duration': 0.000808, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'trends': ['22% increase detected']}}, {'agent': 'root_cause', 'duration': 0.000219, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'root_causes': []}}]
+2026-06-13 18:45:51,836 | INFO | GROUP 2 RESULTS: [{'agent': 'risk', 'duration': 1e-05, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk']}}, {'agent': 'trend', 'duration': 0.000808, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'trends': ['22% increase detected']}}, {'agent': 'root_cause', 'duration': 0.000219, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'root_causes': []}}]
+2026-06-13 18:45:51,838 | INFO | RUNNING AGENT: forecast
+2026-06-13 18:45:51,838 | INFO | FORECAST INPUT: ['22% increase detected']
+2026-06-13 18:45:51,838 | INFO | COMPLETED AGENT: forecast in 0.000266s
+2026-06-13 18:45:51,838 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.']}
+2026-06-13 18:45:51,839 | INFO | PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000266, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-13 18:45:51,839 | INFO | GROUP 3 RESULTS: [{'agent': 'forecast', 'duration': 0.000266, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-13 18:45:51,839 | INFO | RUNNING AGENT: recommendation
+2026-06-13 18:45:51,839 | INFO | COMPLETED AGENT: recommendation in 5e-06s
+2026-06-13 18:45:51,839 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}
+2026-06-13 18:45:51,839 | INFO | PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 5e-06, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}}]
+2026-06-13 18:45:51,839 | INFO | GROUP 4 RESULTS: [{'agent': 'recommendation', 'duration': 5e-06, 'artifacts': {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}}]
+2026-06-13 18:45:51,839 | INFO | ROUTE: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'recommendation', 'forecast', 'root_cause']
+2026-06-13 18:45:51,839 | INFO | AFTER ACTIONS: []
+2026-06-13 18:45:51,839 | INFO | AFTER INSIGHTS: []
+2026-06-13 18:45:51,841 | INFO | AFTER TRENDS: []
+2026-06-13 18:45:51,841 | INFO | EXECUTION METADATA: {'agents_executed': ['summary', 'sentiment', 'insights', 'findings', 'actions', 'risk', 'trend', 'root_cause', 'forecast', 'recommendation'], 'agent_count': 10, 'parallel_groups': [['summary'], ['sentiment', 'insights', 'findings', 'actions'], ['risk', 'trend', 'root_cause'], ['forecast'], ['recommendation']], 'timings': {'summary': 2.742013, 'sentiment': 1.2e-05, 'insights': 0.000287, 'findings': 0.000893, 'actions': 0.002266, 'risk': 1e-05, 'trend': 0.000808, 'root_cause': 0.000219, 'forecast': 0.000266, 'recommendation': 5e-06}, 'total_execution_time': 2.76111}
+2026-06-13 18:45:51,841 | INFO | ====FINAL ARTIFACTS:: {'sentiment': ['Positive'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'trends': ['22% increase detected'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}====
+2026-06-13 18:45:51,851 | INFO | ==============Application AI Summarizer==============
+2026-06-13 18:45:51,851 | INFO | ==============EXECUTION END==============
+2026-06-13 21:45:02,977 | INFO | ==============Application AI Summarizer==============
+2026-06-13 21:45:02,977 | INFO | ==============Creating database tables==============
+2026-06-13 21:45:02,988 | INFO | ==============Application AI Summarizer==============
+2026-06-13 21:45:02,990 | INFO | ==============FastAPI app initialized==============
+2026-06-13 21:45:56,371 | INFO | ==============Application AI Summarizer==============
+2026-06-13 21:45:56,371 | INFO | ==============Creating database tables==============
+2026-06-13 21:45:56,387 | INFO | ==============Application AI Summarizer==============
+2026-06-13 21:45:56,387 | INFO | ==============FastAPI app initialized==============
+2026-06-13 21:46:19,916 | INFO | ==============Application AI Summarizer==============
+2026-06-13 21:46:19,916 | INFO | ==============Serving home page==============
+2026-06-13 21:46:19,916 | INFO | ==============EXECUTION START==============
+2026-06-13 21:47:47,526 | INFO | ==============Application AI Summarizer==============
+2026-06-13 21:47:47,526 | INFO | ==============Creating database tables==============
+2026-06-13 21:47:47,529 | INFO | ==============Application AI Summarizer==============
+2026-06-13 21:47:47,529 | INFO | ==============FastAPI app initialized==============
+2026-06-13 21:47:47,540 | INFO | INTENT SCORES: {'business_report': 2, 'meeting_notes': 2, 'research_report': 1}
+2026-06-13 21:47:47,540 | INFO | PRIMARY INTENT: business_report
+2026-06-13 21:47:47,542 | INFO | SELECTED INTENTS: ['business_report', 'meeting_notes', 'research_report']
+2026-06-13 21:47:47,542 | INFO | STRATEGY: {'recommendation', 'sentiment', 'risk', 'actions', 'forecast', 'findings', 'root_cause', 'trend', 'summary', 'insights'}
+2026-06-13 21:47:47,542 | INFO | STRATEGY: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'recommendation', 'forecast', 'root_cause']
+2026-06-13 21:47:47,542 | INFO | INPUT STRATEGY: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'recommendation', 'forecast', 'root_cause']
+2026-06-13 21:47:47,543 | INFO | PARSED SECTIONS: {'business_report': 'Revenue increased by 22%.', 'meeting_notes': 'John should prepare report.', 'research_report': 'Customer satisfaction improved.'}
+2026-06-13 21:47:47,543 | INFO | SECTIONS: {'business_report': 'Revenue increased by 22%.', 'meeting_notes': 'John should prepare report.', 'research_report': 'Customer satisfaction improved.'}
+2026-06-13 21:47:47,543 | INFO | Resolved execution order: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-13 21:47:47,543 | INFO | PARALLEL GROUPS: [['summary'], ['sentiment', 'actions', 'findings', 'insights'], ['trend', 'risk', 'root_cause'], ['forecast'], ['recommendation']]
+2026-06-13 21:47:50,510 | INFO | SUMMARY METRICS: {'input_words': 17, 'summary_words': 12, 'compression_ratio': 1.0}
+2026-06-13 21:47:50,510 | INFO | RUNNING AGENT: sentiment
+2026-06-13 21:47:50,510 | INFO | COMPLETED AGENT: sentiment in 1.2e-05s
+2026-06-13 21:47:50,512 | INFO | RUNNING AGENT: actions
+2026-06-13 21:47:50,512 | INFO | ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-13 21:47:50,512 | INFO | RUNNING AGENT: findings
+2026-06-13 21:47:50,512 | INFO | RUNNING AGENT: insights
+2026-06-13 21:47:50,512 | INFO | FINDING TOOL OUTPUT: ['Research Report:']
+2026-06-13 21:47:50,512 | INFO | COMPLETED AGENT: insights in 0.000255s
+2026-06-13 21:47:50,512 | INFO | FINDING TOOL RETURN: ['Research Report:']
+2026-06-13 21:47:50,514 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%']}
+2026-06-13 21:47:50,514 | INFO | COMPLETED AGENT: findings in 0.001211s
+2026-06-13 21:47:50,514 | INFO | ARTIFACTS: {'findings': ['Research Report:']}
+2026-06-13 21:47:50,514 | INFO | ACTION TOOL: ['John should prepare report.']
+2026-06-13 21:47:50,514 | INFO | COMPLETED AGENT: actions in 0.003114s
+2026-06-13 21:47:50,514 | INFO | ARTIFACTS: {'actions': ['John should prepare report.']}
+2026-06-13 21:47:50,514 | INFO | PARALLEL EXECUTION:[{'agent': 'sentiment', 'duration': 1.2e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'actions', 'duration': 0.003114, 'artifacts': {'actions': ['John should prepare report.']}}, {'agent': 'findings', 'duration': 0.001211, 'artifacts': {'findings': ['Research Report:']}}, {'agent': 'insights', 'duration': 0.000255, 'artifacts': {'insights': ['Revenue changed by 22%']}}]
+2026-06-13 21:47:50,514 | INFO | GROUP 1 RESULTS: [{'agent': 'sentiment', 'duration': 1.2e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'actions', 'duration': 0.003114, 'artifacts': {'actions': ['John should prepare report.']}}, {'agent': 'findings', 'duration': 0.001211, 'artifacts': {'findings': ['Research Report:']}}, {'agent': 'insights', 'duration': 0.000255, 'artifacts': {'insights': ['Revenue changed by 22%']}}]
+2026-06-13 21:47:50,514 | INFO | RUNNING AGENT: trend
+2026-06-13 21:47:50,514 | INFO | RUNNING AGENT: risk
+2026-06-13 21:47:50,514 | INFO | TREND AGENT: ['22% increase detected']
+2026-06-13 21:47:50,518 | INFO | RUNNING AGENT: root_cause
+2026-06-13 21:47:50,518 | INFO | COMPLETED AGENT: risk in 1.3e-05s
+2026-06-13 21:47:50,518 | INFO | FORMATTED TREND AGENT: ['22% increase detected']
+2026-06-13 21:47:50,518 | INFO | ROOT CAUSES: []
+2026-06-13 21:47:50,518 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'risk': ['Moderate Risk']}
+2026-06-13 21:47:50,518 | INFO | COMPLETED AGENT: trend in 0.001104s
+2026-06-13 21:47:50,518 | INFO | COMPLETED AGENT: root_cause in 0.000359s
+2026-06-13 21:47:50,518 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'trends': ['22% increase detected']}
+2026-06-13 21:47:50,518 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'root_causes': []}
+2026-06-13 21:47:50,518 | INFO | PARALLEL EXECUTION:[{'agent': 'trend', 'duration': 0.001104, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'trends': ['22% increase detected']}}, {'agent': 'risk', 'duration': 1.3e-05, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000359, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'root_causes': []}}]
+2026-06-13 21:47:50,518 | INFO | GROUP 2 RESULTS: [{'agent': 'trend', 'duration': 0.001104, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'trends': ['22% increase detected']}}, {'agent': 'risk', 'duration': 1.3e-05, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000359, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'root_causes': []}}]
+2026-06-13 21:47:50,518 | INFO | RUNNING AGENT: forecast
+2026-06-13 21:47:50,518 | INFO | FORECAST INPUT: ['22% increase detected']
+2026-06-13 21:47:50,518 | INFO | COMPLETED AGENT: forecast in 0.000224s
+2026-06-13 21:47:50,518 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.']}
+2026-06-13 21:47:50,518 | INFO | PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000224, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-13 21:47:50,518 | INFO | GROUP 3 RESULTS: [{'agent': 'forecast', 'duration': 0.000224, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-13 21:47:50,518 | INFO | RUNNING AGENT: recommendation
+2026-06-13 21:47:50,518 | INFO | COMPLETED AGENT: recommendation in 5e-06s
+2026-06-13 21:47:50,518 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}
+2026-06-13 21:47:50,518 | INFO | PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 5e-06, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}}]
+2026-06-13 21:47:50,523 | INFO | GROUP 4 RESULTS: [{'agent': 'recommendation', 'duration': 5e-06, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}}]
+2026-06-13 21:47:50,523 | INFO | ROUTE: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'recommendation', 'forecast', 'root_cause']
+2026-06-13 21:47:50,523 | INFO | AFTER ACTIONS: []
+2026-06-13 21:47:50,523 | INFO | AFTER INSIGHTS: []
+2026-06-13 21:47:50,523 | INFO | AFTER TRENDS: []
+2026-06-13 21:47:50,523 | INFO | EXECUTION METADATA: {'agents_executed': ['summary', 'sentiment', 'actions', 'findings', 'insights', 'trend', 'risk', 'root_cause', 'forecast', 'recommendation'], 'agent_count': 10, 'parallel_groups': [['summary'], ['sentiment', 'actions', 'findings', 'insights'], ['trend', 'risk', 'root_cause'], ['forecast'], ['recommendation']], 'timings': {'summary': 2.966578, 'sentiment': 1.2e-05, 'actions': 0.003114, 'findings': 0.001211, 'insights': 0.000255, 'trend': 0.001104, 'risk': 1.3e-05, 'root_cause': 0.000359, 'forecast': 0.000224, 'recommendation': 5e-06}, 'total_execution_time': 2.980873}
+2026-06-13 21:47:50,523 | INFO | ====FINAL ARTIFACTS:: {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'findings': ['Research Report:'], 'insights': ['Revenue changed by 22%'], 'trends': ['22% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': [], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}====
+2026-06-13 21:47:50,538 | INFO | ==============Application AI Summarizer==============
+2026-06-13 21:47:50,538 | INFO | ==============EXECUTION END==============
+2026-06-13 22:30:33,748 | INFO | ==============Application AI Summarizer==============
+2026-06-13 22:30:33,748 | INFO | ==============Creating database tables==============
+2026-06-13 22:30:33,748 | INFO | ==============Application AI Summarizer==============
+2026-06-13 22:30:33,748 | INFO | ==============FastAPI app initialized==============
+2026-06-13 22:35:53,376 | INFO | ==============Application AI Summarizer==============
+2026-06-13 22:35:53,376 | INFO | ==============Creating database tables==============
+2026-06-13 22:35:53,376 | INFO | ==============Application AI Summarizer==============
+2026-06-13 22:35:53,376 | INFO | ==============FastAPI app initialized==============
+2026-06-13 22:36:00,249 | INFO | ==============Application AI Summarizer==============
+2026-06-13 22:36:00,249 | INFO | ==============Creating database tables==============
+2026-06-13 22:36:00,250 | INFO | ==============Application AI Summarizer==============
+2026-06-13 22:36:00,250 | INFO | ==============FastAPI app initialized==============
+2026-06-13 22:36:28,630 | INFO | ==============Application AI Summarizer==============
+2026-06-13 22:36:28,630 | INFO | ==============Serving home page==============
+2026-06-13 22:36:28,630 | INFO | ==============EXECUTION START==============
+2026-06-14 06:50:38,282 | INFO | ==============Application AI Summarizer==============
+2026-06-14 06:50:38,283 | INFO | ==============Creating database tables==============
+2026-06-14 06:50:38,283 | INFO | ==============Application AI Summarizer==============
+2026-06-14 06:50:38,297 | INFO | ==============FastAPI app initialized==============
+2026-06-14 06:58:34,441 | INFO | ==============Application AI Summarizer==============
+2026-06-14 06:58:34,441 | INFO | ==============Creating database tables==============
+2026-06-14 06:58:34,446 | INFO | ==============Application AI Summarizer==============
+2026-06-14 06:58:34,446 | INFO | ==============FastAPI app initialized==============
+2026-06-14 06:59:14,962 | INFO | ==============Application AI Summarizer==============
+2026-06-14 06:59:14,965 | INFO | ==============Creating database tables==============
+2026-06-14 06:59:14,969 | INFO | ==============Application AI Summarizer==============
+2026-06-14 06:59:14,969 | INFO | ==============FastAPI app initialized==============
+2026-06-14 07:00:11,936 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:00:11,939 | INFO | ==============Serving home page==============
+2026-06-14 07:00:11,940 | INFO | ==============EXECUTION START==============
+2026-06-14 07:00:20,979 | INFO | INTENT SCORES: {'business_report': 2, 'meeting_notes': 2, 'research_report': 1}
+2026-06-14 07:00:20,979 | INFO | PRIMARY INTENT: business_report
+2026-06-14 07:00:20,979 | INFO | SELECTED INTENTS: ['business_report', 'meeting_notes', 'research_report']
+2026-06-14 07:00:20,979 | INFO | STRATEGY: {'forecast', 'risk', 'root_cause', 'insights', 'summary', 'sentiment', 'trend', 'findings', 'recommendation', 'actions'}
+2026-06-14 07:00:20,979 | INFO | STRATEGY: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:00:20,981 | INFO | INPUT STRATEGY: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:00:20,981 | INFO | PARSED SECTIONS: {'business_report': 'Revenue increased by 22%.', 'meeting_notes': 'John should prepare report.', 'research_report': 'Customer satisfaction improved.'}
+2026-06-14 07:00:20,981 | INFO | SECTIONS: {'business_report': 'Revenue increased by 22%.', 'meeting_notes': 'John should prepare report.', 'research_report': 'Customer satisfaction improved.'}
+2026-06-14 07:00:20,981 | INFO | Resolved execution order: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:00:20,981 | INFO | PARALLEL GROUPS: [['summary'], ['insights', 'sentiment', 'findings', 'actions'], ['risk', 'root_cause', 'trend'], ['forecast'], ['recommendation']]
+2026-06-14 07:00:20,981 | INFO | SUMMARY INPUT:
+Revenue increased by 22%.
+Customer satisfaction improved.
+John should prepare report.
+2026-06-14 07:00:24,474 | INFO | RUNNING AGENT: insights
+2026-06-14 07:00:24,476 | INFO | COMPLETED AGENT: insights in 0.000419s
+2026-06-14 07:00:24,476 | INFO | RUNNING AGENT: sentiment
+2026-06-14 07:00:24,476 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%']}
+2026-06-14 07:00:24,476 | INFO | COMPLETED AGENT: sentiment in 1.4e-05s
+2026-06-14 07:00:24,476 | INFO | RUNNING AGENT: findings
+2026-06-14 07:00:24,476 | INFO | RUNNING AGENT: actions
+2026-06-14 07:00:24,478 | INFO | ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 07:00:24,478 | INFO | FINDING TOOL OUTPUT: ['Research Report:']
+2026-06-14 07:00:24,479 | INFO | FINDING TOOL RETURN: ['Research Report:']
+2026-06-14 07:00:24,479 | INFO | COMPLETED AGENT: findings in 0.001091s
+2026-06-14 07:00:24,479 | INFO | ARTIFACTS: {'findings': ['Research Report:']}
+2026-06-14 07:00:24,479 | INFO | ACTION TOOL: ['John should prepare report.']
+2026-06-14 07:00:24,479 | INFO | COMPLETED AGENT: actions in 0.002815s
+2026-06-14 07:00:24,481 | INFO | ARTIFACTS: {'actions': ['John should prepare report.']}
+2026-06-14 07:00:24,481 | INFO | PARALLEL EXECUTION:[{'agent': 'insights', 'duration': 0.000419, 'artifacts': {'insights': ['Revenue changed by 22%']}}, {'agent': 'sentiment', 'duration': 1.4e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'findings', 'duration': 0.001091, 'artifacts': {'findings': ['Research Report:']}}, {'agent': 'actions', 'duration': 0.002815, 'artifacts': {'actions': ['John should prepare report.']}}]
+2026-06-14 07:00:24,481 | INFO | GROUP 1 RESULTS: [{'agent': 'insights', 'duration': 0.000419, 'artifacts': {'insights': ['Revenue changed by 22%']}}, {'agent': 'sentiment', 'duration': 1.4e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'findings', 'duration': 0.001091, 'artifacts': {'findings': ['Research Report:']}}, {'agent': 'actions', 'duration': 0.002815, 'artifacts': {'actions': ['John should prepare report.']}}]
+2026-06-14 07:00:24,481 | INFO | RUNNING AGENT: risk
+2026-06-14 07:00:24,481 | INFO | COMPLETED AGENT: risk in 9e-06s
+2026-06-14 07:00:24,481 | INFO | RUNNING AGENT: root_cause
+2026-06-14 07:00:24,481 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk']}
+2026-06-14 07:00:24,483 | INFO | RUNNING AGENT: trend
+2026-06-14 07:00:24,483 | INFO | ROOT CAUSES: []
+2026-06-14 07:00:24,483 | INFO | TREND AGENT: ['22% increase detected']
+2026-06-14 07:00:24,483 | INFO | COMPLETED AGENT: root_cause in 0.000551s
+2026-06-14 07:00:24,483 | INFO | FORMATTED TREND AGENT: ['22% increase detected']
+2026-06-14 07:00:24,483 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'root_causes': []}
+2026-06-14 07:00:24,483 | INFO | COMPLETED AGENT: trend in 0.000557s
+2026-06-14 07:00:24,483 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'trends': ['22% increase detected']}
+2026-06-14 07:00:24,483 | INFO | PARALLEL EXECUTION:[{'agent': 'risk', 'duration': 9e-06, 'artifacts': {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000551, 'artifacts': {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'root_causes': []}}, {'agent': 'trend', 'duration': 0.000557, 'artifacts': {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'trends': ['22% increase detected']}}]
+2026-06-14 07:00:24,483 | INFO | GROUP 2 RESULTS: [{'agent': 'risk', 'duration': 9e-06, 'artifacts': {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000551, 'artifacts': {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'root_causes': []}}, {'agent': 'trend', 'duration': 0.000557, 'artifacts': {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'trends': ['22% increase detected']}}]
+2026-06-14 07:00:24,485 | INFO | RUNNING AGENT: forecast
+2026-06-14 07:00:24,485 | INFO | FORECAST INPUT: ['22% increase detected']
+2026-06-14 07:00:24,485 | INFO | COMPLETED AGENT: forecast in 0.000223s
+2026-06-14 07:00:24,485 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.']}
+2026-06-14 07:00:24,485 | INFO | PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000223, 'artifacts': {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 07:00:24,485 | INFO | GROUP 3 RESULTS: [{'agent': 'forecast', 'duration': 0.000223, 'artifacts': {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 07:00:24,485 | INFO | RUNNING AGENT: recommendation
+2026-06-14 07:00:24,487 | INFO | COMPLETED AGENT: recommendation in 4e-06s
+2026-06-14 07:00:24,487 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}
+2026-06-14 07:00:24,487 | INFO | PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 4e-06, 'artifacts': {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}}]
+2026-06-14 07:00:24,487 | INFO | GROUP 4 RESULTS: [{'agent': 'recommendation', 'duration': 4e-06, 'artifacts': {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}}]
+2026-06-14 07:00:24,487 | INFO | ROUTE: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:00:24,487 | INFO | AFTER ACTIONS: []
+2026-06-14 07:00:24,487 | INFO | AFTER INSIGHTS: []
+2026-06-14 07:00:24,487 | INFO | AFTER TRENDS: []
+2026-06-14 07:00:24,487 | INFO | EXECUTION METADATA: {'agents_executed': ['summary', 'insights', 'sentiment', 'findings', 'actions', 'risk', 'root_cause', 'trend', 'forecast', 'recommendation'], 'agent_count': 10, 'parallel_groups': [['summary'], ['insights', 'sentiment', 'findings', 'actions'], ['risk', 'root_cause', 'trend'], ['forecast'], ['recommendation']], 'timings': {'summary': 3.492895, 'insights': 0.000419, 'sentiment': 1.4e-05, 'findings': 0.001091, 'actions': 0.002815, 'risk': 9e-06, 'root_cause': 0.000551, 'trend': 0.000557, 'forecast': 0.000223, 'recommendation': 4e-06}, 'total_execution_time': 3.508868}
+2026-06-14 07:00:24,487 | INFO | ====FINAL ARTIFACTS:: {'insights': ['Revenue changed by 22%'], 'sentiment': ['Positive'], 'findings': ['Research Report:'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}====
+2026-06-14 07:00:24,499 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:00:24,499 | INFO | ==============EXECUTION END==============
+2026-06-14 07:05:59,824 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:05:59,824 | INFO | ==============Creating database tables==============
+2026-06-14 07:05:59,844 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:05:59,844 | INFO | ==============FastAPI app initialized==============
+2026-06-14 07:06:20,475 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:06:20,477 | INFO | ==============Serving home page==============
+2026-06-14 07:06:20,477 | INFO | ==============EXECUTION START==============
+2026-06-14 07:06:30,325 | INFO | INTENT SCORES: {'business_report': 2, 'meeting_notes': 2, 'research_report': 1}
+2026-06-14 07:06:30,325 | INFO | PRIMARY INTENT: business_report
+2026-06-14 07:06:30,325 | INFO | SELECTED INTENTS: ['business_report', 'meeting_notes', 'research_report']
+2026-06-14 07:06:30,325 | INFO | STRATEGY: {'sentiment', 'risk', 'actions', 'forecast', 'findings', 'recommendation', 'summary', 'root_cause', 'trend', 'insights'}
+2026-06-14 07:06:30,325 | INFO | STRATEGY: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 07:06:30,325 | INFO | INPUT STRATEGY: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 07:06:30,325 | INFO | PARSED SECTIONS: {'business_report': 'Revenue increased by 22%.', 'meeting_notes': 'John should prepare report.', 'research_report': 'Customer satisfaction improved.'}
+2026-06-14 07:06:30,325 | INFO | SECTIONS: {'business_report': 'Revenue increased by 22%.', 'meeting_notes': 'John should prepare report.', 'research_report': 'Customer satisfaction improved.'}
+2026-06-14 07:06:30,325 | INFO | Resolved execution order: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 07:06:30,325 | INFO | PARALLEL GROUPS: [['summary'], ['sentiment', 'actions', 'insights', 'findings'], ['risk', 'root_cause', 'trend'], ['forecast'], ['recommendation']]
+2026-06-14 07:06:30,325 | INFO | SUMMARY INPUT:
+Revenue increased by 22%.
+Customer satisfaction improved.
+John should prepare report.
+2026-06-14 07:06:30,325 | INFO | SUMMARY WORDS: 11
+2026-06-14 07:06:30,325 | INFO | RUNNING AGENT: sentiment
+2026-06-14 07:06:30,325 | INFO | COMPLETED AGENT: sentiment in 1e-05s
+2026-06-14 07:06:30,325 | INFO | RUNNING AGENT: actions
+2026-06-14 07:06:30,325 | INFO | ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 07:06:30,325 | INFO | RUNNING AGENT: insights
+2026-06-14 07:06:30,325 | INFO | RUNNING AGENT: findings
+2026-06-14 07:06:30,325 | INFO | FINDING TOOL OUTPUT: ['Research Report:']
+2026-06-14 07:06:30,325 | INFO | COMPLETED AGENT: insights in 0.000268s
+2026-06-14 07:06:30,332 | INFO | FINDING TOOL RETURN: ['Research Report:']
+2026-06-14 07:06:30,332 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%']}
+2026-06-14 07:06:30,332 | INFO | COMPLETED AGENT: findings in 0.001748s
+2026-06-14 07:06:30,332 | INFO | ARTIFACTS: {'findings': ['Research Report:']}
+2026-06-14 07:06:30,332 | INFO | ACTION TOOL: ['John should prepare report.']
+2026-06-14 07:06:30,332 | INFO | COMPLETED AGENT: actions in 0.004819s
+2026-06-14 07:06:30,332 | INFO | ARTIFACTS: {'actions': ['John should prepare report.']}
+2026-06-14 07:06:30,332 | INFO | PARALLEL EXECUTION:[{'agent': 'sentiment', 'duration': 1e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'actions', 'duration': 0.004819, 'artifacts': {'actions': ['John should prepare report.']}}, {'agent': 'insights', 'duration': 0.000268, 'artifacts': {'insights': ['Revenue changed by 22%']}}, {'agent': 'findings', 'duration': 0.001748, 'artifacts': {'findings': ['Research Report:']}}]
+2026-06-14 07:06:30,332 | INFO | GROUP 1 RESULTS: [{'agent': 'sentiment', 'duration': 1e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'actions', 'duration': 0.004819, 'artifacts': {'actions': ['John should prepare report.']}}, {'agent': 'insights', 'duration': 0.000268, 'artifacts': {'insights': ['Revenue changed by 22%']}}, {'agent': 'findings', 'duration': 0.001748, 'artifacts': {'findings': ['Research Report:']}}]
+2026-06-14 07:06:30,332 | INFO | RUNNING AGENT: risk
+2026-06-14 07:06:30,332 | INFO | COMPLETED AGENT: risk in 1.3e-05s
+2026-06-14 07:06:30,332 | INFO | RUNNING AGENT: root_cause
+2026-06-14 07:06:30,332 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'risk': ['Moderate Risk']}
+2026-06-14 07:06:30,332 | INFO | RUNNING AGENT: trend
+2026-06-14 07:06:30,332 | INFO | ROOT CAUSES: []
+2026-06-14 07:06:30,338 | INFO | TREND AGENT: ['22% increase detected']
+2026-06-14 07:06:30,338 | INFO | COMPLETED AGENT: root_cause in 0.000538s
+2026-06-14 07:06:30,338 | INFO | FORMATTED TREND AGENT: ['22% increase detected']
+2026-06-14 07:06:30,338 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'root_causes': []}
+2026-06-14 07:06:30,339 | INFO | COMPLETED AGENT: trend in 0.001115s
+2026-06-14 07:06:30,339 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'trends': ['22% increase detected']}
+2026-06-14 07:06:30,339 | INFO | PARALLEL EXECUTION:[{'agent': 'risk', 'duration': 1.3e-05, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000538, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'root_causes': []}}, {'agent': 'trend', 'duration': 0.001115, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'trends': ['22% increase detected']}}]
+2026-06-14 07:06:30,339 | INFO | GROUP 2 RESULTS: [{'agent': 'risk', 'duration': 1.3e-05, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.000538, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'root_causes': []}}, {'agent': 'trend', 'duration': 0.001115, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'trends': ['22% increase detected']}}]
+2026-06-14 07:06:30,339 | INFO | RUNNING AGENT: forecast
+2026-06-14 07:06:30,339 | INFO | FORECAST INPUT: ['22% increase detected']
+2026-06-14 07:06:30,339 | INFO | COMPLETED AGENT: forecast in 0.000501s
+2026-06-14 07:06:30,339 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.']}
+2026-06-14 07:06:30,339 | INFO | PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000501, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 07:06:30,339 | INFO | GROUP 3 RESULTS: [{'agent': 'forecast', 'duration': 0.000501, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 07:06:30,339 | INFO | RUNNING AGENT: recommendation
+2026-06-14 07:06:30,343 | INFO | COMPLETED AGENT: recommendation in 3e-06s
+2026-06-14 07:06:30,343 | INFO | ARTIFACTS: {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}
+2026-06-14 07:06:30,343 | INFO | PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 3e-06, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}}]
+2026-06-14 07:06:30,343 | INFO | GROUP 4 RESULTS: [{'agent': 'recommendation', 'duration': 3e-06, 'artifacts': {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}}]
+2026-06-14 07:06:30,343 | INFO | ROUTE: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-14 07:06:30,343 | INFO | AFTER ACTIONS: []
+2026-06-14 07:06:30,343 | INFO | AFTER INSIGHTS: []
+2026-06-14 07:06:30,343 | INFO | AFTER TRENDS: []
+2026-06-14 07:06:30,343 | INFO | EXECUTION METADATA: {'agents_executed': ['summary', 'sentiment', 'actions', 'insights', 'findings', 'risk', 'root_cause', 'trend', 'forecast', 'recommendation'], 'agent_count': 10, 'parallel_groups': [['summary'], ['sentiment', 'actions', 'insights', 'findings'], ['risk', 'root_cause', 'trend'], ['forecast'], ['recommendation']], 'timings': {'summary': 0.000309, 'sentiment': 1e-05, 'actions': 0.004819, 'insights': 0.000268, 'findings': 0.001748, 'risk': 1.3e-05, 'root_cause': 0.000538, 'trend': 0.001115, 'forecast': 0.000501, 'recommendation': 3e-06}, 'total_execution_time': 0.018467}
+2026-06-14 07:06:30,343 | INFO | ====FINAL ARTIFACTS:: {'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}====
+2026-06-14 07:06:30,351 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:06:30,351 | INFO | ==============EXECUTION END==============
+2026-06-14 07:09:34,717 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:09:34,717 | INFO | ==============Creating database tables==============
+2026-06-14 07:09:34,717 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:09:34,717 | INFO | ==============FastAPI app initialized==============
+2026-06-14 07:09:52,124 | INFO | INTENT SCORES: {'business_report': 2, 'meeting_notes': 2, 'research_report': 1}
+2026-06-14 07:09:52,124 | INFO | PRIMARY INTENT: business_report
+2026-06-14 07:09:52,124 | INFO | SELECTED INTENTS: ['business_report', 'meeting_notes', 'research_report']
+2026-06-14 07:09:52,124 | INFO | STRATEGY: {'forecast', 'risk', 'insights', 'root_cause', 'findings', 'recommendation', 'trend', 'sentiment', 'actions', 'summary'}
+2026-06-14 07:09:52,124 | INFO | STRATEGY: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:09:52,124 | INFO | INPUT STRATEGY: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:09:52,124 | INFO | PARSED SECTIONS: {'business_report': 'Revenue increased by 22%.', 'meeting_notes': 'John should prepare report.', 'research_report': 'Customer satisfaction improved.'}
+2026-06-14 07:09:52,124 | INFO | SECTIONS: {'business_report': 'Revenue increased by 22%.', 'meeting_notes': 'John should prepare report.', 'research_report': 'Customer satisfaction improved.'}
+2026-06-14 07:09:52,124 | INFO | Resolved execution order: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:09:52,124 | INFO | PARALLEL GROUPS: [['summary'], ['insights', 'findings', 'sentiment', 'actions'], ['risk', 'root_cause', 'trend'], ['forecast'], ['recommendation']]
+2026-06-14 07:09:52,124 | INFO | SUMMARY INPUT:
+Revenue increased by 22%.
+Customer satisfaction improved.
+John should prepare report.
+2026-06-14 07:09:52,124 | INFO | SUMMARY WORDS: 11
+2026-06-14 07:09:52,124 | INFO | RUNNING AGENT: insights
+2026-06-14 07:09:52,124 | INFO | COMPLETED AGENT: insights in 0.000254s
+2026-06-14 07:09:52,124 | INFO | RUNNING AGENT: findings
+2026-06-14 07:09:52,124 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%']}
+2026-06-14 07:09:52,124 | INFO | RUNNING AGENT: sentiment
+2026-06-14 07:09:52,124 | INFO | FINDING TOOL OUTPUT: ['Research Report:']
+2026-06-14 07:09:52,124 | INFO | RUNNING AGENT: actions
+2026-06-14 07:09:52,124 | INFO | COMPLETED AGENT: sentiment in 9e-06s
+2026-06-14 07:09:52,124 | INFO | FINDING TOOL RETURN: ['Research Report:']
+2026-06-14 07:09:52,124 | INFO | ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-14 07:09:52,124 | INFO | COMPLETED AGENT: findings in 0.001509s
+2026-06-14 07:09:52,124 | INFO | ARTIFACTS: {'findings': ['Research Report:']}
+2026-06-14 07:09:52,124 | INFO | ACTION TOOL: ['John should prepare report.']
+2026-06-14 07:09:52,124 | INFO | COMPLETED AGENT: actions in 0.003069s
+2026-06-14 07:09:52,124 | INFO | ARTIFACTS: {'actions': ['John should prepare report.']}
+2026-06-14 07:09:52,124 | INFO | PARALLEL EXECUTION:[{'agent': 'insights', 'duration': 0.000254, 'artifacts': {'insights': ['Revenue changed by 22%']}}, {'agent': 'findings', 'duration': 0.001509, 'artifacts': {'findings': ['Research Report:']}}, {'agent': 'sentiment', 'duration': 9e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'actions', 'duration': 0.003069, 'artifacts': {'actions': ['John should prepare report.']}}]
+2026-06-14 07:09:52,124 | INFO | GROUP 1 RESULTS: [{'agent': 'insights', 'duration': 0.000254, 'artifacts': {'insights': ['Revenue changed by 22%']}}, {'agent': 'findings', 'duration': 0.001509, 'artifacts': {'findings': ['Research Report:']}}, {'agent': 'sentiment', 'duration': 9e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'actions', 'duration': 0.003069, 'artifacts': {'actions': ['John should prepare report.']}}]
+2026-06-14 07:09:52,140 | INFO | RUNNING AGENT: risk
+2026-06-14 07:09:52,140 | INFO | COMPLETED AGENT: risk in 1.2e-05s
+2026-06-14 07:09:52,140 | INFO | RUNNING AGENT: root_cause
+2026-06-14 07:09:52,140 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk']}
+2026-06-14 07:09:52,140 | INFO | RUNNING AGENT: trend
+2026-06-14 07:09:52,142 | INFO | ROOT CAUSES: []
+2026-06-14 07:09:52,142 | INFO | TREND AGENT: ['22% increase detected']
+2026-06-14 07:09:52,142 | INFO | COMPLETED AGENT: root_cause in 0.0012s
+2026-06-14 07:09:52,142 | INFO | FORMATTED TREND AGENT: ['22% increase detected']
+2026-06-14 07:09:52,142 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'root_causes': []}
+2026-06-14 07:09:52,142 | INFO | COMPLETED AGENT: trend in 0.001516s
+2026-06-14 07:09:52,142 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'trends': ['22% increase detected']}
+2026-06-14 07:09:52,142 | INFO | PARALLEL EXECUTION:[{'agent': 'risk', 'duration': 1.2e-05, 'artifacts': {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.0012, 'artifacts': {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'root_causes': []}}, {'agent': 'trend', 'duration': 0.001516, 'artifacts': {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'trends': ['22% increase detected']}}]
+2026-06-14 07:09:52,142 | INFO | GROUP 2 RESULTS: [{'agent': 'risk', 'duration': 1.2e-05, 'artifacts': {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk']}}, {'agent': 'root_cause', 'duration': 0.0012, 'artifacts': {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'root_causes': []}}, {'agent': 'trend', 'duration': 0.001516, 'artifacts': {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'trends': ['22% increase detected']}}]
+2026-06-14 07:09:52,142 | INFO | RUNNING AGENT: forecast
+2026-06-14 07:09:52,142 | INFO | FORECAST INPUT: ['22% increase detected']
+2026-06-14 07:09:52,142 | INFO | COMPLETED AGENT: forecast in 0.00074s
+2026-06-14 07:09:52,142 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.']}
+2026-06-14 07:09:52,142 | INFO | PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.00074, 'artifacts': {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 07:09:52,142 | INFO | GROUP 3 RESULTS: [{'agent': 'forecast', 'duration': 0.00074, 'artifacts': {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.']}}]
+2026-06-14 07:09:52,142 | INFO | RUNNING AGENT: recommendation
+2026-06-14 07:09:52,142 | INFO | COMPLETED AGENT: recommendation in 6e-06s
+2026-06-14 07:09:52,142 | INFO | ARTIFACTS: {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}
+2026-06-14 07:09:52,142 | INFO | PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 6e-06, 'artifacts': {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}}]
+2026-06-14 07:09:52,142 | INFO | GROUP 4 RESULTS: [{'agent': 'recommendation', 'duration': 6e-06, 'artifacts': {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}}]
+2026-06-14 07:09:52,142 | INFO | ROUTE: ['summary', 'actions', 'insights', 'findings', 'trend', 'sentiment', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-14 07:09:52,142 | INFO | AFTER ACTIONS: []
+2026-06-14 07:09:52,142 | INFO | AFTER INSIGHTS: []
+2026-06-14 07:09:52,142 | INFO | AFTER TRENDS: []
+2026-06-14 07:09:52,142 | INFO | EXECUTION METADATA: {'agents_executed': ['summary', 'insights', 'findings', 'sentiment', 'actions', 'risk', 'root_cause', 'trend', 'forecast', 'recommendation'], 'agent_count': 10, 'parallel_groups': [['summary'], ['insights', 'findings', 'sentiment', 'actions'], ['risk', 'root_cause', 'trend'], ['forecast'], ['recommendation']], 'timings': {'summary': 0.000496, 'insights': 0.000254, 'findings': 0.001509, 'sentiment': 9e-06, 'actions': 0.003069, 'risk': 1.2e-05, 'root_cause': 0.0012, 'trend': 0.001516, 'forecast': 0.00074, 'recommendation': 6e-06}, 'total_execution_time': 0.021925}
+2026-06-14 07:09:52,142 | INFO | ====FINAL ARTIFACTS:: {'insights': ['Revenue changed by 22%'], 'findings': ['Research Report:'], 'sentiment': ['Positive'], 'actions': ['John should prepare report.'], 'risk': ['Moderate Risk'], 'root_causes': [], 'trends': ['22% increase detected'], 'forecasts': ['Growth trend of 22% may continue.'], 'recommendations': ['Increase investment in growth channels.']}====
+2026-06-14 07:09:52,157 | INFO | ==============Application AI Summarizer==============
+2026-06-14 07:09:52,157 | INFO | ==============EXECUTION END==============

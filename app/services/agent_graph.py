@@ -67,7 +67,13 @@ def run_graph(state):
         intent_info,
         strategy
     )
-
+    
+    state["sections"] = (
+        plan.get(
+            "sections",
+            {}
+        )
+    )
     # --------------------------------------------------
     # Dependency Resolution
     # --------------------------------------------------
