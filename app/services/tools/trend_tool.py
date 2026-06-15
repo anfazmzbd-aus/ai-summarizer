@@ -1,5 +1,5 @@
 import re
-
+from app.services.logging.logger import logger
 
 def detect_trends(insights):
 
@@ -32,5 +32,5 @@ def detect_trends(insights):
                 trends.append(
                     f"{abs(value)}% decrease detected"
                 )
-    print(f"TREND TOOL Trends: {trends}")
+    logger.info(f"****TREND TOOL Trends: {trends}")
     return trends

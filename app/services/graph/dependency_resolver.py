@@ -6,42 +6,50 @@ def resolve_execution_order(
 ):
 
     resolved = []
+    visiting = set()
     visited = set()
-    
-    def get_dependencies(
-        agent_name,
-        registry
-    ):
-        return registry[
-            agent_name
-        ].get(
-            "depends_on",
-            []
-        )
 
-    def visit(agent_name):
+    def visit(agent):
 
-        if agent_name in visited:
+        if agent in visited:
             return
 
-        visited.add(agent_name)
+        if agent in visiting:
+            raise Exception(
+                f"Circular dependency detected at {agent}"
+            )
 
-        agent_info = registry.get(
-            agent_name,
+        visiting.add(agent)
+
+        deps = registry.get(
+            agent,
             {}
-        )
-
-        dependencies = agent_info.get(
+        ).get(
             "depends_on",
             []
         )
 
-        for dependency in dependencies:
-            visit(dependency)
+        for dep in deps:
 
-        resolved.append(agent_name)
+            if dep not in registry:
+
+                raise Exception(
+                    f"Unknown dependency: {dep}"
+                )
+
+            visit(dep)
+
+        visiting.remove(agent)
+        visited.add(agent)
+        resolved.append(agent)
 
     for agent in selected_agents:
+
         visit(agent)
-    logger.info(f"****Resolved execution order: {resolved}")
+
+    logger.info(
+        f"****Resolved execution order: {resolved}"
+    )
+
     return resolved
+

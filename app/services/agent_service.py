@@ -44,13 +44,13 @@ def run_agents(
         "context": {}   
     }
 
-    print(
-        "\nREGISTERED AGENTS:",
-        list(AGENT_REGISTRY.keys())
+    logger.info(
+        f"\n****REGISTERED AGENTS: "
+        f"{list(AGENT_REGISTRY.keys())}"
     )
     result = run_graph(state)
 
-    logger.info(f"====FINAL ARTIFACTS:====")
+    logger.info(f"****FINAL ARTIFACTS: ")
     logger.info(f"{result.get('artifacts', {})}")
     
     return {

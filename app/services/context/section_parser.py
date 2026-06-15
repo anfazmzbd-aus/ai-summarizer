@@ -80,7 +80,7 @@ def split_sections(text):
 
     return {
 
-        key: " ".join(
+        key: "\n".join(
             value
         )
 

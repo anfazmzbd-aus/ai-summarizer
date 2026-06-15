@@ -5,7 +5,9 @@ from app.services.logging.logger import logger
 @register_agent(
     "root_cause",
     depends_on=[
-        "insights"
+        "insights",
+        "trend",
+        "risk"
     ],
     produces=[
         "root_causes"
@@ -57,11 +59,11 @@ def root_cause_agent(state):
         )
     )
 
-    print(
-        "\nROOT CAUSE INPUT:",
-        insights,
-        trends,
-        risk
+    logger.info(
+        f"****ROOT CAUSE INPUT: "
+        f"{insights}, "
+        f"{trends}, "
+        f"{risk}"
     )
 
     root_causes = root_cause_tool(

@@ -25,3 +25,30 @@ def execute_parallel(tasks):
         f"{results}"
     )
     return results
+
+def reorder_results(results, execution_order):
+
+    index_map = {
+        name: i
+        for i, name in enumerate(execution_order)
+    }
+
+    return sorted(
+        results,
+        key=lambda r: index_map.get(r["agent"], 999)
+    )
+
+def stabilize_parallel_order(results, group_order):
+
+    index_map = {
+        agent: i
+        for i, agent in enumerate(group_order)
+    }
+
+    return sorted(
+        results,
+        key=lambda r: index_map.get(
+            r["agent"],
+            999
+        )
+    )

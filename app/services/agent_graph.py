@@ -1,40 +1,15 @@
 import time
-
-from app.services.classifiers.intent_classifier import (
-    classify_intent
-)
-
-from app.services.strategies.strategy_builder import (
-    build_strategy
-)
-
-from app.services.routers.semantic_router import (
-    semantic_router
-)
-
-from app.services.registry.agent_registry import (
-    AGENT_REGISTRY
-)
-
-from app.services.graph.dependency_resolver import (
-    resolve_execution_order
-)
-
-from app.services.graph.parallel_groups import (
-    build_parallel_groups
-)
-
-from app.services.graph.parallel_executor import (
-    execute_parallel
-)
-
-from app.services.graph.agent_runner import (
-    run_agent
-)
+from app.services.classifiers.intent_classifier import classify_intent
+from app.services.strategies.strategy_builder import build_strategy
+from app.services.routers.semantic_router import semantic_router
+from app.services.registry.agent_registry import AGENT_REGISTRY
+from app.services.graph.dependency_resolver import resolve_execution_order
+from app.services.graph.parallel_groups import build_parallel_groups
+from app.services.graph.parallel_executor import execute_parallel, stabilize_parallel_order
+from app.services.graph.agent_runner import run_agent
 #import logging
 from app.services.logging.logger import logger
-
-#logger = logging.getLogger(__name__)
+from app.services.graph.graph_validator import validate_execution_graph
 
 def run_graph(state):
     graph_start = time.perf_counter()
@@ -55,7 +30,7 @@ def run_graph(state):
     )
 
     logger.info(
-        f"====STRATEGY:==== "
+        f"****STRATEGY: "
         f"{strategy}"
     )
     # --------------------------------------------------
@@ -86,27 +61,44 @@ def run_graph(state):
     # Dependency Resolution
     # --------------------------------------------------
 
-    execution_order = resolve_execution_order(
-        plan["selected_agents"],
-        AGENT_REGISTRY
+    execution_order = (
+        resolve_execution_order(
+            plan["selected_agents"],
+            AGENT_REGISTRY
+        )
+    )
+
+    # preserve dependency closure
+    execution_order = list(
+        dict.fromkeys(
+            execution_order
+        )
     )
 
     plan["execution_order"] = (
         execution_order
     )
-
+    plan["selected_agents"] = (
+        execution_order
+    )
     # --------------------------------------------------
     # Parallel Groups
     # --------------------------------------------------
-    print(
-        "\nEXECUTION ORDER:",
-        execution_order
+    logger.info(
+        f"\n****EXECUTION ORDER:, "
+        f"{execution_order}"
     )
 
-    print(
-        "AGENT_REGISTRY:",
-        list(AGENT_REGISTRY.keys())
+    logger.info(
+        f"****AGENT_REGISTRY:, "
+        f"{list(AGENT_REGISTRY.keys())}"
     )
+
+    validate_execution_graph(
+        execution_order,
+        AGENT_REGISTRY
+    )
+
     groups = build_parallel_groups(
         execution_order,
         AGENT_REGISTRY
@@ -210,9 +202,27 @@ def run_graph(state):
         results = execute_parallel(
             tasks
         )
+        #results = reorder_results(results, execution_order)
+        agent_order_map = {
+            agent: i
+            for i, agent in enumerate(
+                groups[group_index]
+            )
+        }
 
+        results = sorted(
+            results,
+            key=lambda r: agent_order_map.get(
+                r["agent"],
+                999
+            )
+        )
+        results = stabilize_parallel_order(
+            results,
+            groups[group_index]
+        )
         logger.info(
-            f"====GROUP {group_index} RESULTS:==== "
+            f"****GROUP {group_index} RESULTS"
             f"{results}"
         )
 
@@ -241,6 +251,39 @@ def run_graph(state):
                     "artifacts",
                     {}
                 )[key] = value
+
+    state["context"] = {
+
+        "insights":
+            state["artifacts"].get(
+                "insights",
+                []
+            ),
+
+        "findings":
+            state["artifacts"].get(
+                "findings",
+                []
+            ),
+
+        "actions":
+            state["artifacts"].get(
+                "actions",
+                []
+            ),
+
+        "trends":
+            state["artifacts"].get(
+                "trends",
+                []
+            ),
+
+        "risk":
+            state["artifacts"].get(
+                "risk",
+                []
+            )
+    }
 
     execution_metadata[
         "agent_count"
@@ -274,10 +317,10 @@ def run_graph(state):
     # --------------------------------------------------
     # Debug prints
     # --------------------------------------------------
-    logger.info(f"****ROUTE: {plan['selected_agents']}")
-    logger.info(f"****AFTER ACTIONS: {state.get('actions')}")
-    logger.info(f"****AFTER INSIGHTS: {state.get('insights')}")
-    logger.info(f"****AFTER TRENDS: {state.get('trends')}")
+    logger.debug(f"****ROUTE: {plan['selected_agents']}")
+    logger.debug(f"****AFTER ACTIONS: {state.get('actions')}")
+    logger.debug(f"****AFTER INSIGHTS: {state.get('insights')}")
+    logger.debug(f"****AFTER TRENDS: {state.get('trends')}")
     logger.debug("=== DEBUG: AGENT GRAPH EXECUTION START===")
     logger.debug(f"MERGED ARTIFACTS: {state['artifacts']}")
     logger.debug(f"REGISTERED: {AGENT_REGISTRY.keys()}")
@@ -285,5 +328,6 @@ def run_graph(state):
     logger.info(f"****EXECUTION METADATA: {state.get('execution')}")
     logger.debug(f"ARTIFACTS: {state.get('artifacts', {})}")
     logger.debug("=== DEBUG: AGENT GRAPH EXECUTION END===")
+
     return state
 

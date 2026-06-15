@@ -8,7 +8,8 @@ def preprocess_summary_input(text):
     ignore_headers = {
         "Meeting Notes",
         "Business Report",
-        "Research Report"
+        "Research Report",
+        "General"
     }
 
     for line in text.splitlines():
