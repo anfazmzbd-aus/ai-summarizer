@@ -110,3 +110,102 @@ FastAPI Routes
 Templates
 
 Static Assets
+
+production-grade V7.5 documentation update
+
+V7.5.0 STABLE ARCHITECTURE
+Overview
+
+The AI Summarizer is a multi-agent DAG-based execution engine that transforms raw input into structured analytical outputs using parallel agent orchestration.
+
+Core Pipeline
+Input Text
+    ↓
+Semantic Router (intent detection)
+    ↓
+Section Parser (structuring input)
+    ↓
+Dependency Resolver (DAG construction)
+    ↓
+Graph Validator (consistency check)
+    ↓
+Parallel Scheduler (execution grouping)
+    ↓
+Parallel Executor (agent execution)
+    ↓
+Artifact Aggregation (state merge)
+    ↓
+Response Formatter
+    ↓
+History Persistence (DB)
+
+Agent Registry System
+All agents are dynamically registered:
+AGENT_REGISTRY = {
+    "summary": {...},
+    "insights": {...},
+    "trend": {...},
+    "sentiment": {...},
+    "findings": {...},
+    "risk": {...},
+    "root_cause": {...},
+    "forecast": {...},
+    "recommendation": {...},
+    "plan": {...}
+}
+
+Dependency Model (DAG)
+
+Execution order is derived using:
+
+semantic routing
+dependency resolution
+graph validation
+Example DAG:
+summary
+  ↓
+insights → sentiment → findings
+  ↓
+trend → risk
+  ↓
+forecast → root_cause
+  ↓
+recommendation
+
+Parallel Execution Model
+
+Agents are grouped into execution layers:
+Layer 1:
+  summary
+
+Layer 2:
+  insights, findings, sentiment
+
+Layer 3:
+  trend, risk
+
+Layer 4:
+  forecast, root_cause
+
+Layer 5:
+  recommendation
+
+Each layer executes concurrently.
+
+Output Structure
+
+Each run produces:
+
+{
+  "summary": "",
+  "insights": [],
+  "findings": [],
+  "trend": [],
+  "sentiment": [],
+  "risk": [],
+  "forecast": [],
+  "root_cause": [],
+  "recommendations": [],
+  "execution_plan": {},
+  "execution_metadata": {}
+}

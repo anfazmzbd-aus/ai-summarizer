@@ -93,3 +93,49 @@ Experimental
 Purpose:
 
 Generate execution plans.
+
+#Agent Execution Model (V7.5)
+
+Each agent follows:
+state (input)
+   ↓
+tool/logic
+   ↓
+state["artifacts"][key] update
+   ↓
+return state
+
+
+##Standard Agent Template
+
+@register_agent(
+    name="agent_name",
+    depends_on=["dependency_agents"],
+    produces=["artifact_key"]
+)
+def agent(state):
+
+    artifacts = state.get("artifacts", {})
+
+    result = tool_logic(artifacts)
+
+    state.setdefault("artifacts", {})["key"] = result
+
+    return state
+
+##Dependency Rules
+depends_on defines execution ordering
+missing dependencies are auto-injected into DAG
+graph validator ensures correctness before execution
+
+
+
+
+
+
+
+
+
+
+
+
