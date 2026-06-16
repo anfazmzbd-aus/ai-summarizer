@@ -10,3 +10,5 @@ other.txt
 package-lock.json
 package.json
 backup/
+summaries.db
+logs

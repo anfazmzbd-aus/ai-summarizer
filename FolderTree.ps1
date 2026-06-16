@@ -1,4 +1,4 @@
-$exclude = @("backup", "venv", "venv311", ".git")
+$exclude = @("backup", "venv", "venv311", ".git", "__pycache__", "tests")
 
 # Set to $true if you want files displayed
 $showFiles = $true

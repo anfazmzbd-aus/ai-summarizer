@@ -3,13 +3,14 @@ from app.services.classifiers.intent_classifier import classify_intent
 from app.services.strategies.strategy_builder import build_strategy
 from app.services.routers.semantic_router import semantic_router
 from app.services.registry.agent_registry import AGENT_REGISTRY
-from app.services.graph.dependency_resolver import resolve_execution_order
-from app.services.graph.parallel_groups import build_parallel_groups
+#from app.services.graph.dependency_resolver import resolve_execution_order
+#from app.services.graph.parallel_groups import build_parallel_groups
 from app.services.graph.parallel_executor import execute_parallel, stabilize_parallel_order
 from app.services.graph.agent_runner import run_agent
 #import logging
 from app.services.logging.logger import logger
-from app.services.graph.graph_validator import validate_execution_graph
+#from app.services.graph.graph_validator import validate_execution_graph
+from app.services.graph.scheduler import Scheduler
 
 def run_graph(state):
     graph_start = time.perf_counter()
@@ -57,51 +58,53 @@ def run_graph(state):
         "trends": state["artifacts"].get("trends", []),
         "risk": state["artifacts"].get("risk", []),
     }
-    # --------------------------------------------------
-    # Dependency Resolution
-    # --------------------------------------------------
+    # -------------------------------------------------------------------------------
+    # Dependency Resolution -> moved to app/services/graph/scheduler.py in V7.6 ph1
+    # -------------------------------------------------------------------------------
+    # -------------------------------------------------------------------------------
+    # Parallel Groups -> moved to app/services/graph/scheduler.py in V7.6 ph1
+    # -------------------------------------------------------------------------------
 
-    execution_order = (
-        resolve_execution_order(
+    execution_plan = (
+        Scheduler.build_execution_plan(
             plan["selected_agents"],
             AGENT_REGISTRY
         )
     )
 
-    # preserve dependency closure
-    execution_order = list(
-        dict.fromkeys(
-            execution_order
-        )
+    plan["selected_agents"] = (
+        execution_plan[
+            "selected_agents"
+        ]
     )
 
     plan["execution_order"] = (
-        execution_order
-    )
-    plan["selected_agents"] = (
-        execution_order
-    )
-    # --------------------------------------------------
-    # Parallel Groups
-    # --------------------------------------------------
-    logger.info(
-        f"\n****EXECUTION ORDER:, "
-        f"{execution_order}"
+        execution_plan[
+            "execution_order"
+        ]
     )
 
-    logger.info(
-        f"****AGENT_REGISTRY:, "
-        f"{list(AGENT_REGISTRY.keys())}"
+    plan["parallel_groups"] = (
+        execution_plan[
+            "parallel_groups"
+        ]
     )
 
-    validate_execution_graph(
-        execution_order,
-        AGENT_REGISTRY
+    plan.setdefault(
+        "metadata",
+        {}
     )
 
-    groups = build_parallel_groups(
-        execution_order,
-        AGENT_REGISTRY
+    plan["metadata"].update(
+        execution_plan[
+            "metadata"
+        ]
+    )
+
+    groups = (
+        plan[
+            "parallel_groups"
+        ]
     )
 
     # --------------------------------------------------
