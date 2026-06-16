@@ -3,17 +3,25 @@ from app.services.classifiers.intent_classifier import classify_intent
 from app.services.strategies.strategy_builder import build_strategy
 from app.services.routers.semantic_router import semantic_router
 from app.services.registry.agent_registry import AGENT_REGISTRY
-#from app.services.graph.dependency_resolver import resolve_execution_order
-#from app.services.graph.parallel_groups import build_parallel_groups
 from app.services.graph.parallel_executor import execute_parallel, stabilize_parallel_order
 from app.services.graph.agent_runner import run_agent
-#import logging
 from app.services.logging.logger import logger
-#from app.services.graph.graph_validator import validate_execution_graph
 from app.services.graph.scheduler import Scheduler
+from app.services.runtime.context_builder import build_execution_context
 
 def run_graph(state):
     graph_start = time.perf_counter()
+
+    execution = (
+        build_execution_context(
+            state
+        )
+    )
+
+    state.update(
+        execution
+    )
+    
     # --------------------------------------------------
     # Intent Classification
     # --------------------------------------------------
