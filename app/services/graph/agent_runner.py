@@ -1,9 +1,10 @@
 import time
 import copy
-import logging
+import uuid
 from app.services.logging.logger import logger
+from app.services.logging.trace_logger import trace_logger
 
-logger = logging.getLogger("agent_system")
+logger.info("****agent_system")
 
 def run_agent(agent_name, agent_func, state):
     logger.info(
@@ -27,14 +28,78 @@ def run_agent(agent_name, agent_func, state):
         )
     )
 
+    execution_id = (
+        state[
+            "execution_id"
+        ]
+    )
+
+    trace = (
+        trace_logger.start(
+            execution_id,
+            agent_name,
+            {
+                "context":
+                    local_state.get(
+                        "context",
+                        {}
+                    ),
+
+                "selected_agents":
+                    local_state.get(
+                        "selected_agents",
+                        []
+                    )
+            }
+        )
+    )
+
     start = time.perf_counter()
 
-    result = agent_func(local_state)
+    try:
 
-    duration = round(
-        time.perf_counter() - start,
-        6
-    )
+        result = (
+            agent_func(
+                local_state
+            )
+        )
+
+        duration = round(
+            time.perf_counter()
+            - start,
+            6
+        )
+
+        trace_logger.end(
+            trace,
+            {
+                "artifacts":
+                    result.get(
+                        "artifacts",
+                        {}
+                    )
+            },
+            status="success"
+        )
+
+    except Exception as e:
+
+        duration = round(
+            time.perf_counter()
+            - start,
+            6
+        )
+
+        trace_logger.end(
+            trace,
+            {
+                "error":
+                    str(e)
+            },
+            status="failed"
+        )
+
+        raise
 
     logger.info(
         f"****COMPLETED AGENT: "

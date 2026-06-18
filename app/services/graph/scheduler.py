@@ -61,7 +61,7 @@ class Scheduler:
         )
 
         logger.info(
-            f"****PARALLEL GROUPS: "
+            f"****PARALLEL GROUPS (scheduler): "
             f"{groups}"
         )
 

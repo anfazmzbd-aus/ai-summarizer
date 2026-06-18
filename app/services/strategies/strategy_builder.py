@@ -39,7 +39,7 @@ def build_strategy(intents):
         )
 
     logger.info(
-        f"****STRATEGY: {strategy}"
+        f"****STRATEGY (strategy builder): {strategy}"
     )
 
     preferred_order = [

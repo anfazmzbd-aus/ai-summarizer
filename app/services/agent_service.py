@@ -45,7 +45,7 @@ def run_agents(
     }
 
     logger.info(
-        f"\n****REGISTERED AGENTS: "
+        f"****REGISTERED AGENTS: "
         f"{list(AGENT_REGISTRY.keys())}"
     )
     result = run_graph(state)

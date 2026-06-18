@@ -74,7 +74,7 @@ def build_parallel_groups(
         )
 
     logger.info(
-        f"****PARALLEL GROUPS: "
+        f"****PARALLEL GROUPS (parallel groups): "
         f"{groups}"
     )
 

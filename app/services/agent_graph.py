@@ -1,4 +1,5 @@
 import time
+import uuid
 from app.services.classifiers.intent_classifier import classify_intent
 from app.services.strategies.strategy_builder import build_strategy
 from app.services.routers.semantic_router import semantic_router
@@ -8,8 +9,15 @@ from app.services.graph.agent_runner import run_agent
 from app.services.logging.logger import logger
 from app.services.graph.scheduler import Scheduler
 from app.services.runtime.context_builder import build_execution_context
+from app.services.logging.trace_logger import trace_logger
 
 def run_graph(state):
+    state["execution_id"] = (
+        str(
+            uuid.uuid4()
+        )
+    )
+
     graph_start = time.perf_counter()
 
     execution = (
@@ -39,7 +47,7 @@ def run_graph(state):
     )
 
     logger.info(
-        f"****STRATEGY: "
+        f"****STRATEGY agent_graph: "
         f"{strategy}"
     )
     # --------------------------------------------------
@@ -122,17 +130,19 @@ def run_graph(state):
     execution_metadata = {
         "agents_executed": [],
         "agent_count": 0,
-        "parallel_groups": groups,
-        "timings": {}
+        "parallel_groups": groups[1:],
+        "timings": {},
+        "trace_count":0
     }
 
+    #execution_metadata["traces"] = trace_logger.get_traces()
     timings = {}
     
     # --------------------------------------------------
     # Group 1
     # Usually Summary
     # --------------------------------------------------
-
+    
     if len(groups) > 0:
 
         for agent_name in groups[0]:
@@ -149,25 +159,57 @@ def run_graph(state):
                 ]
             )
 
-            start = (
-                time.perf_counter()
+            logger.info(
+                f"****PREPROCESS START: "
+                f"{agent_name}"
             )
+
+            logger.debug(
+                f"****PREPROCESS INPUT SIZE: "
+                f"{len(state.get('text', ''))}"
+            )
+
+            start = time.perf_counter()
 
             state = agent(state)
 
-            timings[
-                agent_name
-            ] = round(
+            duration = round(
                 time.perf_counter()
                 - start,
                 6
             )
 
-            execution_metadata[
-                "agents_executed"
-            ].append(
+            timings[
                 agent_name
+            ] = duration
+
+            execution_metadata[
+                "preprocessing"
+            ] = {
+                "agent": agent_name,
+                "duration": duration,
+                "output_size": len(
+                    state.get(
+                        "summary",
+                        ""
+                    )
+                )
+            }
+
+            logger.info(
+                f"****PREPROCESS END: "
+                f"{agent_name} "
+                f"| {duration}s"
             )
+
+            logger.debug(
+                f"****SUMMARY LENGTH: "
+                f"{len(state.get('summary', ''))}"
+            )
+
+            logger.debug(f"****SUMMARY PREVIEW: {state.get('summary', '')[:150]}")
+
+#
 
     # --------------------------------------------------
     # Group 2+
@@ -263,6 +305,8 @@ def run_graph(state):
                     {}
                 )[key] = value
 
+    #logger.info(f"****TRACE SAMPLE: {trace_logger.get_traces()[-1]}")
+
     state["context"] = {
 
         "insights":
@@ -315,11 +359,34 @@ def run_graph(state):
         - graph_start,
         6
     )
+
     # --------------------------------------------------
     # Save Plan
     # --------------------------------------------------
 
     state["plan"] = plan
+
+    # --------------------------------------------------
+    # trace_count logic
+    # --------------------------------------------------
+
+    execution_metadata[
+        "trace_count"
+    ] = (
+        len(
+            trace_logger.get_traces()
+        )
+    )
+    execution_metadata[
+        "trace_sample"
+    ] = (
+        trace_logger.get_traces()[-1]
+        if trace_logger.get_traces()
+        else None
+    )
+
+    logger.info(f"****TRACE COUNT: {len(trace_logger.get_traces())}")
+    logger.info(f"****TRACE COUNT METADATA: {execution_metadata['trace_count']}")
 
     state[
         "execution"
