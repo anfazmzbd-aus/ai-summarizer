@@ -36,5 +36,10 @@ def build_execution_context(
             "executed": []
         },
 
-        "artifacts": {}
+        "artifacts": deepcopy(
+            state.get(
+                "artifacts",
+                {}
+            )
+        )
     }

@@ -1,31 +1,80 @@
+from copy import deepcopy
+
 def merge_state(
     base,
-    updates
+    updates,
+    overwrite_agents=None
 ):
 
-    merged = (
-        base.copy()
+    overwrite_agents = (
+        overwrite_agents
+        or []
     )
 
-    for key, value in updates.items():
+    merged = deepcopy(
+        base
+    )
 
-        if key == "artifacts":
+    merged.setdefault(
+        "artifacts",
+        {}
+    )
 
-            merged.setdefault(
-                "artifacts",
-                {}
-            )
+    incoming = (
+        updates.get(
+            "artifacts",
+            {}
+        )
+    )
 
-            merged[
-                "artifacts"
-            ].update(
-                value
-            )
+    for key, value in incoming.items():
 
-        else:
+        if (
+            key in merged["artifacts"]
+            and key not in overwrite_agents
+        ):
 
-            merged[
-                key
-            ] = value
+            continue
+
+        merged[
+            "artifacts"
+        ][key] = deepcopy(
+            value
+        )
+
+    return merged
+
+def merge_retry_state(base, retry_results):
+
+    merged = (
+        deepcopy(
+            base
+        )
+    )
+
+    merged.setdefault("artifacts", {})
+
+    for r in retry_results:
+
+        artifacts = r.get("artifacts", {})
+
+        for key, value in artifacts.items():
+
+            if key not in merged["artifacts"]:
+                merged["artifacts"][key] = deepcopy(value)
+                continue
+
+            # LIST MERGE (core fix)
+            if isinstance(merged["artifacts"][key], list):
+                merged["artifacts"][key].extend(deepcopy(value))
+                continue
+
+            # DICT MERGE (nested support)
+            if isinstance(merged["artifacts"][key], dict):
+                merged["artifacts"][key].update(deepcopy(value))
+                continue
+
+            # fallback overwrite
+            merged["artifacts"][key] = deepcopy(value)
 
     return merged

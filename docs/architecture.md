@@ -209,3 +209,170 @@ Each run produces:
   "execution_plan": {},
   "execution_metadata": {}
 }
+
+V7.6 Production Architecture
+
+┌────────────────────────────────────────────────────────────┐
+│                      CLIENT / UI LAYER                     │
+│  Web UI • API • Upload PDF • Future Integrations           │
+└───────────────────────┬────────────────────────────────────┘
+                        │
+                        ▼
+┌────────────────────────────────────────────────────────────┐
+│                    REQUEST ENTRY LAYER                     │
+│                     routes/summarize.py                    │
+└───────────────────────┬────────────────────────────────────┘
+                        │
+                        ▼
+══════════════════ PREPROCESSING (NOT DAG) ═══════════════════
+
+┌────────────────────────────────────────────────────────────┐
+│                  INPUT NORMALIZATION                       │
+│  • Clean text                                              │
+│  • Token metrics                                           │
+│  • Upload extraction                                       │
+└───────────────────────┬────────────────────────────────────┘
+                        │
+                        ▼
+
+┌────────────────────────────────────────────────────────────┐
+│                    SUMMARY GENERATION                      │
+│                   summary_agent (NON-DAG)                  │
+│                                                            │
+│ OUTPUT:                                                    │
+│ state["summary"]                                           │
+└───────────────────────┬────────────────────────────────────┘
+                        │
+                        ▼
+
+┌────────────────────────────────────────────────────────────┐
+│                     SECTION PARSER                         │
+│            app/services/context/section_parser.py          │
+│                                                            │
+│ OUTPUT:                                                    │
+│ state["plan"]["sections"]                                  │
+└───────────────────────┬────────────────────────────────────┘
+                        │
+                        ▼
+
+┌────────────────────────────────────────────────────────────┐
+│                    SEMANTIC ROUTER                         │
+│                     semantic_router.py                     │
+│                                                            │
+│ OUTPUT:                                                    │
+│ selected_agents                                            │
+│ execution strategy                                         │
+└───────────────────────┬────────────────────────────────────┘
+                        |
+                        ▼
+
+══════════════════════ DAG ENGINE (V7.6) ══════════════════════
+
+                        │
+                        ▼
+
+┌────────────────────────────────────────────────────────────┐
+│                 DEPENDENCY RESOLVER                        │
+│         resolve_execution_order()                          │
+└───────────────────────┬────────────────────────────────────┘
+                        |
+                        ▼
+
+┌────────────────────────────────────────────────────────────┐
+│                    GRAPH VALIDATOR                         │
+│            validate_execution_graph()                      │
+│                                                            │
+│ Checks:                                                    │
+│ • unknown agents                                           │
+│ • dependency violations                                    │
+│ • DAG purity                                               │
+└───────────────────────┬────────────────────────────────────┘
+                        |
+                        ▼
+
+┌────────────────────────────────────────────────────────────┐
+│                    SCHEDULER (NEW)                         │
+│                  scheduler.py                              │
+│                                                            │
+│ OUTPUT:                                                    │
+│ parallel_groups                                            │
+└───────────────────────┬────────────────────────────────────┘
+
+                        ▼
+
+┌────────────────────────────────────────────────────────────┐
+│                 PARALLEL EXECUTOR                          │
+│               parallel_executor.py                         │
+└───────────────────────┬────────────────────────────────────┘
+                        |
+                        ▼
+
+┌────────────────────────────────────────────────────────────┐
+│                     DAG AGENTS                             │
+│                                                            │
+│ insights → findings → sentiment                            │
+│            ↓                                               │
+│          trend → risk                                      │
+│            ↓                                               │
+│         forecast → root_cause                              │
+│            ↓                                               │
+│      recommendation                                        │
+└───────────────────────┬────────────────────────────────────┘
+                        |
+                        ▼
+
+════════════════════ RUNTIME + OUTPUT ════════════════════════
+                        |
+                        ▼
+
+┌────────────────────────────────────────────────────────────┐
+│                     STATE MERGER                           │
+│                                                            │
+│ state["artifacts"]                                         │
+└───────────────────────┬────────────────────────────────────┘
+                        |
+                        ▼
+
+┌────────────────────────────────────────────────────────────┐
+│                  RESPONSE FORMATTER                        │
+│                                                            │
+│ Summary                                                    │
+│ Artifacts                                                  │
+│ Execution Plan                                             │
+│ Execution Metadata                                         │
+└───────────────────────┬────────────────────────────────────┘
+                        |
+                        ▼
+
+┌────────────────────────────────────────────────────────────┐
+│                  STORAGE / HISTORY                         │
+│               DB + Observability                           │
+└────────────────────────────────────────────────────────────┘
+
+Production Boundaries
+Layer A — Request Processing
+  routes/
+  upload handling
+  input validation
+Layer B — Preprocessing (outside DAG)
+  summary
+  section parsing
+  routing
+Layer C — Execution Engine
+  resolver
+  validator
+  scheduler
+  executor
+Layer D — Runtime
+  artifacts
+  merge
+  metadata
+Layer E — Delivery
+  formatter
+  persistence
+V7.6 Design Principles
+  Summary is precomputed, never scheduled
+  Planner decides what to run
+  Scheduler decides when to run
+  Executor decides how to run
+  Runtime decides how to merge

@@ -10,6 +10,7 @@ from app.services.logging.logger import logger
 from app.services.graph.scheduler import Scheduler
 from app.services.runtime.context_builder import build_execution_context
 from app.services.logging.trace_logger import trace_logger
+from app.services.runtime.executor import DAGExecutor
 
 def run_graph(state):
     state["execution_id"] = (
@@ -209,8 +210,6 @@ def run_graph(state):
 
             logger.debug(f"****SUMMARY PREVIEW: {state.get('summary', '')[:150]}")
 
-#
-
     # --------------------------------------------------
     # Group 2+
     # Parallel
@@ -252,10 +251,23 @@ def run_graph(state):
                 )
             )
 
-        results = execute_parallel(
-            tasks
+        executor = DAGExecutor()
+
+        state, failed, results = (
+            executor.execute_group(
+                tasks,
+                state
+            )
         )
-        #results = reorder_results(results, execution_order)
+
+        if failed:
+
+            state = executor.retry_failed(
+                tasks,
+                state,
+                failed
+            )
+
         agent_order_map = {
             agent: i
             for i, agent in enumerate(
@@ -305,7 +317,7 @@ def run_graph(state):
                     {}
                 )[key] = value
 
-    #logger.info(f"****TRACE SAMPLE: {trace_logger.get_traces()[-1]}")
+    logger.debug(f"****TRACE SAMPLE: {trace_logger.get_traces()[-1]}")
 
     state["context"] = {
 
@@ -384,7 +396,15 @@ def run_graph(state):
         if trace_logger.get_traces()
         else None
     )
+    execution_metadata[
+        "retry_count"
+    ] = len(
+        failed
+    )
 
+    execution_metadata[
+        "failed_agents"
+    ] = failed
     logger.info(f"****TRACE COUNT: {len(trace_logger.get_traces())}")
     logger.info(f"****TRACE COUNT METADATA: {execution_metadata['trace_count']}")
 

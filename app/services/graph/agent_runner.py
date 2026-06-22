@@ -84,22 +84,32 @@ def run_agent(agent_name, agent_func, state):
 
     except Exception as e:
 
-        duration = round(
-            time.perf_counter()
-            - start,
-            6
-        )
+        duration = round(time.perf_counter() - start, 6)
 
         trace_logger.end(
             trace,
             {
-                "error":
-                    str(e)
+                "error": str(e)
             },
             status="failed"
         )
 
-        raise
+        logger.error(
+            f"****AGENT FAILED: {agent_name} | {str(e)}"
+        )
+
+        # -----------------------------------------
+        # PHASE 4: Retry hook (DO NOT raise here)
+        # -----------------------------------------
+
+        return {
+            "agent": agent_name,
+            "status": "failed",
+            "duration": duration,
+            "error": str(e),
+            "artifacts": {},
+            "retry_eligible": True
+        }
 
     logger.info(
         f"****COMPLETED AGENT: "
