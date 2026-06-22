@@ -8,7 +8,7 @@ from app.services.tools.action_tool import (
 
 @register_agent(
     "actions",
-    depends_on=["summary"]
+    depends_on=[] # depends_on["summary"] removed in V7.6 ph6
 )
 
 def actions_agent(state):

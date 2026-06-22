@@ -7,7 +7,7 @@ from app.services.tools.insight_tool import (
 
 @register_agent(
     "insights",
-    depends_on=["summary"],
+    depends_on=[], # depends_on["summary"] removed in V7.6 ph6
     produces=["insights"]
 )
 def insights_agent(state):

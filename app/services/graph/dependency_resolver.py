@@ -8,7 +8,12 @@ def resolve_execution_order(
     resolved = []
     visiting = set()
     visited = set()
-
+    NON_DAG_NODES = {
+        "summary",
+        "plan",
+        "semantic_router",
+        "section_parser"
+    }
     def visit(agent):
 
         if agent in visited:
@@ -30,6 +35,11 @@ def resolve_execution_order(
         )
 
         for dep in deps:
+            if dep in NON_DAG_NODES:
+                logger.debug(
+                    f"Skipping preprocessing dependency: {dep}"
+                )
+                continue
 
             if dep not in registry:
 

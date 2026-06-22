@@ -131,7 +131,7 @@ def run_graph(state):
     execution_metadata = {
         "agents_executed": [],
         "agent_count": 0,
-        "parallel_groups": groups[1:],
+        "parallel_groups": groups,
         "timings": {},
         "trace_count":0
     }
@@ -144,71 +144,58 @@ def run_graph(state):
     # Usually Summary
     # --------------------------------------------------
     
-    if len(groups) > 0:
+    PREPROCESSING_NODE = "summary"
 
-        for agent_name in groups[0]:
+    if PREPROCESSING_NODE in AGENT_REGISTRY:
 
-            agent_info = (
-                AGENT_REGISTRY[
-                    agent_name
-                ]
-            )
+        agent_info = (
+            AGENT_REGISTRY[
+                PREPROCESSING_NODE
+            ]
+        )
 
-            agent = (
-                agent_info[
-                    "function"
-                ]
-            )
+        agent = (
+            agent_info[
+                "function"
+            ]
+        )
 
-            logger.info(
-                f"****PREPROCESS START: "
-                f"{agent_name}"
-            )
+        logger.info(
+            "****PREPROCESS START: summary"
+        )
 
-            logger.debug(
-                f"****PREPROCESS INPUT SIZE: "
-                f"{len(state.get('text', ''))}"
-            )
+        start = time.perf_counter()
 
-            start = time.perf_counter()
+        state = agent(
+            state
+        )
 
-            state = agent(state)
+        duration = round(
+            time.perf_counter()
+            - start,
+            6
+        )
 
-            duration = round(
-                time.perf_counter()
-                - start,
-                6
-            )
+        timings[
+            PREPROCESSING_NODE
+        ] = duration
 
-            timings[
-                agent_name
-            ] = duration
-
-            execution_metadata[
-                "preprocessing"
-            ] = {
-                "agent": agent_name,
-                "duration": duration,
-                "output_size": len(
-                    state.get(
-                        "summary",
-                        ""
-                    )
+        execution_metadata[
+            "preprocessing"
+        ] = {
+            "agent": PREPROCESSING_NODE,
+            "duration": duration,
+            "output_size": len(
+                state.get(
+                    "summary",
+                    ""
                 )
-            }
-
-            logger.info(
-                f"****PREPROCESS END: "
-                f"{agent_name} "
-                f"| {duration}s"
             )
+        }
 
-            logger.debug(
-                f"****SUMMARY LENGTH: "
-                f"{len(state.get('summary', ''))}"
-            )
-
-            logger.debug(f"****SUMMARY PREVIEW: {state.get('summary', '')[:150]}")
+        logger.info(
+            f"****PREPROCESS END: {duration}s"
+        )
 
     # --------------------------------------------------
     # Group 2+
@@ -216,7 +203,6 @@ def run_graph(state):
     # --------------------------------------------------
 
     for group_index in range(
-        1,
         len(groups)
     ):
 
@@ -267,6 +253,10 @@ def run_graph(state):
                 state,
                 failed
             )
+
+        # ensure retry results are counted
+        for agent in failed:
+            execution_metadata["agents_executed"].append(agent)
 
         agent_order_map = {
             agent: i

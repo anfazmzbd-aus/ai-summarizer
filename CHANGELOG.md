@@ -404,3 +404,128 @@ Vision:
 * Enterprise reporting
 * Human-in-the-loop review
 * Advanced observability
+
+##V6.7.1
+
+Release Date: Historical Baseline
+
+Added
+Parallel Execution Engine
+Execution
+input
+↓
+parallel execution
+↓
+aggregation
+
+##V7.0.0
+Added
+Multi-agent architecture.
+Structured execution pipeline.
+Artifact generation.
+
+##V7.1.x
+Added
+Root cause analysis.
+Forecast generation.
+Recommendation generation.
+
+##V7.2.x
+Added
+Analytical agent orchestration.
+Registry-based agent execution.
+
+##V7.3.x
+Added
+Multi-intent routing.
+Semantic execution strategy.
+
+##V7.4.0
+
+Status: Released
+
+Added
+Section-aware execution planning.
+Execution metadata reporting.
+Artifact separation model.
+Changed
+Summary generation optimized.
+Improved section parsing.
+
+##V7.5.0
+
+Release Date: 2026-06
+Status: Stable Baseline
+
+Added
+Graph validation framework.
+Dependency enforcement.
+Parallel execution grouping.
+Execution metadata tracking.
+Artifact aggregation.
+Changed
+Execution ordering migrated to dependency resolver.
+Registry became source of truth.
+Fixed
+Circular dependency detection.
+Registry mismatch handling.
+Parallel execution ordering issues.
+Dependency validation failures.
+Execution Model
+selected_agents
+↓
+resolve_execution_order
+↓
+validate_execution_graph
+↓
+parallel_groups
+↓
+parallel_executor
+Runtime Metadata
+{
+  "agents_executed": [],
+  "parallel_groups": [],
+  "timings": {},
+  "total_execution_time": 0
+}
+
+##V7.6.0 (In Progress)
+
+Release Date: TBD
+Status: Active Development
+
+Phase 1 — Scheduler Extraction
+Added
+Introduced dedicated scheduler abstraction.
+Added scheduler.py to isolate execution planning from execution runtime.
+Added immutable execution schedule model.
+Introduced execution layer concept.
+Changed
+Removed scheduling responsibility from agent_graph.py.
+Parallel execution now consumes execution schedules instead of raw groups.
+Execution metadata now generated from scheduler output.
+Architecture
+Established separation:
+Planning Layer
+Scheduler Layer
+Execution Layer
+Execution Flow
+execution_order
+↓
+scheduler
+↓
+parallel_executor
+↓
+state_merger
+Internal Rules
+Scheduler accepts DAG agents only.
+Scheduler produces immutable execution layers.
+Runtime preserves execution metadata compatibility.
+
+
+
+
+
+
+
+

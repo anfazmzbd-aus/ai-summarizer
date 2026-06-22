@@ -36,6 +36,20 @@ class Scheduler:
                 execution_order
             )
         )
+        
+        # ✅ FIX 1 — remove preprocessing BEFORE validation
+        NON_DAG_NODES = {
+            "summary",
+            "plan",
+            "semantic_router",
+            "section_parser"
+        }
+
+        execution_order = [
+            agent
+            for agent in execution_order
+            if agent not in NON_DAG_NODES
+        ]
 
         validate_execution_graph(
             execution_order,
@@ -48,7 +62,12 @@ class Scheduler:
                 registry
             )
         )
-
+        
+        execution_order = [
+            agent
+            for group in groups
+            for agent in group
+        ]
         metadata = {
             "resolved": True,
             "validated": True,

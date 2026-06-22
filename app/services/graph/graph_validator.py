@@ -5,12 +5,20 @@ def validate_execution_graph(
     execution_order,
     AGENT_REGISTRY
 ):
-
+    NON_DAG_NODES = {"summary", "plan", "semantic_router", "section_parser"}
     errors = []
     warnings = []
 
     registry_keys = set(AGENT_REGISTRY.keys())
     execution_set = set(execution_order)
+
+    # 0. Block preprocessing nodes in DAG
+    illegal_nodes = execution_set.intersection(NON_DAG_NODES)
+
+    if illegal_nodes:
+        errors.append(
+            f"Preprocessing nodes found in DAG execution_order: {illegal_nodes}"
+        )
 
     # 1. Unknown agents in execution order
     unknown_agents = execution_set - registry_keys
@@ -38,10 +46,20 @@ def validate_execution_graph(
     # 3. Dependency validation
     for agent in execution_order:
 
-        agent_info = AGENT_REGISTRY.get(agent, {})
+        if agent not in AGENT_REGISTRY:
+            continue
 
-        dependencies = agent_info.get("depends_on", [])
+        if agent in NON_DAG_NODES:
+            continue  # already handled above
 
+        dependencies = AGENT_REGISTRY[agent].get("depends_on", [])
+
+        for dep in dependencies:
+            if dep in NON_DAG_NODES:
+                errors.append(
+                    f"{agent} depends on non-DAG node: {dep}"
+                )
+                
         missing_deps = [
             d for d in dependencies
             if d not in execution_set
@@ -54,12 +72,19 @@ def validate_execution_graph(
 
     if errors:
 
-        logger.error("GRAPH VALIDATION FAILED")
+        logger.error(
+            "****GRAPH VALIDATION FAILED"
+        )
 
         for e in errors:
-            logger.error(e)
 
-        raise Exception("Invalid execution graph")
+            logger.error(
+                f"****GRAPH ERROR: {e}"
+            )
+
+        raise Exception(
+            "\n".join(errors)
+        )
 
     logger.info(
         f"****GRAPH VALIDATION PASSED | warnings={warnings}"

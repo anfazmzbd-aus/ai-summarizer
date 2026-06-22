@@ -8,7 +8,7 @@ from app.services.tools.sentiment_tool import (
 
 @register_agent(
     "sentiment",
-    depends_on=["summary"]
+    depends_on=[] # depends_on["summary"] removed in V7.6 ph6
 )
 def sentiment_agent(state):
 

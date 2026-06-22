@@ -7,7 +7,7 @@ from app.services.tools.finding_tool import (
 
 @register_agent(
     "findings",
-    depends_on=["summary"]
+    depends_on=[] # depends_on["summary"] removed in V7.6 ph6
 )
 def findings_agent(state):
     findings = research_finding_tool(state["text"])

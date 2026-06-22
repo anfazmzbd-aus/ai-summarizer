@@ -3,10 +3,22 @@ import copy
 import uuid
 from app.services.logging.logger import logger
 from app.services.logging.trace_logger import trace_logger
+from copy import deepcopy
+
 
 logger.info("****agent_system")
 
 def run_agent(agent_name, agent_func, state):
+
+    isolated_state = {
+        "context": deepcopy(state.get("context", {})),
+        "artifacts": deepcopy(state.get("artifacts", {})),
+        "runtime": deepcopy(state.get("runtime", {})),
+        "text": state.get("text"),
+        "summary_length": state.get("summary_length"),
+        "selected_agents": deepcopy(state.get("selected_agents", []))
+    }
+
     logger.info(
         f"****RUNNING AGENT: "
         f"{agent_name}"
@@ -60,7 +72,7 @@ def run_agent(agent_name, agent_func, state):
 
         result = (
             agent_func(
-                local_state
+                isolated_state
             )
         )
 
