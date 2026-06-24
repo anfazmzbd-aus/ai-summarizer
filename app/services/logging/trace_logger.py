@@ -1,5 +1,7 @@
 import time
 import uuid
+from datetime import datetime
+
 from app.services.logging.logger import logger
 
 class TraceLogger:
@@ -27,6 +29,11 @@ class TraceLogger:
             "agent":
                 agent,
 
+            "started_at":
+                datetime.now().strftime(
+                    "%Y-%m-%d %H:%M:%S.%f"
+                )[:-3],
+
             "start":
                 time.perf_counter(),
 
@@ -46,7 +53,17 @@ class TraceLogger:
         status
     ):
 
-        trace["end"] = (
+        trace[
+            "ended_at"
+        ] = (
+            datetime.now().strftime(
+                "%Y-%m-%d %H:%M:%S.%f"
+            )[:-3]
+        )
+
+        trace[
+            "end"
+        ] = (
             time.perf_counter()
         )
 

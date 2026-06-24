@@ -417,5 +417,45 @@ def run_graph(state):
     logger.debug(f"ARTIFACTS: {state.get('artifacts', {})}")
     logger.debug("=== DEBUG: AGENT GRAPH EXECUTION END===")
 
+    from app.services.runtime.runtime_snapshot import RuntimeSnapshot
+
+    from app.services.runtime.metrics import RuntimeMetrics
+
+    from app.services.runtime.graph_export import GraphExporter
+
+    from app.routes.runtime import runtime_cache
+
+    state[
+        "snapshot"
+    ] = (
+        RuntimeSnapshot.create(
+            state
+        )
+    )
+
+    state[
+        "metrics"
+    ] = (
+        RuntimeMetrics.collect(
+            state
+        )
+    )
+
+    state[
+        "graph"
+    ] = (
+        GraphExporter.export(
+            state
+        )
+    )
+
+    runtime_cache.clear()
+
+    runtime_cache.update(
+        state[
+            "metrics"
+        ]
+    )
+
     return state
 

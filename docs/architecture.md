@@ -376,3 +376,109 @@ V7.6 Design Principles
   Scheduler decides when to run
   Executor decides how to run
   Runtime decides how to merge
+
+V7.6 is now behaving like a real DAG runtime:
+
+  Preprocessing
+  ↓
+  Planning
+  ↓
+  Validation
+  ↓
+  Scheduling
+  ↓
+  Parallel Execution
+  ↓
+  Retry
+  ↓
+  Immutable Merge
+  ↓
+  Artifacts
+
+  No architectural contamination visible in this output anymore.
+
+  ✅ Execution Plan ↔ Execution Metadata are synchronized
+
+  Execution Plan:
+
+  execution_order:
+  [
+  'sentiment',
+  'actions',
+  'findings',
+  'insights',
+  'risk',
+  'trend',
+  'forecast',
+  'root_cause',
+  'recommendation'
+  ]
+
+  Execution Metadata:
+
+  agents_executed:
+  [
+  'sentiment',
+  'actions',
+  'findings',
+  'insights',
+  'risk',
+  'trend',
+  'forecast',
+  'root_cause',
+  'recommendation'
+  ]
+
+  ✅ Parallel scheduling is deterministic
+
+  Plan:
+
+  parallel_groups:
+  [
+  ['sentiment','actions','findings','insights'],
+  ['risk','trend'],
+  ['forecast','root_cause'],
+  ['recommendation']
+  ]
+
+  Runtime:
+
+  parallel_groups:
+  [
+  ['sentiment','actions','findings','insights'],
+  ['risk','trend'],
+  ['forecast','root_cause'],
+  ['recommendation']
+  ]
+
+  Perfect.
+
+  Scheduler → executor → metadata are now using the same ordering model.
+
+  ✅ Deterministic merge appears healthy
+
+  Trace sample output:
+
+  artifacts:
+  {
+  sentiment,
+  actions,
+  findings,
+  insights,
+  risk,
+  trends,
+  forecasts,
+  root_causes,
+  recommendations
+  }
+
+  No nested artifact contamination anymore
+
+  V7.6
+  STATUS = STABLE
+  Scheduler = OK
+  Validator = OK
+  Retry = OK
+  Merger = OK
+  Traceability = OK
+  DAG Isolation = OK

@@ -1,4 +1,4 @@
-$exclude = @("backup", "venv", "venv311", ".git", "__pycache__", "tests")
+$exclude = @("backup", "venv", "venv311", ".git", "__pycache__", "tests", "business", "expected", "meetings", "mixed", "research" )
 
 # Set to $true if you want files displayed
 $showFiles = $true
@@ -7,6 +7,7 @@ function Is-Excluded {
     param([System.IO.FileSystemInfo]$item)
 
     foreach ($ex in $exclude) {
+        #Write-Output ($ex)
         if ($item.Name -like $ex -or $item.FullName -like "*$ex*") {
             return $true
         }
