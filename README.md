@@ -465,3 +465,16 @@ FastAPI Integration
 
 This is the first version that resembles a true orchestration engine rather than a simple summarizer.
 
+V6.7
+
+parallel_groups:
+[
+ ["summary"],
+ ["insights","actions"],
+ ["trend","risk"]
+]
+
+summary = preprocessing
+metadata agent_count includes preprocessing
+agents_executed excludes preprocessing
+
