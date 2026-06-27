@@ -1,10 +1,11 @@
 from copy import deepcopy
-
+from app.services.logging.logger import logger
 
 def build_execution_context(
     state
 ):
-
+    #logger.info(f"****CONTEXT BUILDER agent_graph: {deepcopy(state.get('selected_agents',[]))}")
+                
     return {
 
         "context": {
@@ -23,7 +24,7 @@ def build_execution_context(
                     )
                 )
         },
-
+        
         "state":
             deepcopy(
                 state

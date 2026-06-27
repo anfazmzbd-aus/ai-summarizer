@@ -86,7 +86,15 @@ class TraceLogger:
                 6
             )
         )
+        trace.pop(
+            "start",
+            None
+        )
 
+        trace.pop(
+            "end",
+            None
+        )
         logger.info(
             f"****LOGGER TRACE END : "
             f"{trace['agent']} | "

@@ -13,6 +13,7 @@ from app.services.logging.trace_logger import trace_logger
 from app.services.runtime.executor import DAGExecutor
 
 def run_graph(state):
+
     state["execution_id"] = (
         str(
             uuid.uuid4()
@@ -27,10 +28,14 @@ def run_graph(state):
         )
     )
 
+    logger.info(f"****context_bulder->agent_graph: {execution}")
+
     state.update(
         execution
     )
-    
+
+    logger.info(f"****agent_graph immediately after: {state}")
+
     # --------------------------------------------------
     # Intent Classification
     # --------------------------------------------------
@@ -38,7 +43,7 @@ def run_graph(state):
     intent_info = classify_intent(
         state["text"]
     )
-
+    logger.info(f"****agent_graph intent_info : {intent_info}")
     # --------------------------------------------------
     # Strategy Builder
     # --------------------------------------------------
@@ -48,7 +53,7 @@ def run_graph(state):
     )
 
     logger.info(
-        f"****STRATEGY agent_graph: "
+        f"****agent_graph STRATEGY : "
         f"{strategy}"
     )
     # --------------------------------------------------
@@ -131,9 +136,22 @@ def run_graph(state):
     execution_metadata = {
         "agents_executed": [],
         "agent_count": 0,
-        "parallel_groups": groups,
+
+        # only DAG groups
+        "parallel_groups": [
+            g
+            for g in groups
+            if "summary" not in g
+        ],
+
         "timings": {},
-        "trace_count":0
+        "trace_count": 0,
+
+        # NEW
+        "execution_events": [],
+
+        "retry_count": 0,
+        "failed_agents": []
     }
 
     #execution_metadata["traces"] = trace_logger.get_traces()
@@ -146,7 +164,7 @@ def run_graph(state):
     
     PREPROCESSING_NODE = "summary"
 
-    if PREPROCESSING_NODE in AGENT_REGISTRY:
+    if (PREPROCESSING_NODE in plan["selected_agents"]):
 
         agent_info = (
             AGENT_REGISTRY[
@@ -201,8 +219,9 @@ def run_graph(state):
     # Group 2+
     # Parallel
     # --------------------------------------------------
-
-    for group_index in range(
+    failed = []
+    results = []
+    for group_index in range(1,
         len(groups)
     ):
 
@@ -244,6 +263,16 @@ def run_graph(state):
                 tasks,
                 state
             )
+        )
+
+        failed = (
+            failed
+            or []
+        )
+
+        results = (
+            results
+            or []
         )
 
         if failed:
@@ -294,7 +323,19 @@ def run_graph(state):
             ].append(
                 agent_name
             )
-
+            execution_metadata[
+                "execution_events"
+            ].append(
+                {
+                    "agent": agent_name,
+                    "stage": "dag",
+                    "status": (
+                        "failed"
+                        if result.get("error")
+                        else "success"
+                    )
+                }
+            )
             artifacts = result.get(
                 "artifacts",
                 {}
@@ -307,7 +348,14 @@ def run_graph(state):
                     {}
                 )[key] = value
 
-    logger.debug(f"****TRACE SAMPLE: {trace_logger.get_traces()[-1]}")
+    traces = (
+        trace_logger.get_traces()
+    )
+
+    logger.debug(
+        f"****TRACE SAMPLE: "
+        f"{traces[-1] if traces else None}"
+    )
 
     state["context"] = {
 
@@ -344,10 +392,18 @@ def run_graph(state):
 
     execution_metadata[
         "agent_count"
-    ] = len(
-        execution_metadata[
-            "agents_executed"
-        ]
+    ] = (
+        len(
+            execution_metadata[
+                "agents_executed"
+            ]
+        )
+        +
+        (
+            1
+            if "summary" in plan["selected_agents"]
+            else 0
+        )
     )
 
     execution_metadata[
@@ -374,18 +430,28 @@ def run_graph(state):
 
     execution_metadata[
         "trace_count"
-    ] = (
-        len(
-            trace_logger.get_traces()
-        )
+    ] = len(
+        traces
     )
+
+    traces = (
+        trace_logger.get_traces()
+    )
+
+    execution_metadata[
+        "trace_count"
+    ] = len(
+        traces
+    )
+
     execution_metadata[
         "trace_sample"
     ] = (
-        trace_logger.get_traces()[-1]
-        if trace_logger.get_traces()
+        traces[-1]
+        if traces
         else None
     )
+
     execution_metadata[
         "retry_count"
     ] = len(
@@ -395,7 +461,7 @@ def run_graph(state):
     execution_metadata[
         "failed_agents"
     ] = failed
-    logger.info(f"****TRACE COUNT: {len(trace_logger.get_traces())}")
+    logger.info(f"****TRACE COUNT: {len(traces)}")
     logger.info(f"****TRACE COUNT METADATA: {execution_metadata['trace_count']}")
 
     state[

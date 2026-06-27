@@ -49,12 +49,24 @@ def classify_intent(text):
         "research_report": research_score
     }
 
-    primary_intent = max(scores, key=scores.get)
+    #primary_intent = max(scores, key=scores.get)
 
     detected_intents = []
     for intent_name, score in scores.items():
         if score > 0:
             detected_intents.append(intent_name)
+
+    if detected_intents:
+        primary_intent = max(
+            detected_intents,
+            key=lambda x: scores[x]
+        )
+
+    else:
+        primary_intent = "fallback"
+        detected_intents = [
+            "fallback"
+        ]
 
     logger.info(
         f"****INTENT SCORES: {scores}"

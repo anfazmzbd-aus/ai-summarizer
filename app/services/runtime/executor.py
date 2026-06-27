@@ -34,7 +34,7 @@ class DAGExecutor:
 
                 success_state["artifacts"].update(group_artifacts)
 
-        return success_state, failed, results
+        return success_state, failed or [], results or []
 
     def retry_failed(self, group_tasks, state, failed_agents):
 
@@ -70,7 +70,25 @@ class DAGExecutor:
         #retry_base_state = deepcopy(state)
         #retry_base_state["artifacts"] = deepcopy(state.get("artifacts", {}))
 
-        retry_results = execute_parallel(retry_tasks)
+        from copy import deepcopy
+
+        retry_input = deepcopy(
+            state
+        )
+
+        retry_results = execute_parallel(
+            [
+                (
+                    t[0],
+                    (
+                        t[1][0],
+                        t[1][1],
+                        retry_input
+                    )
+                )
+                for t in retry_tasks
+            ]
+        )
 
         retry_state = {
             "artifacts": {}
@@ -91,6 +109,18 @@ class DAGExecutor:
                     {}
                 )
             )
+            
+        state[
+            "execution"
+        ][
+            "retry_count"
+        ] += 1
+
+        state[
+            "execution"
+        ][
+            "failed_agents"
+        ] = failed_agents
 
         return merge_state(
             state,

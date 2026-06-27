@@ -26,6 +26,11 @@ def build_strategy(intents):
             "sentiment",
             "risk",
             "recommendation"
+        },
+
+        "fallback": {
+            "summary",
+            "sentiment"
         }
     }
 
@@ -49,7 +54,9 @@ def build_strategy(intents):
         "findings",
         "trend",
         "sentiment",
-        "risk"
+        "risk",
+        "root_cause",
+        "recommendation"
     ]
 
     return sorted(

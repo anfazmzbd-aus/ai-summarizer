@@ -16,7 +16,7 @@ def semantic_router(
         text
     )
     logger.info(
-        f"****PARSED SECTIONS: {sections}"
+        f"****PARSED SECTIONS after split: {sections}"
     )
     text = text.lower()
 

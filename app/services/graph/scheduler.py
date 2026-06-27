@@ -62,12 +62,26 @@ class Scheduler:
                 registry
             )
         )
-        
+        # --------------------------------------------------
+        # Restore preprocessing group
+        # (summary executes outside DAG)
+        # --------------------------------------------------
+
+        if (
+            "summary"
+            in selected_agents
+        ):
+
+            groups = [
+                ["summary"]
+            ] + groups
+
         execution_order = [
             agent
             for group in groups
             for agent in group
         ]
+
         metadata = {
             "resolved": True,
             "validated": True,

@@ -13265,3 +13265,1117 @@ Revenue increased by 12%.
 2026-06-24 12:51:08,707 | INFO | {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 12% may continue.'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
 2026-06-24 12:51:08,709 | INFO | ==============Application AI Summarizer==============
 2026-06-24 12:51:08,709 | INFO | ==============EXECUTION END==============
+2026-06-24 12:55:49,812 | INFO | ****agent_system
+2026-06-24 12:55:50,330 | INFO | ==============Application AI Summarizer==============
+2026-06-24 12:55:50,330 | INFO | ==============FastAPI app initialized==============
+2026-06-24 12:56:58,135 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-24 12:56:58,135 | INFO | ****INTENT SCORES: {'business_report': 2, 'meeting_notes': 5, 'research_report': 0}
+2026-06-24 12:56:58,135 | INFO | ****PRIMARY INTENT: meeting_notes
+2026-06-24 12:56:58,135 | INFO | ****SELECTED INTENTS: ['business_report', 'meeting_notes']
+2026-06-24 12:56:58,135 | INFO | ****STRATEGY (strategy builder): {'forecast', 'summary', 'recommendation', 'risk', 'sentiment', 'actions', 'root_cause', 'trend', 'insights'}
+2026-06-24 12:56:58,135 | INFO | ****STRATEGY agent_graph: ['summary', 'actions', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-24 12:56:58,135 | INFO | ****INPUT STRATEGY: ['summary', 'actions', 'insights', 'trend', 'sentiment', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-24 12:56:58,135 | INFO | ****PARSED SECTIONS: {'general': 'Meeting agenda:\nJohn should prepare the report.\nSarah must follow up.\nRevenue increased by 12%.'}
+2026-06-24 12:56:58,135 | INFO | ****SECTIONS: {'general': 'Meeting agenda:\nJohn should prepare the report.\nSarah must follow up.\nRevenue increased by 12%.'}
+2026-06-24 12:56:58,135 | INFO | ****Resolved execution order: ['summary', 'actions', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'forecast', 'recommendation', 'root_cause']
+2026-06-24 12:56:58,135 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'summary'}"]
+2026-06-24 12:56:58,135 | INFO | ****PARALLEL GROUPS (parallel groups): [['findings', 'actions', 'sentiment', 'insights'], ['risk', 'trend'], ['forecast', 'root_cause'], ['recommendation']]
+2026-06-24 12:56:58,135 | INFO | ****EXECUTION ORDER: ['findings', 'actions', 'sentiment', 'insights', 'risk', 'trend', 'forecast', 'root_cause', 'recommendation']
+2026-06-24 12:56:58,145 | INFO | ****PARALLEL GROUPS (scheduler): [['findings', 'actions', 'sentiment', 'insights'], ['risk', 'trend'], ['forecast', 'root_cause'], ['recommendation']]
+2026-06-24 12:56:58,145 | INFO | ****PREPROCESS START: summary
+2026-06-24 12:56:58,146 | INFO | ****SUMMARY INPUT:
+Meeting agenda:
+John should prepare the report.
+Sarah must follow up.
+Revenue increased by 12%.
+2026-06-24 12:56:58,146 | INFO | ****SUMMARY WORDS: 15
+2026-06-24 12:56:58,146 | INFO | ****PREPROCESS END: 0.000531s
+2026-06-24 12:56:58,146 | INFO | ****RUNNING AGENT: findings
+2026-06-24 12:56:58,146 | INFO | ****RUNNING AGENT: actions
+2026-06-24 12:56:58,146 | INFO | ****LOGGER TRACE START: findings
+2026-06-24 12:56:58,146 | INFO | ****LOGGER TRACE START: actions
+2026-06-24 12:56:58,146 | INFO | ****RUNNING AGENT: sentiment
+2026-06-24 12:56:58,146 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-24 12:56:58,146 | INFO | ****RUNNING AGENT: insights
+2026-06-24 12:56:58,146 | INFO | ****LOGGER TRACE START: sentiment
+2026-06-24 12:56:58,146 | INFO | ****FINDING TOOL RETURN: []
+2026-06-24 12:56:58,146 | INFO | ****LOGGER TRACE START: insights
+2026-06-24 12:56:58,146 | INFO | ****LOGGER TRACE END : sentiment | success | 3.9e-05
+2026-06-24 12:56:58,146 | INFO | ****LOGGER TRACE END : findings | success | 0.002485
+2026-06-24 12:56:58,146 | INFO | ****LOGGER TRACE END : insights | success | 0.00022
+2026-06-24 12:56:58,146 | INFO | ****COMPLETED AGENT: sentiment in 1.1e-05s
+2026-06-24 12:56:58,146 | INFO | ****COMPLETED AGENT: findings in 0.002458s
+2026-06-24 12:56:58,146 | INFO | ****COMPLETED AGENT: insights in 0.0002s
+2026-06-24 12:56:58,146 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-24 12:56:58,146 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-24 12:56:58,146 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-24 12:56:58,146 | INFO | ****ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-24 12:56:58,146 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-24 12:56:58,146 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%']}
+2026-06-24 12:56:58,146 | INFO | ****ACTION TOOL: ['John should prepare the report.', 'Sarah must follow up.']
+2026-06-24 12:56:58,146 | INFO | ****LOGGER TRACE END : actions | success | 0.006399
+2026-06-24 12:56:58,146 | INFO | ****COMPLETED AGENT: actions in 0.006358s
+2026-06-24 12:56:58,146 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-24 12:56:58,146 | INFO | ****ARTIFACTS: {'actions': ['John should prepare the report.', 'Sarah must follow up.']}
+2026-06-24 12:56:58,146 | INFO | ****PARALLEL EXECUTION:[{'agent': 'findings', 'duration': 0.002458, 'artifacts': {'findings': []}}, {'agent': 'actions', 'duration': 0.006358, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.']}}, {'agent': 'sentiment', 'duration': 1.1e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.0002, 'artifacts': {'insights': ['Revenue changed by 12%']}}]
+2026-06-24 12:56:58,146 | INFO | ****GROUP 0 RESULTS[{'agent': 'findings', 'duration': 0.002458, 'artifacts': {'findings': []}}, {'agent': 'actions', 'duration': 0.006358, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.']}}, {'agent': 'sentiment', 'duration': 1.1e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.0002, 'artifacts': {'insights': ['Revenue changed by 12%']}}]
+2026-06-24 12:56:58,146 | INFO | ****RUNNING AGENT: risk
+2026-06-24 12:56:58,146 | INFO | ****LOGGER TRACE START: risk
+2026-06-24 12:56:58,146 | INFO | ****RUNNING AGENT: trend
+2026-06-24 12:56:58,146 | INFO | ****LOGGER TRACE END : risk | success | 3.9e-05
+2026-06-24 12:56:58,146 | INFO | ****LOGGER TRACE START: trend
+2026-06-24 12:56:58,146 | INFO | ****COMPLETED AGENT: risk in 1.5e-05s
+2026-06-24 12:56:58,161 | INFO | ****TREND TOOL Trends: ['12% increase detected']
+2026-06-24 12:56:58,161 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-24 12:56:58,161 | INFO | ****TREND AGENT: ['12% increase detected']
+2026-06-24 12:56:58,162 | INFO | ****ARTIFACTS: {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk']}
+2026-06-24 12:56:58,162 | INFO | ****FORMATTED TREND AGENT: ['12% increase detected']
+2026-06-24 12:56:58,163 | INFO | ****LOGGER TRACE END : trend | success | 0.001709
+2026-06-24 12:56:58,163 | INFO | ****COMPLETED AGENT: trend in 0.001663s
+2026-06-24 12:56:58,163 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-24 12:56:58,163 | INFO | ****ARTIFACTS: {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'trends': ['12% increase detected']}
+2026-06-24 12:56:58,163 | INFO | ****PARALLEL EXECUTION:[{'agent': 'risk', 'duration': 1.5e-05, 'artifacts': {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk']}}, {'agent': 'trend', 'duration': 0.001663, 'artifacts': {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'trends': ['12% increase detected']}}]
+2026-06-24 12:56:58,163 | INFO | ****GROUP 1 RESULTS[{'agent': 'risk', 'duration': 1.5e-05, 'artifacts': {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk']}}, {'agent': 'trend', 'duration': 0.001663, 'artifacts': {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'trends': ['12% increase detected']}}]
+2026-06-24 12:56:58,163 | INFO | ****RUNNING AGENT: forecast
+2026-06-24 12:56:58,163 | INFO | ****RUNNING AGENT: root_cause
+2026-06-24 12:56:58,163 | INFO | ****LOGGER TRACE START: forecast
+2026-06-24 12:56:58,163 | INFO | ****LOGGER TRACE START: root_cause
+2026-06-24 12:56:58,163 | INFO | ****FORECAST INPUT: ['12% increase detected']
+2026-06-24 12:56:58,163 | INFO | ****ROOT CAUSE INPUT: ['Revenue changed by 12%'], ['12% increase detected'], ['Moderate Risk']
+2026-06-24 12:56:58,163 | INFO | ****LOGGER TRACE END : forecast | success | 0.000377
+2026-06-24 12:56:58,163 | INFO | ****LOGGER TRACE END : root_cause | success | 0.000344
+2026-06-24 12:56:58,163 | INFO | ****COMPLETED AGENT: forecast in 0.000358s
+2026-06-24 12:56:58,163 | INFO | ****COMPLETED AGENT: root_cause in 0.000323s
+2026-06-24 12:56:58,163 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-24 12:56:58,163 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-24 12:56:58,163 | INFO | ****ARTIFACTS: {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'forecasts': ['Growth trend of 12% may continue.']}
+2026-06-24 12:56:58,163 | INFO | ****ARTIFACTS: {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.']}
+2026-06-24 12:56:58,163 | INFO | ****PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.000358, 'artifacts': {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'forecasts': ['Growth trend of 12% may continue.']}}, {'agent': 'root_cause', 'duration': 0.000323, 'artifacts': {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.']}}]
+2026-06-24 12:56:58,163 | INFO | ****GROUP 2 RESULTS[{'agent': 'forecast', 'duration': 0.000358, 'artifacts': {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'forecasts': ['Growth trend of 12% may continue.']}}, {'agent': 'root_cause', 'duration': 0.000323, 'artifacts': {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.']}}]
+2026-06-24 12:56:58,163 | INFO | ****RUNNING AGENT: recommendation
+2026-06-24 12:56:58,163 | INFO | ****LOGGER TRACE START: recommendation
+2026-06-24 12:56:58,163 | INFO | ****LOGGER TRACE END : recommendation | success | 1.7e-05
+2026-06-24 12:56:58,163 | INFO | ****COMPLETED AGENT: recommendation in 9e-06s
+2026-06-24 12:56:58,163 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-24 12:56:58,163 | INFO | ****ARTIFACTS: {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'forecasts': ['Growth trend of 12% may continue.'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-24 12:56:58,163 | INFO | ****PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 9e-06, 'artifacts': {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'forecasts': ['Growth trend of 12% may continue.'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-24 12:56:58,163 | INFO | ****GROUP 3 RESULTS[{'agent': 'recommendation', 'duration': 9e-06, 'artifacts': {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'forecasts': ['Growth trend of 12% may continue.'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-24 12:56:58,163 | INFO | ****TRACE COUNT: 9
+2026-06-24 12:56:58,163 | INFO | ****TRACE COUNT METADATA: 9
+2026-06-24 12:56:58,163 | INFO | ****EXECUTION METADATA: {'agents_executed': ['findings', 'actions', 'sentiment', 'insights', 'risk', 'trend', 'forecast', 'root_cause', 'recommendation'], 'agent_count': 9, 'parallel_groups': [['findings', 'actions', 'sentiment', 'insights'], ['risk', 'trend'], ['forecast', 'root_cause'], ['recommendation']], 'timings': {'summary': 0.000531, 'findings': 0.002458, 'actions': 0.006358, 'sentiment': 1.1e-05, 'insights': 0.0002, 'risk': 1.5e-05, 'trend': 0.001663, 'forecast': 0.000358, 'root_cause': 0.000323, 'recommendation': 9e-06}, 'trace_count': 9, 'preprocessing': {'agent': 'summary', 'duration': 0.000531, 'output_size': 95}, 'total_execution_time': 0.027383, 'trace_sample': {'trace_id': '0ee9d3dd-584e-45b9-a95d-ed876d6fe930', 'execution_id': '9116ca33-1738-4c70-a84a-5cbf2ddab89a', 'agent': 'recommendation', 'started_at': '2026-06-24 12:56:58.163', 'start': 1034373.514144, 'input': {'context': {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}, 'selected_agents': []}, 'parallel_group': None, 'ended_at': '2026-06-24 12:56:58.163', 'end': 1034373.5141609, 'status': 'success', 'output': {'artifacts': {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'forecasts': ['Growth trend of 12% may continue.'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}, 'duration': 1.7e-05}, 'retry_count': 0, 'failed_agents': []}
+2026-06-24 12:56:58,163 | INFO | ****FINAL ARTIFACTS: 
+2026-06-24 12:56:58,163 | INFO | {'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'forecasts': ['Growth trend of 12% may continue.'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-24 12:56:58,180 | INFO | ==============Application AI Summarizer==============
+2026-06-24 12:56:58,180 | INFO | ==============EXECUTION END==============
+2026-06-24 13:44:54,190 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-24 13:44:54,195 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-24 13:44:54,195 | INFO | ****PRIMARY INTENT: business_report
+2026-06-24 13:44:54,195 | INFO | ****SELECTED INTENTS: []
+2026-06-24 13:44:54,195 | INFO | ****STRATEGY (strategy builder): {'summary'}
+2026-06-24 13:44:54,195 | INFO | ****STRATEGY agent_graph: ['summary']
+2026-06-24 13:44:54,197 | INFO | ****INPUT STRATEGY: ['summary']
+2026-06-24 13:44:54,197 | INFO | ****PARSED SECTIONS: {'general': '"John bought 3 apples for $5 each"'}
+2026-06-24 13:44:54,197 | INFO | ****SECTIONS: {'general': '"John bought 3 apples for $5 each"'}
+2026-06-24 13:44:54,197 | INFO | ****Resolved execution order: ['summary']
+2026-06-24 13:44:54,197 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'forecast', 'summary', 'findings', 'risk', 'sentiment', 'recommendation', 'root_cause', 'trend', 'insights'}"]
+2026-06-24 13:44:54,197 | INFO | ****PARALLEL GROUPS (parallel groups): []
+2026-06-24 13:44:54,197 | INFO | ****EXECUTION ORDER: []
+2026-06-24 13:44:54,197 | INFO | ****PARALLEL GROUPS (scheduler): []
+2026-06-24 13:44:54,197 | INFO | ****PREPROCESS START: summary
+2026-06-24 13:44:54,197 | INFO | ****SUMMARY INPUT:
+"John bought 3 apples for $5 each"
+2026-06-24 13:44:54,197 | INFO | ****SUMMARY WORDS: 7
+2026-06-24 13:44:54,197 | INFO | ****PREPROCESS END: 0.000744s
+2026-06-24 13:45:35,253 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-24 13:45:35,253 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-24 13:45:35,253 | INFO | ****PRIMARY INTENT: business_report
+2026-06-24 13:45:35,253 | INFO | ****SELECTED INTENTS: []
+2026-06-24 13:45:35,253 | INFO | ****STRATEGY (strategy builder): {'summary'}
+2026-06-24 13:45:35,253 | INFO | ****STRATEGY agent_graph: ['summary']
+2026-06-24 13:45:35,253 | INFO | ****INPUT STRATEGY: ['summary']
+2026-06-24 13:45:35,269 | INFO | ****PARSED SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-24 13:45:35,269 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-24 13:45:35,269 | INFO | ****Resolved execution order: ['summary']
+2026-06-24 13:45:35,269 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'forecast', 'summary', 'findings', 'risk', 'sentiment', 'recommendation', 'root_cause', 'trend', 'insights'}"]
+2026-06-24 13:45:35,269 | INFO | ****PARALLEL GROUPS (parallel groups): []
+2026-06-24 13:45:35,269 | INFO | ****EXECUTION ORDER: []
+2026-06-24 13:45:35,269 | INFO | ****PARALLEL GROUPS (scheduler): []
+2026-06-24 13:45:35,269 | INFO | ****PREPROCESS START: summary
+2026-06-24 13:45:35,269 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-24 13:45:35,269 | INFO | ****SUMMARY WORDS: 7
+2026-06-24 13:45:35,269 | INFO | ****PREPROCESS END: 0.000477s
+2026-06-24 13:48:32,020 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-24 13:48:32,020 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-24 13:48:32,020 | INFO | ****PRIMARY INTENT: business_report
+2026-06-24 13:48:32,020 | INFO | ****SELECTED INTENTS: []
+2026-06-24 13:48:32,020 | INFO | ****STRATEGY (strategy builder): {'summary'}
+2026-06-24 13:48:32,020 | INFO | ****STRATEGY agent_graph: ['summary']
+2026-06-24 13:48:32,020 | INFO | ****INPUT STRATEGY: ['summary']
+2026-06-24 13:48:32,020 | INFO | ****PARSED SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-24 13:48:32,020 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-24 13:48:32,020 | INFO | ****Resolved execution order: ['summary']
+2026-06-24 13:48:32,020 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'forecast', 'summary', 'findings', 'risk', 'sentiment', 'recommendation', 'root_cause', 'trend', 'insights'}"]
+2026-06-24 13:48:32,020 | INFO | ****PARALLEL GROUPS (parallel groups): []
+2026-06-24 13:48:32,020 | INFO | ****EXECUTION ORDER: []
+2026-06-24 13:48:32,020 | INFO | ****PARALLEL GROUPS (scheduler): []
+2026-06-24 13:48:32,020 | INFO | ****PREPROCESS START: summary
+2026-06-24 13:48:32,020 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-24 13:48:32,020 | INFO | ****SUMMARY WORDS: 7
+2026-06-24 13:48:32,020 | INFO | ****PREPROCESS END: 0.000461s
+2026-06-24 14:01:28,872 | INFO | ==============Serving home page==============
+2026-06-24 14:01:28,873 | INFO | ==============EXECUTION START==============
+2026-06-24 14:01:59,673 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-24 14:01:59,674 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-24 14:01:59,674 | INFO | ****PRIMARY INTENT: business_report
+2026-06-24 14:01:59,674 | INFO | ****SELECTED INTENTS: []
+2026-06-24 14:01:59,674 | INFO | ****STRATEGY (strategy builder): {'summary'}
+2026-06-24 14:01:59,674 | INFO | ****STRATEGY agent_graph: ['summary']
+2026-06-24 14:01:59,674 | INFO | ****INPUT STRATEGY: ['summary']
+2026-06-24 14:01:59,675 | INFO | ****PARSED SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-24 14:01:59,675 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-24 14:01:59,675 | INFO | ****Resolved execution order: ['summary']
+2026-06-24 14:01:59,675 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'forecast', 'summary', 'findings', 'risk', 'sentiment', 'recommendation', 'root_cause', 'trend', 'insights'}"]
+2026-06-24 14:01:59,675 | INFO | ****PARALLEL GROUPS (parallel groups): []
+2026-06-24 14:01:59,675 | INFO | ****EXECUTION ORDER: []
+2026-06-24 14:01:59,675 | INFO | ****PARALLEL GROUPS (scheduler): []
+2026-06-24 14:01:59,675 | INFO | ****PREPROCESS START: summary
+2026-06-24 14:01:59,675 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-24 14:01:59,675 | INFO | ****SUMMARY WORDS: 7
+2026-06-24 14:01:59,675 | INFO | ****PREPROCESS END: 0.00034s
+2026-06-24 14:22:31,341 | INFO | ****agent_system
+2026-06-24 14:24:41,318 | INFO | ****agent_system
+2026-06-24 14:24:41,829 | INFO | ==============Application AI Summarizer==============
+2026-06-24 14:24:41,829 | INFO | ==============FastAPI app initialized==============
+2026-06-24 14:24:47,968 | INFO | ****agent_system
+2026-06-24 14:24:48,418 | INFO | ==============Application AI Summarizer==============
+2026-06-24 14:24:48,418 | INFO | ==============FastAPI app initialized==============
+2026-06-24 14:24:53,817 | INFO | ==============Serving home page==============
+2026-06-24 14:24:53,817 | INFO | ==============EXECUTION START==============
+2026-06-24 14:24:58,001 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-24 14:24:58,001 | INFO | ****CONTEXT BUILDER agent_graph: []
+2026-06-24 14:24:58,001 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': '5ca5bdf7-a76d-4202-be3b-fad22add7215'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-24 14:24:58,001 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': '5ca5bdf7-a76d-4202-be3b-fad22add7215', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': '5ca5bdf7-a76d-4202-be3b-fad22add7215'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-24 14:24:58,001 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-24 14:24:58,001 | INFO | ****PRIMARY INTENT: business_report
+2026-06-24 14:24:58,001 | INFO | ****SELECTED INTENTS: []
+2026-06-24 14:24:58,001 | INFO | ****STRATEGY (strategy builder): {'summary'}
+2026-06-24 14:24:58,001 | INFO | ****STRATEGY agent_graph: ['summary']
+2026-06-24 14:24:58,001 | INFO | ****INPUT STRATEGY: ['summary']
+2026-06-24 14:24:58,001 | INFO | ****PARSED SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-24 14:24:58,001 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-24 14:24:58,001 | INFO | ****Resolved execution order: ['summary']
+2026-06-24 14:24:58,001 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'forecast', 'recommendation', 'insights', 'root_cause', 'sentiment', 'risk', 'trend', 'findings', 'summary'}"]
+2026-06-24 14:24:58,001 | INFO | ****PARALLEL GROUPS (parallel groups): []
+2026-06-24 14:24:58,001 | INFO | ****EXECUTION ORDER: []
+2026-06-24 14:24:58,001 | INFO | ****PARALLEL GROUPS (scheduler): []
+2026-06-24 14:24:58,001 | INFO | ****PREPROCESS START: summary
+2026-06-24 14:24:58,001 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-24 14:24:58,001 | INFO | ****SUMMARY WORDS: 7
+2026-06-24 14:24:58,001 | INFO | ****PREPROCESS END: 0.000154s
+2026-06-24 15:01:20,262 | INFO | ****agent_system
+2026-06-24 15:01:20,840 | INFO | ==============Application AI Summarizer==============
+2026-06-24 15:01:20,840 | INFO | ==============FastAPI app initialized==============
+2026-06-24 15:09:24,957 | INFO | ****agent_system
+2026-06-24 15:09:25,408 | INFO | ==============Application AI Summarizer==============
+2026-06-24 15:09:25,408 | INFO | ==============FastAPI app initialized==============
+2026-06-24 15:11:02,578 | INFO | ****agent_system
+2026-06-24 15:11:03,028 | INFO | ==============Application AI Summarizer==============
+2026-06-24 15:11:03,028 | INFO | ==============FastAPI app initialized==============
+2026-06-24 15:11:10,348 | INFO | ****agent_system
+2026-06-24 15:11:10,853 | INFO | ==============Application AI Summarizer==============
+2026-06-24 15:11:10,853 | INFO | ==============FastAPI app initialized==============
+2026-06-24 15:12:17,089 | INFO | ****agent_system
+2026-06-24 15:12:17,451 | INFO | ==============Application AI Summarizer==============
+2026-06-24 15:12:17,451 | INFO | ==============FastAPI app initialized==============
+2026-06-24 15:13:29,629 | INFO | ****agent_system
+2026-06-24 15:13:30,082 | INFO | ==============Application AI Summarizer==============
+2026-06-24 15:13:30,082 | INFO | ==============FastAPI app initialized==============
+2026-06-24 15:14:25,784 | INFO | ****agent_system
+2026-06-24 15:14:26,279 | INFO | ==============Application AI Summarizer==============
+2026-06-24 15:14:26,280 | INFO | ==============FastAPI app initialized==============
+2026-06-24 15:15:09,613 | INFO | ****agent_system
+2026-06-24 15:15:10,166 | INFO | ==============Application AI Summarizer==============
+2026-06-24 15:15:10,166 | INFO | ==============FastAPI app initialized==============
+2026-06-24 15:41:39,273 | INFO | ****agent_system
+2026-06-24 15:41:39,823 | INFO | ==============Application AI Summarizer==============
+2026-06-24 15:41:39,823 | INFO | ==============FastAPI app initialized==============
+2026-06-24 15:42:49,512 | INFO | ****agent_system
+2026-06-24 15:42:49,947 | INFO | ==============Application AI Summarizer==============
+2026-06-24 15:42:49,947 | INFO | ==============FastAPI app initialized==============
+2026-06-24 17:55:21,598 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-24 17:55:21,598 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'f297312e-2b92-43c4-981d-34bce0d77eda'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-24 17:55:21,598 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'f297312e-2b92-43c4-981d-34bce0d77eda', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'f297312e-2b92-43c4-981d-34bce0d77eda'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-24 17:55:21,598 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0, 'other_intent': 7}
+2026-06-24 17:55:21,598 | INFO | ****PRIMARY INTENT: other_intent
+2026-06-24 17:55:21,598 | INFO | ****SELECTED INTENTS: ['other_intent']
+2026-06-24 17:55:21,598 | INFO | ****agent_graph intent_info : {'primary_intent': 'other_intent', 'intents': ['other_intent'], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0, 'other_intent': 7}}
+2026-06-24 17:55:21,598 | INFO | ****STRATEGY (strategy builder): {'findings', 'sentiment', 'summary'}
+2026-06-24 17:55:21,598 | INFO | ****agent_graph STRATEGY : ['summary', 'findings', 'sentiment']
+2026-06-24 17:55:21,598 | INFO | ****INPUT STRATEGY: ['summary', 'findings', 'sentiment']
+2026-06-24 17:55:21,598 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-24 17:55:21,598 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-24 17:55:21,598 | INFO | ****Resolved execution order: ['summary', 'findings', 'sentiment']
+2026-06-24 17:55:21,598 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'forecast', 'risk', 'trend', 'insights', 'recommendation', 'summary', 'root_cause'}"]
+2026-06-24 17:55:21,598 | INFO | ****PARALLEL GROUPS (parallel groups): [['findings', 'sentiment']]
+2026-06-24 17:55:21,598 | INFO | ****EXECUTION ORDER: ['findings', 'sentiment']
+2026-06-24 17:55:21,598 | INFO | ****PARALLEL GROUPS (scheduler): [['findings', 'sentiment']]
+2026-06-24 17:55:21,598 | INFO | ****PREPROCESS START: summary
+2026-06-24 17:55:21,598 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-24 17:55:21,598 | INFO | ****SUMMARY WORDS: 7
+2026-06-24 17:55:21,598 | INFO | ****PREPROCESS END: 0.000329s
+2026-06-24 17:55:21,598 | INFO | ****RUNNING AGENT: findings
+2026-06-24 17:55:21,598 | INFO | ****LOGGER TRACE START: findings
+2026-06-24 17:55:21,598 | INFO | ****RUNNING AGENT: sentiment
+2026-06-24 17:55:21,598 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-24 17:55:21,598 | INFO | ****LOGGER TRACE START: sentiment
+2026-06-24 17:55:21,598 | INFO | ****FINDING TOOL RETURN: []
+2026-06-24 17:55:21,598 | INFO | ****LOGGER TRACE END : sentiment | success | 3.5e-05
+2026-06-24 17:55:21,598 | INFO | ****LOGGER TRACE END : findings | success | 0.001399
+2026-06-24 17:55:21,598 | INFO | ****COMPLETED AGENT: sentiment in 1.4e-05s
+2026-06-24 17:55:21,598 | INFO | ****COMPLETED AGENT: findings in 0.000976s
+2026-06-24 17:55:21,598 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-24 17:55:21,598 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-24 17:55:21,614 | INFO | ****ARTIFACTS: {'sentiment': ['Neutral']}
+2026-06-24 17:55:21,614 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-24 17:55:21,615 | INFO | ****PARALLEL EXECUTION:[{'agent': 'findings', 'duration': 0.000976, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 1.4e-05, 'artifacts': {'sentiment': ['Neutral']}}]
+2026-06-24 17:55:21,616 | INFO | ****GROUP 0 RESULTS[{'agent': 'findings', 'duration': 0.000976, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 1.4e-05, 'artifacts': {'sentiment': ['Neutral']}}]
+2026-06-24 17:55:21,616 | INFO | ****TRACE COUNT: 2
+2026-06-24 17:55:21,616 | INFO | ****TRACE COUNT METADATA: 2
+2026-06-24 17:55:21,616 | INFO | ****EXECUTION METADATA: {'agents_executed': ['findings', 'sentiment'], 'agent_count': 2, 'parallel_groups': [['findings', 'sentiment']], 'timings': {'summary': 0.000329, 'findings': 0.000976, 'sentiment': 1.4e-05}, 'trace_count': 2, 'preprocessing': {'agent': 'summary', 'duration': 0.000329, 'output_size': 32}, 'total_execution_time': 0.009997, 'trace_sample': {'trace_id': 'a3ea4c49-6452-4a38-a289-e8d7205c3660', 'execution_id': 'f297312e-2b92-43c4-981d-34bce0d77eda', 'agent': 'findings', 'started_at': '2026-06-24 17:55:21.598', 'start': 1052276.9578749, 'input': {'context': {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}, 'selected_agents': []}, 'parallel_group': None, 'ended_at': '2026-06-24 17:55:21.598', 'end': 1052276.9592739, 'status': 'success', 'output': {'artifacts': {'findings': []}}, 'duration': 0.001399}, 'retry_count': 0, 'failed_agents': []}
+2026-06-24 17:55:21,616 | INFO | ****FINAL ARTIFACTS: 
+2026-06-24 17:55:21,616 | INFO | {'findings': [], 'sentiment': ['Neutral']}
+2026-06-24 17:55:21,633 | INFO | ==============Application AI Summarizer==============
+2026-06-24 17:55:21,633 | INFO | ==============EXECUTION END==============
+2026-06-25 19:55:12,401 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-25 19:55:12,417 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'b0b2f44e-9a92-4aef-9001-8e8589dae701'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-25 19:55:12,417 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'b0b2f44e-9a92-4aef-9001-8e8589dae701', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'b0b2f44e-9a92-4aef-9001-8e8589dae701'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-25 19:55:12,421 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0, 'other_intent': 7}
+2026-06-25 19:55:12,422 | INFO | ****PRIMARY INTENT: other_intent
+2026-06-25 19:55:12,422 | INFO | ****SELECTED INTENTS: ['other_intent']
+2026-06-25 19:55:12,422 | INFO | ****agent_graph intent_info : {'primary_intent': 'other_intent', 'intents': ['other_intent'], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0, 'other_intent': 7}}
+2026-06-25 19:55:12,422 | INFO | ****STRATEGY (strategy builder): {'findings', 'sentiment', 'summary'}
+2026-06-25 19:55:12,422 | INFO | ****agent_graph STRATEGY : ['summary', 'findings', 'sentiment']
+2026-06-25 19:55:12,425 | INFO | ****INPUT STRATEGY: ['summary', 'findings', 'sentiment']
+2026-06-25 19:55:12,426 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-25 19:55:12,426 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-25 19:55:12,426 | INFO | ****Resolved execution order: ['summary', 'findings', 'sentiment']
+2026-06-25 19:55:12,429 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'forecast', 'risk', 'trend', 'insights', 'recommendation', 'summary', 'root_cause'}"]
+2026-06-25 19:55:12,429 | INFO | ****PARALLEL GROUPS (parallel groups): [['findings', 'sentiment']]
+2026-06-25 19:55:12,431 | INFO | ****EXECUTION ORDER: ['findings', 'sentiment']
+2026-06-25 19:55:12,431 | INFO | ****PARALLEL GROUPS (scheduler): [['findings', 'sentiment']]
+2026-06-25 19:55:12,432 | INFO | ****PREPROCESS START: summary
+2026-06-25 19:55:12,434 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-25 19:55:12,434 | INFO | ****SUMMARY WORDS: 7
+2026-06-25 19:55:12,434 | INFO | ****PREPROCESS END: 0.001195s
+2026-06-25 19:55:12,446 | INFO | ****RUNNING AGENT: findings
+2026-06-25 19:55:12,449 | INFO | ****LOGGER TRACE START: findings
+2026-06-25 19:55:12,452 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-25 19:55:12,452 | INFO | ****RUNNING AGENT: sentiment
+2026-06-25 19:55:12,452 | INFO | ****FINDING TOOL RETURN: []
+2026-06-25 19:55:12,452 | INFO | ****LOGGER TRACE START: sentiment
+2026-06-25 19:55:12,453 | INFO | ****LOGGER TRACE END : sentiment | success | 0.000908
+2026-06-25 19:55:12,453 | INFO | ****LOGGER TRACE END : findings | success | 0.003352
+2026-06-25 19:55:12,453 | INFO | ****COMPLETED AGENT: sentiment in 0.000787s
+2026-06-25 19:55:12,453 | INFO | ****COMPLETED AGENT: findings in 0.002786s
+2026-06-25 19:55:12,453 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-25 19:55:12,456 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-25 19:55:12,456 | INFO | ****ARTIFACTS: {'sentiment': ['Neutral']}
+2026-06-25 19:55:12,458 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-25 19:55:12,463 | INFO | ****PARALLEL EXECUTION:[{'agent': 'findings', 'duration': 0.002786, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 0.000787, 'artifacts': {'sentiment': ['Neutral']}}]
+2026-06-25 19:55:12,466 | INFO | ****GROUP 0 RESULTS[{'agent': 'findings', 'duration': 0.002786, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 0.000787, 'artifacts': {'sentiment': ['Neutral']}}]
+2026-06-25 19:55:12,466 | INFO | ****TRACE COUNT: 4
+2026-06-25 19:55:12,467 | INFO | ****TRACE COUNT METADATA: 4
+2026-06-25 19:55:12,469 | INFO | ****EXECUTION METADATA: {'agents_executed': ['findings', 'sentiment'], 'agent_count': 2, 'parallel_groups': [['findings', 'sentiment']], 'timings': {'summary': 0.001195, 'findings': 0.002786, 'sentiment': 0.000787}, 'trace_count': 4, 'preprocessing': {'agent': 'summary', 'duration': 0.001195, 'output_size': 32}, 'total_execution_time': 0.051278, 'trace_sample': {'trace_id': 'fe958b8a-1c0d-4fcb-b42c-54be715ba6e3', 'execution_id': 'b0b2f44e-9a92-4aef-9001-8e8589dae701', 'agent': 'findings', 'started_at': '2026-06-25 19:55:12.451', 'start': 1145879.9620166, 'input': {'context': {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}, 'selected_agents': []}, 'parallel_group': None, 'ended_at': '2026-06-25 19:55:12.453', 'end': 1145879.9653683, 'status': 'success', 'output': {'artifacts': {'findings': []}}, 'duration': 0.003352}, 'retry_count': 0, 'failed_agents': []}
+2026-06-25 19:55:12,472 | INFO | ****FINAL ARTIFACTS: 
+2026-06-25 19:55:12,473 | INFO | {'findings': [], 'sentiment': ['Neutral']}
+2026-06-25 19:55:12,580 | INFO | ==============Application AI Summarizer==============
+2026-06-25 19:55:12,580 | INFO | ==============EXECUTION END==============
+2026-06-26 08:01:04,166 | INFO | ****agent_system
+2026-06-26 08:01:04,536 | INFO | ==============Application AI Summarizer==============
+2026-06-26 08:01:04,536 | INFO | ==============FastAPI app initialized==============
+2026-06-26 08:01:16,257 | INFO | ==============Serving home page==============
+2026-06-26 08:01:16,258 | INFO | ==============EXECUTION START==============
+2026-06-26 08:01:21,493 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-26 08:01:21,498 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'eb15ec7d-f3b3-4524-911a-24df8e20461f'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-26 08:01:21,498 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'eb15ec7d-f3b3-4524-911a-24df8e20461f', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'eb15ec7d-f3b3-4524-911a-24df8e20461f'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-26 08:01:21,498 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0, 'other_intent': 7}
+2026-06-26 08:01:21,498 | INFO | ****PRIMARY INTENT: other_intent
+2026-06-26 08:01:21,498 | INFO | ****SELECTED INTENTS: ['other_intent']
+2026-06-26 08:01:21,498 | INFO | ****agent_graph intent_info : {'primary_intent': 'other_intent', 'intents': ['other_intent'], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0, 'other_intent': 7}}
+2026-06-26 08:01:21,498 | INFO | ****STRATEGY (strategy builder): {'summary', 'sentiment', 'findings'}
+2026-06-26 08:01:21,498 | INFO | ****agent_graph STRATEGY : ['summary', 'findings', 'sentiment']
+2026-06-26 08:01:21,498 | INFO | ****INPUT STRATEGY: ['summary', 'findings', 'sentiment']
+2026-06-26 08:01:21,498 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 08:01:21,498 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 08:01:21,498 | INFO | ****Resolved execution order: ['summary', 'findings', 'sentiment']
+2026-06-26 08:01:21,498 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'forecast', 'insights', 'root_cause', 'recommendation', 'risk', 'summary', 'trend'}"]
+2026-06-26 08:01:21,498 | INFO | ****PARALLEL GROUPS (parallel groups): [['sentiment', 'findings']]
+2026-06-26 08:01:21,498 | INFO | ****EXECUTION ORDER: ['summary', 'sentiment', 'findings']
+2026-06-26 08:01:21,498 | INFO | ****PARALLEL GROUPS (scheduler): [['summary'], ['sentiment', 'findings']]
+2026-06-26 08:01:21,498 | INFO | ****PREPROCESS START: summary
+2026-06-26 08:01:21,498 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-26 08:01:21,498 | INFO | ****SUMMARY WORDS: 7
+2026-06-26 08:01:21,498 | INFO | ****PREPROCESS END: 0.000306s
+2026-06-26 08:01:21,498 | INFO | ****RUNNING AGENT: sentiment
+2026-06-26 08:01:21,498 | INFO | ****LOGGER TRACE START: sentiment
+2026-06-26 08:01:21,498 | INFO | ****RUNNING AGENT: findings
+2026-06-26 08:01:21,498 | INFO | ****LOGGER TRACE END : sentiment | success | 3.1e-05
+2026-06-26 08:01:21,498 | INFO | ****LOGGER TRACE START: findings
+2026-06-26 08:01:21,498 | INFO | ****COMPLETED AGENT: sentiment in 1.1e-05s
+2026-06-26 08:01:21,498 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-26 08:01:21,498 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-26 08:01:21,498 | INFO | ****FINDING TOOL RETURN: []
+2026-06-26 08:01:21,498 | INFO | ****ARTIFACTS: {'sentiment': ['Neutral']}
+2026-06-26 08:01:21,498 | INFO | ****LOGGER TRACE END : findings | success | 0.000829
+2026-06-26 08:01:21,498 | INFO | ****COMPLETED AGENT: findings in 0.000782s
+2026-06-26 08:01:21,498 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-26 08:01:21,498 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-26 08:01:21,498 | INFO | ****PARALLEL EXECUTION:[{'agent': 'sentiment', 'duration': 1.1e-05, 'artifacts': {'sentiment': ['Neutral']}}, {'agent': 'findings', 'duration': 0.000782, 'artifacts': {'findings': []}}]
+2026-06-26 08:01:21,498 | INFO | ****GROUP 1 RESULTS[{'agent': 'sentiment', 'duration': 1.1e-05, 'artifacts': {'sentiment': ['Neutral']}}, {'agent': 'findings', 'duration': 0.000782, 'artifacts': {'findings': []}}]
+2026-06-26 08:01:21,498 | INFO | ****TRACE COUNT: 2
+2026-06-26 08:01:21,498 | INFO | ****TRACE COUNT METADATA: 2
+2026-06-26 08:01:21,498 | INFO | ****EXECUTION METADATA: {'agents_executed': ['sentiment', 'findings'], 'agent_count': 2, 'parallel_groups': [['summary'], ['sentiment', 'findings']], 'timings': {'summary': 0.000306, 'sentiment': 1.1e-05, 'findings': 0.000782}, 'trace_count': 2, 'preprocessing': {'agent': 'summary', 'duration': 0.000306, 'output_size': 32}, 'total_execution_time': 0.01254, 'trace_sample': {'trace_id': '6c2df006-be84-4595-aeb5-b82d87a9731c', 'execution_id': 'eb15ec7d-f3b3-4524-911a-24df8e20461f', 'agent': 'findings', 'started_at': '2026-06-26 08:01:21.498', 'start': 1189449.0191125, 'input': {'context': {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}, 'selected_agents': []}, 'parallel_group': None, 'ended_at': '2026-06-26 08:01:21.498', 'end': 1189449.0199415, 'status': 'success', 'output': {'artifacts': {'findings': []}}, 'duration': 0.000829}, 'retry_count': 0, 'failed_agents': []}
+2026-06-26 08:01:21,515 | INFO | ****FINAL ARTIFACTS: 
+2026-06-26 08:01:21,515 | INFO | {'sentiment': ['Neutral'], 'findings': []}
+2026-06-26 08:01:21,515 | INFO | ==============Application AI Summarizer==============
+2026-06-26 08:01:21,515 | INFO | ==============EXECUTION END==============
+2026-06-26 08:12:37,190 | INFO | ==============Serving home page==============
+2026-06-26 08:12:37,190 | INFO | ==============EXECUTION START==============
+2026-06-26 08:17:06,375 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-26 08:17:06,375 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'c8455813-7ca0-4adc-9dd5-d58ffc4af6c7'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-26 08:17:06,375 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'c8455813-7ca0-4adc-9dd5-d58ffc4af6c7', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'c8455813-7ca0-4adc-9dd5-d58ffc4af6c7'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-26 08:17:06,375 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0, 'other_intent': 7}
+2026-06-26 08:17:06,375 | INFO | ****PRIMARY INTENT: other_intent
+2026-06-26 08:17:06,375 | INFO | ****SELECTED INTENTS: ['other_intent']
+2026-06-26 08:17:06,375 | INFO | ****agent_graph intent_info : {'primary_intent': 'other_intent', 'intents': ['other_intent'], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0, 'other_intent': 7}}
+2026-06-26 08:17:06,375 | INFO | ****STRATEGY (strategy builder): {'summary', 'sentiment', 'findings'}
+2026-06-26 08:17:06,375 | INFO | ****agent_graph STRATEGY : ['summary', 'findings', 'sentiment']
+2026-06-26 08:17:06,375 | INFO | ****INPUT STRATEGY: ['summary', 'findings', 'sentiment']
+2026-06-26 08:17:06,375 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 08:17:06,375 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 08:17:06,375 | INFO | ****Resolved execution order: ['summary', 'findings', 'sentiment']
+2026-06-26 08:17:06,375 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'forecast', 'insights', 'root_cause', 'recommendation', 'risk', 'summary', 'trend'}"]
+2026-06-26 08:17:06,382 | INFO | ****PARALLEL GROUPS (parallel groups): [['sentiment', 'findings']]
+2026-06-26 08:17:06,382 | INFO | ****EXECUTION ORDER: ['summary', 'sentiment', 'findings']
+2026-06-26 08:17:06,382 | INFO | ****PARALLEL GROUPS (scheduler): [['summary'], ['sentiment', 'findings']]
+2026-06-26 08:17:06,382 | INFO | ****PREPROCESS START: summary
+2026-06-26 08:17:06,382 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-26 08:17:06,382 | INFO | ****SUMMARY WORDS: 7
+2026-06-26 08:17:06,382 | INFO | ****PREPROCESS END: 0.000497s
+2026-06-26 08:17:06,382 | INFO | ****RUNNING AGENT: sentiment
+2026-06-26 08:17:06,382 | INFO | ****LOGGER TRACE START: sentiment
+2026-06-26 08:17:06,382 | INFO | ****RUNNING AGENT: findings
+2026-06-26 08:17:06,382 | INFO | ****LOGGER TRACE END : sentiment | success | 2.9e-05
+2026-06-26 08:17:06,382 | INFO | ****LOGGER TRACE START: findings
+2026-06-26 08:17:06,382 | INFO | ****COMPLETED AGENT: sentiment in 1.1e-05s
+2026-06-26 08:17:06,382 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-26 08:17:06,382 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-26 08:17:06,382 | INFO | ****FINDING TOOL RETURN: []
+2026-06-26 08:17:06,382 | INFO | ****ARTIFACTS: {'sentiment': ['Neutral']}
+2026-06-26 08:17:06,382 | INFO | ****LOGGER TRACE END : findings | success | 0.000764
+2026-06-26 08:17:06,382 | INFO | ****COMPLETED AGENT: findings in 0.00074s
+2026-06-26 08:17:06,382 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-26 08:17:06,382 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-26 08:17:06,382 | INFO | ****PARALLEL EXECUTION:[{'agent': 'sentiment', 'duration': 1.1e-05, 'artifacts': {'sentiment': ['Neutral']}}, {'agent': 'findings', 'duration': 0.00074, 'artifacts': {'findings': []}}]
+2026-06-26 08:17:06,382 | INFO | ****GROUP 1 RESULTS[{'agent': 'sentiment', 'duration': 1.1e-05, 'artifacts': {'sentiment': ['Neutral']}}, {'agent': 'findings', 'duration': 0.00074, 'artifacts': {'findings': []}}]
+2026-06-26 08:17:06,382 | INFO | ****TRACE COUNT: 4
+2026-06-26 08:17:06,382 | INFO | ****TRACE COUNT METADATA: 4
+2026-06-26 08:17:06,382 | INFO | ****EXECUTION METADATA: {'agents_executed': ['sentiment', 'findings'], 'agent_count': 2, 'parallel_groups': [['summary'], ['sentiment', 'findings']], 'timings': {'summary': 0.000497, 'sentiment': 1.1e-05, 'findings': 0.00074}, 'trace_count': 4, 'preprocessing': {'agent': 'summary', 'duration': 0.000497, 'output_size': 32}, 'total_execution_time': 0.010248, 'trace_sample': {'trace_id': '2a1c42df-771b-467f-80b7-6bc56ebb3093', 'execution_id': 'c8455813-7ca0-4adc-9dd5-d58ffc4af6c7', 'agent': 'findings', 'started_at': '2026-06-26 08:17:06.382', 'start': 1190393.896972, 'input': {'context': {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}, 'selected_agents': []}, 'parallel_group': None, 'ended_at': '2026-06-26 08:17:06.382', 'end': 1190393.8977355, 'status': 'success', 'output': {'artifacts': {'findings': []}}, 'duration': 0.000764}, 'retry_count': 0, 'failed_agents': []}
+2026-06-26 08:17:06,382 | INFO | ****FINAL ARTIFACTS: 
+2026-06-26 08:17:06,382 | INFO | {'sentiment': ['Neutral'], 'findings': []}
+2026-06-26 08:17:06,382 | INFO | ==============Application AI Summarizer==============
+2026-06-26 08:17:06,382 | INFO | ==============EXECUTION END==============
+2026-06-26 08:18:48,869 | INFO | ****agent_system
+2026-06-26 08:18:49,660 | INFO | ==============Application AI Summarizer==============
+2026-06-26 08:18:49,660 | INFO | ==============FastAPI app initialized==============
+2026-06-26 08:19:02,162 | INFO | ==============Serving home page==============
+2026-06-26 08:19:02,162 | INFO | ==============EXECUTION START==============
+2026-06-26 08:19:04,122 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-26 08:19:04,122 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'a2db051b-2d16-4656-9c39-45baa16c7c8b'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-26 08:19:04,122 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'a2db051b-2d16-4656-9c39-45baa16c7c8b', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'a2db051b-2d16-4656-9c39-45baa16c7c8b'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-26 08:19:04,122 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-26 08:19:04,122 | INFO | ****PRIMARY INTENT: business_report
+2026-06-26 08:19:04,122 | INFO | ****SELECTED INTENTS: []
+2026-06-26 08:19:04,122 | INFO | ****agent_graph intent_info : {'primary_intent': 'business_report', 'intents': [], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}}
+2026-06-26 08:19:04,122 | INFO | ****STRATEGY (strategy builder): {'summary'}
+2026-06-26 08:19:04,122 | INFO | ****agent_graph STRATEGY : ['summary']
+2026-06-26 08:19:04,122 | INFO | ****INPUT STRATEGY: ['summary']
+2026-06-26 08:19:04,122 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 08:19:04,122 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 08:19:04,122 | INFO | ****Resolved execution order: ['summary']
+2026-06-26 08:19:04,122 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'summary', 'insights', 'risk', 'sentiment', 'root_cause', 'trend', 'findings', 'forecast', 'recommendation'}"]
+2026-06-26 08:19:04,122 | INFO | ****PARALLEL GROUPS (parallel groups): []
+2026-06-26 08:19:04,122 | INFO | ****EXECUTION ORDER: ['summary']
+2026-06-26 08:19:04,122 | INFO | ****PARALLEL GROUPS (scheduler): [['summary']]
+2026-06-26 08:19:04,122 | INFO | ****PREPROCESS START: summary
+2026-06-26 08:19:04,122 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-26 08:19:04,122 | INFO | ****SUMMARY WORDS: 7
+2026-06-26 08:19:04,122 | INFO | ****PREPROCESS END: 0.000452s
+2026-06-26 08:55:26,279 | INFO | ****agent_system
+2026-06-26 08:55:28,018 | INFO | ==============Application AI Summarizer==============
+2026-06-26 08:55:28,018 | INFO | ==============FastAPI app initialized==============
+2026-06-26 08:55:34,651 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-26 08:55:34,651 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'd674a0b4-5fcf-49fe-9366-2a7fded48f3a'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-26 08:55:34,651 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'd674a0b4-5fcf-49fe-9366-2a7fded48f3a', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'd674a0b4-5fcf-49fe-9366-2a7fded48f3a'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-26 08:55:34,654 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-26 08:55:34,654 | INFO | ****PRIMARY INTENT: business_report
+2026-06-26 08:55:34,654 | INFO | ****SELECTED INTENTS: []
+2026-06-26 08:55:34,654 | INFO | ****agent_graph intent_info : {'primary_intent': 'business_report', 'intents': [], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}}
+2026-06-26 08:55:34,654 | INFO | ****STRATEGY (strategy builder): {'summary'}
+2026-06-26 08:55:34,654 | INFO | ****agent_graph STRATEGY : ['summary']
+2026-06-26 08:55:34,654 | INFO | ****INPUT STRATEGY: ['summary']
+2026-06-26 08:55:34,654 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 08:55:34,654 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 08:55:34,654 | INFO | ****Resolved execution order: ['summary']
+2026-06-26 08:55:34,654 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'insights', 'sentiment', 'summary', 'trend', 'risk', 'root_cause', 'recommendation', 'forecast', 'findings'}"]
+2026-06-26 08:55:34,654 | INFO | ****PARALLEL GROUPS (parallel groups): []
+2026-06-26 08:55:34,654 | INFO | ****EXECUTION ORDER: ['summary']
+2026-06-26 08:55:34,654 | INFO | ****PARALLEL GROUPS (scheduler): [['summary']]
+2026-06-26 08:55:34,654 | INFO | ****PREPROCESS START: summary
+2026-06-26 08:55:34,654 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-26 08:55:34,654 | INFO | ****SUMMARY WORDS: 7
+2026-06-26 08:55:34,654 | INFO | ****PREPROCESS END: 0.000136s
+2026-06-26 08:55:34,654 | INFO | ****TRACE COUNT: 0
+2026-06-26 08:55:34,654 | INFO | ****TRACE COUNT METADATA: 0
+2026-06-26 08:55:34,654 | INFO | ****EXECUTION METADATA: {'agents_executed': [], 'agent_count': 0, 'parallel_groups': [['summary']], 'timings': {'summary': 0.000136}, 'trace_count': 0, 'preprocessing': {'agent': 'summary', 'duration': 0.000136, 'output_size': 32}, 'total_execution_time': 0.002351, 'trace_sample': None, 'retry_count': 0, 'failed_agents': []}
+2026-06-26 08:55:34,654 | INFO | ****FINAL ARTIFACTS: 
+2026-06-26 08:55:34,654 | INFO | {}
+2026-06-26 08:55:34,668 | INFO | ==============Application AI Summarizer==============
+2026-06-26 08:55:34,668 | INFO | ==============EXECUTION END==============
+2026-06-26 08:58:39,691 | INFO | ****agent_system
+2026-06-26 08:58:40,356 | INFO | ==============Application AI Summarizer==============
+2026-06-26 08:58:40,356 | INFO | ==============FastAPI app initialized==============
+2026-06-26 08:59:05,236 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-26 08:59:05,236 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'cc890d0d-60b4-40c6-a7b0-ce7aa548e93a'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-26 08:59:05,236 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'cc890d0d-60b4-40c6-a7b0-ce7aa548e93a', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'cc890d0d-60b4-40c6-a7b0-ce7aa548e93a'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-26 08:59:05,236 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-26 08:59:05,236 | INFO | ****PRIMARY INTENT: business_report
+2026-06-26 08:59:05,236 | INFO | ****SELECTED INTENTS: []
+2026-06-26 08:59:05,236 | INFO | ****agent_graph intent_info : {'primary_intent': 'business_report', 'intents': [], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}}
+2026-06-26 08:59:05,236 | INFO | ****STRATEGY (strategy builder): {'summary'}
+2026-06-26 08:59:05,236 | INFO | ****agent_graph STRATEGY : ['summary']
+2026-06-26 08:59:05,236 | INFO | ****INPUT STRATEGY: ['summary']
+2026-06-26 08:59:05,236 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 08:59:05,236 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 08:59:05,236 | INFO | ****Resolved execution order: ['summary']
+2026-06-26 08:59:05,236 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'trend', 'summary', 'forecast', 'recommendation', 'root_cause', 'sentiment', 'risk', 'insights', 'findings'}"]
+2026-06-26 08:59:05,236 | INFO | ****PARALLEL GROUPS (parallel groups): []
+2026-06-26 08:59:05,236 | INFO | ****EXECUTION ORDER: ['summary']
+2026-06-26 08:59:05,236 | INFO | ****PARALLEL GROUPS (scheduler): [['summary']]
+2026-06-26 08:59:05,236 | INFO | ****PREPROCESS START: summary
+2026-06-26 08:59:05,236 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-26 08:59:05,236 | INFO | ****SUMMARY WORDS: 7
+2026-06-26 08:59:05,236 | INFO | ****PREPROCESS END: 0.000256s
+2026-06-26 08:59:05,236 | INFO | ****TRACE COUNT: 0
+2026-06-26 08:59:05,236 | INFO | ****TRACE COUNT METADATA: 0
+2026-06-26 08:59:05,236 | INFO | ****EXECUTION METADATA: {'agents_executed': [], 'agent_count': 0, 'parallel_groups': [], 'timings': {'summary': 0.000256}, 'trace_count': 0, 'preprocessing': {'agent': 'summary', 'duration': 0.000256, 'output_size': 32}, 'total_execution_time': 0.003598, 'trace_sample': None, 'retry_count': 0, 'failed_agents': []}
+2026-06-26 08:59:05,249 | INFO | ****FINAL ARTIFACTS: 
+2026-06-26 08:59:05,249 | INFO | {}
+2026-06-26 08:59:05,249 | INFO | ==============Application AI Summarizer==============
+2026-06-26 08:59:05,249 | INFO | ==============EXECUTION END==============
+2026-06-26 09:13:29,098 | INFO | ****agent_system
+2026-06-26 09:13:29,448 | INFO | ==============Application AI Summarizer==============
+2026-06-26 09:13:29,448 | INFO | ==============FastAPI app initialized==============
+2026-06-26 09:13:55,391 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-26 09:13:55,391 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'a22780c1-7a8d-4a05-a769-dd0135ffca00'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-26 09:13:55,391 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'a22780c1-7a8d-4a05-a769-dd0135ffca00', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'a22780c1-7a8d-4a05-a769-dd0135ffca00'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-26 09:13:55,391 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-26 09:13:55,391 | INFO | ****PRIMARY INTENT: business_report
+2026-06-26 09:13:55,391 | INFO | ****SELECTED INTENTS: []
+2026-06-26 09:13:55,391 | INFO | ****agent_graph intent_info : {'primary_intent': 'business_report', 'intents': [], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}}
+2026-06-26 09:13:55,391 | INFO | ****STRATEGY (strategy builder): {'summary'}
+2026-06-26 09:13:55,391 | INFO | ****agent_graph STRATEGY : ['summary']
+2026-06-26 09:13:55,391 | INFO | ****INPUT STRATEGY: ['summary']
+2026-06-26 09:13:55,391 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 09:13:55,391 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 09:13:55,391 | INFO | ****Resolved execution order: ['summary']
+2026-06-26 09:13:55,391 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'trend', 'insights', 'root_cause', 'summary', 'sentiment', 'risk', 'recommendation', 'forecast', 'findings'}"]
+2026-06-26 09:13:55,391 | INFO | ****PARALLEL GROUPS (parallel groups): []
+2026-06-26 09:13:55,391 | INFO | ****EXECUTION ORDER: ['summary']
+2026-06-26 09:13:55,391 | INFO | ****PARALLEL GROUPS (scheduler): [['summary']]
+2026-06-26 09:13:55,391 | INFO | ****PREPROCESS START: summary
+2026-06-26 09:13:55,391 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-26 09:13:55,391 | INFO | ****SUMMARY WORDS: 7
+2026-06-26 09:23:33,667 | INFO | ****agent_system
+2026-06-26 09:23:34,381 | INFO | ==============Application AI Summarizer==============
+2026-06-26 09:23:34,381 | INFO | ==============FastAPI app initialized==============
+2026-06-26 09:23:48,879 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-26 09:23:48,879 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'a4120df3-cc61-4e2e-a1d2-79cdc1732060'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-26 09:23:48,879 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'a4120df3-cc61-4e2e-a1d2-79cdc1732060', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'a4120df3-cc61-4e2e-a1d2-79cdc1732060'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-26 09:23:48,879 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-26 09:23:48,879 | INFO | ****PRIMARY INTENT: business_report
+2026-06-26 09:23:48,879 | INFO | ****SELECTED INTENTS: []
+2026-06-26 09:23:48,879 | INFO | ****agent_graph intent_info : {'primary_intent': 'business_report', 'intents': [], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}}
+2026-06-26 09:23:48,879 | INFO | ****STRATEGY (strategy builder): {'summary'}
+2026-06-26 09:23:48,890 | INFO | ****agent_graph STRATEGY : ['summary']
+2026-06-26 09:23:48,890 | INFO | ****INPUT STRATEGY: ['summary']
+2026-06-26 09:23:48,890 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 09:23:48,890 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 09:23:48,890 | INFO | ****Resolved execution order: ['summary']
+2026-06-26 09:23:48,890 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'insights', 'risk', 'findings', 'recommendation', 'trend', 'summary', 'forecast', 'root_cause', 'sentiment'}"]
+2026-06-26 09:23:48,890 | INFO | ****PARALLEL GROUPS (parallel groups): []
+2026-06-26 09:23:48,890 | INFO | ****EXECUTION ORDER: ['summary']
+2026-06-26 09:23:48,890 | INFO | ****PARALLEL GROUPS (scheduler): [['summary']]
+2026-06-26 09:23:48,890 | INFO | ****PREPROCESS START: summary
+2026-06-26 09:23:48,890 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-26 09:23:48,890 | INFO | ****SUMMARY WORDS: 7
+2026-06-26 09:39:47,271 | INFO | ****agent_system
+2026-06-26 09:39:47,633 | INFO | ==============Application AI Summarizer==============
+2026-06-26 09:39:47,633 | INFO | ==============FastAPI app initialized==============
+2026-06-26 09:39:52,978 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-26 09:39:52,978 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'd4a84e4d-03df-46f4-abcd-9917184777e0'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-26 09:39:52,978 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'd4a84e4d-03df-46f4-abcd-9917184777e0', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'd4a84e4d-03df-46f4-abcd-9917184777e0'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-26 09:39:52,978 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-26 09:39:52,978 | INFO | ****PRIMARY INTENT: business_report
+2026-06-26 09:39:52,978 | INFO | ****SELECTED INTENTS: []
+2026-06-26 09:39:52,978 | INFO | ****agent_graph intent_info : {'primary_intent': 'business_report', 'intents': [], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}}
+2026-06-26 09:39:52,978 | INFO | ****STRATEGY (strategy builder): {'summary'}
+2026-06-26 09:39:52,978 | INFO | ****agent_graph STRATEGY : ['summary']
+2026-06-26 09:39:52,978 | INFO | ****INPUT STRATEGY: ['summary']
+2026-06-26 09:39:52,978 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 09:39:52,978 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 09:39:52,978 | INFO | ****Resolved execution order: ['summary']
+2026-06-26 09:39:52,978 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'summary', 'insights', 'trend', 'forecast', 'root_cause', 'sentiment', 'risk', 'recommendation', 'findings'}"]
+2026-06-26 09:39:52,978 | INFO | ****PARALLEL GROUPS (parallel groups): []
+2026-06-26 09:39:52,978 | INFO | ****EXECUTION ORDER: ['summary']
+2026-06-26 09:39:52,978 | INFO | ****PARALLEL GROUPS (scheduler): [['summary']]
+2026-06-26 09:39:52,978 | INFO | ****PREPROCESS START: summary
+2026-06-26 09:39:52,978 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-26 09:39:52,978 | INFO | ****SUMMARY WORDS: 7
+2026-06-26 09:39:52,978 | INFO | ****PREPROCESS END: 0.00056s
+2026-06-26 09:39:52,978 | INFO | ****TRACE COUNT: 0
+2026-06-26 09:39:52,978 | INFO | ****TRACE COUNT METADATA: 0
+2026-06-26 09:39:52,978 | INFO | ****EXECUTION METADATA: {'agents_executed': [], 'agent_count': 1, 'parallel_groups': [], 'timings': {'summary': 0.00056}, 'trace_count': 0, 'preprocessing': {'agent': 'summary', 'duration': 0.00056, 'output_size': 32}, 'total_execution_time': 0.006357, 'trace_sample': None, 'retry_count': 0, 'failed_agents': []}
+2026-06-26 09:39:52,996 | INFO | ****FINAL ARTIFACTS: 
+2026-06-26 09:39:52,996 | INFO | {}
+2026-06-26 09:39:52,996 | INFO | ==============Application AI Summarizer==============
+2026-06-26 09:39:53,011 | INFO | ==============EXECUTION END==============
+2026-06-26 09:40:46,860 | INFO | ==============Serving home page==============
+2026-06-26 09:40:46,860 | INFO | ==============EXECUTION START==============
+2026-06-26 09:40:52,031 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-26 09:40:52,032 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': '6a058268-adca-41d4-a0a7-021cad375f17'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-26 09:40:52,032 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': '6a058268-adca-41d4-a0a7-021cad375f17', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': '6a058268-adca-41d4-a0a7-021cad375f17'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-26 09:40:52,032 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-26 09:40:52,032 | INFO | ****PRIMARY INTENT: business_report
+2026-06-26 09:40:52,032 | INFO | ****SELECTED INTENTS: []
+2026-06-26 09:40:52,033 | INFO | ****agent_graph intent_info : {'primary_intent': 'business_report', 'intents': [], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}}
+2026-06-26 09:40:52,033 | INFO | ****STRATEGY (strategy builder): {'summary'}
+2026-06-26 09:40:52,033 | INFO | ****agent_graph STRATEGY : ['summary']
+2026-06-26 09:40:52,033 | INFO | ****INPUT STRATEGY: ['summary']
+2026-06-26 09:40:52,033 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 09:40:52,033 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-26 09:40:52,033 | INFO | ****Resolved execution order: ['summary']
+2026-06-26 09:40:52,033 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'summary', 'insights', 'trend', 'forecast', 'root_cause', 'sentiment', 'risk', 'recommendation', 'findings'}"]
+2026-06-26 09:40:52,033 | INFO | ****PARALLEL GROUPS (parallel groups): []
+2026-06-26 09:40:52,033 | INFO | ****EXECUTION ORDER: ['summary']
+2026-06-26 09:40:52,033 | INFO | ****PARALLEL GROUPS (scheduler): [['summary']]
+2026-06-26 09:40:52,033 | INFO | ****PREPROCESS START: summary
+2026-06-26 09:40:52,033 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-26 09:40:52,033 | INFO | ****SUMMARY WORDS: 7
+2026-06-26 09:40:52,033 | INFO | ****PREPROCESS END: 0.000407s
+2026-06-26 09:40:52,033 | INFO | ****TRACE COUNT: 0
+2026-06-26 09:40:52,033 | INFO | ****TRACE COUNT METADATA: 0
+2026-06-26 09:40:52,033 | INFO | ****EXECUTION METADATA: {'agents_executed': [], 'agent_count': 1, 'parallel_groups': [], 'timings': {'summary': 0.000407}, 'trace_count': 0, 'preprocessing': {'agent': 'summary', 'duration': 0.000407, 'output_size': 32}, 'total_execution_time': 0.004188, 'trace_sample': None, 'retry_count': 0, 'failed_agents': []}
+2026-06-26 09:40:52,033 | INFO | ****FINAL ARTIFACTS: 
+2026-06-26 09:40:52,033 | INFO | {}
+2026-06-26 09:40:52,038 | INFO | ==============Application AI Summarizer==============
+2026-06-26 09:40:52,038 | INFO | ==============EXECUTION END==============
+2026-06-27 07:11:20,603 | INFO | ****agent_system
+2026-06-27 07:11:21,000 | INFO | ==============Application AI Summarizer==============
+2026-06-27 07:11:21,000 | INFO | ==============FastAPI app initialized==============
+2026-06-27 07:11:38,499 | INFO | ==============Serving home page==============
+2026-06-27 07:11:38,499 | INFO | ==============EXECUTION START==============
+2026-06-27 07:11:41,586 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-27 07:11:41,586 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'c0fa93d0-2e81-4162-9ae3-ab7c104a01d4'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-27 07:11:41,586 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'c0fa93d0-2e81-4162-9ae3-ab7c104a01d4', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'c0fa93d0-2e81-4162-9ae3-ab7c104a01d4'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-27 07:11:41,586 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-27 07:11:41,586 | INFO | ****PRIMARY INTENT: business_report
+2026-06-27 07:11:41,586 | INFO | ****SELECTED INTENTS: []
+2026-06-27 07:11:41,586 | INFO | ****agent_graph intent_info : {'primary_intent': 'business_report', 'intents': [], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}}
+2026-06-27 07:11:41,586 | INFO | ****STRATEGY (strategy builder): {'summary'}
+2026-06-27 07:11:41,586 | INFO | ****agent_graph STRATEGY : ['summary']
+2026-06-27 07:11:41,590 | INFO | ****INPUT STRATEGY: ['summary']
+2026-06-27 07:11:41,590 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-27 07:11:41,590 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-27 07:11:41,590 | INFO | ****Resolved execution order: ['summary']
+2026-06-27 07:11:41,590 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'insights', 'summary', 'root_cause', 'risk', 'sentiment', 'trend', 'forecast', 'findings', 'recommendation'}"]
+2026-06-27 07:11:41,590 | INFO | ****PARALLEL GROUPS (parallel groups): []
+2026-06-27 07:11:41,590 | INFO | ****EXECUTION ORDER: ['summary']
+2026-06-27 07:11:41,590 | INFO | ****PARALLEL GROUPS (scheduler): [['summary']]
+2026-06-27 07:11:41,590 | INFO | ****PREPROCESS START: summary
+2026-06-27 07:11:41,590 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-27 07:11:41,590 | INFO | ****SUMMARY WORDS: 7
+2026-06-27 07:11:41,590 | INFO | ****PREPROCESS END: 0.000341s
+2026-06-27 07:11:41,590 | INFO | ****TRACE COUNT: 0
+2026-06-27 07:11:41,590 | INFO | ****TRACE COUNT METADATA: 0
+2026-06-27 07:11:41,590 | INFO | ****EXECUTION METADATA: {'agents_executed': [], 'agent_count': 1, 'parallel_groups': [], 'timings': {'summary': 0.000341}, 'trace_count': 0, 'execution_events': [], 'retry_count': 0, 'failed_agents': [], 'preprocessing': {'agent': 'summary', 'duration': 0.000341, 'output_size': 32}, 'total_execution_time': 0.005447, 'trace_sample': None}
+2026-06-27 07:11:41,590 | INFO | ****FINAL ARTIFACTS: 
+2026-06-27 07:11:41,590 | INFO | {}
+2026-06-27 07:11:41,608 | INFO | ==============Application AI Summarizer==============
+2026-06-27 07:11:41,608 | INFO | ==============EXECUTION END==============
+2026-06-27 07:12:30,153 | INFO | ==============Serving home page==============
+2026-06-27 07:12:30,157 | INFO | ==============EXECUTION START==============
+2026-06-27 07:12:55,687 | INFO | ==============Serving home page==============
+2026-06-27 07:12:55,689 | INFO | ==============EXECUTION START==============
+2026-06-27 07:12:58,794 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-27 07:12:58,797 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'a86558f9-40a6-4a17-a14e-041a6c7c44ce'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-27 07:12:58,797 | INFO | ****agent_graph immediately after: {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'a86558f9-40a6-4a17-a14e-041a6c7c44ce', 'state': {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'a86558f9-40a6-4a17-a14e-041a6c7c44ce'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-27 07:12:58,797 | INFO | ****INTENT SCORES: {'business_report': 2, 'meeting_notes': 5, 'research_report': 0}
+2026-06-27 07:12:58,797 | INFO | ****PRIMARY INTENT: meeting_notes
+2026-06-27 07:12:58,797 | INFO | ****SELECTED INTENTS: ['business_report', 'meeting_notes']
+2026-06-27 07:12:58,797 | INFO | ****agent_graph intent_info : {'primary_intent': 'meeting_notes', 'intents': ['business_report', 'meeting_notes'], 'scores': {'business_report': 2, 'meeting_notes': 5, 'research_report': 0}}
+2026-06-27 07:12:58,797 | INFO | ****STRATEGY (strategy builder): {'insights', 'summary', 'root_cause', 'risk', 'sentiment', 'trend', 'forecast', 'recommendation', 'actions'}
+2026-06-27 07:12:58,797 | INFO | ****agent_graph STRATEGY : ['summary', 'actions', 'insights', 'trend', 'sentiment', 'risk', 'root_cause', 'recommendation', 'forecast']
+2026-06-27 07:12:58,800 | INFO | ****INPUT STRATEGY: ['summary', 'actions', 'insights', 'trend', 'sentiment', 'risk', 'root_cause', 'recommendation', 'forecast']
+2026-06-27 07:12:58,801 | INFO | ****PARSED SECTIONS after split: {'general': 'Meeting agenda:\nJohn should prepare the report.\nSarah must follow up.\nRevenue increased by 12%.'}
+2026-06-27 07:12:58,801 | INFO | ****SECTIONS: {'general': 'Meeting agenda:\nJohn should prepare the report.\nSarah must follow up.\nRevenue increased by 12%.'}
+2026-06-27 07:12:58,801 | INFO | ****Resolved execution order: ['summary', 'actions', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-27 07:12:58,801 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'summary'}"]
+2026-06-27 07:12:58,801 | INFO | ****PARALLEL GROUPS (parallel groups): [['insights', 'sentiment', 'findings', 'actions'], ['risk', 'trend'], ['root_cause', 'forecast'], ['recommendation']]
+2026-06-27 07:12:58,801 | INFO | ****EXECUTION ORDER: ['summary', 'insights', 'sentiment', 'findings', 'actions', 'risk', 'trend', 'root_cause', 'forecast', 'recommendation']
+2026-06-27 07:12:58,801 | INFO | ****PARALLEL GROUPS (scheduler): [['summary'], ['insights', 'sentiment', 'findings', 'actions'], ['risk', 'trend'], ['root_cause', 'forecast'], ['recommendation']]
+2026-06-27 07:12:58,801 | INFO | ****PREPROCESS START: summary
+2026-06-27 07:12:58,801 | INFO | ****SUMMARY INPUT:
+Meeting agenda:
+John should prepare the report.
+Sarah must follow up.
+Revenue increased by 12%.
+2026-06-27 07:12:58,801 | INFO | ****SUMMARY WORDS: 15
+2026-06-27 07:12:58,801 | INFO | ****PREPROCESS END: 0.000636s
+2026-06-27 07:12:58,807 | INFO | ****RUNNING AGENT: insights
+2026-06-27 07:12:58,807 | INFO | ****RUNNING AGENT: sentiment
+2026-06-27 07:12:58,807 | INFO | ****LOGGER TRACE START: insights
+2026-06-27 07:12:58,807 | INFO | ****RUNNING AGENT: findings
+2026-06-27 07:12:58,807 | INFO | ****LOGGER TRACE END : insights | success | 0.000354
+2026-06-27 07:12:58,807 | INFO | ****RUNNING AGENT: actions
+2026-06-27 07:12:58,807 | INFO | ****LOGGER TRACE START: sentiment
+2026-06-27 07:12:58,807 | INFO | ****LOGGER TRACE START: findings
+2026-06-27 07:12:58,807 | INFO | ****COMPLETED AGENT: insights in 0.000319s
+2026-06-27 07:12:58,807 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:12:58,807 | INFO | ****LOGGER TRACE END : sentiment | success | 1.9e-05
+2026-06-27 07:12:58,807 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-27 07:12:58,807 | INFO | ****LOGGER TRACE START: actions
+2026-06-27 07:12:58,807 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%']}
+2026-06-27 07:12:58,807 | INFO | ****COMPLETED AGENT: sentiment in 9e-06s
+2026-06-27 07:12:58,807 | INFO | ****FINDING TOOL RETURN: []
+2026-06-27 07:12:58,807 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:12:58,807 | INFO | ****LOGGER TRACE END : findings | success | 0.005127
+2026-06-27 07:12:58,807 | INFO | ****ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-27 07:12:58,807 | INFO | ****COMPLETED AGENT: findings in 0.005102s
+2026-06-27 07:12:58,807 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:12:58,807 | INFO | ****ACTION TOOL: ['John should prepare the report.', 'Sarah must follow up.']
+2026-06-27 07:12:58,807 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-27 07:12:58,821 | INFO | ****LOGGER TRACE END : actions | success | 0.006791
+2026-06-27 07:12:58,821 | INFO | ****COMPLETED AGENT: actions in 0.006753s
+2026-06-27 07:12:58,823 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:12:58,829 | INFO | ****ARTIFACTS: {'actions': ['John should prepare the report.', 'Sarah must follow up.']}
+2026-06-27 07:12:58,829 | INFO | ****PARALLEL EXECUTION:[{'agent': 'insights', 'duration': 0.000319, 'artifacts': {'insights': ['Revenue changed by 12%']}}, {'agent': 'sentiment', 'duration': 9e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'findings', 'duration': 0.005102, 'artifacts': {'findings': []}}, {'agent': 'actions', 'duration': 0.006753, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.']}}]
+2026-06-27 07:12:58,833 | INFO | ****GROUP 1 RESULTS[{'agent': 'insights', 'duration': 0.000319, 'artifacts': {'insights': ['Revenue changed by 12%']}}, {'agent': 'sentiment', 'duration': 9e-06, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'findings', 'duration': 0.005102, 'artifacts': {'findings': []}}, {'agent': 'actions', 'duration': 0.006753, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.']}}]
+2026-06-27 07:12:58,834 | INFO | ****RUNNING AGENT: risk
+2026-06-27 07:12:58,842 | INFO | ****RUNNING AGENT: trend
+2026-06-27 07:12:58,842 | INFO | ****LOGGER TRACE START: risk
+2026-06-27 07:12:58,843 | INFO | ****LOGGER TRACE START: trend
+2026-06-27 07:12:58,844 | INFO | ****LOGGER TRACE END : risk | success | 3.7e-05
+2026-06-27 07:12:58,844 | INFO | ****TREND TOOL Trends: ['12% increase detected']
+2026-06-27 07:12:58,844 | INFO | ****COMPLETED AGENT: risk in 1.6e-05s
+2026-06-27 07:12:58,846 | INFO | ****TREND AGENT: ['12% increase detected']
+2026-06-27 07:12:58,848 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:12:58,850 | INFO | ****FORMATTED TREND AGENT: ['12% increase detected']
+2026-06-27 07:12:58,850 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk']}
+2026-06-27 07:12:58,850 | INFO | ****LOGGER TRACE END : trend | success | 0.007359
+2026-06-27 07:12:58,852 | INFO | ****COMPLETED AGENT: trend in 0.007331s
+2026-06-27 07:12:58,852 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:12:58,852 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'trends': ['12% increase detected']}
+2026-06-27 07:12:58,852 | INFO | ****PARALLEL EXECUTION:[{'agent': 'risk', 'duration': 1.6e-05, 'artifacts': {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk']}}, {'agent': 'trend', 'duration': 0.007331, 'artifacts': {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'trends': ['12% increase detected']}}]
+2026-06-27 07:12:58,852 | INFO | ****GROUP 2 RESULTS[{'agent': 'risk', 'duration': 1.6e-05, 'artifacts': {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk']}}, {'agent': 'trend', 'duration': 0.007331, 'artifacts': {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'trends': ['12% increase detected']}}]
+2026-06-27 07:12:58,856 | INFO | ****RUNNING AGENT: root_cause
+2026-06-27 07:12:58,856 | INFO | ****RUNNING AGENT: forecast
+2026-06-27 07:12:58,857 | INFO | ****LOGGER TRACE START: root_cause
+2026-06-27 07:12:58,859 | INFO | ****LOGGER TRACE START: forecast
+2026-06-27 07:12:58,860 | INFO | ****ROOT CAUSE INPUT: ['Revenue changed by 12%'], ['12% increase detected'], ['Moderate Risk']
+2026-06-27 07:12:58,860 | INFO | ****FORECAST INPUT: ['12% increase detected']
+2026-06-27 07:12:58,861 | INFO | ****LOGGER TRACE END : forecast | success | 0.001416
+2026-06-27 07:12:58,862 | INFO | ****LOGGER TRACE END : root_cause | success | 0.001943
+2026-06-27 07:12:58,862 | INFO | ****COMPLETED AGENT: forecast in 0.000993s
+2026-06-27 07:12:58,862 | INFO | ****COMPLETED AGENT: root_cause in 0.001905s
+2026-06-27 07:12:58,862 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:12:58,862 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:12:58,862 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'forecasts': ['Growth trend of 12% may continue.']}
+2026-06-27 07:12:58,862 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.']}
+2026-06-27 07:12:58,864 | INFO | ****PARALLEL EXECUTION:[{'agent': 'root_cause', 'duration': 0.001905, 'artifacts': {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.']}}, {'agent': 'forecast', 'duration': 0.000993, 'artifacts': {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'forecasts': ['Growth trend of 12% may continue.']}}]
+2026-06-27 07:12:58,864 | INFO | ****GROUP 3 RESULTS[{'agent': 'root_cause', 'duration': 0.001905, 'artifacts': {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.']}}, {'agent': 'forecast', 'duration': 0.000993, 'artifacts': {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'forecasts': ['Growth trend of 12% may continue.']}}]
+2026-06-27 07:12:58,864 | INFO | ****RUNNING AGENT: recommendation
+2026-06-27 07:12:58,864 | INFO | ****LOGGER TRACE START: recommendation
+2026-06-27 07:12:58,864 | INFO | ****LOGGER TRACE END : recommendation | success | 1.7e-05
+2026-06-27 07:12:58,864 | INFO | ****COMPLETED AGENT: recommendation in 9e-06s
+2026-06-27 07:12:58,864 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:12:58,866 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'forecasts': ['Growth trend of 12% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-27 07:12:58,866 | INFO | ****PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 9e-06, 'artifacts': {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'forecasts': ['Growth trend of 12% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-27 07:12:58,866 | INFO | ****GROUP 4 RESULTS[{'agent': 'recommendation', 'duration': 9e-06, 'artifacts': {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'forecasts': ['Growth trend of 12% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-27 07:12:58,866 | INFO | ****TRACE COUNT: 9
+2026-06-27 07:12:58,868 | INFO | ****TRACE COUNT METADATA: 9
+2026-06-27 07:12:58,868 | INFO | ****EXECUTION METADATA: {'agents_executed': ['insights', 'sentiment', 'findings', 'actions', 'risk', 'trend', 'root_cause', 'forecast', 'recommendation'], 'agent_count': 10, 'parallel_groups': [['insights', 'sentiment', 'findings', 'actions'], ['risk', 'trend'], ['root_cause', 'forecast'], ['recommendation']], 'timings': {'summary': 0.000636, 'insights': 0.000319, 'sentiment': 9e-06, 'findings': 0.005102, 'actions': 0.006753, 'risk': 1.6e-05, 'trend': 0.007331, 'root_cause': 0.001905, 'forecast': 0.000993, 'recommendation': 9e-06}, 'trace_count': 9, 'execution_events': [{'agent': 'insights', 'stage': 'dag', 'status': 'success'}, {'agent': 'sentiment', 'stage': 'dag', 'status': 'success'}, {'agent': 'findings', 'stage': 'dag', 'status': 'success'}, {'agent': 'actions', 'stage': 'dag', 'status': 'success'}, {'agent': 'risk', 'stage': 'dag', 'status': 'success'}, {'agent': 'trend', 'stage': 'dag', 'status': 'success'}, {'agent': 'root_cause', 'stage': 'dag', 'status': 'success'}, {'agent': 'forecast', 'stage': 'dag', 'status': 'success'}, {'agent': 'recommendation', 'stage': 'dag', 'status': 'success'}], 'retry_count': 0, 'failed_agents': [], 'preprocessing': {'agent': 'summary', 'duration': 0.000636, 'output_size': 95}, 'total_execution_time': 0.070586, 'trace_sample': {'trace_id': '59d8dc37-de9a-4e1d-a426-bdda56eda69e', 'execution_id': 'a86558f9-40a6-4a17-a14e-041a6c7c44ce', 'agent': 'recommendation', 'started_at': '2026-06-27 07:12:58.864', 'start': 1272949.6776487, 'input': {'context': {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}, 'selected_agents': []}, 'parallel_group': None, 'ended_at': '2026-06-27 07:12:58.864', 'end': 1272949.6776659, 'status': 'success', 'output': {'artifacts': {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'forecasts': ['Growth trend of 12% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}, 'duration': 1.7e-05}}
+2026-06-27 07:12:58,869 | INFO | ****FINAL ARTIFACTS: 
+2026-06-27 07:12:58,869 | INFO | {'insights': ['Revenue changed by 12%'], 'sentiment': ['Positive'], 'findings': [], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'risk': ['Moderate Risk'], 'trends': ['12% increase detected'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'forecasts': ['Growth trend of 12% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-27 07:12:58,877 | INFO | ==============Application AI Summarizer==============
+2026-06-27 07:12:58,877 | INFO | ==============EXECUTION END==============
+2026-06-27 07:20:48,545 | INFO | ****agent_system
+2026-06-27 07:20:49,659 | INFO | ==============Application AI Summarizer==============
+2026-06-27 07:20:49,664 | INFO | ==============FastAPI app initialized==============
+2026-06-27 07:21:02,311 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-27 07:21:02,311 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': '66d3582d-7b7f-4419-a4d7-d98cd40949ba'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-27 07:21:02,313 | INFO | ****agent_graph immediately after: {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': '66d3582d-7b7f-4419-a4d7-d98cd40949ba', 'state': {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': '66d3582d-7b7f-4419-a4d7-d98cd40949ba'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-27 07:21:02,313 | INFO | ****INTENT SCORES: {'business_report': 2, 'meeting_notes': 5, 'research_report': 0}
+2026-06-27 07:21:02,314 | INFO | ****PRIMARY INTENT: meeting_notes
+2026-06-27 07:21:02,314 | INFO | ****SELECTED INTENTS: ['business_report', 'meeting_notes']
+2026-06-27 07:21:02,315 | INFO | ****agent_graph intent_info : {'primary_intent': 'meeting_notes', 'intents': ['business_report', 'meeting_notes'], 'scores': {'business_report': 2, 'meeting_notes': 5, 'research_report': 0}}
+2026-06-27 07:21:02,315 | INFO | ****STRATEGY (strategy builder): {'trend', 'insights', 'actions', 'root_cause', 'risk', 'forecast', 'recommendation', 'summary', 'sentiment'}
+2026-06-27 07:21:02,315 | INFO | ****agent_graph STRATEGY : ['summary', 'actions', 'insights', 'trend', 'sentiment', 'risk', 'root_cause', 'recommendation', 'forecast']
+2026-06-27 07:21:02,317 | INFO | ****INPUT STRATEGY: ['summary', 'actions', 'insights', 'trend', 'sentiment', 'risk', 'root_cause', 'recommendation', 'forecast']
+2026-06-27 07:21:02,318 | INFO | ****PARSED SECTIONS after split: {'general': 'Meeting agenda:\nJohn should prepare the report.\nSarah must follow up.\nRevenue increased by 12%.'}
+2026-06-27 07:21:02,318 | INFO | ****SECTIONS: {'general': 'Meeting agenda:\nJohn should prepare the report.\nSarah must follow up.\nRevenue increased by 12%.'}
+2026-06-27 07:21:02,318 | INFO | ****Resolved execution order: ['summary', 'actions', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-27 07:21:02,318 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'summary'}"]
+2026-06-27 07:21:02,318 | INFO | ****PARALLEL GROUPS (parallel groups): [['insights', 'actions', 'findings', 'sentiment'], ['trend', 'risk'], ['root_cause', 'forecast'], ['recommendation']]
+2026-06-27 07:21:02,318 | INFO | ****EXECUTION ORDER: ['summary', 'insights', 'actions', 'findings', 'sentiment', 'trend', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-27 07:21:02,320 | INFO | ****PARALLEL GROUPS (scheduler): [['summary'], ['insights', 'actions', 'findings', 'sentiment'], ['trend', 'risk'], ['root_cause', 'forecast'], ['recommendation']]
+2026-06-27 07:21:02,320 | INFO | ****PREPROCESS START: summary
+2026-06-27 07:21:02,320 | INFO | ****SUMMARY INPUT:
+Meeting agenda:
+John should prepare the report.
+Sarah must follow up.
+Revenue increased by 12%.
+2026-06-27 07:21:02,320 | INFO | ****SUMMARY WORDS: 15
+2026-06-27 07:21:02,320 | INFO | ****PREPROCESS END: 0.001329s
+2026-06-27 07:21:02,326 | INFO | ****RUNNING AGENT: insights
+2026-06-27 07:21:02,327 | INFO | ****LOGGER TRACE START: insights
+2026-06-27 07:21:02,329 | INFO | ****LOGGER TRACE END : insights | success | 0.000286
+2026-06-27 07:21:02,329 | INFO | ****COMPLETED AGENT: insights in 0.000257s
+2026-06-27 07:21:02,329 | INFO | ****RUNNING AGENT: actions
+2026-06-27 07:21:02,329 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:21:02,329 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%']}
+2026-06-27 07:21:02,331 | INFO | ****LOGGER TRACE START: actions
+2026-06-27 07:21:02,334 | INFO | ****RUNNING AGENT: findings
+2026-06-27 07:21:02,334 | INFO | ****RUNNING AGENT: sentiment
+2026-06-27 07:21:02,336 | INFO | ****LOGGER TRACE START: findings
+2026-06-27 07:21:02,338 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-27 07:21:02,338 | INFO | ****FINDING TOOL RETURN: []
+2026-06-27 07:21:02,338 | INFO | ****LOGGER TRACE END : findings | success | 0.000428
+2026-06-27 07:21:02,338 | INFO | ****COMPLETED AGENT: findings in 0.000398s
+2026-06-27 07:21:02,338 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:21:02,338 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-27 07:21:02,343 | INFO | ****LOGGER TRACE START: sentiment
+2026-06-27 07:21:02,343 | INFO | ****LOGGER TRACE END : sentiment | success | 3.1e-05
+2026-06-27 07:21:02,343 | INFO | ****COMPLETED AGENT: sentiment in 1.1e-05s
+2026-06-27 07:21:02,343 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:21:02,343 | INFO | ****ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-27 07:21:02,345 | INFO | ****ACTION TOOL: ['John should prepare the report.', 'Sarah must follow up.']
+2026-06-27 07:21:02,345 | INFO | ****LOGGER TRACE END : actions | success | 0.010825
+2026-06-27 07:21:02,345 | INFO | ****COMPLETED AGENT: actions in 0.010797s
+2026-06-27 07:21:02,345 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:21:02,345 | INFO | ****ARTIFACTS: {'actions': ['John should prepare the report.', 'Sarah must follow up.']}
+2026-06-27 07:21:02,345 | INFO | ****PARALLEL EXECUTION:[{'agent': 'insights', 'duration': 0.000257, 'artifacts': {'insights': ['Revenue changed by 12%']}}, {'agent': 'actions', 'duration': 0.010797, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.']}}, {'agent': 'findings', 'duration': 0.000398, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 1.1e-05, 'artifacts': {'sentiment': ['Positive']}}]
+2026-06-27 07:21:02,347 | INFO | ****GROUP 1 RESULTS[{'agent': 'insights', 'duration': 0.000257, 'artifacts': {'insights': ['Revenue changed by 12%']}}, {'agent': 'actions', 'duration': 0.010797, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.']}}, {'agent': 'findings', 'duration': 0.000398, 'artifacts': {'findings': []}}, {'agent': 'sentiment', 'duration': 1.1e-05, 'artifacts': {'sentiment': ['Positive']}}]
+2026-06-27 07:21:02,351 | INFO | ****RUNNING AGENT: trend
+2026-06-27 07:21:02,352 | INFO | ****LOGGER TRACE START: trend
+2026-06-27 07:21:02,353 | INFO | ****RUNNING AGENT: risk
+2026-06-27 07:21:02,353 | INFO | ****TREND TOOL Trends: ['12% increase detected']
+2026-06-27 07:21:02,353 | INFO | ****LOGGER TRACE START: risk
+2026-06-27 07:21:02,353 | INFO | ****TREND AGENT: ['12% increase detected']
+2026-06-27 07:21:02,355 | INFO | ****LOGGER TRACE END : risk | success | 5.3e-05
+2026-06-27 07:21:02,355 | INFO | ****FORMATTED TREND AGENT: ['12% increase detected']
+2026-06-27 07:21:02,355 | INFO | ****COMPLETED AGENT: risk in 1.9e-05s
+2026-06-27 07:21:02,355 | INFO | ****LOGGER TRACE END : trend | success | 0.002751
+2026-06-27 07:21:02,355 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:21:02,357 | INFO | ****COMPLETED AGENT: trend in 0.002692s
+2026-06-27 07:21:02,357 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}
+2026-06-27 07:21:02,357 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:21:02,358 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected']}
+2026-06-27 07:21:02,358 | INFO | ****PARALLEL EXECUTION:[{'agent': 'trend', 'duration': 0.002692, 'artifacts': {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected']}}, {'agent': 'risk', 'duration': 1.9e-05, 'artifacts': {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}}]
+2026-06-27 07:21:02,358 | INFO | ****GROUP 2 RESULTS[{'agent': 'trend', 'duration': 0.002692, 'artifacts': {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected']}}, {'agent': 'risk', 'duration': 1.9e-05, 'artifacts': {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'risk': ['Moderate Risk']}}]
+2026-06-27 07:21:02,364 | INFO | ****RUNNING AGENT: root_cause
+2026-06-27 07:21:02,367 | INFO | ****LOGGER TRACE START: root_cause
+2026-06-27 07:21:02,367 | INFO | ****ROOT CAUSE INPUT: ['Revenue changed by 12%'], ['12% increase detected'], ['Moderate Risk']
+2026-06-27 07:21:02,368 | INFO | ****LOGGER TRACE END : root_cause | success | 0.0003
+2026-06-27 07:21:02,368 | INFO | ****COMPLETED AGENT: root_cause in 0.000245s
+2026-06-27 07:21:02,368 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:21:02,368 | INFO | ****RUNNING AGENT: forecast
+2026-06-27 07:21:02,370 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.']}
+2026-06-27 07:21:02,372 | INFO | ****LOGGER TRACE START: forecast
+2026-06-27 07:21:02,372 | INFO | ****FORECAST INPUT: ['12% increase detected']
+2026-06-27 07:21:02,372 | INFO | ****LOGGER TRACE END : forecast | success | 0.000585
+2026-06-27 07:21:02,374 | INFO | ****COMPLETED AGENT: forecast in 0.000528s
+2026-06-27 07:21:02,374 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:21:02,374 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 12% may continue.']}
+2026-06-27 07:21:02,374 | INFO | ****PARALLEL EXECUTION:[{'agent': 'root_cause', 'duration': 0.000245, 'artifacts': {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.']}}, {'agent': 'forecast', 'duration': 0.000528, 'artifacts': {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 12% may continue.']}}]
+2026-06-27 07:21:02,376 | INFO | ****GROUP 3 RESULTS[{'agent': 'root_cause', 'duration': 0.000245, 'artifacts': {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.']}}, {'agent': 'forecast', 'duration': 0.000528, 'artifacts': {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 12% may continue.']}}]
+2026-06-27 07:21:02,376 | INFO | ****RUNNING AGENT: recommendation
+2026-06-27 07:21:02,376 | INFO | ****LOGGER TRACE START: recommendation
+2026-06-27 07:21:02,376 | INFO | ****LOGGER TRACE END : recommendation | success | 5.4e-05
+2026-06-27 07:21:02,376 | INFO | ****COMPLETED AGENT: recommendation in 2.1e-05s
+2026-06-27 07:21:02,378 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:21:02,378 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'forecasts': ['Growth trend of 12% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-27 07:21:02,378 | INFO | ****PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 2.1e-05, 'artifacts': {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'forecasts': ['Growth trend of 12% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-27 07:21:02,378 | INFO | ****GROUP 4 RESULTS[{'agent': 'recommendation', 'duration': 2.1e-05, 'artifacts': {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'forecasts': ['Growth trend of 12% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-27 07:21:02,380 | INFO | ****TRACE COUNT: 9
+2026-06-27 07:21:02,380 | INFO | ****TRACE COUNT METADATA: 9
+2026-06-27 07:21:02,382 | INFO | ****EXECUTION METADATA: {'agents_executed': ['insights', 'actions', 'findings', 'sentiment', 'trend', 'risk', 'root_cause', 'forecast', 'recommendation'], 'agent_count': 10, 'parallel_groups': [['insights', 'actions', 'findings', 'sentiment'], ['trend', 'risk'], ['root_cause', 'forecast'], ['recommendation']], 'timings': {'summary': 0.001329, 'insights': 0.000257, 'actions': 0.010797, 'findings': 0.000398, 'sentiment': 1.1e-05, 'trend': 0.002692, 'risk': 1.9e-05, 'root_cause': 0.000245, 'forecast': 0.000528, 'recommendation': 2.1e-05}, 'trace_count': 9, 'execution_events': [{'agent': 'insights', 'stage': 'dag', 'status': 'success'}, {'agent': 'actions', 'stage': 'dag', 'status': 'success'}, {'agent': 'findings', 'stage': 'dag', 'status': 'success'}, {'agent': 'sentiment', 'stage': 'dag', 'status': 'success'}, {'agent': 'trend', 'stage': 'dag', 'status': 'success'}, {'agent': 'risk', 'stage': 'dag', 'status': 'success'}, {'agent': 'root_cause', 'stage': 'dag', 'status': 'success'}, {'agent': 'forecast', 'stage': 'dag', 'status': 'success'}, {'agent': 'recommendation', 'stage': 'dag', 'status': 'success'}], 'retry_count': 0, 'failed_agents': [], 'preprocessing': {'agent': 'summary', 'duration': 0.001329, 'output_size': 95}, 'total_execution_time': 0.068677, 'trace_sample': {'trace_id': 'd5b3bfcf-0803-42ab-9e0d-8f6343d90ffc', 'execution_id': '66d3582d-7b7f-4419-a4d7-d98cd40949ba', 'agent': 'recommendation', 'started_at': '2026-06-27 07:21:02.376', 'input': {'context': {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}, 'selected_agents': []}, 'parallel_group': None, 'ended_at': '2026-06-27 07:21:02.376', 'status': 'success', 'output': {'artifacts': {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'forecasts': ['Growth trend of 12% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}, 'duration': 5.4e-05}}
+2026-06-27 07:21:02,385 | INFO | ****FINAL ARTIFACTS: 
+2026-06-27 07:21:02,385 | INFO | {'insights': ['Revenue changed by 12%'], 'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'findings': [], 'sentiment': ['Positive'], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'forecasts': ['Growth trend of 12% may continue.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-27 07:21:02,403 | INFO | ==============Application AI Summarizer==============
+2026-06-27 07:21:02,403 | INFO | ==============EXECUTION END==============
+2026-06-27 07:21:54,515 | INFO | ==============Serving home page==============
+2026-06-27 07:21:54,515 | INFO | ==============EXECUTION START==============
+2026-06-27 07:39:15,363 | INFO | ****agent_system
+2026-06-27 07:39:16,409 | INFO | ==============Application AI Summarizer==============
+2026-06-27 07:39:16,409 | INFO | ==============FastAPI app initialized==============
+2026-06-27 07:39:26,508 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-27 07:39:26,508 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': '189703e7-3420-409b-aab1-67f9d8e3b2d1'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-27 07:39:26,512 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': '189703e7-3420-409b-aab1-67f9d8e3b2d1', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': '189703e7-3420-409b-aab1-67f9d8e3b2d1'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-27 07:39:26,512 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-27 07:39:26,512 | INFO | ****PRIMARY INTENT: business_report
+2026-06-27 07:39:26,512 | INFO | ****SELECTED INTENTS: []
+2026-06-27 07:39:26,512 | INFO | ****agent_graph intent_info : {'primary_intent': 'business_report', 'intents': ['fallback'], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}}
+2026-06-27 07:39:26,512 | INFO | ****STRATEGY (strategy builder): {'summary', 'sentiment'}
+2026-06-27 07:39:26,512 | INFO | ****agent_graph STRATEGY : ['summary', 'sentiment']
+2026-06-27 07:39:26,512 | INFO | ****INPUT STRATEGY: ['summary', 'sentiment']
+2026-06-27 07:39:26,512 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-27 07:39:26,512 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-27 07:39:26,512 | INFO | ****Resolved execution order: ['summary', 'sentiment']
+2026-06-27 07:39:26,512 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'findings', 'risk', 'summary', 'forecast', 'insights', 'recommendation', 'trend', 'root_cause'}"]
+2026-06-27 07:39:26,512 | INFO | ****PARALLEL GROUPS (parallel groups): [['sentiment']]
+2026-06-27 07:39:26,512 | INFO | ****EXECUTION ORDER: ['summary', 'sentiment']
+2026-06-27 07:39:26,512 | INFO | ****PARALLEL GROUPS (scheduler): [['summary'], ['sentiment']]
+2026-06-27 07:39:26,512 | INFO | ****PREPROCESS START: summary
+2026-06-27 07:39:26,512 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-27 07:39:26,512 | INFO | ****SUMMARY WORDS: 7
+2026-06-27 07:39:26,512 | INFO | ****PREPROCESS END: 0.000603s
+2026-06-27 07:39:26,512 | INFO | ****RUNNING AGENT: sentiment
+2026-06-27 07:39:26,512 | INFO | ****LOGGER TRACE START: sentiment
+2026-06-27 07:39:26,512 | INFO | ****LOGGER TRACE END : sentiment | success | 5.4e-05
+2026-06-27 07:39:26,512 | INFO | ****COMPLETED AGENT: sentiment in 1.8e-05s
+2026-06-27 07:39:26,512 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:39:26,512 | INFO | ****ARTIFACTS: {'sentiment': ['Neutral']}
+2026-06-27 07:39:26,512 | INFO | ****PARALLEL EXECUTION:[{'agent': 'sentiment', 'duration': 1.8e-05, 'artifacts': {'sentiment': ['Neutral']}}]
+2026-06-27 07:39:26,512 | INFO | ****GROUP 1 RESULTS[{'agent': 'sentiment', 'duration': 1.8e-05, 'artifacts': {'sentiment': ['Neutral']}}]
+2026-06-27 07:39:26,512 | INFO | ****TRACE COUNT: 1
+2026-06-27 07:39:26,512 | INFO | ****TRACE COUNT METADATA: 1
+2026-06-27 07:39:26,512 | INFO | ****EXECUTION METADATA: {'agents_executed': ['sentiment'], 'agent_count': 2, 'parallel_groups': [['sentiment']], 'timings': {'summary': 0.000603, 'sentiment': 1.8e-05}, 'trace_count': 1, 'execution_events': [{'agent': 'sentiment', 'stage': 'dag', 'status': 'success'}], 'retry_count': 0, 'failed_agents': [], 'preprocessing': {'agent': 'summary', 'duration': 0.000603, 'output_size': 32}, 'total_execution_time': 0.012355, 'trace_sample': {'trace_id': 'f9eec877-4f91-43c2-8802-dd7f616332d9', 'execution_id': '189703e7-3420-409b-aab1-67f9d8e3b2d1', 'agent': 'sentiment', 'started_at': '2026-06-27 07:39:26.512', 'input': {'context': {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}, 'selected_agents': []}, 'parallel_group': None, 'ended_at': '2026-06-27 07:39:26.512', 'status': 'success', 'output': {'artifacts': {'sentiment': ['Neutral']}}, 'duration': 5.4e-05}}
+2026-06-27 07:39:26,528 | INFO | ****FINAL ARTIFACTS: 
+2026-06-27 07:39:26,528 | INFO | {'sentiment': ['Neutral']}
+2026-06-27 07:39:26,542 | INFO | ==============Application AI Summarizer==============
+2026-06-27 07:39:26,542 | INFO | ==============EXECUTION END==============
+2026-06-27 07:43:28,264 | INFO | ****agent_system
+2026-06-27 07:43:29,190 | INFO | ==============Application AI Summarizer==============
+2026-06-27 07:43:29,190 | INFO | ==============FastAPI app initialized==============
+2026-06-27 07:43:29,951 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-27 07:43:29,951 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'dc76df84-7913-444a-b7d8-da5c316e0264'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-27 07:43:29,951 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'dc76df84-7913-444a-b7d8-da5c316e0264', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'dc76df84-7913-444a-b7d8-da5c316e0264'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-27 07:43:29,951 | INFO | ****INTENT SCORES: {'fallback': 0, 'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-27 07:43:29,951 | INFO | ****PRIMARY INTENT: fallback
+2026-06-27 07:43:29,951 | INFO | ****SELECTED INTENTS: []
+2026-06-27 07:43:29,951 | INFO | ****agent_graph intent_info : {'primary_intent': 'fallback', 'intents': ['fallback'], 'scores': {'fallback': 0, 'business_report': 0, 'meeting_notes': 0, 'research_report': 0}}
+2026-06-27 07:43:29,951 | INFO | ****STRATEGY (strategy builder): {'summary', 'sentiment'}
+2026-06-27 07:43:29,951 | INFO | ****agent_graph STRATEGY : ['summary', 'sentiment']
+2026-06-27 07:43:29,951 | INFO | ****INPUT STRATEGY: ['summary', 'sentiment']
+2026-06-27 07:43:29,951 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-27 07:43:29,951 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-27 07:43:29,951 | INFO | ****Resolved execution order: ['summary', 'sentiment']
+2026-06-27 07:43:29,951 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'summary', 'recommendation', 'trend', 'forecast', 'root_cause', 'risk', 'insights', 'findings'}"]
+2026-06-27 07:43:29,951 | INFO | ****PARALLEL GROUPS (parallel groups): [['sentiment']]
+2026-06-27 07:43:29,951 | INFO | ****EXECUTION ORDER: ['summary', 'sentiment']
+2026-06-27 07:43:29,951 | INFO | ****PARALLEL GROUPS (scheduler): [['summary'], ['sentiment']]
+2026-06-27 07:43:29,951 | INFO | ****PREPROCESS START: summary
+2026-06-27 07:43:29,951 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-27 07:43:29,951 | INFO | ****SUMMARY WORDS: 7
+2026-06-27 07:43:29,951 | INFO | ****PREPROCESS END: 0.000688s
+2026-06-27 07:43:29,968 | INFO | ****RUNNING AGENT: sentiment
+2026-06-27 07:43:29,968 | INFO | ****LOGGER TRACE START: sentiment
+2026-06-27 07:43:29,968 | INFO | ****LOGGER TRACE END : sentiment | success | 5.7e-05
+2026-06-27 07:43:29,968 | INFO | ****COMPLETED AGENT: sentiment in 1.8e-05s
+2026-06-27 07:43:29,968 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:43:29,968 | INFO | ****ARTIFACTS: {'sentiment': ['Neutral']}
+2026-06-27 07:43:29,968 | INFO | ****PARALLEL EXECUTION:[{'agent': 'sentiment', 'duration': 1.8e-05, 'artifacts': {'sentiment': ['Neutral']}}]
+2026-06-27 07:43:29,968 | INFO | ****GROUP 1 RESULTS[{'agent': 'sentiment', 'duration': 1.8e-05, 'artifacts': {'sentiment': ['Neutral']}}]
+2026-06-27 07:43:29,968 | INFO | ****TRACE COUNT: 1
+2026-06-27 07:43:29,968 | INFO | ****TRACE COUNT METADATA: 1
+2026-06-27 07:43:29,968 | INFO | ****EXECUTION METADATA: {'agents_executed': ['sentiment'], 'agent_count': 2, 'parallel_groups': [['sentiment']], 'timings': {'summary': 0.000688, 'sentiment': 1.8e-05}, 'trace_count': 1, 'execution_events': [{'agent': 'sentiment', 'stage': 'dag', 'status': 'success'}], 'retry_count': 0, 'failed_agents': [], 'preprocessing': {'agent': 'summary', 'duration': 0.000688, 'output_size': 32}, 'total_execution_time': 0.015462, 'trace_sample': {'trace_id': '5ad0634b-9cef-4ef8-b9aa-4d034d732edf', 'execution_id': 'dc76df84-7913-444a-b7d8-da5c316e0264', 'agent': 'sentiment', 'started_at': '2026-06-27 07:43:29.968', 'input': {'context': {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}, 'selected_agents': []}, 'parallel_group': None, 'ended_at': '2026-06-27 07:43:29.968', 'status': 'success', 'output': {'artifacts': {'sentiment': ['Neutral']}}, 'duration': 5.7e-05}}
+2026-06-27 07:43:29,968 | INFO | ****FINAL ARTIFACTS: 
+2026-06-27 07:43:29,968 | INFO | {'sentiment': ['Neutral']}
+2026-06-27 07:43:29,998 | INFO | ==============Application AI Summarizer==============
+2026-06-27 07:43:29,998 | INFO | ==============EXECUTION END==============
+2026-06-27 07:44:03,941 | INFO | ==============Serving home page==============
+2026-06-27 07:44:03,945 | INFO | ==============EXECUTION START==============
+2026-06-27 07:44:22,611 | INFO | ==============Serving home page==============
+2026-06-27 07:44:22,611 | INFO | ==============EXECUTION START==============
+2026-06-27 07:44:25,253 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-27 07:44:25,253 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': '27f68a8d-f6d0-47a3-9c31-ebb14d146e32'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-27 07:44:25,253 | INFO | ****agent_graph immediately after: {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': '27f68a8d-f6d0-47a3-9c31-ebb14d146e32', 'state': {'text': 'Meeting agenda:\r\nJohn should prepare the report.\r\nSarah must follow up.\r\nRevenue increased by 12%.', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': '27f68a8d-f6d0-47a3-9c31-ebb14d146e32'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-27 07:44:25,253 | INFO | ****INTENT SCORES: {'fallback': 0, 'business_report': 2, 'meeting_notes': 5, 'research_report': 0}
+2026-06-27 07:44:25,253 | INFO | ****PRIMARY INTENT: meeting_notes
+2026-06-27 07:44:25,260 | INFO | ****SELECTED INTENTS: ['business_report', 'meeting_notes']
+2026-06-27 07:44:25,260 | INFO | ****agent_graph intent_info : {'primary_intent': 'meeting_notes', 'intents': ['business_report', 'meeting_notes'], 'scores': {'fallback': 0, 'business_report': 2, 'meeting_notes': 5, 'research_report': 0}}
+2026-06-27 07:44:25,260 | INFO | ****STRATEGY (strategy builder): {'summary', 'recommendation', 'trend', 'actions', 'sentiment', 'forecast', 'root_cause', 'risk', 'insights'}
+2026-06-27 07:44:25,260 | INFO | ****agent_graph STRATEGY : ['summary', 'actions', 'insights', 'trend', 'sentiment', 'risk', 'root_cause', 'recommendation', 'forecast']
+2026-06-27 07:44:25,260 | INFO | ****INPUT STRATEGY: ['summary', 'actions', 'insights', 'trend', 'sentiment', 'risk', 'root_cause', 'recommendation', 'forecast']
+2026-06-27 07:44:25,260 | INFO | ****PARSED SECTIONS after split: {'general': 'Meeting agenda:\nJohn should prepare the report.\nSarah must follow up.\nRevenue increased by 12%.'}
+2026-06-27 07:44:25,260 | INFO | ****SECTIONS: {'general': 'Meeting agenda:\nJohn should prepare the report.\nSarah must follow up.\nRevenue increased by 12%.'}
+2026-06-27 07:44:25,260 | INFO | ****Resolved execution order: ['summary', 'actions', 'insights', 'trend', 'sentiment', 'findings', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-27 07:44:25,263 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'summary'}"]
+2026-06-27 07:44:25,264 | INFO | ****PARALLEL GROUPS (parallel groups): [['actions', 'sentiment', 'insights', 'findings'], ['trend', 'risk'], ['forecast', 'root_cause'], ['recommendation']]
+2026-06-27 07:44:25,264 | INFO | ****EXECUTION ORDER: ['summary', 'actions', 'sentiment', 'insights', 'findings', 'trend', 'risk', 'forecast', 'root_cause', 'recommendation']
+2026-06-27 07:44:25,264 | INFO | ****PARALLEL GROUPS (scheduler): [['summary'], ['actions', 'sentiment', 'insights', 'findings'], ['trend', 'risk'], ['forecast', 'root_cause'], ['recommendation']]
+2026-06-27 07:44:25,264 | INFO | ****PREPROCESS START: summary
+2026-06-27 07:44:25,264 | INFO | ****SUMMARY INPUT:
+Meeting agenda:
+John should prepare the report.
+Sarah must follow up.
+Revenue increased by 12%.
+2026-06-27 07:44:25,264 | INFO | ****SUMMARY WORDS: 15
+2026-06-27 07:44:25,264 | INFO | ****PREPROCESS END: 0.000896s
+2026-06-27 07:44:25,264 | INFO | ****RUNNING AGENT: actions
+2026-06-27 07:44:25,269 | INFO | ****LOGGER TRACE START: actions
+2026-06-27 07:44:25,269 | INFO | ****RUNNING AGENT: sentiment
+2026-06-27 07:44:25,270 | INFO | ****RUNNING AGENT: insights
+2026-06-27 07:44:25,270 | INFO | ****LOGGER TRACE START: sentiment
+2026-06-27 07:44:25,270 | INFO | ****LOGGER TRACE START: insights
+2026-06-27 07:44:25,272 | INFO | ****LOGGER TRACE END : sentiment | success | 4.7e-05
+2026-06-27 07:44:25,272 | INFO | ****RUNNING AGENT: findings
+2026-06-27 07:44:25,272 | INFO | ****LOGGER TRACE END : insights | success | 0.0003
+2026-06-27 07:44:25,272 | INFO | ****COMPLETED AGENT: sentiment in 1.4e-05s
+2026-06-27 07:44:25,272 | INFO | ****LOGGER TRACE START: findings
+2026-06-27 07:44:25,272 | INFO | ****COMPLETED AGENT: insights in 0.000264s
+2026-06-27 07:44:25,272 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:44:25,272 | INFO | ****FINDING TOOL OUTPUT: []
+2026-06-27 07:44:25,272 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:44:25,272 | INFO | ****ARTIFACTS: {'sentiment': ['Positive']}
+2026-06-27 07:44:25,272 | INFO | ****ACTION TOOL: ['John should prepare the report.', 'Sarah must follow up.']
+2026-06-27 07:44:25,272 | INFO | ****FINDING TOOL RETURN: []
+2026-06-27 07:44:25,272 | INFO | ****ARTIFACTS: {'insights': ['Revenue changed by 12%']}
+2026-06-27 07:44:25,272 | INFO | ****LOGGER TRACE END : actions | success | 0.009248
+2026-06-27 07:44:25,272 | INFO | ****LOGGER TRACE END : findings | success | 0.004246
+2026-06-27 07:44:25,272 | INFO | ****COMPLETED AGENT: actions in 0.009193s
+2026-06-27 07:44:25,272 | INFO | ****COMPLETED AGENT: findings in 0.004185s
+2026-06-27 07:44:25,272 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:44:25,272 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:44:25,272 | INFO | ****ARTIFACTS: {'actions': ['John should prepare the report.', 'Sarah must follow up.']}
+2026-06-27 07:44:25,272 | INFO | ****ARTIFACTS: {'findings': []}
+2026-06-27 07:44:25,283 | INFO | ****PARALLEL EXECUTION:[{'agent': 'actions', 'duration': 0.009193, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.']}}, {'agent': 'sentiment', 'duration': 1.4e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.000264, 'artifacts': {'insights': ['Revenue changed by 12%']}}, {'agent': 'findings', 'duration': 0.004185, 'artifacts': {'findings': []}}]
+2026-06-27 07:44:25,283 | INFO | ****GROUP 1 RESULTS[{'agent': 'actions', 'duration': 0.009193, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.']}}, {'agent': 'sentiment', 'duration': 1.4e-05, 'artifacts': {'sentiment': ['Positive']}}, {'agent': 'insights', 'duration': 0.000264, 'artifacts': {'insights': ['Revenue changed by 12%']}}, {'agent': 'findings', 'duration': 0.004185, 'artifacts': {'findings': []}}]
+2026-06-27 07:44:25,284 | INFO | ****RUNNING AGENT: trend
+2026-06-27 07:44:25,284 | INFO | ****LOGGER TRACE START: trend
+2026-06-27 07:44:25,286 | INFO | ****TREND TOOL Trends: ['12% increase detected']
+2026-06-27 07:44:25,286 | INFO | ****RUNNING AGENT: risk
+2026-06-27 07:44:25,286 | INFO | ****TREND AGENT: ['12% increase detected']
+2026-06-27 07:44:25,286 | INFO | ****LOGGER TRACE START: risk
+2026-06-27 07:44:25,288 | INFO | ****FORMATTED TREND AGENT: ['12% increase detected']
+2026-06-27 07:44:25,288 | INFO | ****LOGGER TRACE END : risk | success | 2.6e-05
+2026-06-27 07:44:25,288 | INFO | ****LOGGER TRACE END : trend | success | 0.001472
+2026-06-27 07:44:25,288 | INFO | ****COMPLETED AGENT: risk in 1e-05s
+2026-06-27 07:44:25,288 | INFO | ****COMPLETED AGENT: trend in 0.001444s
+2026-06-27 07:44:25,288 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:44:25,288 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:44:25,288 | INFO | ****ARTIFACTS: {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'risk': ['Moderate Risk']}
+2026-06-27 07:44:25,288 | INFO | ****ARTIFACTS: {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected']}
+2026-06-27 07:44:25,288 | INFO | ****PARALLEL EXECUTION:[{'agent': 'trend', 'duration': 0.001444, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected']}}, {'agent': 'risk', 'duration': 1e-05, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'risk': ['Moderate Risk']}}]
+2026-06-27 07:44:25,288 | INFO | ****GROUP 2 RESULTS[{'agent': 'trend', 'duration': 0.001444, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected']}}, {'agent': 'risk', 'duration': 1e-05, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'risk': ['Moderate Risk']}}]
+2026-06-27 07:44:25,288 | INFO | ****RUNNING AGENT: forecast
+2026-06-27 07:44:25,288 | INFO | ****LOGGER TRACE START: forecast
+2026-06-27 07:44:25,288 | INFO | ****RUNNING AGENT: root_cause
+2026-06-27 07:44:25,288 | INFO | ****FORECAST INPUT: ['12% increase detected']
+2026-06-27 07:44:25,288 | INFO | ****LOGGER TRACE START: root_cause
+2026-06-27 07:44:25,288 | INFO | ****LOGGER TRACE END : forecast | success | 0.001159
+2026-06-27 07:44:25,288 | INFO | ****ROOT CAUSE INPUT: ['Revenue changed by 12%'], ['12% increase detected'], ['Moderate Risk']
+2026-06-27 07:44:25,288 | INFO | ****COMPLETED AGENT: forecast in 0.001101s
+2026-06-27 07:44:25,288 | INFO | ****LOGGER TRACE END : root_cause | success | 0.000938
+2026-06-27 07:44:25,295 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:44:25,295 | INFO | ****COMPLETED AGENT: root_cause in 0.000819s
+2026-06-27 07:44:25,295 | INFO | ****ARTIFACTS: {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 12% may continue.']}
+2026-06-27 07:44:25,295 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:44:25,295 | INFO | ****ARTIFACTS: {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.']}
+2026-06-27 07:44:25,295 | INFO | ****PARALLEL EXECUTION:[{'agent': 'forecast', 'duration': 0.001101, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 12% may continue.']}}, {'agent': 'root_cause', 'duration': 0.000819, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.']}}]
+2026-06-27 07:44:25,299 | INFO | ****GROUP 3 RESULTS[{'agent': 'forecast', 'duration': 0.001101, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 12% may continue.']}}, {'agent': 'root_cause', 'duration': 0.000819, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.']}}]
+2026-06-27 07:44:25,301 | INFO | ****RUNNING AGENT: recommendation
+2026-06-27 07:44:25,304 | INFO | ****LOGGER TRACE START: recommendation
+2026-06-27 07:44:25,304 | INFO | ****LOGGER TRACE END : recommendation | success | 2.9e-05
+2026-06-27 07:44:25,305 | INFO | ****COMPLETED AGENT: recommendation in 1.2e-05s
+2026-06-27 07:44:25,305 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:44:25,305 | INFO | ****ARTIFACTS: {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 12% may continue.'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-27 07:44:25,305 | INFO | ****PARALLEL EXECUTION:[{'agent': 'recommendation', 'duration': 1.2e-05, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 12% may continue.'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-27 07:44:25,306 | INFO | ****GROUP 4 RESULTS[{'agent': 'recommendation', 'duration': 1.2e-05, 'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 12% may continue.'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}]
+2026-06-27 07:44:25,306 | INFO | ****TRACE COUNT: 10
+2026-06-27 07:44:25,306 | INFO | ****TRACE COUNT METADATA: 10
+2026-06-27 07:44:25,306 | INFO | ****EXECUTION METADATA: {'agents_executed': ['actions', 'sentiment', 'insights', 'findings', 'trend', 'risk', 'forecast', 'root_cause', 'recommendation'], 'agent_count': 10, 'parallel_groups': [['actions', 'sentiment', 'insights', 'findings'], ['trend', 'risk'], ['forecast', 'root_cause'], ['recommendation']], 'timings': {'summary': 0.000896, 'actions': 0.009193, 'sentiment': 1.4e-05, 'insights': 0.000264, 'findings': 0.004185, 'trend': 0.001444, 'risk': 1e-05, 'forecast': 0.001101, 'root_cause': 0.000819, 'recommendation': 1.2e-05}, 'trace_count': 10, 'execution_events': [{'agent': 'actions', 'stage': 'dag', 'status': 'success'}, {'agent': 'sentiment', 'stage': 'dag', 'status': 'success'}, {'agent': 'insights', 'stage': 'dag', 'status': 'success'}, {'agent': 'findings', 'stage': 'dag', 'status': 'success'}, {'agent': 'trend', 'stage': 'dag', 'status': 'success'}, {'agent': 'risk', 'stage': 'dag', 'status': 'success'}, {'agent': 'forecast', 'stage': 'dag', 'status': 'success'}, {'agent': 'root_cause', 'stage': 'dag', 'status': 'success'}, {'agent': 'recommendation', 'stage': 'dag', 'status': 'success'}], 'retry_count': 0, 'failed_agents': [], 'preprocessing': {'agent': 'summary', 'duration': 0.000896, 'output_size': 95}, 'total_execution_time': 0.048761, 'trace_sample': {'trace_id': '2cc7cedb-b34e-43df-acbd-1aa5a70faeff', 'execution_id': '27f68a8d-f6d0-47a3-9c31-ebb14d146e32', 'agent': 'recommendation', 'started_at': '2026-06-27 07:44:25.304', 'input': {'context': {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}, 'selected_agents': []}, 'parallel_group': None, 'ended_at': '2026-06-27 07:44:25.304', 'status': 'success', 'output': {'artifacts': {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 12% may continue.'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}}, 'duration': 2.9e-05}}
+2026-06-27 07:44:25,306 | INFO | ****FINAL ARTIFACTS: 
+2026-06-27 07:44:25,306 | INFO | {'actions': ['John should prepare the report.', 'Sarah must follow up.'], 'sentiment': ['Positive'], 'insights': ['Revenue changed by 12%'], 'findings': [], 'trends': ['12% increase detected'], 'risk': ['Moderate Risk'], 'forecasts': ['Growth trend of 12% may continue.'], 'root_causes': ['Revenue growth appears linked to market expansion.', 'Observed risks may be affecting outcomes.'], 'recommendations': ['Increase investment in growth channels.', 'Develop risk mitigation plans.']}
+2026-06-27 07:44:25,316 | INFO | ==============Application AI Summarizer==============
+2026-06-27 07:44:25,316 | INFO | ==============EXECUTION END==============
+2026-06-27 07:55:17,297 | INFO | ****agent_system
+2026-06-27 07:55:17,709 | INFO | ==============Application AI Summarizer==============
+2026-06-27 07:55:17,709 | INFO | ==============FastAPI app initialized==============
+2026-06-27 07:55:19,509 | INFO | ==============Serving home page==============
+2026-06-27 07:55:19,512 | INFO | ==============EXECUTION START==============
+2026-06-27 07:55:28,058 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-27 07:55:28,058 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'e8057b39-4ea2-4690-838e-f36c92042061'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-27 07:55:28,058 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': 'e8057b39-4ea2-4690-838e-f36c92042061', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': 'e8057b39-4ea2-4690-838e-f36c92042061'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-27 07:55:28,058 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-27 07:56:30,698 | INFO | ****agent_system
+2026-06-27 07:56:31,124 | INFO | ==============Application AI Summarizer==============
+2026-06-27 07:56:31,124 | INFO | ==============FastAPI app initialized==============
+2026-06-27 07:56:43,911 | INFO | ==============Serving home page==============
+2026-06-27 07:56:43,911 | INFO | ==============EXECUTION START==============
+2026-06-27 07:56:46,442 | INFO | ****REGISTERED AGENTS: ['summary', 'actions', 'insights', 'findings', 'plan', 'trend', 'sentiment', 'risk', 'root_cause', 'forecast', 'recommendation']
+2026-06-27 07:56:46,442 | INFO | ****context_bulder->agent_graph: {'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': '0564a542-f91f-4ef8-aab5-ccf9b5f48fb7'}, 'runtime': {'timings': {}, 'executed': []}, 'artifacts': {}}
+2026-06-27 07:56:46,442 | INFO | ****agent_graph immediately after: {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'selected_agents': []}, 'execution_id': '0564a542-f91f-4ef8-aab5-ccf9b5f48fb7', 'state': {'text': 'John bought 3 apples for $5 each', 'summary_length': 'medium', 'summary': '', 'actions': [], 'insights': [], 'findings': [], 'trends': [], 'plan': {}, 'metadata': {}, 'artifacts': {}, 'context': {}, 'execution_id': '0564a542-f91f-4ef8-aab5-ccf9b5f48fb7'}, 'runtime': {'timings': {}, 'executed': []}}
+2026-06-27 07:56:46,443 | INFO | ****INTENT SCORES: {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}
+2026-06-27 07:56:46,444 | INFO | ****PRIMARY INTENT: fallback
+2026-06-27 07:56:46,444 | INFO | ****SELECTED INTENTS: ['fallback']
+2026-06-27 07:56:46,444 | INFO | ****agent_graph intent_info : {'primary_intent': 'fallback', 'intents': ['fallback'], 'scores': {'business_report': 0, 'meeting_notes': 0, 'research_report': 0}}
+2026-06-27 07:56:46,444 | INFO | ****STRATEGY (strategy builder): {'summary', 'sentiment'}
+2026-06-27 07:56:46,444 | INFO | ****agent_graph STRATEGY : ['summary', 'sentiment']
+2026-06-27 07:56:46,444 | INFO | ****INPUT STRATEGY: ['summary', 'sentiment']
+2026-06-27 07:56:46,444 | INFO | ****PARSED SECTIONS after split: {'general': 'John bought 3 apples for $5 each'}
+2026-06-27 07:56:46,444 | INFO | ****SECTIONS: {'general': 'John bought 3 apples for $5 each'}
+2026-06-27 07:56:46,444 | INFO | ****Resolved execution order: ['summary', 'sentiment']
+2026-06-27 07:56:46,444 | INFO | ****GRAPH VALIDATION PASSED | warnings=["Unused registry agents: {'trend', 'risk', 'root_cause', 'forecast', 'findings', 'insights', 'summary', 'recommendation'}"]
+2026-06-27 07:56:46,444 | INFO | ****PARALLEL GROUPS (parallel groups): [['sentiment']]
+2026-06-27 07:56:46,444 | INFO | ****EXECUTION ORDER: ['summary', 'sentiment']
+2026-06-27 07:56:46,444 | INFO | ****PARALLEL GROUPS (scheduler): [['summary'], ['sentiment']]
+2026-06-27 07:56:46,444 | INFO | ****PREPROCESS START: summary
+2026-06-27 07:56:46,444 | INFO | ****SUMMARY INPUT:
+John bought 3 apples for $5 each
+2026-06-27 07:56:46,444 | INFO | ****SUMMARY WORDS: 7
+2026-06-27 07:56:46,444 | INFO | ****PREPROCESS END: 0.000407s
+2026-06-27 07:56:46,444 | INFO | ****RUNNING AGENT: sentiment
+2026-06-27 07:56:46,444 | INFO | ****LOGGER TRACE START: sentiment
+2026-06-27 07:56:46,444 | INFO | ****LOGGER TRACE END : sentiment | success | 2.8e-05
+2026-06-27 07:56:46,444 | INFO | ****COMPLETED AGENT: sentiment in 1e-05s
+2026-06-27 07:56:46,444 | INFO | ****AGENT CONTEXT SNAPSHOT: {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}
+2026-06-27 07:56:46,444 | INFO | ****ARTIFACTS: {'sentiment': ['Neutral']}
+2026-06-27 07:56:46,444 | INFO | ****PARALLEL EXECUTION:[{'agent': 'sentiment', 'duration': 1e-05, 'artifacts': {'sentiment': ['Neutral']}}]
+2026-06-27 07:56:46,444 | INFO | ****GROUP 1 RESULTS[{'agent': 'sentiment', 'duration': 1e-05, 'artifacts': {'sentiment': ['Neutral']}}]
+2026-06-27 07:56:46,444 | INFO | ****TRACE COUNT: 1
+2026-06-27 07:56:46,444 | INFO | ****TRACE COUNT METADATA: 1
+2026-06-27 07:56:46,444 | INFO | ****EXECUTION METADATA: {'agents_executed': ['sentiment'], 'agent_count': 2, 'parallel_groups': [['sentiment']], 'timings': {'summary': 0.000407, 'sentiment': 1e-05}, 'trace_count': 1, 'execution_events': [{'agent': 'sentiment', 'stage': 'dag', 'status': 'success'}], 'retry_count': 0, 'failed_agents': [], 'preprocessing': {'agent': 'summary', 'duration': 0.000407, 'output_size': 32}, 'total_execution_time': 0.007512, 'trace_sample': {'trace_id': 'bf899821-d8a5-4ca3-ba6b-9455a6e9476d', 'execution_id': '0564a542-f91f-4ef8-aab5-ccf9b5f48fb7', 'agent': 'sentiment', 'started_at': '2026-06-27 07:56:46.444', 'input': {'context': {'insights': [], 'findings': [], 'actions': [], 'trends': [], 'risk': []}, 'selected_agents': []}, 'parallel_group': None, 'ended_at': '2026-06-27 07:56:46.444', 'status': 'success', 'output': {'artifacts': {'sentiment': ['Neutral']}}, 'duration': 2.8e-05}}
+2026-06-27 07:56:46,444 | INFO | ****FINAL ARTIFACTS: 
+2026-06-27 07:56:46,444 | INFO | {'sentiment': ['Neutral']}
+2026-06-27 07:56:46,458 | INFO | ==============Application AI Summarizer==============
+2026-06-27 07:56:46,458 | INFO | ==============EXECUTION END==============
