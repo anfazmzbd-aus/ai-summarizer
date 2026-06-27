@@ -522,6 +522,66 @@ Scheduler accepts DAG agents only.
 Scheduler produces immutable execution layers.
 Runtime preserves execution metadata compatibility.
 
+# V7.6 — Execution Engine Hardening (Final)
+
+## Added
+
+* Introduced preprocessing execution stage (summary) outside DAG execution.
+* Added fallback intent for non-domain inputs.
+* Added execution_events telemetry.
+* Added human-readable trace timestamps:
+
+  * started_at
+  * ended_at
+
+## Changed
+
+* Scheduler now excludes preprocessing nodes before DAG validation.
+* Graph validator enforces:
+
+  * dependency existence
+  * non-DAG dependency blocking
+  * preprocessing isolation
+* Parallel execution metadata excludes preprocessing groups.
+* State merging is immutable-by-default.
+* Retry execution uses isolated state snapshots.
+
+## Fixed
+
+* Fixed summary-only execution crashes.
+* Fixed empty DAG execution.
+* Fixed unbound variable failures:
+
+  * result
+  * agent_name
+  * failed
+* Fixed trace_sample empty-list crashes.
+* Fixed preprocessing appearing as DAG node.
+* Fixed execution count inconsistencies.
+
+## Execution Model
+
+Preprocessing:
+summary
+
+DAG:
+actions
+insights
+findings
+sentiment
+trend
+risk
+root_cause
+forecast
+recommendation
+
+Preprocessing output becomes DAG input.
+DAG agents never mutate preprocessing state.
+
+Status:
+V7.6 Locked
+
+
 
 
 
