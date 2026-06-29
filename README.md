@@ -478,3 +478,13 @@ summary = preprocessing
 metadata agent_count includes preprocessing
 agents_executed excludes preprocessing
 
+V7.7 — Execution Engine Evolution Plan (Clean Architecture Layer)
+  Core Goal of V7.7
+
+    Transform this:
+
+    “Agent orchestration system”
+
+    into:
+
+    “Deterministic DAG execution runtime with state contracts”

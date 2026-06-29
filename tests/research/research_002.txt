@@ -1,3 +1,0 @@
-The study demonstrates significant performance gains.
-
-Results indicate reduced processing time.

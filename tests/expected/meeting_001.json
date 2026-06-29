@@ -1,7 +1,0 @@
-{
-  "agents": ["summary", "actions"],
-  "actions": [
-    "John should prepare the report",
-    "Sarah must follow up"
-  ]
-}

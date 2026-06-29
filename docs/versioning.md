@@ -27,3 +27,27 @@ V7.6 Final stable
     Fallback intent preferred over business default.
 
 After these docs updates, I would consider V7.6 officially closed.
+
+V7.7 — Execution Engine Evolution Plan (Clean Architecture Layer)
+  1. Core Goal of V7.7
+
+    Transform this:
+
+    “Agent orchestration system”
+
+    into:
+
+    “Deterministic DAG execution runtime with state contracts”
+
+  2. Key Design Shift
+    V7.6 model (what you have now)
+    scheduler builds execution_order
+    validator checks correctness
+    runtime executes sequential/parallel groups
+    state is mutable but controlled
+
+    V7.7 model (target)
+    scheduler produces execution DAG object
+    validator validates graph object, not lists
+    runtime executes graph nodes with state contracts
+    no implicit ordering anywhere

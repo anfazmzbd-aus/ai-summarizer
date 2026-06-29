@@ -482,3 +482,147 @@ V7.6 is now behaving like a real DAG runtime:
   Merger = OK
   Traceability = OK
   DAG Isolation = OK
+
+  V7.7 — Execution Engine Evolution Plan (Clean Architecture Layer)
+
+  🧠 Key Architectural Rules (V7.7)
+    1. Hard Separation of Responsibilities
+    Layer	Responsibility
+    graph_builder	builds execution structure only
+    graph_validator	validates correctness only
+    execution_engine	runs everything
+    state_model	defines truth of data
+    scheduler	orchestration planning only
+
+    2. Execution Rule (CRITICAL)
+    NO agent decides order
+    NO runtime builds dependencies
+    NO list-based execution logic outside graph
+
+    Only:
+
+    ExecutionGraph → ExecutionEngine → Output
+
+  3. State Rule
+
+    Each node writes ONLY to:
+
+    state.node_outputs[agent_name]
+
+    No cross writes allowed.
+
+  4. Retry Rule
+
+    Retry operates on:
+
+    node + snapshot_state
+
+    NOT full pipeline.
+
+  5. Preprocessing Isolation
+    preprocessing/
+        summary_agent.py
+    runs before graph
+    never enters ExecutionGraph
+    never validated by DAG rules
+
+  6. Why this structure is “production-grade”
+
+    Because it guarantees:
+
+    ✔ Deterministic execution
+    ✔ No hidden coupling between agents
+    ✔ No runtime graph mutation
+    ✔ Fully testable DAG layer
+    ✔ Isolated retries (critical for reliability)
+    ✔ Clear observability boundaries
+
+
+
+
+
+
+
+
+🧠 V7.7 Production Folder Structure
+
+  app/
+  │
+  ├── routes/
+  │   ├── summarize.py
+  │   ├── health.py
+  │
+  ├── core/
+  │   ├── config.py
+  │   ├── constants.py
+  │   ├── exceptions.py
+  │
+  ├── orchestration/
+  │   │
+  │   ├── graph/
+  │   │   ├── graph_builder.py              # NEW: builds ExecutionGraph
+  │   │   ├── graph_schema.py              # NEW: ExecutionGraph dataclass / schema
+  │   │   ├── graph_validator.py           # upgraded DAG + contract validation
+  │   │   ├── graph_optimizer.py          # optional (future: pruning, batching)
+  │   │
+  │   ├── execution/
+  │   │   ├── execution_engine.py         # NEW CORE: replaces run_graph
+  │   │   ├── layer_executor.py           # executes parallel layers
+  │   │   ├── node_executor.py            # executes single agent node
+  │   │   ├── retry_engine.py             # node-level retry system
+  │   │
+  │   ├── scheduler/
+  │   │   ├── scheduler.py                # now ONLY builds graph
+  │   │
+  │   ├── state/
+  │   │   ├── state_model.py              # canonical State object
+  │   │   ├── state_builder.py            # builds initial state
+  │   │   ├── state_merger.py             # immutable merge logic (V7.6 upgraded)
+  │   │   ├── state_contracts.py          # INPUT/OUTPUT schema per agent
+  │   │
+  │   ├── intent/
+  │   │   ├── intent_classifier.py
+  │   │   ├── intent_router.py
+  │   │
+  │   ├── strategy/
+  │   │   ├── strategy_builder.py
+  │   │   ├── agent_selector.py
+  │   │
+  │   ├── preprocessing/
+  │   │   ├── summary_agent.py            # ONLY preprocessing node
+  │   │   ├── section_parser.py
+  │   │
+  │   ├── agents/
+  │   │   ├── insights.py
+  │   │   ├── actions.py
+  │   │   ├── sentiment.py
+  │   │   ├── findings.py
+  │   │   ├── trend.py
+  │   │   ├── risk.py
+  │   │   ├── root_cause.py
+  │   │   ├── forecast.py
+  │   │   ├── recommendation.py
+  │   │
+  │   ├── registry/
+  │   │   ├── agent_registry.py           # metadata + dependencies + contracts
+  │   │
+  │   ├── logging/
+  │   │   ├── logger.py
+  │   │   ├── trace_logger.py
+  │   │
+  │   ├── observability/
+  │   │   ├── metrics.py
+  │   │   ├── execution_trace.py
+  │   │   ├── debug_dump.py
+  │
+  ├── api/
+  │   ├── api_v1/
+  │   │   ├── summarize_endpoint.py
+  │
+  ├── tests/
+  │   ├── test_graph_builder.py
+  │   ├── test_execution_engine.py
+  │   ├── test_state_merger.py
+  │   ├── test_retry_engine.py
+  │
+  └── main.py
