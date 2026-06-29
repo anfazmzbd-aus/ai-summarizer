@@ -581,6 +581,40 @@ DAG agents never mutate preprocessing state.
 Status:
 V7.6 Locked
 
+# V7.7 — Graph-Based Execution Runtime
+
+Release Type:
+Major Architecture Evolution
+
+## Added
+
+* ExecutionGraph
+* GraphBuilder
+* GraphValidator
+* ExecutionEngine
+* LayerExecutor
+* NodeExecutor
+* StateContract system
+* RetryEngine
+* StateMerger
+
+## Changed
+
+* Scheduler produces graph only
+* Runtime executes graph layers
+* State writes isolated per node
+
+## Removed
+
+* execution_order
+* parallel_groups
+* graph mutation during execution
+
+## Migration Notes
+
+V7.6 remains archived.
+
+Runtime evolution continues from V7.7.
 
 
 

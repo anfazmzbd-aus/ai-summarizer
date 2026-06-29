@@ -12,4 +12,7 @@ package.json
 backup/
 summaries.db
 logs
-Xorchestration/
+app/Xorchestration/
+.pytest_cache/
+.coverage
+htmlcov/

@@ -626,3 +626,129 @@ V7.6 is now behaving like a real DAG runtime:
   │   ├── test_retry_engine.py
   │
   └── main.py
+
+  # Architecture Overview
+
+## Runtime Lineage
+
+V6.x
+↓
+V7.6 (Last Orchestration Runtime)
+↓
+V7.7 (Execution Runtime)
+↓
+V8.x (Future Extensions)
+
+---
+
+## Core Principles
+
+### Graph Is Truth
+
+Execution order is derived from graph.
+
+No implicit sequencing.
+
+---
+
+### Runtime Is Stateless
+
+Execution nodes cannot mutate shared state.
+
+All writes:
+
+state.node_outputs[node_name]
+
+---
+
+### Contracts Are Mandatory
+
+Each node defines:
+
+INPUT
+OUTPUT
+RETRY
+
+Execution without contracts is invalid.
+
+---
+
+## Runtime Layers
+
+graph_builder
+↓
+graph_validator
+↓
+execution_engine
+↓
+layer_executor
+↓
+node_executor
+↓
+state_merger
+
+---
+
+## Legacy Policy
+
+Legacy runtime exists only under:
+
+app/legacy/v76/
+
+No production imports allowed.
+
+#Final V7.7 import contract
+main
+↓
+api
+↓
+service
+↓
+scheduler
+↓
+graph
+↓
+runtime
+↓
+registry
+↓
+state
+↓
+core
+
+Final V7.7 Completion Set
+
+Create these missing files.
+
+app/
+│
+├── main.py
+├── services/
+│   └── summarize_service.py
+│
+├── api/
+│   └── v1/
+│       └── summarize_endpoint.py
+│
+├── orchestration/
+│
+│   ├── state/
+│   │   ├── state_model.py
+│   │   ├── state_builder.py
+│   │   └── state_merger.py
+│
+│   ├── registry/
+│   │   ├── agent_specs.py
+│   │   └── agent_registry.py
+│
+│   ├── execution/
+│   │   ├── execution_engine.py
+│   │   └── retry_engine.py
+│
+│   ├── agents/
+│   │   ├── summary.py
+│   │   ├── insights.py
+│   │   └── actions.py
+│
+└── tests/
+    └── test_full_pipeline.py
