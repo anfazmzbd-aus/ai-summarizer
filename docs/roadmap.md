@@ -51,3 +51,48 @@ Goals:
 * Workflow orchestration
 * Enterprise reporting
 * Human review workflows
+
+# Runtime Roadmap
+
+## V7.7 — Deterministic Runtime
+
+Status:
+Complete
+
+Delivered:
+
+ExecutionGraph
+ExecutionEngine
+State Contracts
+Retry Model
+
+---
+
+## V7.8 — Reliability Layer
+
+Planned:
+
+Execution Trace
+Metrics
+Timeout Enforcement
+Snapshot Recovery
+
+---
+
+## V7.9 — Runtime Optimization
+
+Planned:
+
+Graph Optimizer
+Graph Caching
+Execution Fingerprints
+
+---
+
+## V8.0 — Distributed Runtime
+
+Planned:
+
+Distributed Executors
+Queue Runtime
+Persistent Execution State
