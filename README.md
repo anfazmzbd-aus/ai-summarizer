@@ -488,3 +488,70 @@ V7.7 — Execution Engine Evolution Plan (Clean Architecture Layer)
     into:
 
     “Deterministic DAG execution runtime with state contracts”
+
+# AI-Summarizer — Runtime Status
+
+## Current Runtime
+
+Active Runtime: **V7.7 Graph-Based Execution Engine**
+
+Status:
+
+* ExecutionGraph operational
+* Deterministic execution enabled
+* Contract-based runtime enabled
+* Full pipeline tests passing
+
+---
+
+## Runtime Evolution
+
+### V7.6 (Archived Runtime)
+
+Architecture:
+
+* Scheduler → execution_order
+* Parallel groups
+* Mutable execution state
+* Runtime-driven orchestration
+
+Status:
+
+* Frozen
+* Maintained for rollback only
+* No future feature development
+
+---
+
+### V7.7 (Current Runtime)
+
+Architecture:
+
+* Scheduler → ExecutionGraph
+* GraphValidator
+* ExecutionEngine
+* State Contracts
+* Node-level retries
+
+Execution Model:
+
+Request
+→ Scheduler
+→ ExecutionGraph
+→ ExecutionEngine
+→ State
+→ Output
+
+---
+
+## Development Policy
+
+New features MUST target V7.7.
+
+Do not introduce:
+
+* execution_order
+* parallel_groups
+* runtime dependency generation
+
+All execution must originate from ExecutionGraph.
