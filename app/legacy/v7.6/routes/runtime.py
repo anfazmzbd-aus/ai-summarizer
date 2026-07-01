@@ -6,9 +6,7 @@ router = APIRouter()
 runtime_cache = {}
 
 
-@router.get(
-    "/execution"
-)
+@router.get("/execution")
 def execution():
 
     return runtime_cache

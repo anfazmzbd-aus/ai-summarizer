@@ -8,6 +8,4 @@ from app.api.v1.summarize_endpoint import (
 
 app = FastAPI()
 
-app.include_router(
-    router
-)
+app.include_router(router)

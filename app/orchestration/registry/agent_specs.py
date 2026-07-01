@@ -24,22 +24,11 @@ class AgentSpec:
 
     # graph
 
-    dependencies: Tuple[
-        str,
-        ...
-    ] = ()
+    dependencies: Tuple[str, ...] = ()
 
-    reads: Set[
-        str
-    ] = field(
-        default_factory=set
-    )
+    reads: Set[str] = field(default_factory=set)
 
-    writes: Set[
-        str
-    ] = field(
-        default_factory=set
-    )
+    writes: Set[str] = field(default_factory=set)
 
     # retry
 
@@ -51,6 +40,4 @@ class AgentSpec:
 
     # extension
 
-    metadata: Dict = field(
-        default_factory=dict
-    )
+    metadata: Dict = field(default_factory=dict)

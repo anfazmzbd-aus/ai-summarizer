@@ -13,43 +13,34 @@ from app.orchestration.graph.graph_schema import (
 # Runtime State
 # --------------------------
 
+
 @dataclass
 class RuntimeNodeState:
 
-    status: NodeStatus = (
-        "pending"
-    )
+    status: NodeStatus = "pending"
 
     retries: int = 0
 
     duration_ms: float = 0
 
-    started_at: Optional[
-        str
-    ] = None
+    started_at: Optional[str] = None
 
-    ended_at: Optional[
-        str
-    ] = None
+    ended_at: Optional[str] = None
 
-    error: Optional[
-        str
-    ] = None
+    error: Optional[str] = None
 
 
 # --------------------------
 # Layer Trace
 # --------------------------
 
+
 @dataclass
 class LayerTrace:
 
     index: int
 
-    nodes: tuple[
-        str,
-        ...
-    ]
+    nodes: tuple[str, ...]
 
     duration_ms: float = 0
 
@@ -58,36 +49,19 @@ class LayerTrace:
 # Execution Context
 # --------------------------
 
+
 @dataclass
 class ExecutionContext:
 
     execution_id: str = ""
 
-    runtime: dict[
-        str,
-        RuntimeNodeState
-    ] = field(
-        default_factory=dict
-    )
+    runtime: dict[str, RuntimeNodeState] = field(default_factory=dict)
 
-    completed_layers: list[
-        int
-    ] = field(
-        default_factory=list
-    )
+    completed_layers: list[int] = field(default_factory=list)
 
-    traces: list[
-        LayerTrace
-    ] = field(
-        default_factory=list
-    )
+    traces: list[LayerTrace] = field(default_factory=list)
 
-    metadata: dict[
-        str,
-        Any
-    ] = field(
-        default_factory=dict
-    )
+    metadata: dict[str, Any] = field(default_factory=dict)
 
     # ------------------
 
@@ -96,26 +70,15 @@ class ExecutionContext:
         node_name,
     ):
 
-        state = (
-            self.runtime
-            .get(
-                node_name
-            )
-        )
+        state = self.runtime.get(node_name)
 
         if state is None:
 
-            state = (
-                RuntimeNodeState()
-            )
+            state = RuntimeNodeState()
 
-            self.runtime[
-                node_name
-            ] = state
+            self.runtime[node_name] = state
 
-        state.status = (
-            "running"
-        )
+        state.status = "running"
 
     # ------------------
 
@@ -125,19 +88,11 @@ class ExecutionContext:
         duration_ms,
     ):
 
-        node = (
-            self.runtime[
-                node_name
-            ]
-        )
+        node = self.runtime[node_name]
 
-        node.status = (
-            "success"
-        )
+        node.status = "success"
 
-        node.duration_ms = (
-            duration_ms
-        )
+        node.duration_ms = duration_ms
 
     # ------------------
 
@@ -147,19 +102,11 @@ class ExecutionContext:
         error,
     ):
 
-        node = (
-            self.runtime[
-                node_name
-            ]
-        )
+        node = self.runtime[node_name]
 
-        node.status = (
-            "failed"
-        )
+        node.status = "failed"
 
-        node.error = str(
-            error
-        )
+        node.error = str(error)
 
     # ------------------
 
@@ -168,15 +115,9 @@ class ExecutionContext:
         node_name,
     ):
 
-        node = (
-            self.runtime[
-                node_name
-            ]
-        )
+        node = self.runtime[node_name]
 
-        node.status = (
-            "retry"
-        )
+        node.status = "retry"
 
         node.retries += 1
 
@@ -189,24 +130,8 @@ class ExecutionContext:
         nodes,
     ):
 
-        self.completed_layers.append(
-            index
-        )
+        self.completed_layers.append(index)
 
         self.traces.append(
-
-            LayerTrace(
-
-                index=index,
-
-                duration_ms=(
-                    duration_ms
-                ),
-
-                nodes=tuple(
-                    nodes
-                )
-
-            )
-
+            LayerTrace(index=index, duration_ms=(duration_ms), nodes=tuple(nodes))
         )

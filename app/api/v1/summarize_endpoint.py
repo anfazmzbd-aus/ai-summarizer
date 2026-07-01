@@ -20,21 +20,13 @@ class Request(
     text: str
 
 
-@router.post(
-    "/summarize"
-)
+@router.post("/summarize")
 def summarize(
     req: Request,
 ):
 
-    service = (
-        SummarizeService()
-    )
+    service = SummarizeService()
 
-    result = (
-        service.run(
-            req.text
-        )
-    )
+    result = service.run(req.text)
 
     return result.outputs

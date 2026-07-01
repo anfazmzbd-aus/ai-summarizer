@@ -32,76 +32,31 @@ class GraphBuilder:
         selected_agents: list[str],
     ) -> ExecutionGraph:
 
-        selected_agents = (
-            self._normalize_agents(
-                selected_agents
-            )
-        )
+        selected_agents = self._normalize_agents(selected_agents)
 
-        nodes = (
-            self._build_nodes(
-                selected_agents
-            )
-        )
+        nodes = self._build_nodes(selected_agents)
 
-        edges = (
-            self._build_edges(
-                nodes
-            )
-        )
+        edges = self._build_edges(nodes)
 
-        roots = (
-            self._derive_roots(
-                nodes
-            )
-        )
+        roots = self._derive_roots(nodes)
 
-        leaves = (
-            self._derive_leaves(
-                nodes
-            )
-        )
+        leaves = self._derive_leaves(nodes)
 
-        layers = (
-            self._build_layers(
-                nodes,
-                edges,
-            )
+        layers = self._build_layers(
+            nodes,
+            edges,
         )
 
         return ExecutionGraph(
-
-            execution_id=(
-                str(
-                    uuid4()
-                )
-            ),
-
+            execution_id=(str(uuid4())),
             version="7.7",
-
             nodes=nodes,
-
-            edges=tuple(
-                edges
-            ),
-
-            layers=tuple(
-                layers
-            ),
-
-            selected_agents=tuple(
-                selected_agents
-            ),
-
-            root_nodes=tuple(
-                roots
-            ),
-
-            leaf_nodes=tuple(
-                leaves
-            ),
-
-            metadata={}
+            edges=tuple(edges),
+            layers=tuple(layers),
+            selected_agents=tuple(selected_agents),
+            root_nodes=tuple(roots),
+            leaf_nodes=tuple(leaves),
+            metadata={},
         )
 
     def _normalize_agents(
@@ -122,9 +77,7 @@ class GraphBuilder:
 
             ordered.append(agent)
 
-        return sorted(
-            ordered
-        )
+        return sorted(ordered)
 
     def _build_nodes(
         self,
@@ -135,57 +88,22 @@ class GraphBuilder:
 
         for agent in selected_agents:
 
-            spec = (
-                self.registry
-                .get(
-                    agent
-                )
-            )
+            spec = self.registry.get(agent)
 
             node = GraphNode(
-
                 name=spec.name,
-
-                function_name=(
-                    spec.function_name
-                ),
-
+                function_name=(spec.function_name),
                 stage="dag",
-
-                depends_on=tuple(
-                    sorted(
-                        spec.dependencies
-                    )
-                ),
-
-                reads=frozenset(
-                    spec.reads
-                ),
-
-                writes=frozenset(
-                    spec.writes
-                ),
-
-                retryable=(
-                    spec.retryable
-                ),
-
-                timeout_seconds=(
-                    spec.timeout_seconds
-                ),
-
-                max_retries=(
-                    spec.max_retries
-                ),
-
-                metadata=(
-                    spec.metadata
-                )
+                depends_on=tuple(sorted(spec.dependencies)),
+                reads=frozenset(spec.reads),
+                writes=frozenset(spec.writes),
+                retryable=(spec.retryable),
+                timeout_seconds=(spec.timeout_seconds),
+                max_retries=(spec.max_retries),
+                metadata=(spec.metadata),
             )
 
-            nodes[
-                node.name
-            ] = node
+            nodes[node.name] = node
 
         return nodes
 
@@ -202,28 +120,11 @@ class GraphBuilder:
 
                 if dep not in nodes:
 
-                    raise (
-                        ValidationError(
-                            f"Unknown dependency: {dep}"
-                        )
-                    )
+                    raise (ValidationError(f"Unknown dependency: {dep}"))
 
-                edges.append(
+                edges.append(GraphEdge(source=dep, target=node.name))
 
-                    GraphEdge(
-                        source=dep,
-                        target=node.name
-                    )
-
-                )
-
-        return sorted(
-            edges,
-            key=lambda e: (
-                e.source,
-                e.target
-            )
-        )
+        return sorted(edges, key=lambda e: (e.source, e.target))
 
     def _derive_roots(
         self,
@@ -236,13 +137,9 @@ class GraphBuilder:
 
             if not node.depends_on:
 
-                roots.append(
-                    node.name
-                )
+                roots.append(node.name)
 
-        return sorted(
-            roots
-        )
+        return sorted(roots)
 
     def _derive_leaves(
         self,
@@ -253,9 +150,7 @@ class GraphBuilder:
 
         for node in nodes.values():
 
-            consumed.update(
-                node.depends_on
-            )
+            consumed.update(node.depends_on)
 
         leaves = []
 
@@ -263,13 +158,9 @@ class GraphBuilder:
 
             if name not in consumed:
 
-                leaves.append(
-                    name
-                )
+                leaves.append(name)
 
-        return sorted(
-            leaves
-        )
+        return sorted(leaves)
 
     def _build_layers(
         self,
@@ -277,39 +168,17 @@ class GraphBuilder:
         edges,
     ):
 
-        indegree = defaultdict(
-            int
-        )
+        indegree = defaultdict(int)
 
-        outgoing = (
-            defaultdict(
-                list
-            )
-        )
+        outgoing = defaultdict(list)
 
         for edge in edges:
 
-            indegree[
-                edge.target
-            ] += 1
+            indegree[edge.target] += 1
 
-            outgoing[
-                edge.source
-            ].append(
-                edge.target
-            )
+            outgoing[edge.source].append(edge.target)
 
-        queue = deque(
-
-            sorted(
-
-                node
-                for node in nodes
-                if indegree[node] == 0
-
-            )
-
-        )
+        queue = deque(sorted(node for node in nodes if indegree[node] == 0))
 
         layers = []
 
@@ -321,73 +190,30 @@ class GraphBuilder:
 
             current = []
 
-            count = len(
-                queue
-            )
+            count = len(queue)
 
-            for _ in range(
-                count
-            ):
+            for _ in range(count):
 
-                node = (
-                    queue.popleft()
-                )
+                node = queue.popleft()
 
-                visited.add(
-                    node
-                )
+                visited.add(node)
 
-                current.append(
-                    node
-                )
+                current.append(node)
 
-                for child in sorted(
+                for child in sorted(outgoing[node]):
 
-                    outgoing[
-                        node
-                    ]
+                    indegree[child] -= 1
 
-                ):
+                    if indegree[child] == 0:
 
-                    indegree[
-                        child
-                    ] -= 1
+                        queue.append(child)
 
-                    if (
-                        indegree[
-                            child
-                        ]
-                        == 0
-                    ):
-
-                        queue.append(
-                            child
-                        )
-
-            layers.append(
-
-                ExecutionLayer(
-                    index=layer_idx,
-                    nodes=tuple(
-                        current
-                    )
-                )
-
-            )
+            layers.append(ExecutionLayer(index=layer_idx, nodes=tuple(current)))
 
             layer_idx += 1
 
-        if (
-            len(
-                visited
-            )
-            != len(
-                nodes
-            )
-        ):
+        if len(visited) != len(nodes):
 
-            raise ValidationError(
-                "Cycle detected"
-            )
+            raise ValidationError("Cycle detected")
 
         return layers

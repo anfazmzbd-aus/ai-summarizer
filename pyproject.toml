@@ -1,0 +1,30 @@
+[tool.pytest.ini_options]
+
+pythonpath = [
+"."
+]
+
+testpaths = [
+"app/tests"
+]
+
+[tool.black]
+
+line-length = 88
+
+target-version = ["py311"]
+
+extend-exclude = '''/app/legacy/'''
+
+[tool.isort]
+
+profile = "black"
+
+[tool.ruff]
+
+line-length = 88
+
+target-version = "py311"
+
+exclude = ["app/legacy/*"]
+

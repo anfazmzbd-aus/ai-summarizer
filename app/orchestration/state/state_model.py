@@ -7,23 +7,8 @@ from typing import Any
 @dataclass
 class State:
 
-    global_context: Dict[
-        str,
-        Any
-    ] = field(
-        default_factory=dict
-    )
+    global_context: Dict[str, Any] = field(default_factory=dict)
 
-    artifacts: Dict[
-        str,
-        Any
-    ] = field(
-        default_factory=dict
-    )
+    artifacts: Dict[str, Any] = field(default_factory=dict)
 
-    node_outputs: Dict[
-        str,
-        Any
-    ] = field(
-        default_factory=dict
-    )
+    node_outputs: Dict[str, Any] = field(default_factory=dict)

@@ -10,27 +10,17 @@ def get_agent_usage():
 
     db = SessionLocal()
 
-    rows = db.query(
-        Summary
-    ).all()
+    rows = db.query(Summary).all()
 
     counter = Counter()
 
     for row in rows:
 
-        data = json.loads(
-            row.agent_output
-        )
+        data = json.loads(row.agent_output)
 
-        execution = data.get(
-            "execution",
-            {}
-        )
+        execution = data.get("execution", {})
 
-        for agent in execution.get(
-            "agents_executed",
-            []
-        ):
+        for agent in execution.get("agents_executed", []):
             counter[agent] += 1
 
     db.close()

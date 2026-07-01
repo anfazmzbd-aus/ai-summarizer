@@ -1,16 +1,12 @@
 import re
 from app.services.logging.logger import logger
 
+
 def research_finding_tool(text):
 
     findings = []
 
-    keywords = [
-        "research",
-        "study",
-        "analysis",
-        "result"
-    ]
+    keywords = ["research", "study", "analysis", "result"]
 
     for line in text.splitlines():
 
@@ -20,15 +16,10 @@ def research_finding_tool(text):
             continue
         lower = line.lower()
 
-        if (
-            lower == "research report"
-        ):
+        if lower == "research report":
             continue
 
-        if any(
-            keyword in lower
-            for keyword in keywords
-        ):
+        if any(keyword in lower for keyword in keywords):
             findings.append(line)
 
     logger.info(f"****FINDING TOOL OUTPUT: {findings}")

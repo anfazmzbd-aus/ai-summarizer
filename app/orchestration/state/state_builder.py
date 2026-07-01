@@ -11,11 +11,7 @@ class StateBuilder:
     ):
 
         return State(
-
             global_context={
-
                 "text": text,
-
             }
-
         )

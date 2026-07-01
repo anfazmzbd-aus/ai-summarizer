@@ -8,6 +8,7 @@ from copy import deepcopy
 
 logger.info("****agent_system")
 
+
 def run_agent(agent_name, agent_func, state):
 
     isolated_state = {
@@ -16,99 +17,49 @@ def run_agent(agent_name, agent_func, state):
         "runtime": deepcopy(state.get("runtime", {})),
         "text": state.get("text"),
         "summary_length": state.get("summary_length"),
-        "selected_agents": deepcopy(state.get("selected_agents", []))
+        "selected_agents": deepcopy(state.get("selected_agents", [])),
     }
 
-    logger.info(
-        f"****RUNNING AGENT: "
-        f"{agent_name}"
-    )
+    logger.info(f"****RUNNING AGENT: " f"{agent_name}")
 
-    sections = state.get(
-        "sections",
-        {}
-    )
+    sections = state.get("sections", {})
 
     local_state = copy.deepcopy(state)
 
-    local_state["active_section"] = (
-        sections.get(
-            state.get(
-                "primary_intent"
-            ),
-            state["text"]
-        )
+    local_state["active_section"] = sections.get(
+        state.get("primary_intent"), state["text"]
     )
 
-    execution_id = (
-        state[
-            "execution_id"
-        ]
-    )
+    execution_id = state["execution_id"]
 
-    trace = (
-        trace_logger.start(
-            execution_id,
-            agent_name,
-            {
-                "context":
-                    local_state.get(
-                        "context",
-                        {}
-                    ),
-
-                "selected_agents":
-                    local_state.get(
-                        "selected_agents",
-                        []
-                    )
-            }
-        )
+    trace = trace_logger.start(
+        execution_id,
+        agent_name,
+        {
+            "context": local_state.get("context", {}),
+            "selected_agents": local_state.get("selected_agents", []),
+        },
     )
 
     start = time.perf_counter()
 
     try:
 
-        result = (
-            agent_func(
-                isolated_state
-            )
-        )
+        result = agent_func(isolated_state)
 
-        duration = round(
-            time.perf_counter()
-            - start,
-            6
-        )
+        duration = round(time.perf_counter() - start, 6)
 
         trace_logger.end(
-            trace,
-            {
-                "artifacts":
-                    result.get(
-                        "artifacts",
-                        {}
-                    )
-            },
-            status="success"
+            trace, {"artifacts": result.get("artifacts", {})}, status="success"
         )
 
     except Exception as e:
 
         duration = round(time.perf_counter() - start, 6)
 
-        trace_logger.end(
-            trace,
-            {
-                "error": str(e)
-            },
-            status="failed"
-        )
+        trace_logger.end(trace, {"error": str(e)}, status="failed")
 
-        logger.error(
-            f"****AGENT FAILED: {agent_name} | {str(e)}"
-        )
+        logger.error(f"****AGENT FAILED: {agent_name} | {str(e)}")
 
         # -----------------------------------------
         # PHASE 4: Retry hook (DO NOT raise here)
@@ -120,31 +71,13 @@ def run_agent(agent_name, agent_func, state):
             "duration": duration,
             "error": str(e),
             "artifacts": {},
-            "retry_eligible": True
+            "retry_eligible": True,
         }
 
-    logger.info(
-        f"****COMPLETED AGENT: "
-        f"{agent_name} "
-        f"in {duration}s"
-    )
+    logger.info(f"****COMPLETED AGENT: " f"{agent_name} " f"in {duration}s")
 
-    logger.info(
-        f"****AGENT CONTEXT SNAPSHOT: "
-        f"{state.get('context', {})}"
-    )
-    artifacts = result.get(
-    "artifacts",
-    {}
-    )
-    logger.info(
-        f"****ARTIFACTS: "
-        f"{artifacts}"
-    )
+    logger.info(f"****AGENT CONTEXT SNAPSHOT: " f"{state.get('context', {})}")
+    artifacts = result.get("artifacts", {})
+    logger.info(f"****ARTIFACTS: " f"{artifacts}")
 
-    return {
-        "agent": agent_name,
-        "duration": duration,
-        "artifacts": artifacts
-    }
-
+    return {"agent": agent_name, "duration": duration, "artifacts": artifacts}

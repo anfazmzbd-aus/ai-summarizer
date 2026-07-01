@@ -1,37 +1,21 @@
-from app.services.registry.registry import (
-    register_agent
-)
+from app.services.registry.registry import register_agent
 
-from app.services.tools.forecast_tool import (
-    forecast_tool
-)
+from app.services.tools.forecast_tool import forecast_tool
 from app.services.logging.logger import logger
 
-@register_agent(
-    "forecast",
-    depends_on=["trend"],
-    produces=["forecasts"]
-)
 
+@register_agent("forecast", depends_on=["trend"], produces=["forecasts"])
 def forecast_agent(state):
 
     context = state.get("context", {})
     artifacts = state.get("artifacts", {})
 
-    trends = (
-        context.get("trends")
-        or artifacts.get("trends", [])
-    )
+    trends = context.get("trends") or artifacts.get("trends", [])
 
-    logger.info(
-        f"****FORECAST INPUT: {trends}"
-    )
+    logger.info(f"****FORECAST INPUT: {trends}")
 
     forecasts = forecast_tool(trends)
 
-    state.setdefault(
-        "artifacts",
-        {}
-    )["forecasts"] = forecasts
+    state.setdefault("artifacts", {})["forecasts"] = forecasts
 
     return state

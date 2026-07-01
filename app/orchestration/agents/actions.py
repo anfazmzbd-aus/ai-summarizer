@@ -2,6 +2,4 @@ class ActionsAgent:
 
     def run(self, data):
 
-        return {
-            "actions": ["review", "execute"]
-        }
+        return {"actions": ["review", "execute"]}

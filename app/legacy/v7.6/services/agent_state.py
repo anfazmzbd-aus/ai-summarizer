@@ -1,9 +1,8 @@
 from dataclasses import dataclass, field
 from typing import TypedDict, List, Dict, Any
 
-class AgentState(
-    TypedDict
-):
+
+class AgentState(TypedDict):
 
     text: str
 

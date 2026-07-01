@@ -19,15 +19,9 @@ class NodeExecutor:
     ):
 
         execution_input = {
-
-            "global_context":
-                state.global_context,
-
-            "artifacts":
-                state.artifacts,
-
-            "node_outputs":
-                state.node_outputs,
+            "global_context": state.global_context,
+            "artifacts": state.artifacts,
+            "node_outputs": state.node_outputs,
         }
 
         self.contracts.validate_input(
@@ -35,27 +29,13 @@ class NodeExecutor:
             execution_input,
         )
 
-        agent = (
-            self.registry
-            .resolve(
-                node.function_name
-            )
-        )
+        agent = self.registry.resolve(node.function_name)
 
-        output = (
-            agent.run(
-                execution_input
-            )
-        )
+        output = agent.run(execution_input)
 
         self.contracts.validate_output(
             node.function_name,
             output,
         )
 
-        return {
-
-            node.name:
-            output
-
-        }
+        return {node.name: output}

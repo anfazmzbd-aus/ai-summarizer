@@ -3,19 +3,9 @@ class GraphExporter:
     @staticmethod
     def export(state):
 
-        plan = (
-            state.get(
-                "plan",
-                {}
-            )
-        )
+        plan = state.get("plan", {})
 
-        groups = (
-            plan.get(
-                "parallel_groups",
-                []
-            )
-        )
+        groups = plan.get("parallel_groups", [])
 
         nodes = []
 
@@ -23,20 +13,6 @@ class GraphExporter:
 
             for agent in group:
 
-                nodes.append({
+                nodes.append({"id": agent, "status": "executed"})
 
-                    "id":
-                        agent,
-
-                    "status":
-                        "executed"
-                })
-
-        return {
-
-            "nodes":
-                nodes,
-
-            "groups":
-                groups
-        }
+        return {"nodes": nodes, "groups": groups}

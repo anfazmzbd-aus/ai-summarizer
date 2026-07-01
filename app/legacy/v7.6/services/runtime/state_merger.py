@@ -1,56 +1,30 @@
 from copy import deepcopy
 
-def merge_state(
-    base,
-    updates,
-    overwrite_agents=None
-):
 
-    overwrite_agents = (
-        overwrite_agents
-        or []
-    )
+def merge_state(base, updates, overwrite_agents=None):
 
-    merged = deepcopy(
-        base
-    )
+    overwrite_agents = overwrite_agents or []
 
-    merged.setdefault(
-        "artifacts",
-        {}
-    )
+    merged = deepcopy(base)
 
-    incoming = (
-        updates.get(
-            "artifacts",
-            {}
-        )
-    )
+    merged.setdefault("artifacts", {})
+
+    incoming = updates.get("artifacts", {})
 
     for key, value in incoming.items():
 
-        if (
-            key in merged["artifacts"]
-            and key not in overwrite_agents
-        ):
+        if key in merged["artifacts"] and key not in overwrite_agents:
 
             continue
 
-        merged[
-            "artifacts"
-        ][key] = deepcopy(
-            value
-        )
+        merged["artifacts"][key] = deepcopy(value)
 
     return merged
 
+
 def merge_retry_state(base, retry_results):
 
-    merged = (
-        deepcopy(
-            base
-        )
-    )
+    merged = deepcopy(base)
 
     merged.setdefault("artifacts", {})
 

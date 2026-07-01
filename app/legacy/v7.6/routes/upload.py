@@ -24,44 +24,24 @@ async def upload_pdf(file: UploadFile = File(...)):
         extracted_text += page.extract_text() or ""
 
     if len(extracted_text.strip()) < 10:
-        return JSONResponse(
-            {
-                "error": "PDF has no readable text"
-            },
-            status_code=400
-        )
+        return JSONResponse({"error": "PDF has no readable text"}, status_code=400)
 
     # ----------------------------
     # 2. Run Agent Pipeline
     # ----------------------------
-    result = run_agents(
-        extracted_text,
-        "medium"
-    )
+    result = run_agents(extracted_text, "medium")
 
     # ----------------------------
     # 3. Save to DB
     # ----------------------------
-    save_summary(
-        extracted_text,
-        result
-    )
+    save_summary(extracted_text, result)
 
     # ----------------------------
     # 4. Response
     # ----------------------------
     return {
         "summary": result["summary"],
-        "artifacts": result.get(
-            "artifacts",
-            {}
-        ),
-        "plan": result.get(
-            "plan",
-            {}
-        ),
-        "execution": result.get(
-            "execution",
-            {}
-        )
+        "artifacts": result.get("artifacts", {}),
+        "plan": result.get("plan", {}),
+        "execution": result.get("execution", {}),
     }

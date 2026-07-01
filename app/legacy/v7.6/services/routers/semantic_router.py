@@ -1,44 +1,19 @@
 from app.services.logging.logger import logger
-from app.services.context.section_parser import (
-    split_sections
-)
+from app.services.context.section_parser import split_sections
 
-def semantic_router(
-    text,
-    intent_info,
-    strategy
-):
-    logger.info(
-        f"****INPUT STRATEGY: {strategy}"
-    )
 
-    sections = split_sections(
-        text
-    )
-    logger.info(
-        f"****PARSED SECTIONS after split: {sections}"
-    )
+def semantic_router(text, intent_info, strategy):
+    logger.info(f"****INPUT STRATEGY: {strategy}")
+
+    sections = split_sections(text)
+    logger.info(f"****PARSED SECTIONS after split: {sections}")
     text = text.lower()
 
-    scores = {
-        "actions": 0,
-        "insights": 0,
-        "findings": 0
-    }
+    scores = {"actions": 0, "insights": 0, "findings": 0}
 
-    reasons = {
-        "actions": [],
-        "insights": [],
-        "findings": [],
-        "trends": []
-    }
+    reasons = {"actions": [], "insights": [], "findings": [], "trends": []}
 
-    action_keywords = [
-        "should",
-        "must",
-        "follow up",
-        "need to"
-    ]
+    action_keywords = ["should", "must", "follow up", "need to"]
 
     insight_keywords = [
         "revenue",
@@ -47,62 +22,38 @@ def semantic_router(
         "sales",
         "csat",
         "nps",
-        "customer satisfaction"
+        "customer satisfaction",
     ]
 
-    finding_keywords = [
-        "research",
-        "study",
-        "analysis"
-    ]
+    finding_keywords = ["research", "study", "analysis"]
 
     for word in action_keywords:
         if word in text:
             scores["actions"] += 1
-            reasons["actions"].append(
-                f"{word} detected"
-            )
+            reasons["actions"].append(f"{word} detected")
 
     for word in insight_keywords:
         if word in text:
             scores["insights"] += 1
-            reasons["insights"].append(
-                f"{word} detected"
-            )
+            reasons["insights"].append(f"{word} detected")
 
     for word in finding_keywords:
         if word in text:
             scores["findings"] += 1
-            reasons["findings"].append(
-                f"{word} detected"
-            )
-    
+            reasons["findings"].append(f"{word} detected")
 
     confidence = {}
 
-    confidence["actions"] = round(
-        scores["actions"] / len(action_keywords),
-        2
-    )
+    confidence["actions"] = round(scores["actions"] / len(action_keywords), 2)
 
-    confidence["insights"] = round(
-        scores["insights"] / len(insight_keywords),
-        2
-    )
+    confidence["insights"] = round(scores["insights"] / len(insight_keywords), 2)
 
-    confidence["findings"] = round(
-        scores["findings"] / len(finding_keywords),
-        2
-    )
+    confidence["findings"] = round(scores["findings"] / len(finding_keywords), 2)
 
     if scores["actions"] > 0:
-        strategy.append(
-            "actions"
-        )
+        strategy.append("actions")
 
-    strategy = list(
-        dict.fromkeys(strategy)
-    )
+    strategy = list(dict.fromkeys(strategy))
 
     # --------------------------------------------------
     # Debug prints
@@ -118,21 +69,11 @@ def semantic_router(
     logger.info(f"****SECTIONS: {sections}")
 
     return {
-        "primary_intent": intent_info[
-            "primary_intent"
-        ],
-
-        "intents": intent_info[
-            "intents"
-        ],
-
+        "primary_intent": intent_info["primary_intent"],
+        "intents": intent_info["intents"],
         "sections": sections,
-
         "selected_agents": strategy,
-
         "scores": scores,
-
         "confidence": confidence,
-
-        "reasons": reasons
+        "reasons": reasons,
     }

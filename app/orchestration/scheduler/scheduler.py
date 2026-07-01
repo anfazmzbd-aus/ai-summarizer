@@ -20,6 +20,7 @@ from app.orchestration.registry.agent_registry import (
 # Schedule Result
 # -------------------------
 
+
 @dataclass(frozen=True)
 class ScheduleResult:
 
@@ -34,6 +35,7 @@ class ScheduleResult:
 # Scheduler
 # -------------------------
 
+
 class Scheduler:
 
     def __init__(
@@ -43,11 +45,7 @@ class Scheduler:
 
         self.registry = registry
 
-        self.graph_builder = (
-            GraphBuilder(
-                registry
-            )
-        )
+        self.graph_builder = GraphBuilder(registry)
 
     # -------------------------
     # Agent Selection
@@ -62,35 +60,17 @@ class Scheduler:
 
         agents = []
 
-        if (
-            "revenue"
-            in text
-        ):
+        if "revenue" in text:
 
-            agents.append(
-                "insights"
-            )
+            agents.append("insights")
 
-        if (
-            "trend"
-            in text
-        ):
+        if "trend" in text:
 
-            agents.append(
-                "trend"
-            )
+            agents.append("trend")
 
-        if (
-            "action"
-            in text
-            or
-            "should"
-            in text
-        ):
+        if "action" in text or "should" in text:
 
-            agents.append(
-                "actions"
-            )
+            agents.append("actions")
 
         # always run summary
 
@@ -99,11 +79,7 @@ class Scheduler:
             "summary",
         )
 
-        return list(
-            dict.fromkeys(
-                agents
-            )
-        )
+        return list(dict.fromkeys(agents))
 
     # -------------------------
     # Strategy
@@ -114,76 +90,30 @@ class Scheduler:
         selected_agents,
     ):
 
-        if (
-            len(
-                selected_agents
-            ) <= 2
-        ):
+        if len(selected_agents) <= 2:
 
-            return (
-                "simple"
-            )
+            return "simple"
 
-        return (
-            "business_report"
-        )
+        return "business_report"
 
     # -------------------------
     # Schedule
     # -------------------------
 
     def schedule(
-
         self,
-
         text: str,
-
-        context: Optional[
-            Dict
-        ] = None,
-
+        context: Optional[Dict] = None,
     ) -> ScheduleResult:
 
-        selected_agents = (
+        selected_agents = self._select_agents(text)
 
-            self._select_agents(
-                text
-            )
+        strategy = self._build_strategy(selected_agents)
 
-        )
+        graph = self.graph_builder.build(selected_agents)
 
-        strategy = (
-
-            self._build_strategy(
-                selected_agents
-            )
-
-        )
-
-        graph = (
-
-            self.graph_builder
-            .build(
-
-                selected_agents
-            )
-
-        )
-
-        return (
-
-            ScheduleResult(
-
-                graph=graph,
-
-                selected_agents=(
-                    selected_agents
-                ),
-
-                strategy=(
-                    strategy
-                ),
-
-            )
-
+        return ScheduleResult(
+            graph=graph,
+            selected_agents=(selected_agents),
+            strategy=(strategy),
         )

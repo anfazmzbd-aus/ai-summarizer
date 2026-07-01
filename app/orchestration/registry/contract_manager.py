@@ -1,5 +1,4 @@
 from app.orchestration.state.state_contracts import (
-    DEFAULT_CONTRACT,
     StateContract,
 )
 
@@ -10,16 +9,13 @@ class ContractManager:
 
         self._contracts = {
             "summary": StateContract(
-                input_fields=["global_context"],
-                output_fields=["summary"]
+                input_fields=["global_context"], output_fields=["summary"]
             ),
             "insights": StateContract(
-                input_fields=["global_context"],
-                output_fields=["insight"]
+                input_fields=["global_context"], output_fields=["insight"]
             ),
             "actions": StateContract(
-                input_fields=["global_context"],
-                output_fields=["actions"]
+                input_fields=["global_context"], output_fields=["actions"]
             ),
         }
 

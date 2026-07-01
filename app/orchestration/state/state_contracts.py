@@ -16,5 +16,5 @@ DEFAULT_CONTRACT = StateContract(
         "artifacts",
         "node_outputs",
     ],
-    output_fields=[]
-)   
+    output_fields=[],
+)

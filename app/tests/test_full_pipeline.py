@@ -6,28 +6,14 @@ from app.main import (
     app,
 )
 
-client = TestClient(
-    app
-)
+client = TestClient(app)
 
 
 def test_pipeline():
 
     r = client.post(
-
         "/summarize",
-
-        json={
-
-            "text":
-
-            "Revenue increased."
-
-        },
-
+        json={"text": "Revenue increased."},
     )
 
-    assert (
-        r.status_code
-        == 200
-    )
+    assert r.status_code == 200

@@ -1,6 +1,6 @@
 # app/orchestration/graph/graph_types.py
 
-from typing import Dict, List, Set, Optional
+from typing import Dict, List, Set
 from pydantic import BaseModel
 
 

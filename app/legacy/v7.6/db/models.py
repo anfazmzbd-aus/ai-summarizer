@@ -10,32 +10,20 @@ from datetime import datetime
 
 from app.db.database import Base
 
+
 class Summary(Base):
 
     __tablename__ = "summaries"
 
-    id = Column(
-        Integer,
-        primary_key=True,
-        index=True
-    )
+    id = Column(Integer, primary_key=True, index=True)
 
-    original_text = Column(
-        Text
-    )
+    original_text = Column(Text)
 
-    summary = Column(
-        Text
-    )
+    summary = Column(Text)
 
-    content_type = Column(
-        String,
-        default="General Content"
-    )
+    content_type = Column(String, default="General Content")
 
-    agent_output = Column(
-        Text
-    )
+    agent_output = Column(Text)
 
     execution_plan = Column(Text)
 
@@ -47,7 +35,4 @@ class Summary(Base):
 
     execution_time = Column(Float)
 
-    created_at = Column(
-        DateTime,
-        default=datetime.utcnow
-    )
+    created_at = Column(DateTime, default=datetime.utcnow)

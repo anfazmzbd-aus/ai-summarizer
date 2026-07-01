@@ -1,5 +1,6 @@
 # app/orchestration/graph/graph_exceptions.py
 
+
 class GraphError(Exception):
     pass
 

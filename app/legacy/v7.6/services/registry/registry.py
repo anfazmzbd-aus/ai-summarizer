@@ -1,10 +1,7 @@
 AGENT_REGISTRY = {}
 
-def register_agent(
-    name,
-    depends_on=None,
-    produces=None
-):
+
+def register_agent(name, depends_on=None, produces=None):
 
     if depends_on is None:
         depends_on = []
@@ -17,7 +14,7 @@ def register_agent(
         AGENT_REGISTRY[name] = {
             "function": func,
             "depends_on": depends_on,
-            "produces": produces
+            "produces": produces,
         }
 
         return func

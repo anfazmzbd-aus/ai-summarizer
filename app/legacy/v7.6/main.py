@@ -17,30 +17,26 @@ from fastapi.staticfiles import StaticFiles
 logger.debug("==============Application AI Summarizer==============")
 logger.debug("==============Creating database tables==============")
 
-Base.metadata.create_all(
-    bind=engine
-)
+Base.metadata.create_all(bind=engine)
 
-app = FastAPI(
-    title="AI Summarizer",
-    version="1.0"
-)
+app = FastAPI(title="AI Summarizer", version="1.0")
 
 logger.info("==============Application AI Summarizer==============")
 logger.info("==============FastAPI app initialized==============")
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+
 @app.get("/favicon.ico")
 def favicon():
     return FileResponse("app/static/favicon.ico")
 
+
 @app.get("/manifest.json")
 def manifest():
 
-    return FileResponse(
-        "app/static/manifest.json"
-    )
+    return FileResponse("app/static/manifest.json")
+
 
 app.include_router(home_router)
 app.include_router(summarize_router)

@@ -5,12 +5,7 @@ def preprocess_summary_input(text):
 
     lines = []
 
-    ignore_headers = {
-        "Meeting Notes",
-        "Business Report",
-        "Research Report",
-        "General"
-    }
+    ignore_headers = {"Meeting Notes", "Business Report", "Research Report", "General"}
 
     for line in text.splitlines():
 

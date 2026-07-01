@@ -1,6 +1,5 @@
-from app.services.registry.registry import (
-    register_agent
-)
+from app.services.registry.registry import register_agent
+
 
 @register_agent("plan")
 def plan_agent(state):
@@ -17,12 +16,10 @@ def plan_agent(state):
         "market",
         "growth",
         "performance",
-        "%"
+        "%",
     ]
 
-    signal_count = sum(
-        1 for w in business_signals if w in text
-    )
+    signal_count = sum(1 for w in business_signals if w in text)
 
     is_business = signal_count > 0
     is_strong_business = signal_count >= 3
@@ -42,8 +39,6 @@ def plan_agent(state):
 
     state["selected_agents"] = selected
 
-    state["plan"] = {
-        "selected_agents": selected
-    }
+    state["plan"] = {"selected_agents": selected}
 
     return state

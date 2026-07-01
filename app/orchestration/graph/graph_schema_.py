@@ -11,14 +11,9 @@ from .graph_types import (
 class GraphSchema:
 
     @staticmethod
-    def create(
-        nodes: Iterable[GraphNode]
-    ) -> ExecutionGraph:
+    def create(nodes: Iterable[GraphNode]) -> ExecutionGraph:
 
-        node_map = {
-            node.id: node
-            for node in nodes
-        }
+        node_map = {node.id: node for node in nodes}
 
         edges = []
 
@@ -26,12 +21,6 @@ class GraphSchema:
 
             for dep in node.dependencies:
 
-                edges.append(
-                    (dep, node.id)
-                )
+                edges.append((dep, node.id))
 
-        return ExecutionGraph(
-            nodes=node_map,
-            edges=edges,
-            layers=[]
-        )
+        return ExecutionGraph(nodes=node_map, edges=edges, layers=[])

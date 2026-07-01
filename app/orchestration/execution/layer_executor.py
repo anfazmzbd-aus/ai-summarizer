@@ -11,55 +11,30 @@ class LayerExecutor:
         contracts,
     ):
 
-        self.node_executor = (
-            NodeExecutor(
-
-                registry,
-
-                contracts,
-
-            )
+        self.node_executor = NodeExecutor(
+            registry,
+            contracts,
         )
 
     def execute_layer(
-
         self,
-
         layer,
-
         state,
-
         graph,
-
     ):
 
         results = {}
 
-        for node_name in (
-            layer.nodes
-        ):
+        for node_name in layer.nodes:
 
-            node = (
-                graph.nodes[
-                    node_name
-                ]
+            node = graph.nodes[node_name]
+
+            result = self.node_executor.execute(
+                node,
+                state,
+                graph,
             )
 
-            result = (
-                self.node_executor
-                .execute(
-
-                    node,
-
-                    state,
-
-                    graph,
-
-                )
-            )
-
-            results.update(
-                result
-            )
+            results.update(result)
 
         return results

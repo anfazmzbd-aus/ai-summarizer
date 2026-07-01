@@ -555,3 +555,11 @@ Do not introduce:
 * runtime dependency generation
 
 All execution must originate from ExecutionGraph.
+
+Development
+
+pytest
+
+uvicorn app.main:app --reload
+
+pre-commit run --all-files

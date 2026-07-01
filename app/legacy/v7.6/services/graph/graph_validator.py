@@ -1,10 +1,7 @@
 from app.services.logging.logger import logger
 
 
-def validate_execution_graph(
-    execution_order,
-    AGENT_REGISTRY
-):
+def validate_execution_graph(execution_order, AGENT_REGISTRY):
     NON_DAG_NODES = {"summary", "plan", "semantic_router", "section_parser"}
     errors = []
     warnings = []
@@ -24,24 +21,17 @@ def validate_execution_graph(
     unknown_agents = execution_set - registry_keys
 
     if unknown_agents:
-        errors.append(
-            f"Unknown agents in execution_order: {unknown_agents}"
-        )
+        errors.append(f"Unknown agents in execution_order: {unknown_agents}")
 
     # 2. Unused registry agents (optional warning)
     unused_agents = registry_keys - execution_set
 
-    ignored = {
-        "plan",
-        "actions"
-    }
+    ignored = {"plan", "actions"}
 
     unused_agents -= ignored
 
     if unused_agents:
-        warnings.append(
-            f"Unused registry agents: {unused_agents}"
-        )
+        warnings.append(f"Unused registry agents: {unused_agents}")
 
     # 3. Dependency validation
     for agent in execution_order:
@@ -56,38 +46,23 @@ def validate_execution_graph(
 
         for dep in dependencies:
             if dep in NON_DAG_NODES:
-                errors.append(
-                    f"{agent} depends on non-DAG node: {dep}"
-                )
-                
-        missing_deps = [
-            d for d in dependencies
-            if d not in execution_set
-        ]
+                errors.append(f"{agent} depends on non-DAG node: {dep}")
+
+        missing_deps = [d for d in dependencies if d not in execution_set]
 
         if missing_deps:
-            errors.append(
-                f"{agent} missing dependencies: {missing_deps}"
-            )
+            errors.append(f"{agent} missing dependencies: {missing_deps}")
 
     if errors:
 
-        logger.error(
-            "****GRAPH VALIDATION FAILED"
-        )
+        logger.error("****GRAPH VALIDATION FAILED")
 
         for e in errors:
 
-            logger.error(
-                f"****GRAPH ERROR: {e}"
-            )
+            logger.error(f"****GRAPH ERROR: {e}")
 
-        raise Exception(
-            "\n".join(errors)
-        )
+        raise Exception("\n".join(errors))
 
-    logger.info(
-        f"****GRAPH VALIDATION PASSED | warnings={warnings}"
-    )
+    logger.info(f"****GRAPH VALIDATION PASSED | warnings={warnings}")
 
     return True

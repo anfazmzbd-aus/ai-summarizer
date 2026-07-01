@@ -1,51 +1,33 @@
 from app.services.logging.logger import logger
 
-def resolve_execution_order(
-    selected_agents,
-    registry
-):
+
+def resolve_execution_order(selected_agents, registry):
 
     resolved = []
     visiting = set()
     visited = set()
-    NON_DAG_NODES = {
-        "summary",
-        "plan",
-        "semantic_router",
-        "section_parser"
-    }
+    NON_DAG_NODES = {"summary", "plan", "semantic_router", "section_parser"}
+
     def visit(agent):
 
         if agent in visited:
             return
 
         if agent in visiting:
-            raise Exception(
-                f"Circular dependency detected at {agent}"
-            )
+            raise Exception(f"Circular dependency detected at {agent}")
 
         visiting.add(agent)
 
-        deps = registry.get(
-            agent,
-            {}
-        ).get(
-            "depends_on",
-            []
-        )
+        deps = registry.get(agent, {}).get("depends_on", [])
 
         for dep in deps:
             if dep in NON_DAG_NODES:
-                logger.debug(
-                    f"Skipping preprocessing dependency: {dep}"
-                )
+                logger.debug(f"Skipping preprocessing dependency: {dep}")
                 continue
 
             if dep not in registry:
 
-                raise Exception(
-                    f"Unknown dependency: {dep}"
-                )
+                raise Exception(f"Unknown dependency: {dep}")
 
             visit(dep)
 
@@ -57,9 +39,6 @@ def resolve_execution_order(
 
         visit(agent)
 
-    logger.info(
-        f"****Resolved execution order: {resolved}"
-    )
+    logger.info(f"****Resolved execution order: {resolved}")
 
     return resolved
-

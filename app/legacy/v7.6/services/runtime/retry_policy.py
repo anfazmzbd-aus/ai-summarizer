@@ -9,21 +9,12 @@ class RetryPolicy:
     def should_retry(self, agent_name, attempt, error=None):
 
         if attempt >= self.max_retries:
-            logger.info(
-                f"****RETRY STOPPED: {agent_name}"
-            )
+            logger.info(f"****RETRY STOPPED: {agent_name}")
             return False
 
-        if agent_name in [
-            "summary",
-            "semantic_router",
-            "section_parser"
-        ]:
+        if agent_name in ["summary", "semantic_router", "section_parser"]:
             return False
 
-        logger.info(
-            f"****RETRY ALLOWED: {agent_name} "
-            f"(attempt {attempt})"
-        )
+        logger.info(f"****RETRY ALLOWED: {agent_name} " f"(attempt {attempt})")
 
         return True

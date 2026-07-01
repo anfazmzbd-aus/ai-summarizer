@@ -1,33 +1,16 @@
 import re
 
 
-def detect_risk(
-    insights,
-    findings
-):
-    content = " ".join(
-        insights + findings
-    ).lower()
+def detect_risk(insights, findings):
+    content = " ".join(insights + findings).lower()
     text = content
 
-    if any(
-        word in text
-        for word in [
-            "high risk",
-            "great risk",
-            "risky"
-        ]
-    ):
+    if any(word in text for word in ["high risk", "great risk", "risky"]):
         return ["High Risk"]
 
     if any(
         word in text
-        for word in [
-            "low risk",
-            "loless risky",
-            "normal risk",
-            "moderate risk"            
-        ]
+        for word in ["low risk", "loless risky", "normal risk", "moderate risk"]
     ):
         return ["Low Risk"]
 

@@ -26,54 +26,22 @@ class SummarizeService:
         text,
     ):
 
-        registry = (
-            AgentRegistry()
+        registry = AgentRegistry()
+
+        contracts = ContractManager()
+
+        scheduler = Scheduler(registry)
+
+        engine = ExecutionEngine(
+            registry,
+            contracts,
         )
 
-        contracts = (
-            ContractManager()
-        )
+        plan = scheduler.schedule(text)
 
-        scheduler = (
-            Scheduler(
-                registry
-            )
-        )
+        state = StateBuilder.build(text)
 
-        engine = (
-            ExecutionEngine(
-
-                registry,
-
-                contracts,
-
-            )
-
-        )
-
-        plan = (
-            scheduler
-            .schedule(
-                text
-            )
-        )
-
-        state = (
-            StateBuilder
-            .build(
-                text
-            )
-        )
-
-        return (
-
-            engine
-            .execute(
-
-                plan.graph,
-
-                state,
-
-            )
-
+        return engine.execute(
+            plan.graph,
+            state,
         )

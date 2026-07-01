@@ -6,6 +6,4 @@ class ReplayEngine:
     @staticmethod
     def restore(snapshot):
 
-        return deepcopy(
-            snapshot
-        )
+        return deepcopy(snapshot)

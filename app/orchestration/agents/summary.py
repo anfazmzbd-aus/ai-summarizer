@@ -4,6 +4,4 @@ class SummaryAgent:
 
         text = data["global_context"]["text"]
 
-        return {
-            "summary": text[:150]
-        }
+        return {"summary": text[:150]}

@@ -1,20 +1,12 @@
 from app.services.logging.logger import logger
 
 
-def build_parallel_groups(
-    execution_order,
-    registry
-):
+def build_parallel_groups(execution_order, registry):
 
     # ONLY include agents that exist in registry
-    execution_order = [
-        a for a in execution_order
-        if a in registry
-    ]
+    execution_order = [a for a in execution_order if a in registry]
 
-    remaining = set(
-        execution_order
-    )
+    remaining = set(execution_order)
 
     completed = set()
 
@@ -24,58 +16,29 @@ def build_parallel_groups(
 
         current_group = []
 
-        for agent in list(
-            remaining
-        ):
+        for agent in list(remaining):
 
-            agent_info = registry.get(
-                agent,
-                {}
-            )
+            agent_info = registry.get(agent, {})
 
-            dependencies = (
-                agent_info.get(
-                    "depends_on",
-                    []
-                )
-            )
+            dependencies = agent_info.get("depends_on", [])
 
             # SAFE: ignore unknown dependencies
-            dependencies = [
-                d for d in dependencies
-                if d in registry
-            ]
+            dependencies = [d for d in dependencies if d in registry]
 
-            if all(
-                dep in completed
-                for dep in dependencies
-            ):
+            if all(dep in completed for dep in dependencies):
 
-                current_group.append(
-                    agent
-                )
+                current_group.append(agent)
 
         if not current_group:
 
-            raise Exception(
-                f"Circular or invalid dependency graph: {remaining}"
-            )
+            raise Exception(f"Circular or invalid dependency graph: {remaining}")
 
-        groups.append(
-            current_group
-        )
+        groups.append(current_group)
 
-        completed.update(
-            current_group
-        )
+        completed.update(current_group)
 
-        remaining -= set(
-            current_group
-        )
+        remaining -= set(current_group)
 
-    logger.info(
-        f"****PARALLEL GROUPS (parallel groups): "
-        f"{groups}"
-    )
+    logger.info(f"****PARALLEL GROUPS (parallel groups): " f"{groups}")
 
     return groups

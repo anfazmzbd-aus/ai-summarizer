@@ -24,10 +24,7 @@ class AgentRegistry:
     def __init__(self):
 
         self._specs = {
-
-            "summary":
-
-            AgentSpec(
+            "summary": AgentSpec(
                 name="summary",
                 function_name="summary",
                 agent=SummaryAgent(),
@@ -35,68 +32,31 @@ class AgentRegistry:
                 reads={"text"},
                 writes={"summary"},
             ),
-
-            "insights":
-
-            AgentSpec(
-
+            "insights": AgentSpec(
                 name="insights",
-
                 function_name="insights",
-
                 agent=InsightsAgent(),
-
                 contract=DEFAULT_CONTRACT,
-
-                dependencies=(
-                    "summary",
-                ),
-
-                reads={
-                    "summary"
-                },
-
-                writes={
-                    "insight"
-                },
-
+                dependencies=("summary",),
+                reads={"summary"},
+                writes={"insight"},
             ),
-
-            "actions":
-
-            AgentSpec(
-
+            "actions": AgentSpec(
                 name="actions",
-
                 function_name="actions",
-
                 agent=ActionsAgent(),
-
                 contract=DEFAULT_CONTRACT,
-
-                dependencies=(
-                    "summary",
-                ),
-
-                reads={
-                    "summary"
-                },
-
-                writes={
-                    "actions"
-                },
-
+                dependencies=("summary",),
+                reads={"summary"},
+                writes={"actions"},
             ),
-
         }
 
     def get(
         self,
         name,
     ):
-        return self._specs[
-            name
-        ]
+        return self._specs[name]
 
     def resolve(
         self,
@@ -105,32 +65,19 @@ class AgentRegistry:
 
         for spec in self._specs.values():
 
-            if (
-                spec.function_name
-                ==
-                function_name
-            ):
+            if spec.function_name == function_name:
 
-                return (
-                    spec.agent
-                )
+                return spec.agent
 
-        raise ValueError(
-            function_name
-        )
+        raise ValueError(function_name)
 
     def exists(
         self,
         name,
     ):
-        return (
-            name
-            in self._specs
-        )
+        return name in self._specs
 
     def list_agents(
         self,
     ):
-        return list(
-            self._specs.keys()
-        )
+        return list(self._specs.keys())
