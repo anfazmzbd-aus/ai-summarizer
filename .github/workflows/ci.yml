@@ -1,10 +1,6 @@
 name: CI
-
 on:
-
 push:
-
-```
 branches:
 
   - main
@@ -12,15 +8,9 @@ branches:
   - develop
 
   - feature/**
-```
-
 pull_request:
-
 jobs:
-
 test:
-
-```
 runs-on: ubuntu-latest
 
 strategy:
@@ -67,4 +57,4 @@ steps:
     run: |
 
       python -m compileall app
-```
+
