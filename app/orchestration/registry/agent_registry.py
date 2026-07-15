@@ -29,6 +29,7 @@ class AgentRegistry:
                 function_name="summary",
                 agent=SummaryAgent(),
                 contract=DEFAULT_CONTRACT,
+                dependencies=(),
                 reads={"text"},
                 writes={"summary"},
             ),

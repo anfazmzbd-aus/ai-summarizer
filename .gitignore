@@ -16,3 +16,5 @@ app/Xorchestration/
 .pytest_cache/
 .coverage
 htmlcov/
+venv_test/
+.vscode/

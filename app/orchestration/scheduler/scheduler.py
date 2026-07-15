@@ -1,55 +1,36 @@
 from dataclasses import dataclass
-from typing import Dict
 from typing import List
-from typing import Optional
 
-from app.orchestration.graph.graph_builder import (
-    GraphBuilder,
-)
-
-from app.orchestration.graph.graph_schema import (
-    ExecutionGraph,
-)
-
-from app.orchestration.registry.agent_registry import (
-    AgentRegistry,
-)
+from app.orchestration.graph.graph_builder import GraphBuilder
+from app.orchestration.graph.graph_schema import ExecutionGraph
 
 
-# -------------------------
+# ---------------------------------------------------------
 # Schedule Result
-# -------------------------
+# ---------------------------------------------------------
 
 
 @dataclass(frozen=True)
 class ScheduleResult:
-
     graph: ExecutionGraph
-
     selected_agents: List[str]
-
     strategy: str
 
 
-# -------------------------
+# ---------------------------------------------------------
 # Scheduler
-# -------------------------
+# ---------------------------------------------------------
 
 
 class Scheduler:
-
-    def __init__(
-        self,
-        registry: AgentRegistry,
-    ):
-
+    def __init__(self, registry, contracts):
         self.registry = registry
-
+        self.contracts = contracts
         self.graph_builder = GraphBuilder(registry)
 
-    # -------------------------
+    # -----------------------------------------------------
     # Agent Selection
-    # -------------------------
+    # -----------------------------------------------------
 
     def _select_agents(
         self,
@@ -58,52 +39,42 @@ class Scheduler:
 
         text = text.lower()
 
-        agents = []
+        agents = ["summary"]
 
         if "revenue" in text:
-
             agents.append("insights")
 
         if "trend" in text:
-
             agents.append("trend")
 
         if "action" in text or "should" in text:
-
             agents.append("actions")
 
-        # always run summary
-
-        agents.insert(
-            0,
-            "summary",
-        )
-
+        # Preserve order while removing duplicates
         return list(dict.fromkeys(agents))
 
-    # -------------------------
-    # Strategy
-    # -------------------------
+    # -----------------------------------------------------
+    # Strategy Selection
+    # -----------------------------------------------------
 
     def _build_strategy(
         self,
-        selected_agents,
-    ):
+        selected_agents: List[str],
+    ) -> str:
 
         if len(selected_agents) <= 2:
-
             return "simple"
 
         return "business_report"
 
-    # -------------------------
+    # -----------------------------------------------------
     # Schedule
-    # -------------------------
+    # -----------------------------------------------------
 
     def schedule(
         self,
         text: str,
-        context: Optional[Dict] = None,
+        contracts=None,
     ) -> ScheduleResult:
 
         selected_agents = self._select_agents(text)
@@ -114,6 +85,6 @@ class Scheduler:
 
         return ScheduleResult(
             graph=graph,
-            selected_agents=(selected_agents),
-            strategy=(strategy),
+            selected_agents=selected_agents,
+            strategy=strategy,
         )

@@ -8,10 +8,6 @@ from app.orchestration.execution.layer_executor import (
     LayerExecutor,
 )
 
-from app.orchestration.state.state_merger import (
-    StateMerger,
-)
-
 
 @dataclass
 class ExecutionResult:
@@ -23,46 +19,26 @@ class ExecutionResult:
 
 class ExecutionEngine:
 
-    def __init__(
-        self,
-        registry,
-        contracts,
-    ):
+    def __init__(self, registry, contracts):
 
-        self.validator = GraphValidator()
+        self.validator = GraphValidator()  # FIX
+        self.layer_executor = LayerExecutor(registry, contracts)
 
-        self.layer_executor = LayerExecutor(
-            registry,
-            contracts,
-        )
-
-        self.merger = StateMerger()
-
-    def execute(
-        self,
-        graph,
-        initial_state,
-    ):
+    def execute(self, graph, initial_state):
 
         self.validator.validate(graph)
 
         state = initial_state
+        # print(f"state: {state}")
+        # print(f"graph: {graph}")
 
         for layer in graph.layers:
+            self.layer_executor.execute_layer(layer, state)
 
-            batch = self.layer_executor.execute_layer(
-                layer,
-                state,
-                graph,
-            )
-
-            state = self.merger.commit_batch(
-                state,
-                batch,
-                graph,
-            )
+        # print(f"state: {state}")
+        # print(f"outputs: {state.artifacts}")
 
         return ExecutionResult(
             state=state,
-            outputs=(state.node_outputs),
+            outputs=state.artifacts,
         )

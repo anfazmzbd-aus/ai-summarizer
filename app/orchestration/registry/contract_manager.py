@@ -27,21 +27,29 @@ class ContractManager:
         return self._contracts[function_name]
 
     def validate_input(self, function_name: str, data: dict):
-
         contract = self.resolve(function_name)
 
-        for field in contract.input_fields:
+        required = contract.input_fields
+
+        for field in required:
             if field not in data:
                 raise ValueError(f"Missing input: {field}")
 
-        return True
+        # return True
 
     def validate_output(self, function_name: str, output: dict):
-
         contract = self.resolve(function_name)
 
-        for field in contract.output_fields:
+        required = contract.output_fields
+
+        # FIX: nested node_outputs support
+        if "node_outputs" in required:
+            if "node_outputs" not in output:
+                raise ValueError("Missing output: node_outputs")
+            return
+
+        for field in required:
             if field not in output:
                 raise ValueError(f"Missing output: {field}")
 
-        return True
+        # return True

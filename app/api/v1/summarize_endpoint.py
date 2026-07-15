@@ -29,4 +29,5 @@ def summarize(
 
     result = service.run(req.text)
 
-    return result.outputs
+    # return result.outputs
+    return result

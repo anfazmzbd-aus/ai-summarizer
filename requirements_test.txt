@@ -1,0 +1,22 @@
+fastapi #
+uvicorn #
+pydantic #
+python-dotenv #
+openai #
+pypdf #
+sqlalchemy #
+alembic #
+jinja2 #
+transformers==4.38.2 #
+torch #
+torchvision #
+torchaudio #
+sentencepiece #
+anyio==4.13.0 #
+pytest #
+pre-commit #
+black==24.10.0 #
+ruff==0.8.6 #
+httpcore2==2.7.0 
+httpx2==2.7.0 
+truststore==0.10.4

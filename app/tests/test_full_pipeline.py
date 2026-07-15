@@ -12,7 +12,7 @@ client = TestClient(app)
 def test_pipeline():
 
     r = client.post(
-        "/summarize",
+        "/playground/execute",
         json={"text": "Revenue increased."},
     )
 

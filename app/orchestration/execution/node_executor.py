@@ -1,41 +1,34 @@
-from app.orchestration.state.state_model import State
+from app.orchestration.registry.agent_registry import AgentRegistry
 
 
 class NodeExecutor:
 
     def __init__(
         self,
-        registry,
+        registry: AgentRegistry,
         contracts,
     ):
+
         self.registry = registry
         self.contracts = contracts
 
     def execute(
         self,
         node,
-        state: State,
-        graph,
+        state,
     ):
 
-        execution_input = {
-            "global_context": state.global_context,
-            "artifacts": state.artifacts,
-            "node_outputs": state.node_outputs,
-        }
+        spec = self.registry.get(node)
 
-        self.contracts.validate_input(
-            node.function_name,
-            execution_input,
-        )
+        result = spec.agent.run(state)
 
-        agent = self.registry.resolve(node.function_name)
+        state.node_outputs[node] = result
 
-        output = agent.run(execution_input)
+        state.artifacts.update(result)
 
         self.contracts.validate_output(
-            node.function_name,
-            output,
+            node,
+            result,
         )
 
-        return {node.name: output}
+        return result

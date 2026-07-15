@@ -18,6 +18,10 @@ from app.orchestration.registry.contract_manager import (
     ContractManager,
 )
 
+from app.orchestration.contracts.response_builder import (
+    ResponseBuilder,
+)
+
 
 class SummarizeService:
 
@@ -30,18 +34,32 @@ class SummarizeService:
 
         contracts = ContractManager()
 
-        scheduler = Scheduler(registry)
+        scheduler = Scheduler(registry, contracts)
 
         engine = ExecutionEngine(
             registry,
             contracts,
         )
 
-        plan = scheduler.schedule(text)
+        plan = scheduler.schedule(text, contracts)
 
         state = StateBuilder.build(text)
 
-        return engine.execute(
+        execution = engine.execute(
             plan.graph,
             state,
+        )
+
+        return ResponseBuilder.build(
+            state=execution.state,
+            trace=getattr(
+                engine,
+                "trace",
+                None,
+            ),
+            metrics=getattr(
+                engine,
+                "metrics",
+                None,
+            ),
         )
