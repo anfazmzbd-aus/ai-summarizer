@@ -21,6 +21,7 @@ from app.orchestration.registry.contract_manager import (
 from app.orchestration.contracts.response_builder import (
     ResponseBuilder,
 )
+from app.runtime.runtime_manager import RuntimeManager
 
 
 class SummarizeService:
@@ -41,13 +42,17 @@ class SummarizeService:
             contracts,
         )
 
-        plan = scheduler.schedule(text, contracts)
+        runtime = RuntimeManager(
+            scheduler=scheduler,
+            execution_engine=engine,
+        )
 
         state = StateBuilder.build(text)
 
-        execution = engine.execute(
-            plan.graph,
-            state,
+        execution = runtime.run(
+            text=text,
+            contracts=contracts,
+            state=state,
         )
 
         return ResponseBuilder.build(

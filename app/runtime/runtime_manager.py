@@ -8,8 +8,12 @@ to the existing V7.7 ExecutionEngine.
 from __future__ import annotations
 
 from app.orchestration.execution.execution_engine import ExecutionEngine
+from app.orchestration.scheduler.scheduler import Scheduler
 
-from .runtime_context import RuntimeContext
+# from .cancellation_token import CancellationToken
+# from .runtime_config import RuntimeConfig
+# from .runtime_context import RuntimeContext
+# from .runtime_metadata import RuntimeMetadata
 
 
 class RuntimeManager:
@@ -20,7 +24,17 @@ class RuntimeManager:
     to the underlying ExecutionEngine.
     """
 
-    def __init__(self, execution_engine: ExecutionEngine) -> None:
+    """"
+    CP-2 implementation:
+    Coordinates the runtime lifecycle.
+    """
+
+    def __init__(
+        self,
+        scheduler: Scheduler,
+        execution_engine: ExecutionEngine,
+    ) -> None:
+        self._scheduler = scheduler
         self._execution_engine = execution_engine
 
     @property
@@ -28,20 +42,33 @@ class RuntimeManager:
         """Returns the configured execution engine."""
         return self._execution_engine
 
-    def execute(self, context: RuntimeContext):
+    @property
+    def scheduler(self):
+        return self._scheduler
+
+    def run(
+        self,
+        *,
+        text: str,
+        contracts,
+        state,
+    ):
         """
-        Execute a runtime context.
+        Execute a complete runtime cycle.
 
-        CP-1 implementation simply delegates to the existing
-        execution engine.
-
-        Future phases will introduce:
-
-        - lifecycle transitions
-        - retries
-        - events
-        - metrics
-        - tracing
+        CP-2 implementation:
+        - schedule
+        - create RuntimeContext
+        - execute
         """
 
-        return self._execution_engine.execute(context.execution_context)
+        plan = self._scheduler.schedule(text, contracts)
+
+        # Context is created now for lifecycle ownership.
+        # ExecutionEngine still uses the existing V7.7 API.
+        execution = self._execution_engine.execute(
+            plan.graph,
+            state,
+        )
+
+        return execution
