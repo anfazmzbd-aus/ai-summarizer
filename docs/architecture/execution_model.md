@@ -77,3 +77,31 @@ Retry outputs:
 merge_state()
 
 No mutation of successful outputs.
+
+V7.7-stable
+                REST API
+                    │
+            SummarizeService
+                    │
+              Scheduler
+                    │
+             GraphBuilder
+                    │
+          ExecutionGraph
+                    │
+          GraphValidator
+                    │
+          ExecutionEngine
+                    │
+           LayerExecutor
+                    │
+            NodeExecutor
+                    │
+             AgentRegistry
+                    │
+               Agents
+                    │
+                 State
+                    │
+          ResponseBuilder
+

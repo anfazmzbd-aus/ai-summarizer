@@ -563,3 +563,19 @@ pytest
 uvicorn app.main:app --reload
 
 pre-commit run --all-files
+
+## AI Summarizer
+## Version: V7.7 Stable
+Update:
+
+Project Overview
+Features
+Architecture
+Folder Structure
+Execution Pipeline
+Scheduler
+Execution Engine
+Runtime
+API
+Tests
+Future Roadmap

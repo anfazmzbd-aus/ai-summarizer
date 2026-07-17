@@ -51,3 +51,5 @@ V7.7 — Execution Engine Evolution Plan (Clean Architecture Layer)
     validator validates graph object, not lists
     runtime executes graph nodes with state contracts
     no implicit ordering anywhere
+
+V7.7-stable

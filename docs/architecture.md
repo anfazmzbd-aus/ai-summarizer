@@ -997,3 +997,31 @@ Overall architecture:
 9.8 / 10
 
 The missing points are almost entirely documentation and production observability rather than architectural design.
+
+V7.7-stable
+                REST API
+                    │
+            SummarizeService
+                    │
+              Scheduler
+                    │
+             GraphBuilder
+                    │
+          ExecutionGraph
+                    │
+          GraphValidator
+                    │
+          ExecutionEngine
+                    │
+           LayerExecutor
+                    │
+            NodeExecutor
+                    │
+             AgentRegistry
+                    │
+               Agents
+                    │
+                 State
+                    │
+          ResponseBuilder
+

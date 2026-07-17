@@ -616,3 +616,20 @@ V7.6 remains archived.
 
 Runtime evolution continues from V7.7.
 
+V7.7-stable should summarize:
+
+ExecutionGraph
+GraphBuilder
+GraphValidator
+Scheduler
+ExecutionEngine
+LayerExecutor
+NodeExecutor
+ResponseBuilder
+Runtime contracts
+Playground API
+Deterministic DAG execution
+Registry refactor
+Production tests
+Runtime endpoint
+Observability foundation
