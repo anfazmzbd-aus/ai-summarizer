@@ -13,6 +13,9 @@ from app.orchestration.execution.execution_context import ExecutionContext
 from .cancellation_token import CancellationToken
 from .runtime_config import RuntimeConfig
 from .runtime_metadata import RuntimeMetadata
+from datetime import datetime, timezone
+
+from .runtime_metadata import RuntimeStatus
 
 
 @dataclass(slots=True)
@@ -30,3 +33,21 @@ class RuntimeContext:
     metadata: RuntimeMetadata
 
     cancellation_token: CancellationToken
+
+    def mark_initializing(self) -> None:
+        self.metadata.status = RuntimeStatus.INITIALIZING
+
+    def mark_scheduling(self) -> None:
+        self.metadata.status = RuntimeStatus.SCHEDULING
+
+    def mark_executing(self) -> None:
+        self.metadata.status = RuntimeStatus.EXECUTING
+        self.metadata.started_at = datetime.now(timezone.utc)
+
+    def mark_completed(self) -> None:
+        self.metadata.status = RuntimeStatus.COMPLETED
+        self.metadata.completed_at = datetime.now(timezone.utc)
+
+    def mark_failed(self) -> None:
+        self.metadata.status = RuntimeStatus.FAILED
+        self.metadata.completed_at = datetime.now(timezone.utc)

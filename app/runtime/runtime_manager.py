@@ -10,10 +10,11 @@ from __future__ import annotations
 from app.orchestration.execution.execution_engine import ExecutionEngine
 from app.orchestration.scheduler.scheduler import Scheduler
 
-# from .cancellation_token import CancellationToken
-# from .runtime_config import RuntimeConfig
-# from .runtime_context import RuntimeContext
-# from .runtime_metadata import RuntimeMetadata
+# from app.runtime.cancellation_token import CancellationToken
+# from app.runtime.runtime_config import RuntimeConfig
+# from app.runtime.runtime_context import RuntimeContext
+# from app.runtime.runtime_metadata import RuntimeMetadata
+from .runtime_session import RuntimeSession
 
 
 class RuntimeManager:
@@ -62,13 +63,29 @@ class RuntimeManager:
         - execute
         """
 
+        # Context is created now for lifecycle ownership.
+        session = RuntimeSession()
+
+        context = session.runtime_context
+
+        context.mark_initializing()
+
         plan = self._scheduler.schedule(text, contracts)
 
-        # Context is created now for lifecycle ownership.
+        context.mark_scheduling()
+
+        context.mark_executing()
+
         # ExecutionEngine still uses the existing V7.7 API.
-        execution = self._execution_engine.execute(
-            plan.graph,
-            state,
-        )
+        try:
+            execution = self._execution_engine.execute(
+                plan.graph,
+                state,
+            )
+        except Exception:
+            context.mark_failed()
+            raise
+        finally:
+            context.mark_completed()
 
         return execution

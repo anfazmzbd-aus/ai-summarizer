@@ -47,3 +47,15 @@ class RuntimeConfig:
 
     cache_enabled: bool = False
     checkpoint_enabled: bool = False
+
+    # ------------------------------------------------------------------
+    # Retry Services
+    # ------------------------------------------------------------------
+
+    retry_enabled: bool = True
+
+    max_retry_attempts: int = 3
+
+    retry_delay_seconds: float = 0.0
+
+    retry_exponential_backoff: bool = False
