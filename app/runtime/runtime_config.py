@@ -59,3 +59,11 @@ class RuntimeConfig:
     retry_delay_seconds: float = 0.0
 
     retry_exponential_backoff: bool = False
+
+    # ------------------------------------------------------------------
+    # Parallel Execution
+    # ------------------------------------------------------------------
+
+    parallel_execution: bool = False
+
+    max_workers: int = 4

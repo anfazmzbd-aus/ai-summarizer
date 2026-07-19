@@ -12,7 +12,14 @@ class LayerExecutor:
         results = []
 
         for node in layer.nodes:
-            result = self.node_executor.execute(node, state)
-            results.append(result)
+            execution = self.node_executor.execute(
+                node,
+                state,
+            )
+
+            state.node_outputs[execution.node] = execution.output
+
+            state.artifacts.update(execution.output)
+            results.append(execution)
 
         return results
