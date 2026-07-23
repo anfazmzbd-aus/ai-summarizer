@@ -10,11 +10,8 @@ from __future__ import annotations
 from app.orchestration.execution.execution_engine import ExecutionEngine
 from app.orchestration.scheduler.scheduler import Scheduler
 
-# from app.runtime.cancellation_token import CancellationToken
-# from app.runtime.runtime_config import RuntimeConfig
-# from app.runtime.runtime_context import RuntimeContext
-# from app.runtime.runtime_metadata import RuntimeMetadata
 from .runtime_session import RuntimeSession
+from app.runtime.middleware_pipeline import MiddlewarePipeline
 
 
 class RuntimeManager:
@@ -76,6 +73,9 @@ class RuntimeManager:
 
         context.mark_executing()
 
+        self.pipeline = MiddlewarePipeline()
+        self.pipeline.before_execution(context)
+
         # ExecutionEngine still uses the existing V7.7 API.
         try:
             execution = self._execution_engine.execute(
@@ -87,5 +87,10 @@ class RuntimeManager:
             raise
         finally:
             context.mark_completed()
+
+        self.pipeline.after_execution(
+            context,
+            execution,
+        )
 
         return execution

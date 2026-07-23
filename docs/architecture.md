@@ -1025,3 +1025,1494 @@ V7.7-stable
                     │
           ResponseBuilder
 
+##V7.8-stable V1.0
+=====================V7.8-stable========================
+# AI Summarizer
+
+# Architecture
+
+Version: V7.8 Stable
+Status: Production Ready Runtime Foundation
+
+---
+
+# Overview
+
+AI Summarizer is a production-oriented, modular AI orchestration platform designed to execute AI agents deterministically through a validated execution graph.
+
+The runtime separates planning from execution, allowing execution policies, observability, lifecycle management, caching, persistence, recovery, retries, middleware, and hooks to evolve independently.
+
+The architecture emphasizes:
+
+- Deterministic execution
+- Strong separation of concerns
+- Runtime extensibility
+- Fault tolerance
+- Testability
+- Production readiness
+
+---
+
+# High-Level Architecture
+
+```
+                Request
+                   │
+                   ▼
+          Intent Classification
+                   │
+                   ▼
+           Strategy Builder
+                   │
+                   ▼
+           Agent Selection
+                   │
+                   ▼
+               Scheduler
+                   │
+                   ▼
+          Execution Graph Builder
+                   │
+                   ▼
+           Graph Validator
+                   │
+                   ▼
+          Runtime Manager
+                   │
+                   ▼
+          Runtime Session
+                   │
+                   ▼
+          Runtime Context
+                   │
+     ┌─────────────┼────────────────┐
+     │             │                │
+     ▼             ▼                ▼
+ Middleware     Hooks          Observers
+     │             │                │
+     └─────────────┼────────────────┘
+                   │
+                   ▼
+          Execution Engine
+                   │
+         Layer Executor
+                   │
+         Node Executor
+                   │
+             AI Agents
+```
+
+---
+
+# Runtime Components
+
+## Runtime Manager
+
+Responsibilities
+
+- Owns execution lifecycle
+- Creates RuntimeSession
+- Creates RuntimeContext
+- Coordinates Scheduler
+- Coordinates ExecutionEngine
+- Handles runtime state transitions
+
+Location
+
+```
+
+app/runtime/runtime_manager.py
+
+```
+
+---
+
+## Runtime Session
+
+Represents one execution session.
+
+Owns
+
+- RuntimeContext
+- RuntimeMetadata
+- Execution identifiers
+
+---
+
+## Runtime Context
+
+Contains execution state throughout the runtime lifecycle.
+
+Responsibilities
+
+- lifecycle state
+- execution metadata
+- configuration
+- cancellation token
+- metrics
+- trace information
+
+---
+
+# Scheduling Layer
+
+Scheduler converts user requests into executable graphs.
+
+Responsibilities
+
+- strategy selection
+- graph construction
+- execution planning
+
+Output
+
+ExecutionGraph
+
+---
+
+# Execution Graph
+
+ExecutionGraph contains
+
+```
+
+Nodes
+Edges
+Execution Layers
+
+```
+
+The graph is validated before execution.
+
+---
+
+# Execution Engine
+
+Responsible for deterministic graph execution.
+
+Responsibilities
+
+- execute graph layers
+- invoke LayerExecutor
+- emit execution events
+- coordinate runtime execution
+
+---
+
+# Layer Executor
+
+Executes one graph layer.
+
+Supports
+
+- sequential execution
+- parallel execution
+
+Updates
+
+- state outputs
+- execution artifacts
+
+---
+
+# Node Executor
+
+Executes individual AI agents.
+
+Responsibilities
+
+- locate agent
+- validate contracts
+- execute agent
+- collect outputs
+- emit runtime events
+
+Returns
+
+NodeExecutionResult
+
+---
+
+# Runtime Events
+
+Runtime emits strongly typed events.
+
+Implemented events
+
+```
+
+ExecutionStarted
+ExecutionFinished
+
+LayerStarted
+LayerFinished
+
+NodeStarted
+NodeFinished
+NodeFailed
+
+RetryStarted
+RetryFinished
+
+```
+
+---
+
+# Event Bus
+
+Implements publish/subscribe messaging.
+
+Responsibilities
+
+- publish events
+- dispatch subscribers
+- decouple runtime components
+
+---
+
+# Subscribers
+
+Current subscribers
+
+## TraceSubscriber
+
+Produces execution trace.
+
+---
+
+## MetricsSubscriber
+
+Collects runtime metrics.
+
+---
+
+## LoggingSubscriber
+
+Produces runtime logging.
+
+---
+
+# Runtime Observer
+
+Observer provides passive monitoring.
+
+Responsibilities
+
+- observe lifecycle
+- inspect runtime
+- collect diagnostics
+
+Observers never modify runtime behavior.
+
+---
+
+# Runtime Hooks
+
+Hooks provide extension points.
+
+Lifecycle
+
+```
+
+Before Runtime
+After Runtime
+
+```
+
+Designed for
+
+- plugins
+- auditing
+- external integrations
+
+---
+
+# Runtime Middleware
+
+Middleware wraps execution.
+
+Execution order
+
+```
+
+Middleware 1 Before
+Middleware 2 Before
+
+Execution
+
+Middleware 2 After
+Middleware 1 After
+
+```
+
+Used for
+
+- authorization
+- telemetry
+- auditing
+- request enrichment
+
+---
+
+# Runtime Policies
+
+Policy Engine centralizes runtime decisions.
+
+Examples
+
+- retry policies
+- timeout policies
+- execution policies
+
+---
+
+# Retry System
+
+RetryExecutor
+
+Uses
+
+RetryPolicy
+
+Supports
+
+- configurable attempts
+- deterministic retries
+
+---
+
+# Timeout System
+
+TimeoutExecutor
+
+Supports
+
+- execution timeout
+- cancellation
+
+---
+
+# Cancellation
+
+CancellationToken allows cooperative cancellation throughout execution.
+
+---
+
+# Circuit Breaker
+
+Protects runtime from repeatedly failing operations.
+
+States
+
+```
+
+Closed
+
+Open
+
+Half Open
+
+```
+
+Supports
+
+- failure thresholds
+- recovery timeout
+
+---
+
+# Execution Cache
+
+Purpose
+
+Reuse deterministic execution results.
+
+Components
+
+```
+
+CacheEntry
+
+CachePolicy
+
+ExecutionCache
+
+```
+
+Supports
+
+- TTL
+- maximum entries
+- eviction
+- enable/disable
+
+---
+
+# Persistence
+
+Stores execution history.
+
+Components
+
+```
+
+ExecutionRecord
+
+PersistenceManager
+
+PersistenceBackend
+
+MemoryBackend
+
+```
+
+Supports
+
+- save
+- load
+- delete
+- exists
+
+Future
+
+- SQLite
+- PostgreSQL
+- Redis
+- Cloud Storage
+
+---
+
+# Checkpoint & Recovery
+
+Supports resumable execution.
+
+Components
+
+```
+
+Checkpoint
+
+CheckpointManager
+
+RecoveryManager
+
+MemoryCheckpointBackend
+
+```
+
+Capabilities
+
+- save checkpoints
+- recover latest state
+- future resume support
+
+---
+
+# Runtime State Flow
+
+```
+
+Initialize
+
+↓
+
+Scheduling
+
+↓
+
+Executing
+
+↓
+
+Completed
+
+or
+
+↓
+
+Failed
+
+```
+
+---
+
+# Directory Structure
+
+```
+
+app/
+
+runtime/
+cache/
+checkpoint/
+events/
+hooks/
+middleware/
+observer/
+persistence/
+
+orchestration/
+execution/
+graph/
+scheduler/
+
+agents/
+
+contracts/
+
+tests/
+
+```
+
+---
+
+# Testing
+
+Current automated coverage
+
+```
+
+114 tests
+
+```
+
+Coverage includes
+
+- execution
+- runtime
+- events
+- middleware
+- hooks
+- observers
+- cache
+- persistence
+- checkpointing
+- recovery
+- retries
+- timeout
+- circuit breaker
+- API
+- integration
+
+All tests passing.
+
+---
+
+# Design Principles
+
+The architecture follows these principles:
+
+- Single Responsibility Principle
+- Dependency Injection
+- Composition over inheritance
+- Event-driven communication
+- Deterministic execution
+- Immutable execution planning
+- Runtime isolation
+- Modular extensibility
+- Test-first development
+- Production readiness
+
+---
+
+# Current Status
+
+Version
+
+```
+
+V7.8 Stable
+
+```
+
+Runtime Foundation Complete
+
+Production Runtime Infrastructure Complete
+
+Ready for
+
+```
+
+V7.9 Runtime Intelligence
+
+```
+
+##V7.8-stable V1.1
+=====================V7.8-stable========================
+# `ARCHITECTURE.md`
+
+```markdown
+# AI Summarizer Architecture
+
+## Version
+
+Current Version: **V7.8.0**
+
+Architecture Status: **Production Runtime Foundation**
+
+---
+
+# 1. Vision
+
+AI Summarizer is evolving from a document summarization application into a production-grade Agentic AI Runtime Platform.
+
+The architecture is built around deterministic execution today, while preparing for adaptive runtime intelligence in future releases.
+
+The guiding principles are:
+
+- Modular architecture
+- Strong separation of concerns
+- Deterministic execution
+- Extensible runtime
+- Production reliability
+- Enterprise scalability
+
+---
+
+# 2. High-Level Architecture
+
+```
+
+```
+                    Client
+
+                       │
+
+               FastAPI / REST API
+
+                       │
+
+              Summarize Service
+
+                       │
+
+               Runtime Manager
+
+                       │
+
+              Runtime Session
+
+                       │
+
+              Runtime Context
+
+                       │
+
+    ┌──────────────────────────────────────┐
+    │                                      │
+    │  Middleware Pipeline                 │
+    │  Runtime Hooks                       │
+    │  Policy Engine                       │
+    │  Runtime Observer                    │
+    │                                      │
+    └──────────────────────────────────────┘
+
+                       │
+
+                  Scheduler
+
+                       │
+
+               ExecutionGraph
+
+                       │
+
+              Execution Engine
+
+                       │
+
+              Layer Executor
+
+                       │
+
+              Node Executor
+
+                       │
+
+               Registered Agents
+
+                       │
+
+             Response Builder
+```
+
+```
+
+---
+
+# 3. Architectural Layers
+
+```
+
+Presentation Layer
+│
+Application Layer
+│
+Runtime Layer
+│
+Execution Layer
+│
+Agent Layer
+│
+Infrastructure Layer
+
+```
+
+---
+
+# 4. Runtime Layer
+
+Location
+
+```
+
+app/runtime/
+
+```
+
+The Runtime Layer owns execution lifecycle and production behavior.
+
+Responsibilities
+
+- Runtime lifecycle
+- Execution orchestration
+- Reliability
+- Runtime policies
+- Observability
+- Extension points
+- Runtime state
+
+Core Components
+
+```
+
+RuntimeManager
+RuntimeSession
+RuntimeContext
+RuntimeConfig
+RuntimeMetadata
+CancellationToken
+
+```
+
+---
+
+# 5. Execution Layer
+
+Location
+
+```
+
+app/orchestration/
+
+```
+
+Responsible for deterministic workflow execution.
+
+Core Components
+
+```
+
+Scheduler
+ExecutionGraph
+ExecutionEngine
+LayerExecutor
+NodeExecutor
+ContractManager
+StateBuilder
+
+```
+
+Responsibilities
+
+- Build execution graph
+- Validate DAG
+- Execute nodes
+- Execute layers
+- Maintain execution state
+- Preserve execution order
+
+---
+
+# 6. Agent Layer
+
+Location
+
+```
+
+app/agents/
+
+```
+
+Agents perform domain-specific AI tasks.
+
+Examples
+
+```
+
+Summary Agent
+Insight Agent
+Trend Agent
+Risk Agent
+Sentiment Agent
+Forecast Agent
+Recommendation Agent
+
+```
+
+Agent responsibilities
+
+- Execute a specialized task
+- Produce deterministic output
+- Never orchestrate execution
+- Never control runtime behavior
+
+---
+
+# 7. Runtime Event Architecture
+
+Location
+
+```
+
+app/runtime/events/
+
+```
+
+Components
+
+```
+
+EventBus
+EventDispatcher
+RuntimeEventPublisher
+SubscriberRegistry
+EventTypes
+
+```
+
+Current Events
+
+```
+
+ExecutionStarted
+ExecutionFinished
+
+LayerStarted
+LayerFinished
+
+NodeStarted
+NodeFinished
+NodeFailed
+
+RetryStarted
+RetryFinished
+
+```
+
+Purpose
+
+- Runtime observability
+- Event-driven extensions
+- Metrics
+- Logging
+- Tracing
+
+---
+
+# 8. Runtime Observability
+
+Location
+
+```
+
+app/runtime/observer/
+
+```
+
+Components
+
+```
+
+RuntimeObserver
+ObserverContext
+
+```
+
+Subscribers
+
+```
+
+LoggingSubscriber
+MetricsSubscriber
+TraceSubscriber
+
+```
+
+Responsibilities
+
+- Runtime monitoring
+- Execution tracing
+- Metrics collection
+- Structured logging
+
+---
+
+# 9. Reliability Layer
+
+## Retry
+
+```
+
+RetryExecutor
+RetryPolicy
+
+```
+
+Supports configurable retry behavior.
+
+---
+
+## Timeout
+
+```
+
+Timeout
+TimeoutExecutor
+
+```
+
+Supports execution timeout protection.
+
+---
+
+## Circuit Breaker
+
+```
+
+CircuitBreaker
+
+```
+
+Protects the runtime against repeated failures.
+
+---
+
+## Cancellation
+
+```
+
+CancellationToken
+
+```
+
+Supports cooperative execution cancellation.
+
+---
+
+# 10. Runtime Extension Framework
+
+## Middleware
+
+Location
+
+```
+
+app/runtime/middleware/
+
+```
+
+Components
+
+```
+
+RuntimeMiddleware
+MiddlewarePipeline
+
+```
+
+Responsibilities
+
+- Pre-execution processing
+- Post-execution processing
+- Cross-cutting concerns
+
+---
+
+## Runtime Hooks
+
+Location
+
+```
+
+app/runtime/hooks/
+
+```
+
+Components
+
+```
+
+RuntimeHook
+HookManager
+HookContext
+
+```
+
+Responsibilities
+
+- Runtime lifecycle callbacks
+- Extension points
+- Custom runtime behavior
+
+---
+
+# 11. Policy Engine
+
+Location
+
+```
+
+app/runtime/policy/
+
+```
+
+Component
+
+```
+
+PolicyEngine
+
+```
+
+Purpose
+
+Evaluate runtime policies before execution.
+
+Examples
+
+- Retry decisions
+- Timeout policy
+- Runtime restrictions
+- Execution behavior
+
+---
+
+# 12. Runtime Cache
+
+Location
+
+```
+
+app/runtime/cache/
+
+```
+
+Components
+
+```
+
+ExecutionCache
+CacheEntry
+CachePolicy
+
+```
+
+Capabilities
+
+- TTL expiration
+- Entry eviction
+- Maximum cache size
+- Execution output caching
+
+---
+
+# 13. Execution Persistence
+
+Location
+
+```
+
+app/runtime/persistence/
+
+```
+
+Components
+
+```
+
+ExecutionRecord
+PersistenceBackend
+MemoryBackend
+PersistenceManager
+
+```
+
+Responsibilities
+
+- Store execution history
+- Persist runtime metadata
+- Abstract storage backend
+
+---
+
+# 14. Checkpoint & Recovery
+
+Location
+
+```
+
+app/runtime/checkpoint/
+
+```
+
+Components
+
+```
+
+Checkpoint
+MemoryCheckpointBackend
+CheckpointManager
+RecoveryManager
+
+```
+
+Capabilities
+
+- Save execution state
+- Resume interrupted execution
+- Recover runtime state
+
+---
+
+# 15. Runtime State Flow
+
+```
+
+Request
+
+│
+
+RuntimeManager
+
+│
+
+RuntimeSession
+
+│
+
+RuntimeContext
+
+│
+
+Scheduler
+
+│
+
+ExecutionGraph
+
+│
+
+ExecutionEngine
+
+│
+
+LayerExecutor
+
+│
+
+NodeExecutor
+
+│
+
+Agent
+
+│
+
+State Update
+
+│
+
+Response Builder
+
+│
+
+Response
+
+```
+
+---
+
+# 16. Runtime Lifecycle
+
+```
+
+INITIALIZING
+
+```
+  │
+```
+
+SCHEDULING
+
+```
+  │
+```
+
+EXECUTING
+
+```
+  │
+```
+
+COMPLETED
+
+```
+  │
+```
+
+FAILED (if required)
+
+```
+  │
+```
+
+TERMINATED
+
+```
+
+---
+
+# 17. Testing Status
+
+Current Validation
+
+```
+
+114 Unit Tests
+
+```
+
+Validation Pipeline
+
+```
+
+Black
+
+↓
+
+Ruff
+
+↓
+
+Pytest
+
+```
+
+Current Status
+
+```
+
+114 Passed
+
+Black Passed
+
+Ruff Passed
+
+Pytest Passed
+
+```
+
+---
+
+# 18. Design Principles
+
+## Separation of Concerns
+
+Runtime owns orchestration.
+
+Agents own execution.
+
+---
+
+## Deterministic Execution
+
+ExecutionGraph is the execution contract.
+
+Execution order is reproducible.
+
+---
+
+## Extensibility
+
+New functionality should be added using:
+
+- Middleware
+- Hooks
+- Policies
+- Subscribers
+
+Avoid modifying the execution engine unless necessary.
+
+---
+
+## Reliability
+
+Runtime must support
+
+- Retry
+- Timeout
+- Circuit breaker
+- Recovery
+- Checkpointing
+- Persistence
+
+---
+
+## Observability
+
+Every execution should be observable through:
+
+- Events
+- Logging
+- Metrics
+- Tracing
+
+---
+
+## Testability
+
+Every production component requires
+
+- Unit tests
+- Integration tests
+- Regression coverage
+
+---
+
+# 19. Architectural Rules
+
+The following rules are mandatory.
+
+Rule 1
+
+ExecutionGraph is the single orchestration contract.
+
+---
+
+Rule 2
+
+ExecutionEngine is the only execution coordinator.
+
+---
+
+Rule 3
+
+Runtime controls execution.
+
+Agents never control runtime.
+
+---
+
+Rule 4
+
+All runtime extensions use official extension points.
+
+- Middleware
+- Hooks
+- Policies
+- Event subscribers
+
+---
+
+Rule 5
+
+Every new capability requires:
+
+- Implementation
+- Tests
+- Documentation
+- Integration validation
+
+---
+
+# 20. V7.9 Architecture Direction
+
+The V7.8 architecture becomes the stable foundation for V7.9.
+
+The next evolution introduces intelligent runtime behavior while preserving all existing execution infrastructure.
+
+Planned additions
+
+```
+
+Runtime Intelligence
+
+↓
+
+Dynamic Planning
+
+↓
+
+Agent Selection
+
+↓
+
+Runtime Learning
+
+↓
+
+Distributed Execution
+
+```
+
+The following components remain stable and are not expected to be rewritten during V7.9:
+
+- RuntimeManager
+- RuntimeSession
+- RuntimeContext
+- Scheduler
+- ExecutionGraph
+- ExecutionEngine
+- LayerExecutor
+- NodeExecutor
+- EventBus
+- RuntimeObserver
+- ExecutionCache
+- PersistenceManager
+- CheckpointManager
+- RecoveryManager
+
+Future development should extend these components rather than replace them.
+
+---
+
+# Architecture Baseline
+
+**Version:** V7.8.0
+
+**Status:** Stable Production Runtime Foundation
+
+**Validation:**
+
+- 114/114 tests passing
+- Black passing
+- Ruff passing
+- Pytest passing
+
+This document defines the official architectural baseline from which all V7.9 development should proceed.
+```
+
+---
+
+## Documentation Package Complete
+
+The documentation set is now complete and internally consistent:
+
+* ✅ `ARCHITECTURE.md`
+* ✅ `CHANGELOG.md`
+* ✅ `PROJECT_STATUS.md`
+* ✅ `ROADMAP.md`
+* ✅ `V7.8_TO_V7.9_TRANSITION_PACKAGE.md`
+
+Together with your passing validation (`114` tests, `black`, `ruff`, and `pytest` all green), this establishes **V7.8.0** as the frozen production baseline. The next chat can begin directly with **V7.9 Phase 1 – Adaptive Runtime Intelligence**, using the transition package as the authoritative context to preserve continuity and prevent architectural drift.

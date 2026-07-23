@@ -11,8 +11,12 @@ class LayerExecutor:
         node_executor,
         runtime_config: RuntimeConfig | None = None,
         parallel_executor: ParallelExecutor | None = None,
+        events=None,
     ):
+
         self.node_executor = node_executor
+
+        self.events = events
 
         self._config = runtime_config or RuntimeConfig()
 
@@ -25,7 +29,13 @@ class LayerExecutor:
         layer,
         state,
     ):
+
         nodes = list(layer.nodes)
+
+        if self.events:
+            self.events.layer_started(
+                layer.index,
+            )
 
         if self._config.parallel_execution and len(nodes) > 1:
 
@@ -50,5 +60,12 @@ class LayerExecutor:
             ]
 
         for execution in executions:
+
             state.node_outputs[execution.node] = execution.output
+
             state.artifacts.update(execution.output)
+
+        if self.events:
+            self.events.layer_finished(
+                layer.index,
+            )
