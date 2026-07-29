@@ -3,7 +3,6 @@
 from typing import Dict, List, Set
 from pydantic import BaseModel
 
-
 NodeId = str
 
 

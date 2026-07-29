@@ -1152,11 +1152,4 @@ Planned focus:
 End of V7.8.0
 
 
-## V7.9 Phase 1
 
-* Runtime intelligence foundation
-* Decision engine
-* Strategy selector
-* Runtime reasoner
-* Intelligence integration tests
-* Test count increased to 181

@@ -28,6 +28,7 @@ class LayerExecutor:
         self,
         layer,
         state,
+        runtime_config: RuntimeConfig | None = None,
     ):
 
         nodes = list(layer.nodes)
@@ -37,7 +38,9 @@ class LayerExecutor:
                 layer.index,
             )
 
-        if self._config.parallel_execution and len(nodes) > 1:
+        config = runtime_config or self._config
+
+        if config.parallel_execution and len(nodes) > 1:
 
             execute = partial(
                 self.node_executor.execute,

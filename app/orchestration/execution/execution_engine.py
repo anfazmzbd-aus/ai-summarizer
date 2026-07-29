@@ -1,8 +1,9 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
-from app.orchestration.execution.node_executor import NodeExecutor
 from app.orchestration.execution.layer_executor import LayerExecutor
+from app.orchestration.execution.node_executor import NodeExecutor
 from app.orchestration.graph.graph_validator import GraphValidator
+from app.runtime.intelligence.decision import Decision
 from app.runtime.runtime_config import RuntimeConfig
 
 
@@ -85,9 +86,21 @@ class ExecutionEngine:
         self,
         graph,
         initial_state,
+        decision: Decision | None = None,
     ):
 
         self.validator.validate(graph)
+
+        #
+        # V7.9 Phase 2
+        # Runtime intelligence integration.
+        #
+        runtime_config = self.layer_executor._config
+        if decision is not None:
+            runtime_config = replace(
+                runtime_config,
+                parallel_execution=(decision.strategy.parallel_execution),
+            )
 
         if self.events:
             self._execution_started()
@@ -99,6 +112,7 @@ class ExecutionEngine:
             self.layer_executor.execute_layer(
                 layer,
                 state,
+                runtime_config=runtime_config,
             )
 
         if self.events:

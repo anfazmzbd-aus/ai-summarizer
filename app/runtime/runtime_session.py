@@ -9,11 +9,12 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from app.orchestration.execution.execution_context import ExecutionContext
-
-from .cancellation_token import CancellationToken
-from .runtime_config import RuntimeConfig
-from .runtime_context import RuntimeContext
-from .runtime_metadata import RuntimeMetadata
+from app.orchestration.graph.graph_schema import ExecutionGraph
+from app.runtime.cancellation_token import CancellationToken
+from app.runtime.intelligence.decision import Decision
+from app.runtime.runtime_config import RuntimeConfig
+from app.runtime.runtime_context import RuntimeContext
+from app.runtime.runtime_metadata import RuntimeMetadata
 
 
 @dataclass(slots=True)
@@ -33,6 +34,16 @@ class RuntimeSession:
     execution_context: ExecutionContext = field(default_factory=ExecutionContext)
 
     runtime_context: RuntimeContext = field(init=False)
+
+    #
+    # V7.9 Phase 2 additions
+    #
+
+    execution_graph: ExecutionGraph | None = None
+
+    decision: Decision | None = None
+
+    execution_result: object | None = None
 
     def __post_init__(self) -> None:
         self.runtime_context = RuntimeContext(

@@ -10,7 +10,6 @@ from app.core.exceptions import (
     ValidationError,
 )
 
-
 # -------------------------
 # Validation Result
 # -------------------------

@@ -6,7 +6,6 @@ from typing import Set
 from typing import Any
 from typing import Literal
 
-
 ExecutionStage = Literal["preprocessing", "dag"]
 
 NodeStatus = Literal["pending", "running", "success", "failed", "skipped", "retry"]

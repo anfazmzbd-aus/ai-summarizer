@@ -772,6 +772,3 @@ Adaptive Agentic AI Runtime Platform
 
 # End of Roadmap
 ```
-## V7.9 Phase 1 ✅ Complete
-
-## V7.9 Phase 2 Active

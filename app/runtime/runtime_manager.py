@@ -9,9 +9,9 @@ from __future__ import annotations
 
 from app.orchestration.execution.execution_engine import ExecutionEngine
 from app.orchestration.scheduler.scheduler import Scheduler
+from app.runtime.middleware_pipeline import MiddlewarePipeline
 
 from .runtime_session import RuntimeSession
-from app.runtime.middleware_pipeline import MiddlewarePipeline
 
 
 class RuntimeManager:
@@ -31,9 +31,11 @@ class RuntimeManager:
         self,
         scheduler: Scheduler,
         execution_engine: ExecutionEngine,
+        decision_engine=None,
     ) -> None:
         self._scheduler = scheduler
         self._execution_engine = execution_engine
+        self._decision_engine = decision_engine
 
     @property
     def execution_engine(self) -> ExecutionEngine:
@@ -67,7 +69,15 @@ class RuntimeManager:
 
         context.mark_initializing()
 
-        plan = self._scheduler.schedule(text, contracts)
+        plan = self._scheduler.schedule(
+            text,
+            contracts,
+        )
+
+        session.execution_graph = plan.graph
+
+        if self._decision_engine:
+            session.decision = self._decision_engine.decide(session.execution_context)
 
         context.mark_scheduling()
 
@@ -81,7 +91,9 @@ class RuntimeManager:
             execution = self._execution_engine.execute(
                 plan.graph,
                 state,
+                decision=session.decision,  # V7.9 Phase 2 Runtime intelligence integration.
             )
+            session.execution_result = execution
         except Exception:
             context.mark_failed()
             raise

@@ -4,7 +4,6 @@ from typing import List
 from app.orchestration.graph.graph_builder import GraphBuilder
 from app.orchestration.graph.graph_schema import ExecutionGraph
 
-
 # ---------------------------------------------------------
 # Schedule Result
 # ---------------------------------------------------------
