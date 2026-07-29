@@ -1,0 +1,6 @@
+-r requirements.txt
+
+pytest
+pre-commit
+black==24.10.0
+ruff==0.8.6
