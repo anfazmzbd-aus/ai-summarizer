@@ -1,5 +1,5 @@
-from dataclasses import dataclass
-from datetime import datetime
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
 
 from .execution_strategy import ExecutionStrategy
 from .reasoning_result import ReasoningResult
@@ -9,4 +9,7 @@ from .reasoning_result import ReasoningResult
 class Decision:
     strategy: ExecutionStrategy
     reasoning: ReasoningResult
-    created_at: datetime
+    created_at: datetime = field(
+        default_factory=lambda: datetime.now(timezone.utc),
+        compare=False,
+    )
