@@ -51,3 +51,23 @@ class RuntimeContext:
     def mark_failed(self) -> None:
         self.metadata.status = RuntimeStatus.FAILED
         self.metadata.completed_at = datetime.now(timezone.utc)
+
+    @property
+    def metrics(self):
+        """
+        Returns runtime execution metrics.
+        """
+        if self.metadata.observability is None:
+            raise RuntimeError("Runtime observability is not initialized.")
+
+        return self.metadata.observability.metrics
+
+    @property
+    def timeline(self):
+        """
+        Returns runtime execution timeline.
+        """
+        if self.metadata.observability is None:
+            raise RuntimeError("Runtime observability is not initialized.")
+
+        return self.metadata.observability.timeline

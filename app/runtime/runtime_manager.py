@@ -12,6 +12,7 @@ from app.orchestration.scheduler.scheduler import Scheduler
 from app.runtime.middleware_pipeline import MiddlewarePipeline
 
 from .runtime_session import RuntimeSession
+from app.runtime.observability.strategy_snapshot import StrategySnapshot
 
 
 class RuntimeManager:
@@ -65,6 +66,10 @@ class RuntimeManager:
         # Context is created now for lifecycle ownership.
         session = RuntimeSession()
 
+        session.snapshot.timeline.record(
+            "runtime_created",
+        )
+
         context = session.runtime_context
 
         context.mark_initializing()
@@ -74,10 +79,26 @@ class RuntimeManager:
             contracts,
         )
 
+        session.snapshot.metrics.total_layers = len(plan.graph.layers)
+
+        session.snapshot.timeline.record(
+            "graph_scheduled",
+            layers=len(plan.graph.layers),
+        )
+
         session.execution_graph = plan.graph
 
         if self._decision_engine:
             session.decision = self._decision_engine.decide(session.execution_context)
+
+            session.snapshot.strategy = StrategySnapshot(
+                strategy=session.decision.strategy,
+            )
+
+            session.snapshot.timeline.record(
+                "decision_created",
+                strategy=session.decision.strategy.strategy.name,
+            )
 
         context.mark_scheduling()
 
@@ -85,6 +106,10 @@ class RuntimeManager:
 
         self.pipeline = MiddlewarePipeline()
         self.pipeline.before_execution(context)
+
+        session.snapshot.timeline.record(
+            "execution_started",
+        )
 
         # ExecutionEngine still uses the existing V7.7 API.
         try:
@@ -94,8 +119,19 @@ class RuntimeManager:
                 decision=session.decision,  # V7.9 Phase 2 Runtime intelligence integration.
             )
             session.execution_result = execution
+
+            session.snapshot.timeline.record(
+                "execution_completed",
+            )
+
+            session.snapshot.metrics.completed_layers = (
+                session.snapshot.metrics.total_layers
+            )
         except Exception:
             context.mark_failed()
+            session.snapshot.timeline.record(
+                "execution_failed",
+            )
             raise
         finally:
             context.mark_completed()
@@ -104,5 +140,7 @@ class RuntimeManager:
             context,
             execution,
         )
-
+        session.snapshot.timeline.record(
+            "runtime_completed",
+        )
         return execution

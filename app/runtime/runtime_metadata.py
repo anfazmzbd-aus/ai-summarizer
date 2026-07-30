@@ -11,6 +11,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
 from uuid import UUID, uuid4
+from app.runtime.observability.runtime_snapshot import RuntimeSnapshot
 
 
 class RuntimeStatus(str, Enum):
@@ -51,6 +52,8 @@ class RuntimeMetadata:
     graph_version: str = "7.7"
 
     scheduler_version: str = "7.7"
+
+    observability: RuntimeSnapshot | None = None
 
     @property
     def duration_seconds(self) -> float | None:

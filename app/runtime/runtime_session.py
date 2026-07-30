@@ -15,6 +15,9 @@ from app.runtime.intelligence.decision import Decision
 from app.runtime.runtime_config import RuntimeConfig
 from app.runtime.runtime_context import RuntimeContext
 from app.runtime.runtime_metadata import RuntimeMetadata
+from app.runtime.observability.execution_metrics import ExecutionMetrics
+from app.runtime.observability.execution_timeline import ExecutionTimeline
+from app.runtime.observability.runtime_snapshot import RuntimeSnapshot
 
 
 @dataclass(slots=True)
@@ -35,6 +38,8 @@ class RuntimeSession:
 
     runtime_context: RuntimeContext = field(init=False)
 
+    snapshot: RuntimeSnapshot = field(init=False)
+
     #
     # V7.9 Phase 2 additions
     #
@@ -52,3 +57,9 @@ class RuntimeSession:
             metadata=self.metadata,
             cancellation_token=self.cancellation_token,
         )
+        self.snapshot = RuntimeSnapshot(
+            metrics=ExecutionMetrics(),
+            timeline=ExecutionTimeline(),
+        )
+        # Wire observability here
+        self.metadata.observability = self.snapshot
