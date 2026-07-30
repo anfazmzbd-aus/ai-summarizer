@@ -2552,3 +2552,403 @@ Together with your passing validation (`114` tests, `black`, `ruff`, and `pytest
 * DecisionEngine
 * Updated architecture diagram
 * Runtime decision flow
+
+
+  # AI Summarizer Architecture
+
+  ## Overview
+
+  AI Summarizer is a production-oriented AI execution platform built around:
+
+  - Agent-based processing
+  - Graph-based orchestration
+  - Deterministic execution
+  - Adaptive runtime intelligence
+  - Runtime observability
+  - Diagnostics
+  - Execution reporting
+
+  The platform evolved from a simple summarization service into an extensible agentic execution runtime.
+
+  # Architecture Evolution
+
+  ## V1-V5: Application Foundation
+
+  Introduced:
+
+  - FastAPI service
+  - Persistence layer
+  - Modular application structure
+  - Multi-output analysis
+
+
+  ## V6: Agent Architecture
+
+  Introduced:
+
+  - Agent registry
+  - Intent classification
+  - Semantic routing
+  - Dependency graphs
+
+
+  ## V7: Execution Runtime
+
+  Introduced:
+
+  - ExecutionGraph
+  - Scheduler
+  - ExecutionEngine
+  - Layer execution
+  - State contracts
+
+
+  ## V7.8: Production Runtime Foundation
+
+  Introduced:
+
+  - Runtime lifecycle management
+  - Runtime context
+  - Events
+  - Middleware
+  - Hooks
+  - Policies
+  - Cache
+  - Persistence
+  - Checkpoints
+
+
+  ## V7.9: Adaptive Runtime Platform
+
+  Introduced:
+
+  - Runtime intelligence
+  - Adaptive execution decisions
+  - Observability pipeline
+  - Diagnostics
+  - Reporting
+
+# V7.9 Architecture
+
+The system is organized into independent layers.
+Architecture diagram:
+                    API Layer
+
+                       |
+
+              Runtime Manager
+
+                       |
+
+              Runtime Session
+
+                       |
+
+              Runtime Context
+
+                       |
+
+        +--------------+--------------+
+
+        |                             |
+
+ Runtime Intelligence          Execution Runtime
+
+        |                             |
+
+ Decision Engine              Execution Graph
+
+ Strategy Selector             Scheduler
+
+ Runtime Reasoner              Execution Engine
+
+                                      |
+
+                               Layer Executor
+
+                                      |
+
+                               Node Executor
+
+                                      |
+
+                                  Agents
+
+
+                                      |
+
+                         Observability / Diagnostics
+
+                                      |
+
+                               Reporting Layer
+
+
+# Runtime Architecture
+
+The runtime layer owns execution lifecycle management.
+
+## RuntimeManager
+
+Responsibilities:
+
+- Runtime entry point
+- Lifecycle coordination
+- Execution delegation
+
+
+## RuntimeSession
+
+Responsibilities:
+
+- Single execution ownership
+- Runtime object aggregation
+- State isolation
+
+
+## RuntimeContext
+
+Responsibilities:
+
+- Runtime-scoped access
+- Metadata exposure
+- Execution lifecycle state
+
+
+## RuntimeMetadata
+
+Stores:
+
+- Execution status
+- Timestamps
+- Observability references
+- Diagnostics
+- Reports
+
+# Execution Lifecycle
+
+A runtime execution follows:
+Request
+
+↓
+
+RuntimeManager
+
+↓
+
+Create RuntimeSession
+
+↓
+
+Initialize RuntimeContext
+
+↓
+
+Runtime Intelligence
+
+↓
+
+Create Execution Decision
+
+↓
+
+Scheduler
+
+↓
+
+ExecutionGraph
+
+↓
+
+ExecutionEngine
+
+↓
+
+LayerExecutor
+
+↓
+
+NodeExecutor
+
+↓
+
+Agents
+
+↓
+
+Runtime Snapshot
+
+↓
+
+Diagnostics
+
+↓
+
+Runtime Report
+
+# Runtime Intelligence
+
+Runtime intelligence determines execution behaviour.
+
+Components:
+
+## Runtime Reasoner
+
+Analyzes runtime conditions.
+
+Examples:
+
+- Workload size
+- Parallel opportunities
+- Cache availability
+- Retry requirements
+
+
+## Strategy Selector
+
+Chooses execution strategy.
+
+
+## Decision Engine
+
+Produces runtime execution decisions.
+
+
+## Execution Strategy
+
+Defines:
+
+- Parallel execution
+- Cache usage
+- Retry behaviour
+- Checkpoint behaviour
+- Timeout behaviour
+
+# Observability
+
+Observability provides runtime visibility.
+
+Components:
+
+- ExecutionMetrics
+- ExecutionTimeline
+- RuntimeSnapshot
+
+
+Provides:
+
+- Execution timing
+- Layer tracking
+- Runtime state capture
+
+# Diagnostics
+
+Diagnostics analyse runtime execution results.
+
+Components:
+
+- RuntimeDiagnostics
+- ExecutionAnalyzer
+- ExecutionStatistics
+- FailureClassifier
+
+
+Provides:
+
+- Health evaluation
+- Failure analysis
+- Runtime issues
+
+# Reporting
+
+Reporting converts runtime state into consumable output.
+
+Components:
+
+- RuntimeReport
+- ExecutionSummary
+- RuntimeHealth
+- ReportBuilder
+
+
+Consumers:
+
+- API responses
+- Dashboards
+- Logs
+- Future monitoring systems
+
+10. Component Responsibilities
+# Dependency Rules
+
+The architecture follows one-directional dependency flow.
+
+Allowed:
+Execution
+↓
+Observability
+↓
+Diagnostics
+↓
+Reporting
+
+Runtime intelligence influences execution but does not own execution.
+
+Forbidden:
+
+- Reporting importing ExecutionEngine
+- Diagnostics mutating execution state
+- Observability controlling execution
+- Agents accessing RuntimeManager directly
+
+# Testing Architecture
+
+V7.9 maintains layered validation.
+
+Coverage:
+
+## Unit Tests
+
+Validate:
+
+- Intelligence components
+- Runtime models
+- Observability
+- Diagnostics
+- Reporting
+
+
+## Integration Tests
+
+Validate:
+
+- Runtime lifecycle
+- Adaptive execution
+- Runtime pipeline
+
+
+Current coverage:
+237 tests passing
+
+Quality gates:
+
+- Black
+- Ruff
+- Pytest
+- Pre-commit
+
+# Extension Points
+
+Future extensions should integrate through:
+
+- Runtime middleware
+- Runtime hooks
+- Event subscribers
+- Policy engine
+- Reporting adapters
+
+New capabilities should avoid modifying:
+
+- ExecutionGraph
+- ExecutionEngine
+- Core runtime lifecycle
