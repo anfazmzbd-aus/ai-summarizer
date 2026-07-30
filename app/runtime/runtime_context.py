@@ -71,3 +71,19 @@ class RuntimeContext:
             raise RuntimeError("Runtime observability is not initialized.")
 
         return self.metadata.observability.timeline
+
+    @property
+    def diagnostics(self):
+        """
+        Returns runtime diagnostics.
+        """
+
+        return self.metadata.diagnostics
+
+    @property
+    def report(self):
+        """
+        Returns the runtime report.
+        """
+
+        return self.metadata.report

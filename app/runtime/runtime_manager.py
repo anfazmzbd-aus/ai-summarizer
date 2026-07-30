@@ -119,6 +119,13 @@ class RuntimeManager:
                 decision=session.decision,  # V7.9 Phase 2 Runtime intelligence integration.
             )
             session.execution_result = execution
+            session.analyze_execution()
+
+            session.metadata.diagnostics = session.diagnostics
+
+            session.build_report()
+
+            session.metadata.report = session.report
 
             session.snapshot.timeline.record(
                 "execution_completed",
@@ -127,11 +134,20 @@ class RuntimeManager:
             session.snapshot.metrics.completed_layers = (
                 session.snapshot.metrics.total_layers
             )
-        except Exception:
+        except Exception as exc:
+
             context.mark_failed()
+
+            session.diagnostics.failures.append(
+                type(exc).__name__,
+            )
+
+            session.diagnostics.healthy = False
+
             session.snapshot.timeline.record(
                 "execution_failed",
             )
+
             raise
         finally:
             context.mark_completed()

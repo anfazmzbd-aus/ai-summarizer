@@ -12,6 +12,10 @@ from datetime import datetime, timezone
 from enum import Enum
 from uuid import UUID, uuid4
 from app.runtime.observability.runtime_snapshot import RuntimeSnapshot
+from app.runtime.diagnostics.runtime_diagnostics import (
+    RuntimeDiagnostics,
+)
+from app.runtime.reporting.runtime_report import RuntimeReport
 
 
 class RuntimeStatus(str, Enum):
@@ -54,6 +58,10 @@ class RuntimeMetadata:
     scheduler_version: str = "7.7"
 
     observability: RuntimeSnapshot | None = None
+
+    diagnostics: RuntimeDiagnostics | None = None
+
+    report: RuntimeReport | None = None
 
     @property
     def duration_seconds(self) -> float | None:
