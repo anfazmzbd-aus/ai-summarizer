@@ -62,7 +62,7 @@ class DecisionEngine:
 
     def decide(
         self,
-        context: ExecutionContext,
+        execution_context: ExecutionContext,
     ) -> Decision:
         """
         Produce a runtime execution decision.
@@ -75,10 +75,10 @@ class DecisionEngine:
             Immutable Decision.
         """
 
-        if context is None:
+        if execution_context is None:
             raise ValueError("ExecutionContext cannot be None")
 
-        reasoning = self._runtime_reasoner.reason(context)
+        reasoning = self._runtime_reasoner.reason(execution_context)
 
         strategy = self._strategy_selector.select(reasoning)
 

@@ -579,3 +579,275 @@ Runtime
 API
 Tests
 Future Roadmap
+
+========================================================================
+
+# AI Summarizer
+
+A production-oriented AI orchestration platform built around graph-based execution, adaptive runtime intelligence, and modular multi-agent processing.
+
+Current Version: **V7.9.0 Release Candidate**
+
+## Overview
+
+AI Summarizer has evolved from a simple text summarization application into a modular execution platform capable of coordinating multiple AI agents through a deterministic execution graph.
+
+The platform emphasizes:
+
+- Graph-based orchestration
+- Adaptive runtime intelligence
+- Deterministic execution
+- Runtime observability
+- Diagnostics and reporting
+- Production-oriented architecture
+
+The current implementation is designed to provide a stable execution runtime while remaining extensible for future distributed and enterprise deployments.
+
+## Key Features
+
+### Multi-Agent Execution
+
+Supported processing capabilities include:
+
+- Summary
+- Actions
+- Insights
+- Findings
+- Sentiment
+- Trend
+- Risk
+- Root Cause
+- Forecast
+- Recommendation
+
+### Graph-Based Orchestration
+
+- Immutable execution graph
+- Dependency validation
+- Layer-based scheduling
+- Parallel execution support
+
+### Adaptive Runtime
+
+- Runtime reasoning
+- Strategy selection
+- Decision engine
+- Runtime lifecycle management
+
+### Runtime Operations
+
+- Observability
+- Diagnostics
+- Reporting
+- Event-driven execution
+- Middleware pipeline
+
+## Architecture Overview
+
+```text
+API
+
+↓
+
+Runtime Manager
+
+↓
+
+Runtime Session
+
+↓
+
+Runtime Context
+
+↓
+
+Runtime Intelligence
+
+↓
+
+Scheduler
+
+↓
+
+Execution Engine
+
+↓
+
+Layer Executor
+
+↓
+
+Node Executor
+
+↓
+
+Agents
+
+↓
+
+Observability
+
+↓
+
+Diagnostics
+
+↓
+
+Reporting
+```
+
+For detailed architecture documentation, see `ARCHITECTURE.md`.
+
+## Repository Structure
+
+```text
+app/
+├── agents/
+├── orchestration/
+│   ├── execution/
+│   ├── graph/
+│   ├── registry/
+│   └── scheduler/
+├── runtime/
+│   ├── intelligence/
+│   ├── observability/
+│   ├── diagnostics/
+│   ├── reporting/
+│   ├── events/
+│   ├── middleware/
+│   └── ...
+├── routes/
+├── services/
+└── tests/
+```
+
+## Quick Start
+
+### Clone
+
+```bash
+git clone <repository-url>
+cd ai-summarizer
+```
+
+### Create Virtual Environment
+
+```bash
+python -m venv venv311
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Start the Application
+
+```bash
+uvicorn app.main:app --reload
+```
+
+## Running Tests
+
+Run the complete validation suite:
+
+```bash
+pytest
+```
+
+Formatting:
+
+```bash
+black .
+```
+
+Static analysis:
+
+```bash
+ruff check .
+```
+
+Pre-commit validation:
+
+```bash
+pre-commit run --all-files
+```
+
+## Documentation
+
+Project documentation is organized as follows:
+
+| Document | Purpose |
+|----------|---------|
+| `README.md` | Project overview and getting started |
+| `ARCHITECTURE.md` | Technical architecture |
+| `CHANGELOG.md` | Release history |
+| `PROJECT_STATUS.md` | Current development status |
+| `ROADMAP.md` | Future direction |
+
+## Current Status
+
+Version:
+
+**V7.9.0 Release Candidate**
+
+Project State:
+
+- Feature Complete
+- Runtime Platform Stable
+- Documentation Synchronized
+- Release Candidate Validation
+
+Automated Validation:
+
+- Black
+- Ruff
+- Pytest
+- Pre-commit
+
+Current automated test count:
+
+**237 passing tests**
+
+## Roadmap
+
+### Completed
+
+- Agent architecture
+- Graph execution
+- Runtime platform
+- Adaptive runtime intelligence
+- Observability
+- Diagnostics
+- Reporting
+
+### Planned
+
+- Distributed runtime execution
+- Enterprise observability
+- Persistent execution history
+- Multi-runtime orchestration
+
+## Contributing
+
+Contributions should maintain the project's architectural principles:
+
+- Deterministic execution
+- Strong component isolation
+- Comprehensive automated testing
+- Production-oriented design
+
+Before submitting changes, ensure:
+
+```bash
+black .
+ruff check .
+pytest
+pre-commit run --all-files
+```
+
+## License
+
+Add the appropriate license information for this repository.
+
