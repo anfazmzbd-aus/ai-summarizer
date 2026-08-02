@@ -1,3 +1,5 @@
+import asyncio
+
 import pytest
 
 from app.distributed.protocols import TaskEnvelope
@@ -12,61 +14,84 @@ class FakeExecutor:
 
         self.executed = []
 
-    async def execute(
-        self,
-        task,
-    ):
+    async def execute(self, task):
 
         self.executed.append(task)
+
+
+def create_worker():
+
+    return Worker(
+        WorkerSpec(
+            worker_id="worker-001",
+            hostname="localhost",
+        ),
+        LocalExecutionQueue(),
+        FakeExecutor(),
+    )
 
 
 def create_task():
 
     return TaskEnvelope(
         task_id="task-001",
-        execution_id="exec-001",
-        node_id="node-001",
+        execution_id="exec",
+        node_id="node",
         agent_type="summary",
     )
 
 
 @pytest.mark.anyio
-async def test_worker_execute_task():
+async def test_execute_task():
 
-    queue = LocalExecutionQueue()
-
-    executor = FakeExecutor()
-
-    worker = Worker(
-        WorkerSpec(
-            worker_id="worker-001",
-            hostname="localhost",
-        ),
-        queue,
-        executor,
-    )
+    worker = create_worker()
 
     await worker.execute_task(create_task())
 
-    assert len(executor.executed) == 1
+    assert worker.metrics.tasks_completed == 1
 
 
 @pytest.mark.anyio
-async def test_worker_status_after_task():
+async def test_worker_start_stop():
 
-    queue = LocalExecutionQueue()
+    worker = create_worker()
 
-    executor = FakeExecutor()
+    task = asyncio.create_task(worker.start())
 
-    worker = Worker(
-        WorkerSpec(
-            worker_id="worker-001",
-            hostname="localhost",
-        ),
-        queue,
-        executor,
-    )
+    await asyncio.sleep(0.05)
 
-    await worker.execute_task(create_task())
+    assert worker.running
 
-    assert worker.spec.status.value == "ready"
+    await worker.stop()
+
+    await task
+
+    assert not worker.running
+
+
+@pytest.mark.anyio
+async def test_worker_process_queue():
+
+    worker = create_worker()
+
+    await worker.queue.enqueue(create_task())
+
+    runtime = asyncio.create_task(worker.start())
+
+    await asyncio.sleep(0.2)
+
+    await worker.stop()
+
+    await runtime
+
+    assert worker.metrics.tasks_completed == 1
+
+
+@pytest.mark.anyio
+async def test_heartbeat():
+
+    worker = create_worker()
+
+    heartbeat = worker.heartbeat()
+
+    assert heartbeat.worker_id == "worker-001"

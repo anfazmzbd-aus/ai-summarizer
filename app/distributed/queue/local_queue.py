@@ -1,7 +1,7 @@
 """
 AI Summarizer V8.0 Distributed Runtime
 
-Local asynchronous execution queue.
+Production local execution queue.
 """
 
 from __future__ import annotations
@@ -10,18 +10,17 @@ import asyncio
 
 from app.distributed.protocols import TaskEnvelope
 
-from .exceptions import QueueEmptyError, QueueFullError
+from .exceptions import (
+    QueueEmptyError,
+    QueueError,
+    QueueFullError,
+)
 from .queue_interface import ExecutionQueue
 
 
 class LocalExecutionQueue(ExecutionQueue):
     """
-    In-memory async execution queue.
-
-    Used for:
-    - Development
-    - Testing
-    - Single-node execution
+    Production in-memory execution queue.
     """
 
     def __init__(
@@ -31,41 +30,81 @@ class LocalExecutionQueue(ExecutionQueue):
 
         self._queue: asyncio.Queue[TaskEnvelope] = asyncio.Queue(maxsize=max_size)
 
+        self._closed = False
+
     async def enqueue(
         self,
         task: TaskEnvelope,
     ) -> None:
 
+        if self._closed:
+            raise QueueError("Queue has been closed.")
+
         try:
-            self._queue.put_nowait(task)
+            await self._queue.put(task)
 
         except asyncio.QueueFull as exc:
-            raise QueueFullError("Execution queue is full") from exc
+            raise QueueFullError("Execution queue is full.") from exc
 
     async def dequeue(
         self,
     ) -> TaskEnvelope:
 
+        if self._closed and self._queue.empty():
+            raise QueueEmptyError("Queue has been closed.")
+
         try:
-            return self._queue.get_nowait()
+            return await self._queue.get()
 
-        except asyncio.QueueEmpty as exc:
-            raise QueueEmptyError("Execution queue is empty") from exc
+        except asyncio.CancelledError:
+            raise
 
-    def size(self) -> int:
+    def task_done(
+        self,
+    ) -> None:
 
-        return self._queue.qsize()
+        self._queue.task_done()
 
-    def empty(self) -> bool:
+    async def join(
+        self,
+    ) -> None:
 
-        return self._queue.empty()
+        await self._queue.join()
 
-    async def clear(self) -> None:
+    async def clear(
+        self,
+    ) -> None:
 
         while not self._queue.empty():
 
             try:
                 self._queue.get_nowait()
+                self._queue.task_done()
 
             except asyncio.QueueEmpty:
                 break
+
+    def close(
+        self,
+    ) -> None:
+
+        self._closed = True
+
+    @property
+    def closed(
+        self,
+    ) -> bool:
+
+        return self._closed
+
+    def size(
+        self,
+    ) -> int:
+
+        return self._queue.qsize()
+
+    def empty(
+        self,
+    ) -> bool:
+
+        return self._queue.empty()

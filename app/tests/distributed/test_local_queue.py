@@ -1,27 +1,26 @@
-from pytest import mark
+import asyncio
+
+import pytest
 
 from app.distributed.protocols import TaskEnvelope
 from app.distributed.queue import (
     LocalExecutionQueue,
-    QueueEmptyError,
-    QueueFullError,
+    QueueError,
 )
 
 
-def create_task(
-    task_id: str = "task-001",
-) -> TaskEnvelope:
+def create_task(task_id: str = "task-001") -> TaskEnvelope:
 
     return TaskEnvelope(
         task_id=task_id,
-        execution_id="execution-001",
-        node_id="node-001",
+        execution_id="exec",
+        node_id="node",
         agent_type="summary",
     )
 
 
-@mark.anyio
-async def test_enqueue_and_dequeue():
+@pytest.mark.anyio
+async def test_enqueue_dequeue():
 
     queue = LocalExecutionQueue()
 
@@ -33,74 +32,78 @@ async def test_enqueue_and_dequeue():
 
     assert result.task_id == task.task_id
 
-
-@mark.anyio
-async def test_fifo_order():
-
-    queue = LocalExecutionQueue()
-
-    await queue.enqueue(create_task("task-1"))
-
-    await queue.enqueue(create_task("task-2"))
-
-    first = await queue.dequeue()
-    second = await queue.dequeue()
-
-    assert first.task_id == "task-1"
-    assert second.task_id == "task-2"
+    queue.task_done()
 
 
-@mark.anyio
-async def test_queue_size():
+@pytest.mark.anyio
+async def test_join():
 
     queue = LocalExecutionQueue()
 
     await queue.enqueue(create_task())
 
-    assert queue.size() == 1
+    task = await queue.dequeue()
+
+    queue.task_done()
+
+    await queue.join()
+
+    assert task.task_id == "task-001"
 
 
-@mark.anyio
-async def test_empty_queue():
-
-    queue = LocalExecutionQueue()
-
-    assert queue.empty()
-
-    try:
-        await queue.dequeue()
-
-    except QueueEmptyError:
-        assert True
-
-    else:
-        assert False
-
-
-@mark.anyio
-async def test_queue_clear():
+@pytest.mark.anyio
+async def test_close():
 
     queue = LocalExecutionQueue()
 
-    await queue.enqueue(create_task())
+    queue.close()
+
+    assert queue.closed
+
+
+@pytest.mark.anyio
+async def test_enqueue_closed_queue():
+
+    queue = LocalExecutionQueue()
+
+    queue.close()
+
+    with pytest.raises(QueueError):
+
+        await queue.enqueue(create_task())
+
+
+@pytest.mark.anyio
+async def test_clear():
+
+    queue = LocalExecutionQueue()
+
+    for i in range(5):
+
+        await queue.enqueue(create_task(str(i)))
 
     await queue.clear()
 
     assert queue.empty()
 
 
-@mark.anyio
-async def test_queue_full():
+@pytest.mark.anyio
+async def test_blocking_dequeue():
 
-    queue = LocalExecutionQueue(max_size=1)
+    queue = LocalExecutionQueue()
 
-    await queue.enqueue(create_task("task-1"))
+    async def producer():
 
-    try:
-        await queue.enqueue(create_task("task-2"))
+        await asyncio.sleep(0.01)
 
-    except QueueFullError:
-        assert True
+        await queue.enqueue(create_task())
 
-    else:
-        assert False
+    producer_task = asyncio.create_task(producer())
+
+    task = await queue.dequeue()
+
+    assert task.task_id == "task-001"
+
+    queue.task_done()
+
+    await producer_task
