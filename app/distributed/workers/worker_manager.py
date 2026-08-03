@@ -10,6 +10,7 @@ import asyncio
 from contextlib import suppress
 
 from .worker import Worker
+from app.observability.metrics import RuntimeMetrics
 
 
 class WorkerManager:
@@ -17,11 +18,16 @@ class WorkerManager:
     Supervises worker lifecycle.
     """
 
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        metrics: RuntimeMetrics | None = None,
+    ) -> None:
 
         self._workers: dict[str, Worker] = {}
 
         self._tasks: dict[str, asyncio.Task[None]] = {}
+
+        self._metrics = metrics
 
     def add_worker(
         self,
@@ -75,6 +81,10 @@ class WorkerManager:
 
         self._tasks[worker_id] = task
 
+        if self._metrics:
+
+            self._metrics.set_active_workers(self.running_workers())
+
         await asyncio.sleep(0)
 
     async def start_all(
@@ -105,6 +115,10 @@ class WorkerManager:
             )
 
         self._tasks.pop(worker_id, None)
+
+        if self._metrics:
+
+            self._metrics.set_active_workers(self.running_workers())
 
     async def stop_all(
         self,

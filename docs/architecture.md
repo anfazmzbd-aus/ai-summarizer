@@ -2952,3 +2952,106 @@ New capabilities should avoid modifying:
 - ExecutionGraph
 - ExecutionEngine
 - Core runtime lifecycle
+
+** The core evolution: **
+V7.9 Runtime
+
+                Execution Engine
+                      |
+              Execution Graph
+                      |
+        --------------------------------
+        |              |              |
+      Agent          Agent          Agent
+      Local          Local          Local
+
+** V7.9 Execution Flow **
+Request
+ ↓
+Intent Classifier
+ ↓
+Strategy Selector
+ ↓
+ExecutionGraph Builder
+ ↓
+Execution Engine
+ ↓
+Node Executor
+ ↓
+Agent Registry
+ ↓
+Result
+
+** V8.0 Distributed Flow **
+API Request
+        |
+        v
+Runtime Coordinator
+        |
+        v
+ExecutionGraph
+        |
+        v
+Distributed Scheduler
+        |
+        v
+Task Queue
+        |
+        |
+ -------------------------
+ |          |            |
+ v          v            v
+Worker A  Worker B   Worker C
+ |          |            |
+Agent     Agent       Agent
+ |          |            |
+    Result Messages
+            |
+    Runtime Aggregator
+            |
+    Final Response
+
+
+V8.0 Distributed Runtime
+
+                 Runtime Coordinator
+                         |
+                 Distributed Scheduler
+                         |
+              Execution Queue / Broker
+                         |
+        ------------------------------------
+        |                 |                |
+    Worker-01          Worker-02        Worker-N
+        |                 |                |
+     Agents            Agents           Agents
+
+## V8.0 Phase 1 — Distributed Runtime Foundation
+
+# Implementation Sequence
+
+Phase 1.1: Distributed Runtime Contracts
+Phase 1.2: Execution Queue Abstraction
+Phase 1.3: Worker Runtime
+Phase 1.4: Runtime Coordinator & Task Dispatcher
+Phase 1.5: Distributed Retry & Recovery
+Phase 1.6: Remote Execution Adapters
+
+
+## V8.0 Phase 2 — Enterprise Observability
+
+#Current architecture:
+Distributed Runtime
+        |
+        |
+        v
+RuntimeMetrics
+        |
+        v
+MetricsRegistry
+        |
+        +----------------+
+        |                |
+        v                v
+ OpenTelemetry       Prometheus
+ (completed)         (next)

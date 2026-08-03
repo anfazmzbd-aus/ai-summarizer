@@ -16,6 +16,7 @@ from .exceptions import (
     QueueFullError,
 )
 from .queue_interface import ExecutionQueue
+from app.observability.metrics import RuntimeMetrics
 
 
 class LocalExecutionQueue(ExecutionQueue):
@@ -25,12 +26,15 @@ class LocalExecutionQueue(ExecutionQueue):
 
     def __init__(
         self,
-        max_size: int = 0,
+        max_size: int | None = None,
+        metrics: RuntimeMetrics | None = None,
     ) -> None:
 
-        self._queue: asyncio.Queue[TaskEnvelope] = asyncio.Queue(maxsize=max_size)
+        self._queue: asyncio.Queue[TaskEnvelope] = asyncio.Queue(maxsize=max_size or 0)
 
         self._closed = False
+
+        self._metrics = metrics
 
     async def enqueue(
         self,
@@ -42,7 +46,8 @@ class LocalExecutionQueue(ExecutionQueue):
 
         try:
             await self._queue.put(task)
-
+            if self._metrics:
+                self._metrics.set_queue_depth(self.size())
         except asyncio.QueueFull as exc:
             raise QueueFullError("Execution queue is full.") from exc
 
@@ -54,8 +59,10 @@ class LocalExecutionQueue(ExecutionQueue):
             raise QueueEmptyError("Queue has been closed.")
 
         try:
-            return await self._queue.get()
-
+            task = await self._queue.get()
+            if self._metrics:
+                self._metrics.set_queue_depth(self.size())
+            return task
         except asyncio.CancelledError:
             raise
 
@@ -83,6 +90,8 @@ class LocalExecutionQueue(ExecutionQueue):
 
             except asyncio.QueueEmpty:
                 break
+        if self._metrics:
+            self._metrics.set_queue_depth(0)
 
     def close(
         self,

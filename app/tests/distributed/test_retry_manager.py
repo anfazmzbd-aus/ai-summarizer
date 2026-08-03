@@ -7,6 +7,7 @@ from app.distributed.recovery import (
     RetryManager,
     RetryPolicy,
 )
+from app.observability.metrics import RuntimeMetrics
 
 
 def create_task():
@@ -23,14 +24,15 @@ def create_task():
 async def test_retry_success():
 
     queue = LocalExecutionQueue()
-
+    metrics: RuntimeMetrics | None = None
     manager = RetryManager(
         queue=queue,
         policy=RetryPolicy(
-            max_attempts=3,
+            max_attempts=2,
             backoff_seconds=0,
         ),
         dead_letter_queue=DeadLetterQueue(),
+        metrics=metrics,
     )
 
     task = create_task()

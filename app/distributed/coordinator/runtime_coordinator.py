@@ -16,6 +16,7 @@ from .result_collector import (
     ResultCollector,
 )
 from .task_dispatcher import TaskDispatcher
+from app.observability.metrics import RuntimeMetrics
 
 
 class RuntimeCoordinator:
@@ -36,12 +37,13 @@ class RuntimeCoordinator:
         dispatcher: TaskDispatcher,
         collector: ResultCollector,
         worker_manager: WorkerManager,
+        metrics: RuntimeMetrics | None = None,
     ) -> None:
 
         self._dispatcher = dispatcher
         self._collector = collector
         self._worker_manager = worker_manager
-
+        self._metrics = metrics
         self._started = False
 
     async def start(self) -> None:
@@ -66,6 +68,10 @@ class RuntimeCoordinator:
         self,
         task: TaskEnvelope,
     ) -> None:
+
+        if self._metrics:
+
+            self._metrics.task_submitted()
 
         await self._dispatcher.dispatch(task)
 

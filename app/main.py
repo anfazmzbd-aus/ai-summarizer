@@ -6,9 +6,13 @@ from app.api.v1.summarize_endpoint import (
     router,
 )
 
+from app.api.metrics import router as metrics_router
+
 from app.api.v1.execution_playground import router as playground_router
 
 app = FastAPI()
+
+app.include_router(metrics_router)
 
 app.include_router(router)
 

@@ -10,6 +10,7 @@ import asyncio
 
 from app.distributed.protocols import TaskEnvelope
 from app.distributed.queue import ExecutionQueue
+from app.observability.metrics import RuntimeMetrics
 
 from .dead_letter_queue import DeadLetterQueue
 from .retry_policy import RetryPolicy
@@ -31,11 +32,13 @@ class RetryManager:
         queue: ExecutionQueue,
         policy: RetryPolicy,
         dead_letter_queue: DeadLetterQueue,
+        metrics: RuntimeMetrics | None = None,
     ) -> None:
 
         self._queue = queue
         self._policy = policy
         self._dead_letter_queue = dead_letter_queue
+        self._metrics = metrics
 
     async def handle_failure(
         self,
@@ -64,10 +67,17 @@ class RetryManager:
 
         await self._queue.enqueue(task)
 
+        if self._metrics:
+
+            self._metrics.retry()
         return True
 
     def dead_letter_count(
         self,
     ) -> int:
+
+        if self._metrics:
+
+            self._metrics.dead_letter()
 
         return self._dead_letter_queue.size()

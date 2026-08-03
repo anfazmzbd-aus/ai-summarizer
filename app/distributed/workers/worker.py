@@ -7,9 +7,10 @@ Production worker runtime.
 from __future__ import annotations
 
 import asyncio
+import time
 
 # from contextlib import suppress
-from datetime import datetime, timezone
+# from datetime import datetime, timezone
 from typing import Any
 
 from app.distributed.protocols import TaskEnvelope
@@ -17,6 +18,7 @@ from app.distributed.queue import (
     ExecutionQueue,
     QueueEmptyError,
 )
+from app.observability.metrics import RuntimeMetrics
 
 from .heartbeat import Heartbeat
 from .worker_metrics import WorkerMetrics
@@ -36,6 +38,7 @@ class Worker:
         spec: WorkerSpec,
         queue: ExecutionQueue,
         executor: Any,
+        metrics: RuntimeMetrics | None = None,
     ) -> None:
 
         self.spec = spec
@@ -44,11 +47,13 @@ class Worker:
 
         self.executor = executor
 
-        self.metrics = WorkerMetrics()
-
         self._running = False
 
         self._shutdown = asyncio.Event()
+
+        self._metrics = metrics
+
+        self.metrics = WorkerMetrics()
 
     @property
     def running(self) -> bool:
@@ -103,7 +108,8 @@ class Worker:
         task: TaskEnvelope,
     ) -> None:
 
-        start = datetime.now(timezone.utc)
+        # start = datetime.now(timezone.utc)
+        start = time.perf_counter()
 
         self.metrics.record_received()
 
@@ -115,7 +121,11 @@ class Worker:
 
             await self.executor.execute(task)
 
-            elapsed = (datetime.now(timezone.utc) - start).total_seconds()
+            elapsed = (time.perf_counter() - start) * 1000
+
+            if self._metrics:
+
+                self._metrics.task_completed(elapsed)
 
             self.metrics.record_completed(elapsed)
 
@@ -126,7 +136,9 @@ class Worker:
         except Exception:
 
             self.metrics.record_failed()
+            if self._metrics:
 
+                self._metrics.task_failed()
             raise
 
         finally:
