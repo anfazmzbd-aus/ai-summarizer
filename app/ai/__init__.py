@@ -33,6 +33,15 @@ from .summarization import (
     SummarizationConfig,
     SummarizationService,
 )
+from .providers import (
+    ProviderConfig,
+    ProviderType,
+    ProviderFactory,
+)
+from .providers import (
+    OpenAIConfig,
+    OpenAIProvider,
+)
 
 __all__ = [
     "AIRequest",
@@ -60,4 +69,9 @@ __all__ = [
     "SummarizationResponse",
     "SummarizationConfig",
     "SummarizationService",
+    "ProviderConfig",
+    "ProviderType",
+    "ProviderFactory",
+    "OpenAIConfig",
+    "OpenAIProvider",
 ]

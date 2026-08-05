@@ -20,4 +20,4 @@ app.include_router(router)
 
 app.include_router(playground_router, prefix="/playground", tags=["playground"])
 
-app.include_router(ai_router, prefix="/api/v1", tags=["AI"])
+app.include_router(ai_router)

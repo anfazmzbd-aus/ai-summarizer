@@ -18,6 +18,12 @@ from app.ai import (
     SummarizationService,
 )
 
+from app.ai import (
+    OpenAIConfig,
+    OpenAIProvider,
+)
+from app.config.ai_settings import AISettings
+
 
 class FakeProvider(AIProvider):
 
@@ -51,8 +57,25 @@ def build_summarization_service() -> SummarizationService:
         )
     )
 
+    settings = AISettings()
     providers = AIProviderRegistry()
-    providers.register(FakeProvider())
+
+    if settings.provider.lower() == "openai":
+
+        providers.register(
+            OpenAIProvider(
+                OpenAIConfig(
+                    api_key=settings.api_key,
+                    model=settings.model,
+                    base_url=settings.base_url,
+                    organization=settings.organization,
+                )
+            )
+        )
+
+    else:
+
+        providers.register(FakeProvider())
 
     runtime = AIRuntimeService(
         PromptEngine(
