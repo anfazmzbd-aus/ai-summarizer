@@ -1447,3 +1447,31 @@ Potential focus:
 ---
 
 End of V7.9.0
+
+## v8.0.0
+
+Major Features
+
+• Distributed Runtime
+• Worker Management
+• Retry Manager
+• Runtime Coordinator
+• Metrics
+• Prometheus Exporter
+• Policy Engine
+• Plugin Framework
+• Memory Store
+• Vector Search
+• AI Runtime
+• Prompt Engine
+• LLM Client
+• Provider Registry
+• FastAPI AI Endpoint
+
+Testing
+
+458 passing tests
+
+Stability
+
+Production Ready

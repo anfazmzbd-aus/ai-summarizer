@@ -3055,3 +3055,45 @@ MetricsRegistry
         v                v
  OpenTelemetry       Prometheus
  (completed)         (next)
+
+# V8.0.0
+# Architecture Specification V8.0.0
+## System Flow Diagram
+The high-level execution flow is strictly decoupled between the request, orchestration, and AI layers:
+Client 
+ ↓ 
+ FastAPI (Route Layer)
+ ↓ 
+ Runtime (RuntimeManager & Session)
+ ↓ 
+ Prompt Engine (Template Renderer)
+ ↓ 
+ LLM Client (Adapter Layer)
+ ↓ 
+ Provider Registry (Selector)
+ ↓ 
+ Providers (OpenAI, Ollama, Mock)
+ ↓ 
+ Response (Validated Artifacts)
+
+** Distributed Runtime **
+Orchestration is managed by a RuntimeCoordinator that dispatches tasks to distributed workers using an internal execution queue
+.
+** Worker lifecycle **
+Managed via WorkerManager, each worker undergoes a formal lifecycle: STARTING → RUNNING → STOPPING → SHUTDOWN
+.
+** Plugin lifecycle **
+Third-party extensions are managed through a dedicated plugin registry that enforces version compatibility and handles dynamic activation/deactivation during runtime
+.
+** Memory subsystem **
+The memory layer provides persistent intelligence through episodic (past executions) and semantic (knowledge) storage, enabling context-aware agents
+.
+** Metrics **
+Telemetry is unified through an Event Bus architecture. Runtime components emit lifecycle events which are aggregated into metrics by dedicated subscribers
+.
+** Policies **
+The Runtime Policy Engine provides admission control through three primary layers
+:
+Quota Policy: Resource limits per execution.
+Resource Policy: Utilization-aware throttling.
+Security Policy: Authorization and origin validation.

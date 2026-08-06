@@ -123,3 +123,14 @@ GET /runtime
 
 
 # error responses
+
+====================
+## V8.0.0
+
+POST /api/v1/summarize
+
+GET /metrics
+
+GET /docs
+
+GET /openapi.json

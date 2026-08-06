@@ -851,3 +851,65 @@ pre-commit run --all-files
 
 Add the appropriate license information for this repository.
 
+# V8.0.0
+# AI Summarizer — Distributed Agent Runtime Platform
+## Architecture overview
+AI Summarizer V8.0.0 is an Agentic AI Workflow Engine designed for enterprise-grade distributed document processing
+. The system has evolved from a deterministic DAG engine (V7.7) into a fully managed distributed platform where specialized AI agents execute across a cluster of workers coordinated by a centralized runtime
+
+## Installation
+Environment: Requires Python 3.11+
+
+## Configuration
+Pre-commit Hooks:
+Configuration
+Configuration is managed via a .env file at the root.
+Provider Selection: Set AI_PROVIDER to openai, ollama, or fake
+
+API Keys: Configure OPENAI_API_KEY for live model access
+
+Runtime settings: Customize MAX_WORKERS and RETRY_COUNT in RuntimeConfig
+
+## FastAPI endpoints
+POST /api/v1/summarize: Main entry point for AI-powered document summarization
+
+GET /metrics: Prometheus-compatible endpoint for real-time monitoring
+
+GET /history: View historical execution results and metadata
+
+POST /playground/execute: Debugging endpoint for inspecting execution graphs and traces
+
+## AI Provider support
+The platform features a provider-neutral abstraction layer
+ Current support includes:
+OpenAI: Standard API and Azure OpenAI compatibility
+
+Local Models: Integration with Ollama and other local inference servers
+
+Mock Provider: Deterministic testing for CI/CD environments
+
+## Metrics endpoint
+The /metrics endpoint exposes live operational telemetry including queue depth, active worker counts, and per-agent execution latency, fully integrated with a Prometheus Metrics Exporter
+
+## Plugin system
+The Plugin SDK allows third-party developers to extend the platform with new agents, tools, and execution strategies without modifying the core runtime
+ It handles dynamic discovery, lifecycle management, and version compatibility
+
+## Memory subsystem
+Features a sophisticated multi-layered memory architecture
+
+Scoped Memory: Namespaces for global, tenant, and per-execution state.
+Vector Store: Abstracted interface for semantic search and RAG pipelines
+
+Retrieval Pipeline: Context-aware retrieval building for agent prompting
+
+## Worker runtime
+The worker is the atomic execution node. It hosts a full V7.9 runtime instance, receiving tasks from a central queue and reporting heartbeat and health metrics to the coordinator
+
+## Development workflow
+The project follows a strict RFC-driven engineering process
+
+1. Architecture Review: Impact audit and interface specification.
+2. Implementation: Complete, production-ready code with strong typing.
+3. Testing: Mandatory unit and regression tests (Pytest).
+4. Integration: Validation against the frozen V7.7 execution kernel.
