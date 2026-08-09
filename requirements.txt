@@ -7,7 +7,7 @@ sqlalchemy==2.0.42
 pypdf==5.9.0
 python-multipart==0.0.20
 python-dotenv
-openai
+openai>=2.0.0
 alembic
 sentencepiece
 anyio==4.13.0

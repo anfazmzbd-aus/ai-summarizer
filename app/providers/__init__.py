@@ -18,6 +18,17 @@ from .models import (
 )
 from .mock_provider import MockProvider
 from .registry import ProviderRegistry
+from .capabilities import ProviderCapabilities
+from .provider_info import ProviderInfo
+from .request_builder import LLMRequestBuilder
+from .response_parser import ResponseParser
+from .openai import (
+    OpenAIAdapter,
+    OpenAIClient,
+    OpenAIConfig,
+    OpenAIProvider,
+)
+from .runtime import ProviderRuntime
 
 __all__ = [
     "BaseProvider",
@@ -34,4 +45,13 @@ __all__ = [
     "Usage",
     "MockProvider",
     "ProviderRegistry",
+    "ProviderCapabilities",
+    "ProviderInfo",
+    "LLMRequestBuilder",
+    "ResponseParser",
+    "OpenAIAdapter",
+    "OpenAIClient",
+    "OpenAIConfig",
+    "OpenAIProvider",
+    "ProviderRuntime",
 ]
