@@ -6,6 +6,8 @@ from app.prompts.value_objects import (
     PromptVersion,
 )
 
+from app.orchestration.agents.summary import SummaryAgent
+
 
 def test_registry_preserves_v8_default_behavior():
     registry = AgentRegistry()
@@ -29,7 +31,12 @@ def test_registry_accepts_v9_runtime_dependencies():
 
     agent = registry.get("summary").agent
 
-    assert agent is not None
+    assert isinstance(agent, SummaryAgent)
+    assert agent._prompt_manager is prompt_manager
+    assert agent._llm_service is llm_service
+    assert agent._prompt_id == PromptId("summary")
+    assert agent._prompt_version == PromptVersion(1, 0, 0)
+    assert agent._model == "mock-model"
 
 
 def test_registry_injects_prompt_manager():

@@ -435,3 +435,58 @@ Agent ──────────────┼── LLMService
                     └── ProviderRuntime
                              ↓
                          Provider
+
+
+Package 3B
+
+                 APPLICATION COMPOSITION ROOT
+                           │
+             ┌─────────────┴─────────────┐
+             │                           │
+       PromptRepository            ProviderFactory
+             │                           │
+       PromptRegistry              ProviderConfig
+             │                           │
+       PromptManager                LLMService
+             │                           │
+             └──────────────┬────────────┘
+                            │
+                     AgentRegistry
+                            │
+                       SummaryAgent
+                            │
+                     RuntimeManager
+                            │
+                    ExecutionEngine
+
+Package 3B implementation
+ProviderRuntime
+      │
+      └── LLMService
+             │
+PromptManager ─┤
+               ▼
+        AgentRegistry
+               │
+               ▼
+          SummaryAgent
+               │
+               ▼
+        ExecutionEngine
+               │
+               ▼
+          RuntimeManager
+
+**  After Package 3C  **
+V9.0
+ ├─ Package 1  Provider foundation       ✅
+ ├─ Package 2  Agent/runtime integration ✅
+ ├─ Package 3B Runtime wiring            ✅ 559
+ ├─ Package 3C Prompt bootstrap          ← NEXT
+ ├─ Package 3D Deterministic E2E
+ └─ V9.1 Live Provider Validation
+       ├─ Mock endpoint
+       ├─ OpenAI API
+       ├─ Error handling
+       ├─ token/usage validation
+       └─ real /api/v1/summarize
