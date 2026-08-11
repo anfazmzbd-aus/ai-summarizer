@@ -3,8 +3,8 @@ AI Summarizer V9.x
 
 Application-level summarization service.
 
-The service owns runtime composition for a summarization request while
-preserving the existing V8 execution pipeline.
+Owns the default V9 runtime composition while preserving
+the existing V8 execution pipeline.
 """
 
 from __future__ import annotations
@@ -15,8 +15,20 @@ from app.orchestration.registry.agent_registry import AgentRegistry
 from app.orchestration.registry.contract_manager import ContractManager
 from app.orchestration.scheduler.scheduler import Scheduler
 from app.orchestration.state.state_builder import StateBuilder
+from app.prompts.bootstrap import register_prompt
 from app.prompts.manager import PromptManager
+from app.prompts.repository import InMemoryPromptRepository
+from app.prompts.registry import PromptRegistry
+from app.prompts.templates.summary import (
+    SUMMARY_PROMPT_ID,
+    SUMMARY_PROMPT_VERSION,
+    build_summary_prompt,
+)
 from app.prompts.value_objects import PromptId, PromptVersion
+from app.providers.config import ProviderType
+from app.providers.factory import ProviderFactory
+from app.providers.mock_provider import MockProvider
+from app.providers.runtime import ProviderRuntime
 from app.runtime.runtime_manager import RuntimeManager
 from app.services.llm_service import LLMService
 
@@ -25,13 +37,24 @@ class SummarizeService:
     """
     Application service for document summarization.
 
-    V8 compatibility:
-        If no V9 dependencies are supplied, AgentRegistry retains its
-        legacy-compatible behavior.
+    Default V9 runtime:
 
-    V9 runtime:
-        PromptManager and LLMService are injected into AgentRegistry so
-        SummaryAgent can execute through the provider runtime.
+        PromptRepository
+            ↓
+        PromptRegistry
+            ↓
+        PromptManager
+            ↓
+        SummaryAgent
+            ↓
+        LLMService
+            ↓
+        MockProvider
+
+    The default provider remains deterministic and offline.
+
+    Explicitly injected LLM services are preserved for tests,
+    integration scenarios, and future production configuration.
     """
 
     def __init__(
@@ -42,18 +65,45 @@ class SummarizeService:
         prompt_version: PromptVersion | None = None,
         model: str | None = None,
     ) -> None:
+        if llm_service is None:
+            factory = ProviderFactory()
+
+            factory.register(
+                ProviderType.MOCK,
+                MockProvider,
+            )
+
+            provider_runtime = ProviderRuntime.mock(
+                factory,
+                model=model or "mock-model",
+            )
+
+            llm_service = provider_runtime.service
+
+        if prompt_manager is None:
+            repository = InMemoryPromptRepository()
+
+            register_prompt(
+                repository,
+                build_summary_prompt(),
+            )
+
+            prompt_manager = PromptManager(
+                PromptRegistry(repository),
+            )
+
         self._llm_service = llm_service
         self._prompt_manager = prompt_manager
-        self._prompt_id = prompt_id
-        self._prompt_version = prompt_version
-        self._model = model
+        self._prompt_id = prompt_id or SUMMARY_PROMPT_ID
+        self._prompt_version = prompt_version or SUMMARY_PROMPT_VERSION
+        self._model = model or "mock-model"
 
     def run(
         self,
         text: str,
     ):
         """
-        Execute a complete summarization runtime cycle.
+        Execute a complete V9 summarization runtime cycle.
         """
 
         registry = AgentRegistry(
@@ -81,10 +131,9 @@ class SummarizeService:
             execution_engine=engine,
         )
 
-        services = {}
-
-        if self._llm_service is not None:
-            services["llm_service"] = self._llm_service
+        services = {
+            "llm_service": self._llm_service,
+        }
 
         state = StateBuilder.build(
             text,
@@ -97,7 +146,7 @@ class SummarizeService:
             state=state,
         )
 
-        return ResponseBuilder.build(
+        response = ResponseBuilder.build(
             state=execution.state,
             trace=getattr(
                 engine,
@@ -110,3 +159,5 @@ class SummarizeService:
                 None,
             ),
         )
+
+        return response

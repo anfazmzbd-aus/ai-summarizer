@@ -490,3 +490,231 @@ V9.0
        ├─ Error handling
        ├─ token/usage validation
        └─ real /api/v1/summarize
+
+** V9.x current baseline **
+| Package         | Status                          |
+| --------------- | ------------------------------- |
+| Package 1       | ✅ Complete                      |
+| Package 2       | ✅ Complete                      |
+| Package 3A      | ✅ Complete                      |
+| Package 3B      | ✅ Complete                      |
+| Package 3C      | ✅ Complete                      |
+| **Package 3D**  | 🟢 Current implementation green |
+| Full regression | **566 passed**                  |
+
+
+
+** V9 AI execution inside that envelope **
+POST /playground/execute
+          │
+          ▼
+   SummarizeService
+          │
+          ▼
+    RuntimeManager
+          │
+          ▼
+   ExecutionEngine
+          │
+          ▼
+     SummaryAgent
+          │
+          ▼
+    PromptManager
+          │
+          ▼
+      LLMService
+          │
+          ▼
+     MockProvider
+          │
+          ▼
+   ExecutionResponse
+          │
+          ├── result.summary
+          ├── node_outputs
+          ├── trace
+          ├── metrics
+          └── metadata
+
+Package 3D now establishes:
+SummarizeService()
+    │
+    ├── PromptRepository
+    ├── PromptRegistry
+    ├── PromptManager
+    │
+    └── ProviderRuntime
+            │
+            ├── LLMService
+            └── MockProvider
+
+V9.0 Package 3D
+Deterministic V9 E2E
+        │
+        ▼
+V9.1
+├── Mock endpoint validation
+├── OpenAI API validation
+├── Provider error handling
+├── Token / usage validation
+└── Real /api/v1/summarize
+
+API
+ ↓
+SummarizeService
+ ↓
+RuntimeManager
+ ↓
+ExecutionEngine
+ ↓
+SummaryAgent
+ ↓
+PromptManager
+ ↓
+LLMService
+ ↓
+MockProvider
+ ↓
+ExecutionResponse
+
+** Package 3D completion scope **
+
+I would treat 3D as complete only when all of these are green:
+
+1. Deterministic V9 service execution
+   * SummarizeService() uses the V9 runtime.
+   * Default provider is MockProvider.
+   * No V8 summary fallback.
+2. Prompt → Agent → LLMService path
+    * Summary prompt is resolved and rendered.
+    * SummaryAgent executes through LLMService.
+    * Mock response reaches the final result.
+3. Execution response contract
+    * ExecutionResponse is returned consistently.
+    * execution_id is populated.
+    * status is correct.
+    * result contains the summary.
+    * node_outputs contains the agent output.
+    * trace/metrics remain compatible with the existing runtime.
+4. API boundary
+    * /playground/execute returns the complete ExecutionResponse.
+    * FastAPI response validation passes.
+5. Regression protection
+    * Add focused tests for the above contracts.
+    * Preserve all existing V8/V9 tests.
+    * No architectural redesign.
+6. Final verification
+    * pytest
+
+Package 3D
+Deterministic V9 End-to-End
+MockProvider
+        ↓
+V9.1
+Live Provider Validation
+        ↓
+OpenAI API
+Error handling
+Usage/token validation
+Real /api/v1/summarize
+
+** Package 3D completion target **
+SummarizeService
+      ↓
+RuntimeManager
+      ↓
+ExecutionEngine
+      ↓
+SummaryAgent
+      ↓
+PromptManager
+      ↓
+LLMService
+      ↓
+MockProvider
+      ↓
+ExecutionResponse
+      ↓
+/playground/execute
+
+** Correct 3D change **
+HTTP request
+    ↓
+FastAPI
+    ↓
+SummarizeService
+    ↓
+RuntimeManager
+    ↓
+ExecutionEngine
+    ↓
+SummaryAgent
+    ↓
+PromptManager
+    ↓
+LLMService
+    ↓
+MockProvider
+    ↓
+State
+    ↓
+ResponseBuilder
+    ↓
+ExecutionResponse
+    ↓
+HTTP response
+
+** Package 3D — COMPLETE ✅ **
+HTTP
+ ↓
+FastAPI
+ ↓
+SummarizeService
+ ↓
+RuntimeManager
+ ↓
+ExecutionEngine
+ ↓
+SummaryAgent
+ ↓
+PromptManager
+ ↓
+LLMService
+ ↓
+MockProvider
+ ↓
+ExecutionResponse
+ ↓
+HTTP response
+
+** V9.0 status **
+Package	Status
+Package 1	✅ Complete
+Package 2	✅ Complete
+Package 3A	✅ Complete
+Package 3B	✅ Complete
+Package 3C	✅ Complete
+Package 3D	✅ Complete
+
+** Next Phase **
+V9.0
+Package 3D
+Deterministic E2E
+        │
+        ▼
+V9.1 Live Provider Validation
+        │
+        ├── Mock endpoint
+        ├── OpenAI API
+        ├── Provider error handling
+        ├── Token / usage validation
+        └── Real /api/v1/summarize
+
+
+
+
+
+
+
+

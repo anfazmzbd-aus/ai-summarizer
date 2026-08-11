@@ -23,11 +23,13 @@ def test_summarize_service_accepts_v9_runtime_dependencies():
     assert service._model == "mock-model"
 
 
-def test_summarize_service_preserves_legacy_construction():
+def test_summarize_service_uses_default_v9_runtime():
     service = SummarizeService()
 
-    assert service._llm_service is None
-    assert service._prompt_manager is None
-    assert service._prompt_id is None
-    assert service._prompt_version is None
-    assert service._model is None
+    assert service._llm_service is not None
+    assert service._prompt_manager is not None
+    assert service._prompt_id == PromptId("summary")
+    assert service._prompt_version == PromptVersion(1, 0, 0)
+    assert service._model == "mock-model"
+
+    assert service._llm_service.provider_name == "mock"
