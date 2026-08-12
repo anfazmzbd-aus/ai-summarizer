@@ -16,6 +16,7 @@ from app.providers.config import (
     ProviderType,
 )
 from app.providers.factory import ProviderFactory
+from app.providers.mock_provider import MockProvider
 
 if TYPE_CHECKING:
     from app.services.llm_service import LLMService
@@ -25,19 +26,9 @@ class ProviderRuntime:
     """
     Composes the configured provider and LLM service.
 
-    ProviderRuntime is the composition boundary between:
-
-        ProviderConfig
-            ↓
-        ProviderFactory
-            ↓
-        Provider
-            ↓
-        LLMService
-
     The LLMService import is intentionally deferred until runtime
     construction to avoid coupling the provider package's import
-    path to the service/orchestration initialization path.
+    path to the legacy service/orchestration package initialization.
     """
 
     def __init__(
@@ -83,8 +74,6 @@ class ProviderRuntime:
         Construct a runtime configured for MockProvider.
         """
 
-        from app.providers.mock_provider import MockProvider
-
         if ProviderType.MOCK not in factory.supported_providers():
             factory.register(
                 ProviderType.MOCK,
@@ -121,11 +110,11 @@ class ProviderRuntime:
         if not api_key.strip():
             raise ValueError("OpenAI API key cannot be empty.")
 
-        from app.providers.openai.provider import (
-            create_openai_provider,
-        )
-
         if ProviderType.OPENAI not in factory.supported_providers():
+            from app.providers.openai.provider import (
+                create_openai_provider,
+            )
+
             factory.register(
                 ProviderType.OPENAI,
                 create_openai_provider,
@@ -142,4 +131,51 @@ class ProviderRuntime:
                 timeout=timeout,
                 max_retries=max_retries,
             ),
+        )
+
+    @classmethod
+    def from_settings(
+        cls,
+        settings,
+        *,
+        factory: ProviderFactory | None = None,
+    ) -> "ProviderRuntime":
+        """
+        Construct a provider runtime from application settings.
+
+        Existing explicit runtime constructors remain supported.
+        """
+
+        factory = factory or ProviderFactory()
+
+        if settings.provider is ProviderType.MOCK:
+            return cls.mock(
+                factory,
+                model=settings.model,
+            )
+
+        if settings.provider is ProviderType.OPENAI:
+            return cls.openai(
+                factory,
+                api_key=settings.api_key or "",
+                model=settings.model,
+                organization=settings.organization,
+                endpoint=settings.endpoint,
+                timeout=settings.timeout,
+                max_retries=settings.max_retries,
+            )
+
+        config = ProviderConfig(
+            provider=settings.provider,
+            model=settings.model,
+            api_key=settings.api_key,
+            endpoint=settings.endpoint,
+            organization=settings.organization,
+            timeout=settings.timeout,
+            max_retries=settings.max_retries,
+        )
+
+        return cls(
+            factory,
+            config,
         )

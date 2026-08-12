@@ -17,6 +17,7 @@ class ProviderType(str, Enum):
     AZURE_OPENAI = "azure_openai"
     OLLAMA = "ollama"
     MOCK = "mock"
+    OPENROUTER = "openrouter"
 
 
 @dataclass(slots=True, frozen=True)
