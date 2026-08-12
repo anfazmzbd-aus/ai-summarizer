@@ -1,4 +1,7 @@
 [tool.pytest.ini_options]
+markers = [
+    "integration: tests requiring external providers or network access",
+]
 
 pythonpath = [
 "."

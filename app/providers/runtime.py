@@ -25,9 +25,19 @@ class ProviderRuntime:
     """
     Composes the configured provider and LLM service.
 
+    ProviderRuntime is the composition boundary between:
+
+        ProviderConfig
+            ↓
+        ProviderFactory
+            ↓
+        Provider
+            ↓
+        LLMService
+
     The LLMService import is intentionally deferred until runtime
     construction to avoid coupling the provider package's import
-    path to the legacy service/orchestration package initialization.
+    path to the service/orchestration initialization path.
     """
 
     def __init__(
@@ -73,10 +83,63 @@ class ProviderRuntime:
         Construct a runtime configured for MockProvider.
         """
 
+        from app.providers.mock_provider import MockProvider
+
+        if ProviderType.MOCK not in factory.supported_providers():
+            factory.register(
+                ProviderType.MOCK,
+                MockProvider,
+            )
+
         return cls(
             factory,
             ProviderConfig(
                 provider=ProviderType.MOCK,
                 model=model,
+            ),
+        )
+
+    @classmethod
+    def openai(
+        cls,
+        factory: ProviderFactory,
+        *,
+        api_key: str,
+        model: str = "gpt-5",
+        organization: str | None = None,
+        endpoint: str | None = None,
+        timeout: float = 60.0,
+        max_retries: int = 2,
+    ) -> "ProviderRuntime":
+        """
+        Construct a runtime configured for OpenAI.
+
+        The OpenAI provider is registered lazily so importing the
+        generic provider runtime does not force OpenAI SDK setup.
+        """
+
+        if not api_key.strip():
+            raise ValueError("OpenAI API key cannot be empty.")
+
+        from app.providers.openai.provider import (
+            create_openai_provider,
+        )
+
+        if ProviderType.OPENAI not in factory.supported_providers():
+            factory.register(
+                ProviderType.OPENAI,
+                create_openai_provider,
+            )
+
+        return cls(
+            factory,
+            ProviderConfig(
+                provider=ProviderType.OPENAI,
+                model=model,
+                api_key=api_key,
+                organization=organization,
+                endpoint=endpoint,
+                timeout=timeout,
+                max_retries=max_retries,
             ),
         )

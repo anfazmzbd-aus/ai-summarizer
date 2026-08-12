@@ -711,10 +711,109 @@ V9.1 Live Provider Validation
         ├── Token / usage validation
         └── Real /api/v1/summarize
 
+**V9.1 Milestone 1: Provider validation boundary**
+/api/v1/summarize
+        ↓
+SummarizeService
+        ↓
+V9 Runtime
+        ↓
+SummaryAgent
+        ↓
+LLMService
+        ↓
+ProviderFactory
+        ↓
+┌─────────────────────┐
+│ MockProvider        │ ← deterministic CI path
+│ OpenAIProvider      │ ← live validation path
+└─────────────────────┘
 
+**project state**
+V9.0
+│
+├── Package 1   Provider foundation                 ✅
+├── Package 2   Agent/runtime integration           ✅
+│
+├── Package 3A  State capability channel            ✅
+├── Package 3B  Service construction/config         ✅
+├── Package 3C  Agent consumes LLMService           ✅
+└── Package 3D  Deterministic E2E                   ✅ FROZEN
+                                                     │
+                                                     ▼
+V9.1
+└── Live Provider Validation
+    ├── Mock endpoint
+    ├── OpenAI API
+    ├── Provider error handling
+    ├── Token / usage validation
+    └── Real /api/v1/summarize
 
+V9.1 should build on the exact architecture already established:
+/api/v1/summarize
+        ↓
+SummarizeService
+        ↓
+RuntimeManager
+        ↓
+ExecutionEngine
+        ↓
+SummaryAgent
+        ↓
+PromptManager
+        ↓
+LLMService
+        ↓
+ProviderRuntime
+        ↓
+OpenAI Provider
+        ↓
+real OpenAI API
 
+**V9.1 next package**
+V9.1 Live Provider Validation
+        │
+        ├── 1. OpenAI adapter normalization      ✅
+        ├── 2. Provider/runtime composition      ✅
+        ├── 3. Real API integration test         ← NEXT
+        ├── 4. Error handling validation
+        ├── 5. Token/usage validation
+        └── 6. Real /api/v1/summarize validation
 
+V9.1 API-level live validation
+
+We have validated:
+
+Provider construction ✅
+Real external LLM execution ✅
+Real response normalization ✅
+Real token usage ✅
+Real latency ✅
+Full regression ✅
+
+actual application path
+POST /api/v1/summarize
+        │
+        ▼
+SummarizeService
+        │
+        ▼
+V9 Runtime
+        │
+        ▼
+SummaryAgent
+        │
+        ▼
+LLMService
+        │
+        ▼
+OpenAIProvider
+        │
+        ▼
+OpenRouter
+        │
+        ▼
+Real LLM response
 
 
 

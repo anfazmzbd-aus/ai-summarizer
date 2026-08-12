@@ -5,6 +5,10 @@ Application-level summarization service.
 
 Owns the default V9 runtime composition while preserving
 the existing V8 execution pipeline.
+
+The default construction remains deterministic and offline.
+Live OpenAI-compatible providers are explicitly composed
+through the existing ProviderRuntime boundary.
 """
 
 from __future__ import annotations
@@ -15,6 +19,7 @@ from app.orchestration.registry.agent_registry import AgentRegistry
 from app.orchestration.registry.contract_manager import ContractManager
 from app.orchestration.scheduler.scheduler import Scheduler
 from app.orchestration.state.state_builder import StateBuilder
+
 from app.prompts.bootstrap import register_prompt
 from app.prompts.manager import PromptManager
 from app.prompts.repository import InMemoryPromptRepository
@@ -25,10 +30,12 @@ from app.prompts.templates.summary import (
     build_summary_prompt,
 )
 from app.prompts.value_objects import PromptId, PromptVersion
+
 from app.providers.config import ProviderType
 from app.providers.factory import ProviderFactory
 from app.providers.mock_provider import MockProvider
 from app.providers.runtime import ProviderRuntime
+
 from app.runtime.runtime_manager import RuntimeManager
 from app.services.llm_service import LLMService
 
@@ -54,7 +61,7 @@ class SummarizeService:
     The default provider remains deterministic and offline.
 
     Explicitly injected LLM services are preserved for tests,
-    integration scenarios, and future production configuration.
+    integration scenarios, and production provider configuration.
     """
 
     def __init__(
@@ -97,6 +104,70 @@ class SummarizeService:
         self._prompt_id = prompt_id or SUMMARY_PROMPT_ID
         self._prompt_version = prompt_version or SUMMARY_PROMPT_VERSION
         self._model = model or "mock-model"
+
+    @classmethod
+    def from_openai(
+        cls,
+        *,
+        api_key: str,
+        model: str = "gpt-5",
+        organization: str | None = None,
+        endpoint: str | None = None,
+        timeout: float = 60.0,
+        max_retries: int = 2,
+    ) -> "SummarizeService":
+        """
+        Construct a summarization service backed by the
+        existing OpenAI-compatible provider runtime.
+
+        This method does not introduce a new service abstraction.
+        It composes the existing ProviderRuntime → LLMService path.
+
+        `endpoint` supports OpenAI-compatible providers such as
+        OpenRouter.
+        """
+
+        factory = ProviderFactory()
+
+        provider_runtime = ProviderRuntime.openai(
+            factory,
+            api_key=api_key,
+            model=model,
+            organization=organization,
+            endpoint=endpoint,
+            timeout=timeout,
+            max_retries=max_retries,
+        )
+
+        return cls(
+            llm_service=provider_runtime.service,
+            model=model,
+        )
+
+    @classmethod
+    def from_openrouter(
+        cls,
+        *,
+        api_key: str,
+        model: str = "openai/gpt-5-mini",
+        endpoint: str = "https://openrouter.ai/api/v1",
+        timeout: float = 60.0,
+        max_retries: int = 2,
+    ) -> "SummarizeService":
+        """
+        Construct a summarization service backed by OpenRouter.
+
+        OpenRouter exposes an OpenAI-compatible API, therefore the
+        existing OpenAI provider implementation is reused.
+        """
+
+        return cls.from_openai(
+            api_key=api_key,
+            model=model,
+            endpoint=endpoint,
+            timeout=timeout,
+            max_retries=max_retries,
+        )
 
     def run(
         self,
@@ -146,7 +217,7 @@ class SummarizeService:
             state=state,
         )
 
-        response = ResponseBuilder.build(
+        return ResponseBuilder.build(
             state=execution.state,
             trace=getattr(
                 engine,
@@ -159,5 +230,3 @@ class SummarizeService:
                 None,
             ),
         )
-
-        return response
