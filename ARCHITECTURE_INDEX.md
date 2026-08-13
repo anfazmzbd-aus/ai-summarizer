@@ -815,5 +815,139 @@ OpenRouter
         ▼
 Real LLM response
 
+**V9.1 frozen scope**
 
+The freeze should preserve the following established contracts:
+    * ProviderSettings
+    * ProviderRuntime.from_settings()
+    * ProviderRuntime.openai()
+    * SummarizeService(provider_settings=...)
+    * SummarizeService.from_environment()
+    * SummarizeService.from_openrouter()
+    * explicit LLMService injection
+    * deterministic MockProvider default
+    * OpenRouter through the OpenAI-compatible provider
+    * ExecutionResponse as the application execution contract
+    * live OpenRouter validation
+    * provider usage and latency capture
+    * OpenAI provider exception classification
 
+pytest: 617 passed
+pre-commit: passed
+git diff --check: passed
+
+## **V9.1 status**
+
+## V9.1 — Live Provider Validation → COMPLETE / FROZEN
+
+The following are now established:
+
+    * Provider configuration and environment settings
+    * Provider runtime composition
+    * MockProvider deterministic runtime
+    * OpenAI-compatible provider path
+    * OpenRouter live execution
+    * Provider error classification
+    * Usage/token normalization
+    * Latency capture
+    * Application-level provider wiring
+    * SummarizeService configuration injection
+    * Environment-based service construction
+    * OpenRouter service construction
+    * Deterministic default behavior
+    * Full ExecutionResponse contract
+    * End-to-end live summarization validation
+    * Regression coverage
+
+617 tests passing is the locked V9.1 baseline.
+
+**Next: V9.2**
+
+The natural next milestone is V9.2 — Advanced Summarization Intelligence:
+
+Long-document handling
+Token-aware chunking
+Hierarchical summarization
+Map-reduce summarization
+Context-preserving aggregation
+Streaming response architecture
+Advanced summarization strategies
+Tests and regression hardening
+
+**V9.2-M1 status**
+V9.1 frozen baseline              617 passed
+V9.2-M1 new tests                  28
+-----------------------------------------
+Current regression                645 passed
+
+** V9.2-M2 — Hierarchical Summarization Core **
+Document
+   ↓
+Chunks
+   ↓
+Chunk summaries
+   ↓
+Grouped summaries
+   ↓
+Final summary
+
+** M2 objective **
+                Document
+                  │
+                  ▼
+            ┌───────────┐
+            │  Chunker  │
+            └─────┬─────┘
+                  │
+        ┌─────────┼─────────┐
+        ▼         ▼         ▼
+    Chunk 0   Chunk 1    Chunk N
+        │         │         │
+        ▼         ▼         ▼
+    Summary 0  Summary 1  Summary N
+        │         │         │
+        └─────────┼─────────┘
+                  ▼
+            Group / Aggregate
+                  │
+                  ▼
+            Higher-level
+            summaries
+                  │
+                  ▼
+            Final Summary
+
+Hierarchical summarization
+Level 0
+Chunks
+ │
+ ▼
+Level 1
+Chunk summaries
+ │
+ ▼
+Level 2
+Grouped summaries
+ │
+ ▼
+Level 3
+Final summary
+
+** Map-Reduce **
+                 Document
+                    │
+                 Chunker
+                    │
+        ┌───────────┼───────────┐
+        ▼           ▼           ▼
+      MAP         MAP         MAP
+        │           │           │
+        ▼           ▼           ▼
+     Summary     Summary     Summary
+        │           │           │
+        └───────────┼───────────┘
+                    │
+                 REDUCE
+                    │
+                    ▼
+               Final Summary

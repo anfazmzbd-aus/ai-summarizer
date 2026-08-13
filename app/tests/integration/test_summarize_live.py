@@ -32,6 +32,7 @@ from app.providers.runtime import ProviderRuntime
 from app.services.summarize_service import SummarizeService
 
 load_dotenv()
+
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_MODEL = os.getenv(
     "OPENROUTER_MODEL",
@@ -42,10 +43,13 @@ OPENROUTER_BASE_URL = os.getenv(
     "https://openrouter.ai/api/v1",
 )
 
-pytestmark = pytest.mark.skipif(
-    not OPENROUTER_API_KEY,
-    reason="OPENROUTER_API_KEY is not configured",
-)
+pytestmark = [
+    pytest.mark.live,
+    pytest.mark.skipif(
+        not OPENROUTER_API_KEY,
+        reason="OPENROUTER_API_KEY is not configured",
+    ),
+]
 
 
 def _build_live_service() -> SummarizeService:

@@ -25,8 +25,10 @@ OPENROUTER_MODEL = os.getenv(
     "openai/gpt-5",
 )
 
-
-pytestmark = pytest.mark.integration
+pytestmark = [
+    pytest.mark.live,
+    pytest.mark.integration,
+]
 
 
 @pytest.fixture

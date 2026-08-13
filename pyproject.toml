@@ -1,6 +1,7 @@
 [tool.pytest.ini_options]
 markers = [
-    "integration: tests requiring external providers or network access",
+    "live: tests requiring live external provider/API access",
+    "integration: tests requiring provider integration behavior",
 ]
 
 pythonpath = [
