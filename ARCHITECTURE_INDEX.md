@@ -951,3 +951,51 @@ Final summary
                     │
                     ▼
                Final Summary
+
+## ** V9.2-M4 — Map-Reduce Summarization Strategy **
+Current state:
+V9.1                         617 passed
+V9.2-M1 Chunking             645
+V9.2-M2 Hierarchy            673
+V9.2-M3 Test isolation       672 + 9 skipped
+
+M4 objective
+
+Introduce a provider-independent Map-Reduce strategy.
+
+Chunks
+  │
+  ├── Chunk 0 ──→ MAP ──→ Summary 0
+  ├── Chunk 1 ──→ MAP ──→ Summary 1
+  ├── Chunk 2 ──→ MAP ──→ Summary 2
+  └── Chunk N ──→ MAP ──→ Summary N
+                         │
+                         ▼
+                       REDUCE
+                         │
+                         ▼
+                   Final Summary
+
+** Architecture after M4 **
+                     Document
+                        │
+                        ▼
+                   TextChunker
+                        │
+                        ▼
+                      Chunk[]
+                        │
+             ┌──────────┴──────────┐
+             │                     │
+             ▼                     ▼
+        Hierarchy              Map-Reduce
+        Builder                 Strategy
+             │                     │
+             │                ┌────┴────┐
+             │                │         │
+             │               MAP      REDUCE
+             │                │         │
+             └────────────────┴─────────┘
+                              │
+                              ▼
+                     Future LLMService
