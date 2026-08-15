@@ -999,3 +999,212 @@ Chunks
                               │
                               ▼
                      Future LLMService
+
+## **V9.2-M5 — Context-Preserving Aggregation**
+
+**M5 architecture**
+
+                    Chunk
+                      │
+                      ▼
+              Context Extraction
+                      │
+          ┌───────────┼───────────┐
+          ▼           ▼           ▼
+       Content     Position     Provenance
+          │           │           │
+          └───────────┼───────────┘
+                      ▼
+               ContextEnvelope
+                      │
+                      ▼
+                 MapResult
+                      │
+                      ▼
+             Context Aggregator
+                      │
+                      ▼
+              AggregatedContext
+                      │
+                      ▼
+                  REDUCE
+
+**M5 final validation**
+Context tests       27 passed
+Summarization       106 passed
+Full regression     722 passed
+Live tests           9 deselected
+Black                Passed
+Ruff                 Passed
+Pytest               Passed
+git diff --check     Passed
+
+## ** V9.2-M6 — Streaming Response Architecture **
+**Objective**
+Summarization
+     │
+     ▼
+Streaming Strategy
+     │
+     ├── Event: started
+     ├── Event: chunk
+     ├── Event: chunk
+     ├── Event: ...
+     └── Event: completed
+
+## **Current V9.2 architecture**
+Document
+   │
+   ▼
+Token-aware Chunking                 ✓ M1
+   │
+   ├──────────────┐
+   ▼              ▼
+Hierarchy      Map-Reduce             ✓ M2/M4
+   │              │
+   └──────┬───────┘
+          ▼
+Context Aggregation                   ✓ M5
+          │
+          ▼
+   Future summarization
+          │
+          ▼
+   Streaming Architecture             ← M6
+          │
+          ▼
+      Future API
+
+**M6 validation**
+Validation	Result
+Streaming tests	36 passed
+Summarization tests	142 passed
+Full non-live regression	758 passed
+Live tests	9 deselected
+Pre-commit	Passed
+git diff --check	Passed
+
+## **V9.2-M7 — Advanced Summarization Strategies**
+**M7 objective**
+                    Document
+                       │
+                       ▼
+                 Strategy Selector
+                       │
+          ┌────────────┼────────────┐
+          ▼            ▼            ▼
+       Direct       Map-Reduce   Hierarchical
+          │            │            │
+          └────────────┼────────────┘
+                       ▼
+                Strategy Result
+
+## **V9.2 architecture now**
+Document
+   │
+   ▼
+Token-aware Chunking                 ✓ M1
+   │
+   ├───────────────┐
+   ▼               ▼
+Hierarchy       Map-Reduce           ✓ M2/M4
+   │               │
+   └───────┬───────┘
+           ▼
+Context-Preserving Aggregation       ✓ M5
+           │
+           ▼
+Streaming Architecture               ✓ M6
+           │
+           ▼
+Advanced Strategy Selection          ← M7
+           │
+           ▼
+Future LLM integration
+
+V9.2
+ ├── M1 Long-document foundation          ✓
+ ├── M2 Hierarchical core                 ✓
+ ├── M3 Context-preserving aggregation    ✓
+ ├── M4 Map-reduce strategy               ✓
+ ├── M5 Context strategy layer            ✓
+ ├── M6 Streaming architecture            ✓
+ ├── M7 Advanced strategy selection       ✓
+ └── M8 Regression hardening              → next
+
+## ** V9.2-M8 — Regression Hardening & Strategy Integration **
+**M8 scope**
+Document
+   │
+   ▼
+Token-aware Chunker
+   │
+   ▼
+Strategy Selector
+   │
+   ├── DIRECT
+   ├── MAP_REDUCE
+   └── HIERARCHICAL
+   │
+   ▼
+Context / Aggregation
+   │
+   ▼
+Streaming Architecture
+   │
+   ▼
+Strategy Result
+
+** M8 architecture **
+                    Document
+                       │
+                       ▼
+                Token-aware Chunker
+                       │
+                       ▼
+                Strategy Selector
+                       │
+             ┌─────────┼─────────┐
+             ▼         ▼         ▼
+           DIRECT   MAP_REDUCE  HIERARCHICAL
+             │         │         │
+             └─────────┼─────────┘
+                       ▼
+                Strategy Executor
+                       │
+                       ▼
+                Pipeline Result
+
+## ** V9.2 — Feature Complete **
+
+V9.2
+│
+├── M1  Long-document foundation              ✓
+│    └── Token-aware chunking
+│
+├── M2  Hierarchical summarization core      ✓
+│
+├── M3  Context-preserving aggregation       ✓
+│
+├── M4  Map-reduce summarization             ✓
+│
+├── M5  Context strategy layer               ✓
+│
+├── M6  Streaming response architecture      ✓
+│
+├── M7  Advanced strategy selection           ✓
+│
+└── M8  Regression hardening / pipeline      ✓
+
+The progression from the V9.1 frozen baseline is:
+V9.1 frozen       617 passed
+        │
+        ▼
+V9.2 development
+        │
+        ▼
+812 passed
++ 9 explicitly excluded live tests
+        │
+        ▼
+V9.2 feature complete
