@@ -17,11 +17,12 @@ from dataclasses import dataclass
 from typing import Callable
 
 from app.summarization.chunking.text_chunker import TextChunker
+from app.summarization.planning import SummarizationPlanner
 from app.summarization.strategies.execution import StrategyExecutor
 from app.summarization.strategies.models import (
     StrategySelection,
     # StrategySelectionConfig,
-    StrategySelectionInput,
+    # StrategySelectionInput,
     StrategyExecutionResult,
 )
 from app.summarization.strategies.selector import (
@@ -68,10 +69,15 @@ class SummarizationPipeline:
         chunker: TextChunker,
         selector: SummarizationStrategySelector | None = None,
         executor: StrategyExecutor | None = None,
+        planner: SummarizationPlanner | None = None,
     ) -> None:
         self._chunker = chunker
         self._selector = selector or SummarizationStrategySelector()
         self._executor = executor or StrategyExecutor()
+        self._planner = planner or SummarizationPlanner(
+            chunker=self._chunker,
+            selector=self._selector,
+        )
 
     def run(
         self,
@@ -101,27 +107,18 @@ class SummarizationPipeline:
         if not callable(summarize):
             raise TypeError("summarize must be callable")
 
-        chunks = self._chunker.chunk(text)
-
-        token_count = sum(chunk.token_count for chunk in chunks)
-
-        selection_input = StrategySelectionInput(
-            token_count=token_count,
-            chunk_count=len(chunks),
-        )
-
-        selection = self._selector.select(selection_input)
+        plan = self._planner.plan(text)
 
         execution = self._executor.execute(
-            selection.strategy,
-            chunks,
+            plan.strategy,
+            plan.chunks,
             summarize,
         )
 
         return SummarizationPipelineResult(
             summary=execution.content,
-            selection=selection,
+            selection=plan.selection,
             execution=execution,
-            chunk_count=len(chunks),
-            token_count=token_count,
+            chunk_count=plan.chunk_count,
+            token_count=plan.token_count,
         )
