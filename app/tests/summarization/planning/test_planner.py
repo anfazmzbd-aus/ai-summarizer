@@ -87,6 +87,8 @@ def test_planner_handles_empty_document():
     assert plan.token_count == 0
     assert plan.strategy is SummarizationStrategyType.DIRECT
     assert plan.source_character_count == 0
+    assert plan.document_profile is not None
+    assert plan.document_profile.structure_type.value == "empty"
 
 
 def test_planner_preserves_chunk_provenance():
@@ -179,6 +181,7 @@ def test_planner_has_no_provider_dependency():
     plan = planner.plan("provider independent")
 
     assert plan.metadata["planner_version"] == "v9.3-m1"
+    assert plan.document_profile is not None
 
 
 def test_planner_rejects_non_string_input():
@@ -212,4 +215,5 @@ def test_plan_rejects_inconsistent_metrics():
             chunk_count=plan.chunk_count + 1,
             source_character_count=plan.source_character_count,
             source_digest=plan.source_digest,
+            document_profile=plan.document_profile,
         )

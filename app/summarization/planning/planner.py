@@ -7,8 +7,9 @@ from __future__ import annotations
 import hashlib
 
 from app.summarization.chunking.text_chunker import TextChunker
-from app.summarization.strategies.selector import SummarizationStrategySelector
+from app.summarization.intelligence import DocumentProfiler
 from app.summarization.strategies.models import StrategySelectionInput
+from app.summarization.strategies.selector import SummarizationStrategySelector
 
 from .models import SummarizationPlan
 
@@ -28,12 +29,16 @@ class SummarizationPlanner:
         self,
         chunker: TextChunker,
         selector: SummarizationStrategySelector | None = None,
+        profiler: DocumentProfiler | None = None,
     ) -> None:
         if not isinstance(chunker, TextChunker):
             raise TypeError("chunker must be a TextChunker")
 
         self._chunker = chunker
         self._selector = selector or SummarizationStrategySelector()
+        self._profiler = profiler or DocumentProfiler(
+            token_counter=self._chunker.token_counter
+        )
 
     @property
     def chunker(self) -> TextChunker:
@@ -45,6 +50,11 @@ class SummarizationPlanner:
         """Return the configured V9.2 strategy selector."""
         return self._selector
 
+    @property
+    def profiler(self) -> DocumentProfiler:
+        """Return the configured V9.3-M2 document profiler."""
+        return self._profiler
+
     def plan(self, text: str) -> SummarizationPlan:
         """
         Build an immutable, deterministic plan for a source document.
@@ -52,6 +62,7 @@ class SummarizationPlanner:
         if not isinstance(text, str):
             raise TypeError("text must be a string")
 
+        profile = self._profiler.profile(text)
         chunks = tuple(self._chunker.chunk(text))
         token_count = sum(chunk.token_count for chunk in chunks)
         chunk_count = len(chunks)
@@ -62,7 +73,6 @@ class SummarizationPlanner:
                 chunk_count=chunk_count,
             )
         )
-
         return SummarizationPlan(
             strategy=selection.strategy,
             selection=selection,
@@ -71,10 +81,14 @@ class SummarizationPlanner:
             chunk_count=chunk_count,
             source_character_count=len(text),
             source_digest=self._digest(text),
+            document_profile=profile,
             metadata={
                 "planner_version": self.planner_version,
                 "chunk_indexes": tuple(chunk.index for chunk in chunks),
                 "strategy_reason": selection.reason,
+                "structure_type": profile.structure_type.value,
+                "paragraph_count": profile.paragraph_count,
+                "sentence_count": profile.sentence_count,
             },
         )
 

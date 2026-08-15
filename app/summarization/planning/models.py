@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from app.summarization.chunking.models import Chunk
+from app.summarization.intelligence.models import DocumentProfile
 from app.summarization.strategies.models import (
     StrategySelection,
     SummarizationStrategyType,
@@ -31,6 +32,7 @@ class SummarizationPlan:
     chunk_count: int
     source_character_count: int
     source_digest: str
+    document_profile: DocumentProfile | None = None
     metadata: dict[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
@@ -64,5 +66,10 @@ class SummarizationPlan:
         if not isinstance(self.source_digest, str) or not self.source_digest:
             raise ValueError("source_digest must not be empty")
 
-        if not isinstance(self.metadata, dict):
+        if self.document_profile is not None and not isinstance(
+            self.document_profile, DocumentProfile
+        ):
+            raise TypeError("document_profile must be a DocumentProfile or None")
+
+        if self.metadata is not None and not isinstance(self.metadata, dict):
             raise TypeError("metadata must be a dictionary")

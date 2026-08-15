@@ -1243,6 +1243,8 @@ V9.2.0
 ├── Pre-commit: PASS
 └── git diff --check: PASS
 
+
+
 V9.2.0
 fa0fe4e
    │
@@ -1256,3 +1258,22 @@ Intelligent Summarization Planner
    ├── Ruff ✓
    ├── Pre-commit ✓
    └── diff check ✓
+
+**M1 integration**
+Document
+   │
+   ▼
+DocumentProfiler
+   │
+   ▼
+DocumentProfile
+   │
+   ├─────────────────────┐
+   ▼                     ▼
+TextChunker       StrategySelector
+   │                     │
+   └──────────┬──────────┘
+              ▼
+      SummarizationPlan
+
+## V9.3-M2 — Document Intelligence / Document Profile.
