@@ -12,6 +12,7 @@ alembic
 sentencepiece
 anyio==4.13.0
 httpcore2==2.7.0
+httpx==0.28.1
 httpx2==2.7.0
 truststore==0.10.4
 opentelemetry-api
