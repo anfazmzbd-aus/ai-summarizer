@@ -1277,3 +1277,44 @@ TextChunker       StrategySelector
       SummarizationPlan
 
 ## V9.3-M2 — Document Intelligence / Document Profile.
+
+**M2 architectural boundary**
+                    V9.3
+                     │
+                     ▼
+          ┌─────────────────────┐
+          │ DocumentProfiler    │
+          │                     │
+          │ DocumentProfile     │
+          └──────────┬──────────┘
+                     │
+                     ▼
+          ┌─────────────────────┐
+          │ SummarizationPlanner│
+          └──────────┬──────────┘
+                     │
+                     ▼
+              V9.2 mechanisms
+          ┌──────────┼──────────┐
+          ▼          ▼          ▼
+       Chunking   Strategy    Context
+                  Selection
+                     │
+                     ▼
+                  Execute
+
+**V9.3 status**
+V9.3 Intelligent Summarization Orchestration
+
+M1  Intelligent Summarization Planner       ✅
+M2  Document Intelligence / Profile        ✅
+M3  Intent-Aware Summarization              ⏳
+M4  Adaptive Strategy Planning               ⏳
+M5  Cost / Token / Latency Optimization     ⏳
+M6  Quality Evaluation Layer                 ⏳
+M7  Quality-Aware Adaptive Execution         ⏳
+M8  Resilience & Fallback Strategy           ⏳
+M9  Intelligent Streaming Integration        ⏳
+M10 Production Hardening & Evaluation        ⏳
+
+**V9.3-M3 — Intent-Aware Summarization.**

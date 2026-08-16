@@ -7,7 +7,12 @@ from __future__ import annotations
 import hashlib
 
 from app.summarization.chunking.text_chunker import TextChunker
-from app.summarization.intelligence import DocumentProfiler
+from app.summarization.intelligence import (
+    DocumentProfiler,
+    # IntentClassification,
+    IntentClassifier,
+    SummarizationIntent,
+)
 from app.summarization.strategies.models import StrategySelectionInput
 from app.summarization.strategies.selector import SummarizationStrategySelector
 
@@ -30,6 +35,7 @@ class SummarizationPlanner:
         chunker: TextChunker,
         selector: SummarizationStrategySelector | None = None,
         profiler: DocumentProfiler | None = None,
+        intent_classifier: IntentClassifier | None = None,
     ) -> None:
         if not isinstance(chunker, TextChunker):
             raise TypeError("chunker must be a TextChunker")
@@ -39,6 +45,7 @@ class SummarizationPlanner:
         self._profiler = profiler or DocumentProfiler(
             token_counter=self._chunker.token_counter
         )
+        self._intent_classifier = intent_classifier or IntentClassifier()
 
     @property
     def chunker(self) -> TextChunker:
@@ -55,7 +62,12 @@ class SummarizationPlanner:
         """Return the configured V9.3-M2 document profiler."""
         return self._profiler
 
-    def plan(self, text: str) -> SummarizationPlan:
+    def plan(
+        self,
+        text: str,
+        *,
+        intent: SummarizationIntent | str | None = None,
+    ) -> SummarizationPlan:
         """
         Build an immutable, deterministic plan for a source document.
         """
@@ -63,6 +75,7 @@ class SummarizationPlanner:
             raise TypeError("text must be a string")
 
         profile = self._profiler.profile(text)
+        intent_classification = self._intent_classifier.classify(text, intent=intent)
         chunks = tuple(self._chunker.chunk(text))
         token_count = sum(chunk.token_count for chunk in chunks)
         chunk_count = len(chunks)
@@ -73,6 +86,7 @@ class SummarizationPlanner:
                 chunk_count=chunk_count,
             )
         )
+
         return SummarizationPlan(
             strategy=selection.strategy,
             selection=selection,
@@ -82,6 +96,8 @@ class SummarizationPlanner:
             source_character_count=len(text),
             source_digest=self._digest(text),
             document_profile=profile,
+            intent=intent_classification.intent,
+            intent_classification=intent_classification,
             metadata={
                 "planner_version": self.planner_version,
                 "chunk_indexes": tuple(chunk.index for chunk in chunks),
@@ -89,6 +105,10 @@ class SummarizationPlanner:
                 "structure_type": profile.structure_type.value,
                 "paragraph_count": profile.paragraph_count,
                 "sentence_count": profile.sentence_count,
+                "intent": intent_classification.intent.value,
+                "intent_confidence": intent_classification.confidence,
+                "intent_explicit": intent_classification.explicit,
+                "intent_matches": intent_classification.matched_terms,
             },
         )
 

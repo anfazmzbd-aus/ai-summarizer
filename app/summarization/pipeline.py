@@ -22,12 +22,10 @@ from app.summarization.strategies.execution import StrategyExecutor
 from app.summarization.strategies.models import (
     StrategySelection,
     # StrategySelectionConfig,
-    # StrategySelectionInput,
     StrategyExecutionResult,
 )
-from app.summarization.strategies.selector import (
-    SummarizationStrategySelector,
-)
+from app.summarization.strategies.selector import SummarizationStrategySelector
+from app.summarization.intelligence import SummarizationIntent
 
 
 @dataclass(frozen=True)
@@ -83,6 +81,8 @@ class SummarizationPipeline:
         self,
         text: str,
         summarize: Callable[[str], str],
+        *,
+        intent: SummarizationIntent | str | None = None,
     ) -> SummarizationPipelineResult:
         """
         Execute the complete V9.2 summarization pipeline.
@@ -107,7 +107,7 @@ class SummarizationPipeline:
         if not callable(summarize):
             raise TypeError("summarize must be callable")
 
-        plan = self._planner.plan(text)
+        plan = self._planner.plan(text, intent=intent)
 
         execution = self._executor.execute(
             plan.strategy,
