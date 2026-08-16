@@ -1508,3 +1508,39 @@ Document
              ▼
       Summarization Execution
 
+**V9.3-M6 — Quality Evaluation Layer**
+
+The V9.3 progression is now:
+V9.2.0       812 passed
+M1           828 passed
+M2           842 passed
+M3           858 passed
+M4           876 passed
+M5           893 passed
+M6           931 passed
+
+**M6 architectural state**
+Document
+   │
+   ├── M2 Document Profile
+   │
+   └── M3 Intent
+          │
+          ▼
+     M1 Planner
+          │
+          ▼
+     M4 Adaptive Strategy
+          │
+          ▼
+     M5 Resource Optimization
+          │
+          ▼
+       Execution
+          │
+          ▼
+     M6 Quality Evaluation
+          │
+          ▼
+   QualityEvaluation
+
