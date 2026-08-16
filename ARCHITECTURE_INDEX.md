@@ -1471,3 +1471,40 @@ V9.3-M4      876 passed
                             │
                             ▼
                  Existing V9.2 Executor
+
+The regression progression
+V9.2.0       812 passed
+V9.3-M1      828 passed
+V9.3-M2      842 passed
+V9.3-M3      858 passed
+V9.3-M4      876 passed
+V9.3-M5      893 passed
+
+**V9.3 architecture now**
+Document
+   │
+   ├── Document Profile
+   │
+   └── Intent Classification
+             │
+             ▼
+      V9.2 Strategy Selector
+             │
+             ▼
+      Adaptive Strategy Planner
+             │
+             ▼
+      Adaptive Strategy Decision
+             │
+             ▼
+      Resource Optimizer
+       ├── Token estimate
+       ├── Latency estimate
+       └── Cost estimate
+             │
+             ▼
+      Optimization Decision
+             │
+             ▼
+      Summarization Execution
+
