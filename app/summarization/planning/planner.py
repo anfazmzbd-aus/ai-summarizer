@@ -1,5 +1,5 @@
 """
-V9.3-M1 deterministic intelligent summarization planner.
+V9.3 deterministic intelligent summarization planner.
 """
 
 from __future__ import annotations
@@ -9,24 +9,21 @@ import hashlib
 from app.summarization.chunking.text_chunker import TextChunker
 from app.summarization.intelligence import (
     DocumentProfiler,
-    # IntentClassification,
     IntentClassifier,
     SummarizationIntent,
 )
-from app.summarization.strategies.models import StrategySelectionInput
+from app.summarization.strategies.models import (
+    StrategySelection,
+    StrategySelectionInput,
+)
 from app.summarization.strategies.selector import SummarizationStrategySelector
 
+from .adaptive import AdaptiveStrategyPlanner
 from .models import SummarizationPlan
 
 
 class SummarizationPlanner:
-    """
-    Build a deterministic plan over the existing V9.2 components.
-
-    The planner owns orchestration only. It delegates document chunking to
-    TextChunker and strategy selection to SummarizationStrategySelector.
-    No provider, LLM, network, or execution dependency is introduced.
-    """
+    """Build a deterministic plan over the existing V9.2 components."""
 
     planner_version = "v9.3-m1"
 
@@ -36,6 +33,7 @@ class SummarizationPlanner:
         selector: SummarizationStrategySelector | None = None,
         profiler: DocumentProfiler | None = None,
         intent_classifier: IntentClassifier | None = None,
+        adaptive_planner: AdaptiveStrategyPlanner | None = None,
     ) -> None:
         if not isinstance(chunker, TextChunker):
             raise TypeError("chunker must be a TextChunker")
@@ -46,21 +44,27 @@ class SummarizationPlanner:
             token_counter=self._chunker.token_counter
         )
         self._intent_classifier = intent_classifier or IntentClassifier()
+        self._adaptive_planner = adaptive_planner or AdaptiveStrategyPlanner()
 
     @property
     def chunker(self) -> TextChunker:
-        """Return the configured V9.2 chunker."""
         return self._chunker
 
     @property
     def selector(self) -> SummarizationStrategySelector:
-        """Return the configured V9.2 strategy selector."""
         return self._selector
 
     @property
     def profiler(self) -> DocumentProfiler:
-        """Return the configured V9.3-M2 document profiler."""
         return self._profiler
+
+    @property
+    def intent_classifier(self) -> IntentClassifier:
+        return self._intent_classifier
+
+    @property
+    def adaptive_planner(self) -> AdaptiveStrategyPlanner:
+        return self._adaptive_planner
 
     def plan(
         self,
@@ -68,9 +72,6 @@ class SummarizationPlanner:
         *,
         intent: SummarizationIntent | str | None = None,
     ) -> SummarizationPlan:
-        """
-        Build an immutable, deterministic plan for a source document.
-        """
         if not isinstance(text, str):
             raise TypeError("text must be a string")
 
@@ -87,9 +88,30 @@ class SummarizationPlanner:
             )
         )
 
+        adaptive = self._adaptive_planner.decide(
+            selection,
+            profile,
+            intent_classification.intent,
+        )
+
+        final_selection = selection
+        if adaptive.promoted:
+            final_selection = StrategySelection(
+                strategy=adaptive.selected_strategy,
+                token_count=selection.token_count,
+                chunk_count=selection.chunk_count,
+                reason=f"{selection.reason}; {adaptive.reasons[0]}",
+                metadata={
+                    **selection.metadata,
+                    "baseline_strategy": selection.strategy.value,
+                    "adaptive_strategy": adaptive.selected_strategy.value,
+                    "adaptive_planner_version": adaptive.metadata["planner_version"],
+                },
+            )
+
         return SummarizationPlan(
-            strategy=selection.strategy,
-            selection=selection,
+            strategy=adaptive.selected_strategy,
+            selection=final_selection,
             chunks=chunks,
             token_count=token_count,
             chunk_count=chunk_count,
@@ -101,7 +123,7 @@ class SummarizationPlanner:
             metadata={
                 "planner_version": self.planner_version,
                 "chunk_indexes": tuple(chunk.index for chunk in chunks),
-                "strategy_reason": selection.reason,
+                "strategy_reason": final_selection.reason,
                 "structure_type": profile.structure_type.value,
                 "paragraph_count": profile.paragraph_count,
                 "sentence_count": profile.sentence_count,
@@ -109,12 +131,14 @@ class SummarizationPlanner:
                 "intent_confidence": intent_classification.confidence,
                 "intent_explicit": intent_classification.explicit,
                 "intent_matches": intent_classification.matched_terms,
+                "baseline_strategy": selection.strategy.value,
+                "adaptive_strategy": adaptive.selected_strategy.value,
+                "adaptive_promoted": adaptive.promoted,
+                "adaptive_reasons": adaptive.reasons,
+                "adaptive_signals": adaptive.signals,
             },
         )
 
     @staticmethod
     def _digest(text: str) -> str:
-        """
-        Return a deterministic SHA-256 digest of the source text.
-        """
         return hashlib.sha256(text.encode("utf-8")).hexdigest()

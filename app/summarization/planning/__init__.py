@@ -1,13 +1,15 @@
 """
-V9.3-M1 intelligent summarization planning.
-
-The planning layer is provider-independent and deterministic.
+V9.3 deterministic summarization planning components.
 """
 
+from .adaptive import AdaptiveStrategyPlanner
+from .adaptive_models import AdaptiveStrategyDecision
 from .models import SummarizationPlan
 from .planner import SummarizationPlanner
 
 __all__ = [
+    "AdaptiveStrategyDecision",
+    "AdaptiveStrategyPlanner",
     "SummarizationPlan",
     "SummarizationPlanner",
 ]

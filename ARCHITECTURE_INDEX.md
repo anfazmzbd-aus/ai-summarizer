@@ -1318,3 +1318,156 @@ M9  Intelligent Streaming Integration        ⏳
 M10 Production Hardening & Evaluation        ⏳
 
 **V9.3-M3 — Intent-Aware Summarization.**
+
+The architectural progression
+Document
+   │
+   ├── DocumentProfile
+   │
+   └── IntentClassification
+             │
+             ▼
+    Intelligent Planner
+             │
+             ▼
+    SummarizationPlan
+             │
+       ┌─────┼─────┐
+       ▼     ▼     ▼
+    Chunking Strategy Context
+             │
+             ▼
+          Execute
+
+**V9.3 milestone status**
+M1  Intelligent Summarization Planner        ✅ FROZEN
+M2  Document Intelligence / Profile         ✅ FROZEN
+M3  Intent-Aware Summarization               ✅ GREEN
+M4  Adaptive Strategy Planning               ⏳
+M5  Cost / Token / Latency Optimization      ⏳
+M6  Quality Evaluation Layer                 ⏳
+M7  Quality-Aware Adaptive Execution         ⏳
+M8  Resilience & Fallback Strategy           ⏳
+M9  Intelligent Streaming Integration        ⏳
+M10 Production Hardening & Evaluation        ⏳
+
+**V9.3-M4 — Adaptive Strategy Planning.**
+**M4 objective**
+Move from:
+
+Document Profile
+       +
+Intent
+       ↓
+Deterministic Plan
+
+to:
+
+Document Profile
+       +
+Intent
+       +
+Constraints
+       ↓
+Adaptive Strategy Plan
+       ↓
+Existing V9.2 Strategy Executor
+
+**M4 expected architecture**
+                    SummarizationPlanner
+                            │
+            ┌───────────────┼────────────────┐
+            ▼               ▼                ▼
+    DocumentProfile   IntentClassification  Constraints
+            │               │                │
+            └───────────────┼────────────────┘
+                            ▼
+                 AdaptiveStrategyPlanner
+                            │
+                            ▼
+                  AdaptiveStrategyPlan
+                            │
+                            ▼
+                 Existing StrategyExecutor
+
+V9.3-M4 design
+The architecture:
+                 V9.2 selector
+                      │
+                      ▼
+              StrategySelection
+                      │
+                      │ baseline
+                      ▼
+        ┌──────────────────────────┐
+        │ AdaptiveStrategyPlanner  │
+        │                          │
+        │ DocumentProfile          │
+        │ IntentClassification     │
+        │ Baseline Strategy        │
+        └────────────┬─────────────┘
+                     │
+                     ▼
+             AdaptiveStrategyPlan
+                     │
+                     ▼
+             Existing Executor
+The key principle is:
+
+**M4 changes planning, not strategy implementation.**
+
+**V9.3-M4 — Adaptive Strategy Planning**
+The new architecture is:
+DocumentProfile
+       +
+IntentClassification
+       +
+V9.2 StrategySelection
+       │
+       ▼
+AdaptiveStrategyPlanner
+       │
+       ▼
+AdaptiveStrategyDecision
+       │
+       ▼
+Final SummarizationPlan
+       │
+       ▼
+Existing StrategyExecutor
+
+progression is now:
+V9.2.0       812 passed
+V9.3-M1      828 passed
+V9.3-M2      842 passed
+V9.3-M3      858 passed
+V9.3-M4      876 passed
+
+**V9.3 architecture after M4**
+                         Document
+                            │
+              ┌─────────────┴─────────────┐
+              ▼                           ▼
+      DocumentProfiler              IntentClassifier
+              │                           │
+              ▼                           ▼
+      DocumentProfile             IntentClassification
+              │                           │
+              └─────────────┬─────────────┘
+                            ▼
+                  V9.2 StrategySelector
+                            │
+                            ▼
+                   StrategySelection
+                            │
+                            ▼
+                 AdaptiveStrategyPlanner
+                            │
+                            ▼
+                 AdaptiveStrategyDecision
+                            │
+                            ▼
+                   SummarizationPlan
+                            │
+                            ▼
+                 Existing V9.2 Executor
