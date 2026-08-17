@@ -8,6 +8,10 @@ from .events import (
     StreamErrorEvent,
     StreamStartedEvent,
 )
+from .intelligence import (
+    IntelligentStreamContext,
+    IntelligentSummarizationStreamer,
+)
 from .models import (
     StreamEventType,
     StreamResult,
@@ -15,6 +19,8 @@ from .models import (
 from .streamer import SummarizationStreamer
 
 __all__ = [
+    "IntelligentStreamContext",
+    "IntelligentSummarizationStreamer",
     "StreamChunkEvent",
     "StreamCompletedEvent",
     "StreamErrorEvent",

@@ -1673,3 +1673,25 @@ ResilienceFallbackPlanner
        ├── FALLBACK
        ├── RETRY
        └── TERMINATE
+
+**V9.3-M9 — Intelligent Streaming Integration**
+
+**M9 objective**
+
+M1 Planner
+   ↓
+M2 Document Profile
+   ↓
+M3 Intent
+   ↓
+M4 Adaptive Planning
+   ↓
+M5 Optimization
+   ↓
+M6 Quality Evaluation
+   ↓
+M7 Quality-Aware Execution
+   ↓
+M8 Resilience / Fallback
+   ↓
+M9 Intelligent Streaming
