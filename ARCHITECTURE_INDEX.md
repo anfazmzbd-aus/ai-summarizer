@@ -1617,3 +1617,59 @@ MAP_REDUCE
 HIERARCHICAL
   ↓
 RETRY / FALLBACK
+
+**V9.3-M8 — Resilience & Fallback Strategy**
+The important distinction is:
+
+M7 handles a successful execution whose quality is inadequate.
+M8 handles an execution failure and determines whether a safe fallback is available.
+
+The resulting architecture is:
+
+                    Summarization Plan
+                           │
+                           ▼
+                    M7 Adaptive Decision
+                           │
+                           ▼
+                      Execution
+                       /      \
+                    success   failure
+                      │          │
+                      ▼          ▼
+                 M6 Quality     M8 Resilience
+                      │          │
+                      ▼          ├── fallback strategy
+                 M7 decision     ├── retry bounded
+                                 ├── terminal failure
+                                 └── preserve error
+
+The target boundary is:
+
+M5 Optimization
+       ↓
+Execution
+       ↓
+M6 Quality Evaluation
+       ↓
+M7 Quality-Aware Adaptive Execution
+       ↓
+M8 Resilience / Fallback
+       ↓
+next execution attempt
+
+The M8 architecture is now:
+Execution exception
+       │
+       ▼
+ResilientExecutionPlanner
+       │
+       ▼
+ResilienceFailure
+       │
+       ▼
+ResilienceFallbackPlanner
+       │
+       ├── FALLBACK
+       ├── RETRY
+       └── TERMINATE
