@@ -1544,3 +1544,76 @@ Document
           ▼
    QualityEvaluation
 
+**V9.3-M7 — Quality-Aware Adaptive Execution**
+**M7 objective**
+Existing plan
+     │
+     ▼
+Existing execution
+     │
+     ▼
+M6 QualityEvaluation
+     │
+     ▼
+M7 QualityAwareAdaptiveExecutor
+     │
+     ├── ACCEPT
+     │
+     ├── RETRY_CURRENT
+     │
+     ├── ESCALATE_STRATEGY
+     │
+     └── FALLBACK
+
+the standalone M7 adaptive decision layer
+QualityEvaluation
+       │
+       ▼
+QualityAwareAdaptiveExecutor
+       │
+       ├── PASS
+       │     └── ACCEPT
+       │
+       └── FAIL
+             │
+             ├── DIRECT
+             │     └── ESCALATE → MAP_REDUCE
+             │
+             ├── MAP_REDUCE
+             │     └── ESCALATE → HIERARCHICAL
+             │
+             └── HIERARCHICAL
+                   ├── attempt available → RETRY_CURRENT
+                   └── budget exhausted → FALLBACK
+
+**Architectural result**
+M1 Intelligent Planner
+        ↓
+M2 Document Profile
+        ↓
+M3 Intent
+        ↓
+M4 Adaptive Strategy
+        ↓
+M5 Cost / Token / Latency
+        ↓
+Existing Execution
+        ↓
+M6 Quality Evaluation
+        ↓
+M7 Quality-Aware Adaptive Decision
+        │
+        ├── ACCEPT
+        ├── ESCALATE_STRATEGY
+        ├── RETRY_CURRENT
+        └── FALLBACK
+
+The bounded progression is:
+
+DIRECT
+  ↓
+MAP_REDUCE
+  ↓
+HIERARCHICAL
+  ↓
+RETRY / FALLBACK
