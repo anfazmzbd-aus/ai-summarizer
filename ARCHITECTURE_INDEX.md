@@ -1865,3 +1865,435 @@ M7 — Quality-Aware Adaptive Execution
 M8 — Resilience & Fallback Strategy
 M9 — Intelligent Streaming Integration
 M10 — Production Hardening & Evaluation
+
+**AI Summarizer V9.3.0 — Intelligent Summarization Orchestration — FROZEN**
+🔒 V9.3.0 IS NOW FROZEN
+
+AI Summarizer V9.3.0 — Intelligent Summarization Orchestration
+
+M1 through M10 are complete:
+
+M1 — Intelligent Summarization Planner
+M2 — Document Intelligence / Document Profile
+M3 — Intent-Aware Summarization
+M4 — Adaptive Strategy Planning
+M5 — Cost / Token / Latency Optimization
+M6 — Quality Evaluation Layer
+M7 — Quality-Aware Adaptive Execution
+M8 — Resilience & Fallback Strategy
+M9 — Intelligent Streaming Integration
+M10 — Production Hardening & Evaluation
+
+The important architectural constraint was maintained: V9.2 remains the frozen foundational summarization architecture, with V9.3 adding intelligence and orchestration layers around it.
+
+Release baseline
+V9.2.0
+Commit: fa0fe4e
+        ↓
+V9.3.0
+Commit: 7ce3317
+Tag:    v9.3.0
+Branch: main
+Remote: synchronized
+Tests:  1084 passed, 9 deselected
+Status: CLEAN / FROZEN
+
+The V9.3 release cycle is officially concluded.
+
+**## V10 Adaptive Intelligence Platform**
+
+Proposed V10 Architecture
+┌─────────────────────────────────────────────────────────────┐
+│                    EXPERIENCE / API                         │
+├─────────────────────────────────────────────────────────────┤
+│                  INTELLIGENCE PLANE                         │
+│  Intent │ Context │ Planning │ Reasoning │ Adaptation      │
+├─────────────────────────────────────────────────────────────┤
+│                   KNOWLEDGE PLANE                           │
+│  Document │ Retrieval │ Memory │ Provenance │ Evidence     │
+├─────────────────────────────────────────────────────────────┤
+│                  EXECUTION PLANE                            │
+│  Strategy │ Agents │ Runtime │ Providers │ Streaming       │
+├─────────────────────────────────────────────────────────────┤
+│                  EVALUATION PLANE                           │
+│  Quality │ Grounding │ Cost │ Latency │ Reliability        │
+├─────────────────────────────────────────────────────────────┤
+│                 OBSERVABILITY / GOVERNANCE                  │
+│  Metrics │ Tracing │ Policies │ Audit │ Configuration      │
+└─────────────────────────────────────────────────────────────┘
+
+Proposed V10 Architecture at a Higher Level
+                         V10 ADAPTIVE INTELLIGENCE
+                                  │
+              ┌───────────────────┼───────────────────┐
+              │                   │                   │
+              ▼                   ▼                   ▼
+        EXPERIENCE          INTELLIGENCE          KNOWLEDGE
+        / API               PLANE                 PLANE
+              │                   │                   │
+              │          ┌────────┼────────┐          │
+              │          │        │        │          │
+              │       Context   Planning  Adaptation  │
+              │          │        │        │          │
+              │          └────────┼────────┘          │
+              │                   │                   │
+              └───────────────────┼───────────────────┘
+                                  ↓
+                           EXECUTION PLANE
+                                  │
+                    ┌─────────────┼─────────────┐
+                    ↓             ↓             ↓
+                 Runtime       Agents       Providers
+                    │             │             │
+                    └─────────────┼─────────────┘
+                                  ↓
+                           EVALUATION PLANE
+                                  │
+                    ┌─────────────┼─────────────┐
+                    ↓             ↓             ↓
+                 Quality        Cost         Reliability
+                    │             │             │
+                    └─────────────┼─────────────┘
+                                  ↓
+                         ADAPTATION SIGNAL
+                                  │
+                                  └──────────► Intelligence
+                                                 │
+                                                 ▼
+                                           Next Decision
+
+                    OBSERVABILITY + GOVERNANCE
+                         spans all layers
+
+Recommended V10 Roadmap
+V9.3.0 FROZEN
+     │
+     ▼
+M1  V10 Architecture Foundation
+     │
+     ▼
+M2  Unified Intelligence Context
+     │
+     ├──────────────► M3 Knowledge & Evidence
+     │                       │
+     │                       ▼
+     │                M4 Multi-Document
+     │                       │
+     └───────────────────────┤
+                             ▼
+                      M5 Closed-Loop
+                         Execution
+                             │
+                             ▼
+                      M6 Self-Optimization
+                             │
+                       ┌─────┴─────┐
+                       ▼           ▼
+                 M7 Verification  M8 Memory
+                       └─────┬─────┘
+                             ▼
+                       M9 Autonomous
+                       Orchestration
+                             │
+                             ▼
+                       M10 Production
+                       Intelligence
+
+**Revised V10 Architecture**
+┌──────────────────────────────────────────────────────────────┐
+│                     EXPERIENCE / API                         │
+└──────────────────────────────┬───────────────────────────────┘
+                               │
+                               ▼
+┌──────────────────────────────────────────────────────────────┐
+│                  APPLICATION ORCHESTRATION                   │
+│        request lifecycle / canonical application flow        │
+└──────────────────────────────┬───────────────────────────────┘
+                               │
+                               ▼
+┌──────────────────────────────────────────────────────────────┐
+│                    INTELLIGENCE CONTEXT                      │
+│                                                              │
+│ Request • Document • Intent • Constraints • Evidence         │
+│ Runtime • History • Policy • Quality • Provenance            │
+└───────────────┬────────────────┬────────────────┬────────────┘
+                │                │                │
+                ▼                ▼                ▼
+          TASK INTELLIGENCE  KNOWLEDGE       EVALUATION
+          Planning          Retrieval       Quality
+          Adaptation        Memory          Verification
+          Optimization      Evidence        Metrics
+                │                │                │
+                └────────────────┼────────────────┘
+                                 ▼
+                         EXECUTION PLAN
+                                 │
+                                 ▼
+                     EXISTING EXECUTION RUNTIME
+                                 │
+             ┌───────────────────┼───────────────────┐
+             ▼                   ▼                   ▼
+          Runtime            Providers          Distributed
+             │                   │                   │
+             └───────────────────┼───────────────────┘
+                                 ▼
+                         EXECUTION TELEMETRY
+                                 │
+                ┌────────────────┼────────────────┐
+                ▼                ▼                ▼
+             Quality           Cost            Latency
+                │                │                │
+                └────────────────┼────────────────┘
+                                 ▼
+                         ADAPTATION SIGNAL
+                                 │
+                                 └──────────────► Intelligence
+
+Final V10 Architecture
+                         ┌──────────────┐
+                         │    REQUEST   │
+                         └──────┬───────┘
+                                │
+                                ▼
+                   ┌────────────────────────┐
+                   │   INTELLIGENCE CONTEXT │
+                   └───────────┬────────────┘
+                               │
+                               ▼
+                       ┌──────────────┐
+                       │ TASK DECISION│
+                       └──────┬───────┘
+                              │
+                              ▼
+                  ┌─────────────────────┐
+                  │ EXISTING V9.3       │
+                  │ DOMAIN INTELLIGENCE │
+                  └──────────┬──────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ SUMMARIZATION   │
+                    │ PLAN            │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ RUNTIME         │
+                    │ DECISION        │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ EXISTING        │
+                    │ V9 RUNTIME      │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ EXECUTION       │
+                    │ RESULT          │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ EVALUATION      │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ ADAPTATION      │
+                    │ DECISION        │
+                    └──────┬─────┬────┘
+                           │     │
+                     ACCEPT│     │REPLAN
+                           │     │
+                           ▼     └──────────► TASK DECISION
+                         OUTPUT
+
+**M1 Scope**
+
+M1 is now deliberately narrow.
+
+M1.1 — Core Context Contract
+
+Establish the minimal IntelligenceContext.
+
+M1.2 — Task Decision Contract
+
+Establish the V10 task-level decision boundary.
+
+M1.3 — Domain Plan Boundary
+
+Define how V10 intelligence hands off to the existing SummarizationPlan.
+
+M1.4 — Runtime Decision Boundary
+
+Define how runtime execution decisions are represented without redesigning the runtime.
+
+M1.5 — Provenance Correlation
+
+Establish correlation and lineage identifiers.
+
+M1.6 — Architecture Tests
+
+Tests must enforce the new boundaries.
+
+M1.7 — Compatibility Validation
+
+Prove that V9.3 behavior remains unchanged.
+
+**M1 Milestone Sequence**
+M1.1
+Repository contract inventory
+        ↓
+M1.2
+IntelligenceContext
+        ↓
+M1.3
+TaskDecision
+        ↓
+M1.4
+SummarizationPlan boundary
+        ↓
+M1.5
+RuntimeDecision
+        ↓
+M1.6
+Provenance correlation
+        ↓
+M1.7
+Architecture tests
+        ↓
+M1.8
+Full regression
+        ↓
+M1 COMPLETE
+
+**Final V10 Architecture**
+                         ┌──────────────┐
+                         │    REQUEST   │
+                         └──────┬───────┘
+                                │
+                                ▼
+                   ┌────────────────────────┐
+                   │   INTELLIGENCE CONTEXT │
+                   └───────────┬────────────┘
+                               │
+                               ▼
+                       ┌──────────────┐
+                       │ TASK DECISION│
+                       └──────┬───────┘
+                              │
+                              ▼
+                  ┌─────────────────────┐
+                  │ EXISTING V9.3       │
+                  │ DOMAIN INTELLIGENCE │
+                  └──────────┬──────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ SUMMARIZATION   │
+                    │ PLAN            │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ RUNTIME         │
+                    │ DECISION        │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ EXISTING        │
+                    │ V9 RUNTIME      │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ EXECUTION       │
+                    │ RESULT          │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ EVALUATION      │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ ADAPTATION      │
+                    │ DECISION        │
+                    └──────┬─────┬────┘
+                           │     │
+                     ACCEPT│     │REPLAN
+                           │     │
+                           ▼     └──────────► TASK DECISION
+                         OUTPUT
+
+V10 M1.1 — Repository Contract Inventory
+M1 Status
+ADR-001                         ✓ Accepted
+M1.1 Repository Inventory      ✓ Complete
+M1.2 IntelligenceContext      ✓ Complete
+M1.3 TaskDecision              ✓ Complete
+M1.4 RuntimeDecision           ✓ Complete
+M1.5 Provenance                ✓ Complete
+M1.6 Architecture Tests        ✓ Complete
+M1.7 Regression                PENDING
+
+Important M1.5 design point
+V10
+correlation_id
+      │
+      ├── context_id
+      ├── task_decision_id
+      ├── plan_id
+      │
+      └── execution_id
+               │
+               └── owned by existing V9 runtime
+The future lifecycle becomes:
+                 correlation_id
+                       │
+        ┌──────────────┼──────────────┐
+        ▼              ▼              ▼
+   Intelligence     Planning       Runtime
+        │              │              │
+ context_id      task_decision_id execution_id
+                       │
+                    plan_id
+                       │
+                 future V10
+                 ┌─────┴─────┐
+                 ▼           ▼
+            evaluation_id adaptation_id
+
+M1.6 objective
+                    ProvenanceContext
+                           │
+                           ▼
+                  IntelligenceContext
+                           │
+                           ▼
+                     TaskDecision
+                           │
+                           ▼
+                  V9.3 Planning Boundary
+                           │
+                           ▼
+                    RuntimeDecision
+                           │
+                           ▼
+                    Existing Runtime
+
+**V10 M1 — Final Status**
+| Milestone                           | Status     |
+| ----------------------------------- | ---------- |
+| M1.1 Repository Inventory           | ✅ Complete |
+| M1.2 IntelligenceContext            | ✅ Complete |
+| M1.3 TaskDecision                   | ✅ Complete |
+| M1.4 RuntimeDecision                | ✅ Complete |
+| M1.5 ProvenanceCorrelation          | ✅ Complete |
+| M1.6 Architecture Integration       | ✅ Complete |
+| M1.7 Production Boundary Validation | ✅ Complete |
+
