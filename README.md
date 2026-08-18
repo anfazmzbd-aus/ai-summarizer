@@ -1,915 +1,364 @@
-# AI Summarizer
+# AI-Summarizer
 
-## Overview
+An enterprise-grade, **Agentic AI Document Processing and Summarization Platform** built on top of FastAPI and designed as a deterministic, contract-driven, and parallel-safe DAG execution runtime. 
 
-AI Summarizer is an Agent-Based Document Processing and Summarization Platform built with FastAPI.
-
-The project started as a simple text summarizer and evolved into a graph-driven agent orchestration system capable of:
-
-* Semantic document routing
-* Multi-intent classification
-* Agent selection
-* Dependency-aware execution
-* Parallel agent execution
-* Execution tracking and explainability
-
-Current Version: **V6.7.1 Stable**
+AI-Summarizer has evolved from a simple monolithic script into a highly sophisticated **Agentic AI Workflow Engine** capable of dynamic routing, robust error isolation, event-driven observability, and advanced summarization strategies (such as hierarchical map-reduce and context preservation).
 
 ---
 
-# Architecture
+## 🚀 Current Version: V9.2.0 (Milestone 4 Frozen)
 
-```text
-Document
-    ↓
-Intent Classifier
-    ↓
-Multi-Intent Planner
-    ↓
-Strategy Builder
-    ↓
-Semantic Router
-    ↓
-Dependency Resolver
-    ↓
-Parallel Execution Graph
-    ↓
-Agent Registry
-    ↓
-Agents
-    ↓
-Execution Metadata
-```
+The platform is currently at **V9.2.0**, with **695 passing tests** and full compliance with `black`, `ruff`, and `pre-commit` quality gates.
+* **Non-Live Test Suite:** 672 passed, 9 deselected.
+* **Live Integration Suite:** 9 passed, skipped when credentials are absent.
+* **Milestone 4 (Map-Reduce Summarization Strategy):** Complete and frozen.
+* **Milestone 5 (Context-Preserving Aggregation):** In progress.
 
 ---
 
-# Features
+## 📋 Overview
 
-## Summarization
+AI-Summarizer is not just a text summarization tool; it is a general-purpose, reusable **AI Orchestration Platform** that executes specialized analytical agents through a Directed Acyclic Graph (DAG). By strictly separating the **Application/Service**, **Runtime**, and **Execution** layers, the platform allows developers to plug in new agents, prompts, or LLM providers without altering the underlying deterministic kernel.
 
-Generates concise summaries from input text.
-
-## Action Extraction
-
-Identifies tasks and follow-up actions.
-
-Examples:
-
-* should
-* must
-* need to
-* follow up
-
-## Business Insights
-
-Detects:
-
-* Revenue changes
-* Profit improvements
-* Market expansion
-
-## Research Findings
-
-Detects:
-
-* Research content
-* Studies
-* Analysis
-* Results
-
-## Multi-Intent Detection
-
-A document can belong to multiple categories simultaneously.
-
-Example:
-
-```text
-Meeting Notes
-Business Report
-Research Report
-```
-
-## Semantic Routing
-
-Automatically selects the required agents based on content analysis.
-
-## Dependency Graph
-
-Agents can declare dependencies.
-
-Example:
-
-```text
-summary
-   ├── actions
-   ├── insights
-   └── findings
-```
-
-## Parallel Execution
-
-Independent agents execute concurrently to improve performance.
+### The Problem it Solves
+Standard agentic systems often fail in production because of unconstrained state mutations, circular dependency deadlocks, or tight coupling to a single LLM vendor. AI-Summarizer solves these systemic challenges by enforcing:
+1. **Clean Layer Separation:** Preprocessing and planning occur strictly outside the execution graph.
+2. **Node Isolation:** Every agent executes inside a read-only, deep-copied snapshot of the state.
+3. **Immutable State Merger:** A centralized merger aggregates results on a single thread to prevent parallel-safe state mutations.
+4. **Provider Abstraction:** A vendor-neutral adapter layer separates agent logic from OpenAI, Azure, Ollama, or OpenRouter SDKs.
 
 ---
 
-# Project Structure
+## 🏛️ System Architecture
 
-```text
+AI-Summarizer implements a robust, layered Clean Architecture:
+
+```
+                  ┌──────────────────────────────────┐
+                  │        CLIENT / UI LAYER         │
+                  │   Web UI • API • Playground API   │
+                  └────────────────┬─────────────────┘
+                                   │
+                                   ▼
+                  ┌──────────────────────────────────┐
+                  │       REQUEST ENTRY LAYER        │
+                  │       routes/summarize.py        │
+                  └────────────────┬─────────────────┘
+                                   │
+                                   ▼
+   ═════════════════════ PREPROCESSING (NON-DAG) ═════════════════════
+                  ┌──────────────────────────────────┐
+                  │    Token-Aware Text Chunking     │
+                  │  (DeterministicTokenCounter)     │
+                  └────────────────┬─────────────────┘
+                                   │
+                                   ▼
+                  ┌──────────────────────────────────┐
+                  │        SUMMARY GENERATION        │
+                  │       summary_agent (Sync)       │
+                  └────────────────┬─────────────────┘
+                                   │
+                                   ▼
+                  ┌──────────────────────────────────┐
+                  │        PLANNING / ROUTING        │
+                  │  Intent Classifier • Router      │
+                  └────────────────┬─────────────────┘
+                                   │
+                                   ▼
+   ═════════════════════════ DAG ENGINE ═════════════════════════
+                  ┌──────────────────────────────────┐
+                  │       DEPENDENCY RESOLVER        │
+                  │    resolve_execution_order()     │
+                  └────────────────┬─────────────────┘
+                                   │
+                                   ▼
+                  ┌──────────────────────────────────┐
+                  │        GRAPH VALIDATOR           │
+                  │   validate_execution_graph()     │
+                  └────────────────┬─────────────────┘
+                                   │
+                                   ▼
+                  ┌──────────────────────────────────┐
+                  │        PARALLEL SCHEDULER        │
+                  │    scheduler.py (Kahn-based)     │
+                  └────────────────┬─────────────────┘
+                                   │
+                                   ▼
+                  ┌──────────────────────────────────┐
+                  │         LAYER EXECUTOR           │
+                  │  ThreadPoolExecutor Concurrency  │
+                  └────────────────┬─────────────────┘
+                                   │
+                                   ▼
+                  ┌──────────────────────────────────┐
+                  │          NODE EXECUTOR           │
+                  │  Isolated Snapshot Execution     │
+                  └────────────────┬─────────────────┘
+                                   │
+                                   ▼
+                  ┌──────────────────────────────────┐
+                  │          STATE MERGER            │
+                  │     Centralized Commit (V7.7)    │
+                  └────────────────┬─────────────────┘
+                                   │
+                                   ▼
+   ══════════════════════ STORAGE & PERSISTENCE ══════════════════════
+                  ┌──────────────────────────────────┐
+                  │   DB Persistence / History /     │
+                  │   Telemetry / Checkpoint Engine  │
+                  └──────────────────────────────────┘
+```
+
+### The Two-Phase Pipeline
+1. **Phase A (Pre-DAG Preprocessing - Non-DAG):** Performs token-aware text chunking, normalization, summary pre-computation, and semantic planning/routing. These are deterministic transformers, completely separated from the DAG scheduling core to avoid graph contamination.
+2. **Phase B (DAG Engine - Graph Core):** Constructs a pure dependency graph containing only analytical nodes (e.g., `insights`, `trends`, `risks`, `recommendations`). This graph is validated for cycles and executed layer-by-layer concurrently.
+
+---
+
+## ✨ Key Features
+
+AI-Summarizer contains several enterprise-ready subsystems designed for reliability, scalability, and observability:
+
+### 1. Multi-Agent Ecosystem
+A centralized decorated registry (`@register_agent`) allows dynamic discovery of specialized agents. Current analytical agents include:
+* **Summary Agent:** Generates text summaries (utilizing the model or a sentence preservation fallback).
+* **Actions Agent:** Extracts concrete tasks and follow-up items using regex rule-based structures.
+* **Insights Agent:** Captures high-level business insights and CSAT/NPS shifts.
+* **Trend & Sentiment Agents:** Classifies trend indicators and text sentiment.
+* **Risk & Forecast Agents:** Identifies threat vectors and projects potential future trends.
+* **Recommendation & Root Cause Agents:** Suggests actions and performs evidential diagnosis.
+
+### 2. Advanced Summarization (V9.2)
+* **Token-Aware Chunking:** Paragraph and sentence boundaries are preserved while dividing large documents using a deterministic `TokenCounter` and configurable maximum sizes/overlaps.
+* **Hierarchical Summarization:** Constructs a dependency hierarchy tree of document segments (`SummaryNode`), retaining deep character-source offset provenance back to the raw chunk inputs.
+* **Map-Reduce Strategy:** Executes parallel MAP summarization across segments and merges them using an intelligent REDUCE aggregator without model-context leakage.
+
+### 3. State & Execution Isolation
+* **ExecutionSession:** The single container that wraps the graph, execution context, and intelligence decision, representing one unified workflow execution.
+* **Node Isolation:** Avoids race conditions by running each node on deep-copied snapshots. Outputs are committed back to the session only after a successful execution.
+* **Contract Enforcement:** Integrates a strict `StateContract` validation step. An agent cannot execute unless its required input schemas are validated, and its output must be validated before it is committed to the shared state.
+
+### 4. Pluggable Infrastructure Abstractions
+* **PromptOS:** Treats prompt templates (`PromptDefinition`) as first-class versioned assets stored in markdown with YAML front matter, isolated from Python code.
+* **AI Provider Abstraction:** A vendor-neutral SDK client interface (`BaseProvider`) that isolates the runtime from concrete APIs. Supports a fully offline/deterministic `MockProvider`, alongside live integrations for **OpenAI**, **Azure OpenAI**, **Google Gemini**, and local **Ollama** backends.
+* **OpenRouter Compatibility:** Supports routing requests to any OpenAI-compatible API endpoint (such as OpenRouter, LiteLLM, or LM Studio) using configuration variables.
+
+### 5. Production Reliability & Resiliency
+* **Event-Driven Observability:** Decouples core execution from logging, metrics, and tracing. Emits detailed lifecycle events (e.g., `ExecutionStarted`, `NodeFailed`, `RetryStarted`) to an `EventBus` consumed by independent subscribers.
+* **Retry Executor:** Implements configurable backoff retry loops at the individual node level, rather than re-running the entire graph.
+* **Circuit Breakers:** Uses a state-machine circuit breaker (`Closed`, `Open`, `Half-Open`) to isolate flaky external LLM endpoints and prevent cascading failures.
+* **Timeout & Graceful Cancellation:** Implements cooperative cancellation tokens and execution timeout enforcement across nodes.
+* **Execution Cache:** Caches execution results to prevent redundant calls to expensive LLMs for duplicate content.
+* **Checkpoint & Recovery:** Automatically persists states at layer-level checkpoints, allowing failed or interrupted executions to resume exactly where they failed.
+
+---
+
+## 📁 Project Structure
+
+The project has a highly modular Clean Architecture layout:
+
+```
 ai-summarizer/
-│
-├── main.py
-├── tools.py
-│
 ├── app/
-│   ├── routes/
-│   │   ├── home.py
-│   │   ├── summarize.py
-│   │   ├── upload.py
-│   │   └── history.py
-│   │
-│   ├── db/
-│   │   ├── database.py
-│   │   └── models.py
-│   │
-│   ├── services/
-│   │   ├── agent_service.py
-│   │   ├── agent_graph.py
-│   │   ├── db_service.py
-│   │   │
+│   ├── api/
+│   │   └── v1/
+│   │       ├── execution_playground.py   # Debugging & E2E execution surface
+│   │       ├── runtime_endpoint.py       # Metrics & trace health API
+│   │       └── summarize_endpoint.py     # Live /summarize REST endpoint
+│   ├── core/
+│   │   ├── exceptions.py                 # Central exception hierarchy
+│   │   └── config.py                     # Global app configuration
+│   ├── prompts/
+│   │   ├── templates/                    # Versioned prompt definitions (Markdown/YAML)
+│   │   ├── manager.py                    # Resolves and orchestrates prompts
+│   │   ├── renderer.py                   # Dynamic Jinja template rendering
+│   │   ├── registry.py                   # Runtime-facing prompt discovery
+│   │   └── repository.py                 # Persistence layer for templates
+│   ├── providers/
+│   │   ├── openai/
+│   │   │   ├── adapter.py                # Adapts OpenAI payload to LLMResponse
+│   │   │   ├── client.py                 # Thin OpenAI SDK client wrapper
+│   │   │   ├── config.py                 # Credentials and endpoint configurations
+│   │   │   └── transport.py              # HTTP client/SDK initialization
+│   │   ├── base.py                       # Provider abstraction (BaseProvider)
+│   │   ├── config.py                     # Generic provider configuration (ProviderConfig)
+│   │   ├── factory.py                    # Instantiates configured LLM providers
+│   │   ├── mock_provider.py              # Deterministic offline provider for CI tests
+│   │   └── runtime.py                    # Provider-to-runtime composition boundary
+│   ├── runtime/
+│   │   ├── events/
+│   │   │   ├── event_bus.py              # Decoupled synchronous publisher
+│   │   │   ├── event_dispatcher.py       # Dispatches execution events
+│   │   │   ├── event_types.py            # Typed dataclass definitions
+│   │   │   └── runtime_event_publisher.py# Unified helper to publish events
+│   │   ├── observer/
+│   │   │   ├── logging_subscriber.py     # Converts events to structured logs
+│   │   │   ├── metrics_subscriber.py     # Monitors timings, counts, and retries
+│   │   │   └── trace_subscriber.py       # Constructs execution tracing timelines
+│   │   ├── middleware/                   # Request preprocessing hooks
+│   │   ├── hooks/                        # Execution hook registry
+│   │   ├── policy/                       # Pluggable admission controls
+│   │   ├── cache/                        # Node execution caching
+│   │   ├── persistence/                  # Persists execution metadata and results
+│   │   ├── checkpoint/                   # Node-level checkpointing and recovery
+│   │   ├── runtime_manager.py            # Orchestrates execution context & lifecycle
+│   │   ├── runtime_session.py            # Aggregate session data container
+│   │   └── runtime_context.py            # State metadata during lifecycle
+│   ├── orchestration/
 │   │   ├── agents/
-│   │   │   ├── summary_agent.py
-│   │   │   ├── actions_agent.py
-│   │   │   ├── insights_agent.py
-│   │   │   ├── findings_agent.py
-│   │   │   ├── plan_agent.py
-│   │   │   └── trend_agent.py
-│   │   │
+│   │   │   ├── summary.py                # summary_agent (V8 legacy / V9 AI-mode)
+│   │   │   ├── insights.py               # insights_agent
+│   │   │   └── actions.py                # actions_agent
+│   │   ├── contracts/
+│   │   │   ├── execution_response.py     # Output response Pydantic models
+│   │   │   └── response_builder.py       # Converts session state to response
+│   │   ├── execution/
+│   │   │   ├── execution_engine.py       # Executes DAG layers
+│   │   │   ├── layer_executor.py         # Concurrent thread layer executor
+│   │   │   └── node_executor.py          # State-contract validation & retry runner
+│   │   ├── graph/
+│   │   │   ├── graph_builder.py          # Constructs ExecutionGraph from intents
+│   │   │   ├── graph_schema.py           # Immutable DAG schemas & types
+│   │   │   └── graph_validator.py        # Dependency closure & cycle detector
 │   │   ├── registry/
-│   │   │   ├── registry.py
-│   │   │   └── agent_registry.py
-│   │   │
-│   │   ├── classifiers/
-│   │   │   └── intent_classifier.py
-│   │   │
-│   │   ├── strategies/
-│   │   │   └── strategy_builder.py
-│   │   │
-│   │   ├── routers/
-│   │   │   └── semantic_router.py
-│   │   │
-│   │   └── graph/
-│   │       ├── dependency_resolver.py
-│   │       ├── parallel_groups.py
-│   │       ├── parallel_executor.py
-│   │       └── agent_runner.py
-│   │
-│   └── state/
-│       └── agent_state.py
-│
-├── templates/
-│   ├── home.html
-│   ├── history.html
-│   └── result.html
-│
-├── requirements.txt
-└── README.md
+│   │   │   ├── agent_registry.py         # Maps agent names to implementations
+│   │   │   └── contract_manager.py       # Enforces StateContracts
+│   │   ├── scheduler/
+│   │   │   └── scheduler.py              # Purely declarative parallel scheduler
+│   │   └── state/
+│   │       ├── state_model.py            # Shared State dataclass container
+│   │       ├── state_builder.py          # Builds execution State
+│   │       └── state_merger.py           # Thread-safe state mutation merger
+│   └── services/
+│       ├── llm_service.py                # Runtime-facing LLM execution wrapper
+│       └── summarize_service.py          # Application-level service entrypoint
+├── app/tests/                            # Standard V8/V9 pytest testing suite
+│   ├── architecture/                     # Verifies import rules and layering
+│   ├── distributed/                      # Queues, workers, and distributed tests
+│   ├── execution/                        # Executor and engine tests
+│   ├── integration/                      # End-to-end and live provider tests
+│   ├── prompts/                          # Prompt lifecycle & rendering tests
+│   └── runtime/                          # Context, metadata, and resilience tests
+└── main.py                               # FastAPI application bootstrapper
 ```
 
 ---
 
-# Agent Registry
+## 🏃 Running the Application
 
-Agents self-register using decorators.
+AI-Summarizer is fully compatible with Windows 11, macOS, and Linux.
 
-Example:
+### 1. Environment Setup
 
-```python
-@register_agent(
-    "insights",
-    depends_on=["summary"]
-)
-def insights_agent(state):
-    ...
-```
+It is highly recommended to use Python 3.11. 
 
----
-
-# Execution Metadata
-
-Every run records:
-
-```python
-{
-    "agents_executed": [],
-    "agent_count": 0,
-    "parallel_groups": [],
-    "timings": {}
-}
-```
-
-Example:
-
-```python
-{
-    "agents_executed": [
-        "summary",
-        "actions",
-        "insights",
-        "findings"
-    ],
-    "agent_count": 4,
-    "parallel_groups": [
-        ["summary"],
-        ["actions", "insights", "findings"]
-    ],
-    "timings": {
-        "summary": 0.000005,
-        "actions": 0.000456,
-        "insights": 0.000286,
-        "findings": 0.000127
-    }
-}
-```
-
----
-
-# Running the Application
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Run:
-
-```bash
-uvicorn main:app --reload
-```
-
-Open:
-
-```text
-http://127.0.0.1:8000
-```
-
----
-
-# Current Version
-
-## V6.7.1 Stable
-
-Completed:
-
-* Agent State
-* Agent Graph
-* Agent Registry
-* Intent Classification
-* Multi-Intent Routing
-* Semantic Planning
-* Dependency Resolution
-* Parallel Execution
-* Execution Tracking
-* Explainability
-
----
-
-# Roadmap
-
-## V6.8
-
-Tool-Enabled Agents
-
-* action_tool
-* trend_tool
-* finding_tool
-* keyword_tool
-* sentiment_tool
-
-## V6.9
-
-LLM-Based Planning
-
-* Dynamic planning
-* Agent selection via LLM
-* Tool selection via LLM
-
-## V7
-
-Agentic AI Summarization Platform
-
-* Full workflow orchestration
-* Tool ecosystem
-* Agent memory
-* Multi-document analysis
-* Enterprise reporting
-* Human-in-the-loop review
-
-```
-```
-Current Architectural Version
-
-Your codebase is now effectively:
-
-V6.7.1 Stable
-
-✓ Agent Registry
-✓ Semantic Routing
-✓ Intent Classification
-✓ Multi Intent Detection
-✓ Dependency Graph
-✓ Parallel Execution
-✓ Execution Metadata
-✓ Database Persistence
-
-# why summarizer.py still exists.
-
-It is not acting as the FastAPI startup file.
-
-It is acting as a shared AI model module.
-
-# Better Structure (V6.7.2 Cleanup)
-
-Create:
-
-app/
-└── models/
-    └── summarizer_model.py
-
-Then update:
-
-# app/services/agents/summary_agent.py
-
-# Current State
-
-Previously:
-
-summarizer.py
-├── summarizer_model
-└── implicit dependency for summary_agent
-
-Now:
-
-summary_agent.py
-    ↓
-app/models/summarizer_model.py
-
-(or whatever path you chose)
-
-and startup is:
-
-uvicorn app.main:app --reload
-
-So summarizer.py is no longer part of the runtime path.
-
-# Updated V6.7.1 Structure
-
-A cleaner representation of your current architecture would be:
-
-ai-summarizer/
-│
-├── requirements.txt
-├── README.md
-├── tools.py
-├── __init__.py
-│
-├── static/
-│   ├── style.css
-│   └── app.js
-│
-├── docs/
-│   ├── architecture.md
-│   └── roadmap.md
-|
-├── logs/
-|   |
-│   └── app.log
-|
-└── app/
-    │
-    ├── __init__.py
-    ├── main.py
-    │
-    ├── models/
-    |   ├── __init__.py
-    │   └── summarizer_model.py
-    │
-    ├── templates/
-    |   ├── __init__.py
-    │   ├── home.html
-    │   ├── history.html
-    │   └── result.html
-    │
-    ├── routes/
-    |   ├── __init__.py
-    │   ├── home.py
-    │   ├── summarize.py
-    │   ├── upload.py
-    │   └── history.py
-    │
-    ├── db/
-    |   ├── __init__.py
-    │   ├── database.py
-    │   └── models.py
-    │
-    └── services/
-        │
-        ├── __init__.py
-        ├── agent_service.py
-        ├── agent_graph.py
-        ├── agent_state.py
-        ├── db_service.py
-        │
-        ├── agents/
-        │   ├── __init__.py
-        │   ├── summary_agent.py
-        │   ├── actions_agent.py
-        │   ├── insights_agent.py
-        │   ├── findings_agent.py
-        │   ├── plan_agent.py
-        │   └── trend_agent.py
-        │
-        ├── registry/
-        |   ├── __init__.py
-        │   ├── registry.py
-        │   └── agent_registry.py
-        │
-        ├── classifiers/
-        |   ├── __init__.py
-        │   └── intent_classifier.py
-        │
-        ├── strategies/
-        |   ├── __init__.py
-        │   └── strategy_builder.py
-        │
-        ├── routers/
-        |   ├── __init__.py
-        │   └── semantic_router.py
-        │
-        └── graph/
-            ├── __init__.py
-            ├── dependency_resolver.py
-            ├── parallel_groups.py
-            ├── parallel_executor.py
-            └── agent_runner.py
-
-# because you've now validated:
-
-Intent Classification
-Semantic Routing
-Agent Registry
-Dependency Resolution
-Parallel Execution
-Execution Metadata
-FastAPI Integration
-
-This is the first version that resembles a true orchestration engine rather than a simple summarizer.
-
-V6.7
-
-parallel_groups:
-[
- ["summary"],
- ["insights","actions"],
- ["trend","risk"]
-]
-
-summary = preprocessing
-metadata agent_count includes preprocessing
-agents_executed excludes preprocessing
-
-V7.7 — Execution Engine Evolution Plan (Clean Architecture Layer)
-  Core Goal of V7.7
-
-    Transform this:
-
-    “Agent orchestration system”
-
-    into:
-
-    “Deterministic DAG execution runtime with state contracts”
-
-# AI-Summarizer — Runtime Status
-
-## Current Runtime
-
-Active Runtime: **V7.7 Graph-Based Execution Engine**
-
-Status:
-
-* ExecutionGraph operational
-* Deterministic execution enabled
-* Contract-based runtime enabled
-* Full pipeline tests passing
-
----
-
-## Runtime Evolution
-
-### V7.6 (Archived Runtime)
-
-Architecture:
-
-* Scheduler → execution_order
-* Parallel groups
-* Mutable execution state
-* Runtime-driven orchestration
-
-Status:
-
-* Frozen
-* Maintained for rollback only
-* No future feature development
-
----
-
-### V7.7 (Current Runtime)
-
-Architecture:
-
-* Scheduler → ExecutionGraph
-* GraphValidator
-* ExecutionEngine
-* State Contracts
-* Node-level retries
-
-Execution Model:
-
-Request
-→ Scheduler
-→ ExecutionGraph
-→ ExecutionEngine
-→ State
-→ Output
-
----
-
-## Development Policy
-
-New features MUST target V7.7.
-
-Do not introduce:
-
-* execution_order
-* parallel_groups
-* runtime dependency generation
-
-All execution must originate from ExecutionGraph.
-
-Development
-
-pytest
-
-uvicorn app.main:app --reload
-
-pre-commit run --all-files
-
-## AI Summarizer
-## Version: V7.7 Stable
-Update:
-
-Project Overview
-Features
-Architecture
-Folder Structure
-Execution Pipeline
-Scheduler
-Execution Engine
-Runtime
-API
-Tests
-Future Roadmap
-
-========================================================================
-
-# AI Summarizer
-
-A production-oriented AI orchestration platform built around graph-based execution, adaptive runtime intelligence, and modular multi-agent processing.
-
-Current Version: **V7.9.0 Release Candidate**
-
-## Overview
-
-AI Summarizer has evolved from a simple text summarization application into a modular execution platform capable of coordinating multiple AI agents through a deterministic execution graph.
-
-The platform emphasizes:
-
-- Graph-based orchestration
-- Adaptive runtime intelligence
-- Deterministic execution
-- Runtime observability
-- Diagnostics and reporting
-- Production-oriented architecture
-
-The current implementation is designed to provide a stable execution runtime while remaining extensible for future distributed and enterprise deployments.
-
-## Key Features
-
-### Multi-Agent Execution
-
-Supported processing capabilities include:
-
-- Summary
-- Actions
-- Insights
-- Findings
-- Sentiment
-- Trend
-- Risk
-- Root Cause
-- Forecast
-- Recommendation
-
-### Graph-Based Orchestration
-
-- Immutable execution graph
-- Dependency validation
-- Layer-based scheduling
-- Parallel execution support
-
-### Adaptive Runtime
-
-- Runtime reasoning
-- Strategy selection
-- Decision engine
-- Runtime lifecycle management
-
-### Runtime Operations
-
-- Observability
-- Diagnostics
-- Reporting
-- Event-driven execution
-- Middleware pipeline
-
-## Architecture Overview
-
-```text
-API
-
-↓
-
-Runtime Manager
-
-↓
-
-Runtime Session
-
-↓
-
-Runtime Context
-
-↓
-
-Runtime Intelligence
-
-↓
-
-Scheduler
-
-↓
-
-Execution Engine
-
-↓
-
-Layer Executor
-
-↓
-
-Node Executor
-
-↓
-
-Agents
-
-↓
-
-Observability
-
-↓
-
-Diagnostics
-
-↓
-
-Reporting
-```
-
-For detailed architecture documentation, see `ARCHITECTURE.md`.
-
-## Repository Structure
-
-```text
-app/
-├── agents/
-├── orchestration/
-│   ├── execution/
-│   ├── graph/
-│   ├── registry/
-│   └── scheduler/
-├── runtime/
-│   ├── intelligence/
-│   ├── observability/
-│   ├── diagnostics/
-│   ├── reporting/
-│   ├── events/
-│   ├── middleware/
-│   └── ...
-├── routes/
-├── services/
-└── tests/
-```
-
-## Quick Start
-
-### Clone
-
-```bash
-git clone <repository-url>
-cd ai-summarizer
-```
-
-### Create Virtual Environment
-
-```bash
+**Windows (PowerShell):**
+```powershell
+# Create a virtual environment
 python -m venv venv311
-```
 
-### Install Dependencies
+# Activate the virtual environment
+.\venv311\Scripts\Activate.ps1
 
-```bash
+# Install requirements
 pip install -r requirements.txt
 ```
 
-### Start the Application
+**macOS/Linux (Bash):**
+```bash
+# Create a virtual environment
+python3 -m venv venv
+
+# Activate the virtual environment
+source venv/bin/activate
+
+# Install requirements
+pip install -r requirements.txt
+```
+
+### 2. Environment Variables (`.env`)
+
+Create a `.env` file in the project root:
+
+```ini
+# Core Configuration
+DEBUG=True
+PORT=8000
+
+# Provider Selection (mock | openai | openrouter)
+AI_PROVIDER=mock
+AI_MODEL=mock-model
+
+# OpenAI Credentials (Required if AI_PROVIDER=openai)
+OPENAI_API_KEY=your_openai_api_key
+
+# OpenRouter Credentials (Required if AI_PROVIDER=openrouter)
+OPENAI_API_KEY=your_openrouter_api_key
+OPENAI_BASE_URL=https://openrouter.ai/api/v1
+AI_MODEL=openai/gpt-4o-mini
+```
+
+### 3. Starting the Server
+
+Launch the FastAPI application with Uvicorn:
 
 ```bash
 uvicorn app.main:app --reload
 ```
+Once started:
+* **Swagger UI Documentation:** http://127.0.0.1:8000/docs
+* **Playground Home API:** http://127.0.0.1:8000/playground/
 
-## Running Tests
+### 4. Running the Tests
 
-Run the complete validation suite:
+To ensure the integrity of the runtime, you can execute the extensive test suite.
 
+**Run All Standard (Offline) Tests:**
 ```bash
-pytest
+pytest -m "not live" -q
+```
+*Expected Output:* ~672 passed, 9 deselected (0.00s network calls).
+
+**Run Live Integration Tests (API Key Required):**
+Set up your `.env` credentials, then run:
+```bash
+pytest -m live --run-live -v
 ```
 
-Formatting:
-
-```bash
-black .
-```
-
-Static analysis:
-
-```bash
-ruff check .
-```
-
-Pre-commit validation:
-
+**Quality Gates Verification (Ruff + Black):**
 ```bash
 pre-commit run --all-files
 ```
 
-## Documentation
+---
 
-Project documentation is organized as follows:
+## 🗺️ Long-Term Roadmap
 
-| Document | Purpose |
-|----------|---------|
-| `README.md` | Project overview and getting started |
-| `ARCHITECTURE.md` | Technical architecture |
-| `CHANGELOG.md` | Release history |
-| `PROJECT_STATUS.md` | Current development status |
-| `ROADMAP.md` | Future direction |
+The platform follows a clear progression roadmap:
 
-## Current Status
+* **V7.7:** Deterministic DAG Execution Kernel ✅
+* **V7.8:** Production Runtime Abstraction (Context, Sessions, EventBus, Observability) ✅
+* **V9.0:** AI Integration Framework (PromptOS, LLM Abstraction, Mock/OpenAI providers) ✅
+* **V9.1:** Provider Configuration & Live Validation (OpenRouter API integration, exception classifications) ✅
+* **V9.2 (Current):** Advanced Summarization (Token-aware Chunking, Hierarchical Summary Trees, Map-Reduce workflows) 🚧
+* **V9.3:** Prompt Intelligence (Prompt evaluations, token optimizers, versioning diagnostics)
+* **V9.4:** Production Retrieval Augmented Generation (Document embeddings, Vector DB backends, citation generation, source verification)
+* **V9.5:** Multi-Agent Intelligence (Planner, Researcher, Fact-checker, Critic, Synthesizer agents)
+* **V9.6:** Autonomous Agentic Runtime (Autonomous planning, tool call execution, long-term memory-aware execution, reflection loops)
+* **V10.0:** Distributed Enterprise Platform (Worker pooling, queues, multi-tenant horizontal scaling, gRPC remote adapters, human-in-the-loop review)
 
-Version:
+---
 
-**V7.9.0 Release Candidate**
+## 🤝 Contributing
 
-Project State:
+Contributions are highly encouraged! Please ensure all pull requests strictly follow the project's core guidelines:
+1. **Clean Imports:** Avoid circular dependencies. Walk imports down, never up.
+2. **Deterministic Pipeline:** The execution engine must remain pure. All adaptive changes are made in the runtime or intelligence layers.
+3. **No Uncoded Abstractions:** If you introduce an interface, implement a complete mocked representation alongside it.
+4. **Test-First Cadence:** No new feature is considered merged until its unit tests pass with 100% reliability.
 
-- Feature Complete
-- Runtime Platform Stable
-- Documentation Synchronized
-- Release Candidate Validation
+---
 
-Automated Validation:
+## 📄 License
 
-- Black
-- Ruff
-- Pytest
-- Pre-commit
-
-Current automated test count:
-
-**237 passing tests**
-
-## Roadmap
-
-### Completed
-
-- Agent architecture
-- Graph execution
-- Runtime platform
-- Adaptive runtime intelligence
-- Observability
-- Diagnostics
-- Reporting
-
-### Planned
-
-- Distributed runtime execution
-- Enterprise observability
-- Persistent execution history
-- Multi-runtime orchestration
-
-## Contributing
-
-Contributions should maintain the project's architectural principles:
-
-- Deterministic execution
-- Strong component isolation
-- Comprehensive automated testing
-- Production-oriented design
-
-Before submitting changes, ensure:
-
-```bash
-black .
-ruff check .
-pytest
-pre-commit run --all-files
-```
-
-## License
-
-Add the appropriate license information for this repository.
-
-# V8.0.0
-# AI Summarizer — Distributed Agent Runtime Platform
-## Architecture overview
-AI Summarizer V8.0.0 is an Agentic AI Workflow Engine designed for enterprise-grade distributed document processing
-. The system has evolved from a deterministic DAG engine (V7.7) into a fully managed distributed platform where specialized AI agents execute across a cluster of workers coordinated by a centralized runtime
-
-## Installation
-Environment: Requires Python 3.11+
-
-## Configuration
-Pre-commit Hooks:
-Configuration
-Configuration is managed via a .env file at the root.
-Provider Selection: Set AI_PROVIDER to openai, ollama, or fake
-
-API Keys: Configure OPENAI_API_KEY for live model access
-
-Runtime settings: Customize MAX_WORKERS and RETRY_COUNT in RuntimeConfig
-
-## FastAPI endpoints
-POST /api/v1/summarize: Main entry point for AI-powered document summarization
-
-GET /metrics: Prometheus-compatible endpoint for real-time monitoring
-
-GET /history: View historical execution results and metadata
-
-POST /playground/execute: Debugging endpoint for inspecting execution graphs and traces
-
-## AI Provider support
-The platform features a provider-neutral abstraction layer
- Current support includes:
-OpenAI: Standard API and Azure OpenAI compatibility
-
-Local Models: Integration with Ollama and other local inference servers
-
-Mock Provider: Deterministic testing for CI/CD environments
-
-## Metrics endpoint
-The /metrics endpoint exposes live operational telemetry including queue depth, active worker counts, and per-agent execution latency, fully integrated with a Prometheus Metrics Exporter
-
-## Plugin system
-The Plugin SDK allows third-party developers to extend the platform with new agents, tools, and execution strategies without modifying the core runtime
- It handles dynamic discovery, lifecycle management, and version compatibility
-
-## Memory subsystem
-Features a sophisticated multi-layered memory architecture
-
-Scoped Memory: Namespaces for global, tenant, and per-execution state.
-Vector Store: Abstracted interface for semantic search and RAG pipelines
-
-Retrieval Pipeline: Context-aware retrieval building for agent prompting
-
-## Worker runtime
-The worker is the atomic execution node. It hosts a full V7.9 runtime instance, receiving tasks from a central queue and reporting heartbeat and health metrics to the coordinator
-
-## Development workflow
-The project follows a strict RFC-driven engineering process
-
-1. Architecture Review: Impact audit and interface specification.
-2. Implementation: Complete, production-ready code with strong typing.
-3. Testing: Mandatory unit and regression tests (Pytest).
-4. Integration: Validation against the frozen V7.7 execution kernel.
+This project is licensed under the Apache 2.0 License - see the LICENSE file for details.

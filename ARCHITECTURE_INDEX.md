@@ -2297,3 +2297,19 @@ M1.6 objective
 | M1.6 Architecture Integration       | ✅ Complete |
 | M1.7 Production Boundary Validation | ✅ Complete |
 
+V10 M1 — Officially Frozen
+
+The following is now established:
+
+V10.0.0-M1
+Intelligence Foundation
+Commit: c94bc02
+Tag: v10.0.0-m1
+Branch: main
+Remote: synchronized
+Working tree: clean
+Tests: 1171 passed
+Live tests: 9 deselected
+Pre-commit: passed
+git diff --check: clean
+
