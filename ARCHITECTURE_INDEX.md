@@ -2313,3 +2313,251 @@ Live tests: 9 deselected
 Pre-commit: passed
 git diff --check: clean
 
+fundamental V10 principle
+V10 decides WHAT.
+V9.3 decides HOW.
+V9 runtime executes.
+
+M2.2 architectural interpretation
+             V10
+              │
+              ▼
+   IntelligenceOrchestrator
+              │
+              ▼
+        TaskDecision
+              │
+              ▼
+       PlannerHandoff
+              │
+              │ context.intent
+              │ source text
+              ▼
+             V9.3
+              │
+              ▼
+    SummarizationPlanner
+              │
+              ▼
+     SummarizationPlan
+
+V10 owns
+WHAT
+│
+├── summarize
+├── retrieve
+├── verify
+├── refine
+├── retry
+├── fallback
+└── abort
+V9.3 owns
+HOW TO SUMMARIZE
+│
+├── document preparation
+├── chunking
+├── strategy selection
+├── adaptive strategy planning
+└── SummarizationPlan
+
+M2 status
+M2.1 Intelligence Orchestrator
+    ✅ Complete
+M2.2 Planner Handoff Boundary
+    ✅ Complete
+
+The architecture now has a meaningful V10-to-V9.3 handoff:
+
+┌──────────────────────────────┐
+│       V10 Intelligence       │
+│                              │
+│ IntelligenceContext          │
+│          ↓                   │
+│ IntelligenceOrchestrator     │
+│          ↓                   │
+│ TaskDecision                 │
+└──────────────┬───────────────┘
+               │
+               ▼
+       PlannerHandoff
+               │
+               ▼
+┌──────────────────────────────┐
+│       V9.3 Planning          │
+│                              │
+│ SummarizationPlanner         │
+│          ↓                   │
+│ SummarizationPlan            │
+└──────────────┬───────────────┘
+               │
+               ▼
+        Existing Runtime
+
+**M2.5 — Architectural Design**
+
+The boundary becomes:
+
+                    V10
+                     │
+             TaskDecision
+                     │
+                     ▼
+           StrategyPolicyHandoff
+                     │
+                     ▼
+                    V9.3
+                     │
+             SummarizationPlan
+                     │
+                     ▼
+             StrategyPolicyResult
+                     │
+                     ▼
+              PlannerOutcome
+                     │
+          ┌──────────┼──────────┐
+          │          │          │
+       decision   strategy   provenance
+          │          │          │
+          └──────────┼──────────┘
+                     ▼
+             V10 Intelligence
+
+**M2 architectural structure after M2.6**
+                    ┌─────────────────────┐
+                    │   V10 Intelligence  │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                     IntelligenceContext
+                               │
+                               ▼
+                         TaskDecision
+                               │
+                               ▼
+                      Planner Handoff
+                               │
+                               ▼
+                    Constraint Evaluation
+                               │
+                               ▼
+                    Strategy Handoff Policy
+                               │
+                               ▼
+                    StrategyPolicyResult
+                               │
+                               ▼
+                       PlannerOutcome
+                               │
+                               ▼
+                     DecisionFeedback
+                               │
+                               ▼
+                       RuntimeDecision
+                               │
+                               ▼
+                 ┌────────────────────────┐
+                 │ Existing Runtime Layer │
+                 └────────────┬───────────┘
+                              │
+                              ▼
+                         Execution
+**M2 status**
+M2.1  Intelligence Orchestrator
+      ✅ Complete
+
+M2.2  Planner Handoff Boundary
+      ✅ Complete
+
+M2.3  Constraint-Aware Planner Handoff
+      ✅ Complete
+
+M2.4  Strategy Handoff Policy
+      ✅ Complete
+
+M2.5  Planner Outcome / Decision Feedback
+      ✅ Complete
+
+M2.6  Intelligence-to-Execution Boundary
+      ✅ Architecture complete
+      ✅ No implementation required
+
+**M2 closure decision**
+M2 — CLOSED
+M2 Architecture
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+M2.1  ✅
+M2.2  ✅
+M2.3  ✅
+M2.4  ✅
+M2.5  ✅
+M2.6  ✅
+
+
+Architecture review       ✅
+Boundary review           ✅
+Frozen-layer protection   ✅
+Regression                ✅
+Contract coverage         ✅
+Execution boundary        ✅
+
+
+STATUS: COMPLETE
+**Final M2 architecture**
+                         V10 INTELLIGENCE
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ IntelligenceContext │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                       ┌───────────────┐
+                       │ TaskDecision  │
+                       └───────┬───────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Planner Handoff      │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Constraint Evaluation│
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Strategy Handoff     │
+                    │ Policy               │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ StrategyPolicyResult │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ PlannerOutcome       │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ DecisionFeedback     │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ RuntimeDecision     │
+                    └──────────┬──────────┘
+                               │
+                         EXECUTION
+                               │
+                               ▼
+                    Existing Runtime
+                               │
+                               ▼
+                    Existing Providers
