@@ -14,6 +14,16 @@ from .strategy_policy import StrategyHandoffPolicy
 from .strategy_policy_handoff import StrategyPolicyHandoff
 from .strategy_policy_result import StrategyPolicyResult
 from .task_decision import TaskAction, TaskDecision
+from .execution_observation import ExecutionObservation, ExecutionOutcome
+from .runtime_observation_adapter import RuntimeObservationAdapter
+from .evaluation_result import EvaluationResult, EvaluationStatus
+from .evaluation import ExecutionEvaluator, EvaluationCriteria
+from .execution_feedback import (
+    ExecutionFeedback,
+    ExecutionFeedbackBuilder,
+    FeedbackSignal,
+)
+from .feedback_consumer import FeedbackConsumer, FeedbackSeverity, IntelligenceFeedback
 
 __all__ = [
     "ConstraintAwarePlannerHandoff",
@@ -33,4 +43,17 @@ __all__ = [
     "StrategyPolicyResult",
     "TaskAction",
     "TaskDecision",
+    "ExecutionObservation",
+    "ExecutionOutcome",
+    "RuntimeObservationAdapter",
+    "EvaluationResult",
+    "EvaluationStatus",
+    "ExecutionEvaluator",
+    "EvaluationCriteria",
+    "ExecutionFeedback",
+    "ExecutionFeedbackBuilder",
+    "FeedbackSignal",
+    "FeedbackConsumer",
+    "FeedbackSeverity",
+    "IntelligenceFeedback",
 ]
