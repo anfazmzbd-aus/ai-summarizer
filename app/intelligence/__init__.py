@@ -50,6 +50,34 @@ from .experience_learning import (
     ExperienceLearningContext,
     LearningExperienceConsumer,
 )
+from .decision_support_policy import (
+    BoundedDecisionSupportPolicy,
+    DecisionSupportDisposition,
+    DecisionSupportPolicyResult,
+)
+from .experience_informed_decision import (
+    ExperienceInformedDecision,
+    ExperienceInformedDecisionBoundary,
+)
+from .decision_support import (
+    DecisionSupportAssessment,
+    DecisionSupportStatus,
+    DecisionSupportBuilder,
+)
+from .evidence_evaluation import (
+    EvidenceAssessment,
+    EvidenceAssessmentStatus,
+    ExperienceEvidenceEvaluator,
+)
+from .experience_evidence import (
+    EvidenceStrength,
+    ExperienceEvidence,
+    ExperienceEvidenceBuilder,
+)
+from .decision_explanation import (
+    DecisionExplanation,
+    DecisionExplanationBuilder,
+)
 
 __all__ = [
     "ConstraintAwarePlannerHandoff",
@@ -97,4 +125,20 @@ __all__ = [
     "FeedbackExperienceResult",
     "ExperienceLearningContext",
     "LearningExperienceConsumer",
+    "BoundedDecisionSupportPolicy",
+    "DecisionSupportDisposition",
+    "DecisionSupportPolicyResult",
+    "ExperienceInformedDecision",
+    "ExperienceInformedDecisionBoundary",
+    "DecisionSupportAssessment",
+    "DecisionSupportBuilder",
+    "DecisionSupportStatus",
+    "EvidenceAssessmentStatus",
+    "EvidenceStrength",
+    "EvidenceAssessment",
+    "ExperienceEvidenceEvaluator",
+    "ExperienceEvidence",
+    "ExperienceEvidenceBuilder",
+    "DecisionExplanation",
+    "DecisionExplanationBuilder",
 ]

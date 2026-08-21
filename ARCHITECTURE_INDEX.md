@@ -2835,3 +2835,62 @@ ExperienceLearningContext
       │
       ▼
 Future Intelligence
+
+**Current M5 progress**
+M5.1  Experience Evidence Contract                  ✅
+M5.2  Experience Evidence Evaluation                ✅
+M5.3  Decision Support Contract                     ✅
+M5.4  Bounded Decision Support Policy               ✅
+M5.5  Experience-Informed Decision Boundary         ✅
+M5.6  Decision Explainability & Provenance          ✅
+M5.7  Architecture Review & Closure                 ✅
+
+**Milestone closure**
+| Milestone | Capability                            | Status  |
+| --------- | ------------------------------------- | ------  |
+| M5.1      | Experience Evidence Contract          | ✅      |
+| M5.2      | Experience Evidence Evaluation        | ✅      |
+| M5.3      | Decision Support Contract             | ✅      |
+| M5.4      | Bounded Decision Support Policy       | ✅      |
+| M5.5      | Experience-Informed Decision Boundary | ✅      |
+| M5.6      | Decision Explainability & Provenance  | ✅      |
+| M5.7      | Architecture Review & Closure         | ✅      |
+
+**Final M5 architecture**
+ExperienceRepository
+        ↓
+LearningExperienceConsumer
+        ↓
+ExperienceLearningContext
+        ↓
+ExperienceEvidenceBuilder
+        ↓
+ExperienceEvidence
+        ↓
+ExperienceEvidenceEvaluator
+        ↓
+EvidenceAssessment
+        │
+        │
+TaskDecision
+        │
+        └─────────────┐
+                      ↓
+           DecisionSupportBuilder
+                      ↓
+          DecisionSupportAssessment
+                      ↓
+        BoundedDecisionSupportPolicy
+                      ↓
+        DecisionSupportPolicyResult
+                      │
+                      │
+TaskDecision ─────────┘
+        ↓
+ExperienceInformedDecisionBoundary
+        ↓
+ExperienceInformedDecision
+        ↓
+DecisionExplanationBuilder
+        ↓
+DecisionExplanation
