@@ -2568,6 +2568,7 @@ M3.3  Runtime Observation Adapter                 ✅
 M3.4  Architecture Review / Evaluation Boundary  ✅
 M3.5  Execution Feedback Contract                 ✅
 M3.6  Intelligence Feedback Consumption Boundary  ✅
+M3.7 Closure Review                               ✅
 
 M3 overall assessment
 
@@ -2632,4 +2633,205 @@ M3 — Execution Feedback & Intelligence Boundary
         ✅ M3.4
         ✅ M3.5
         ✅ M3.6
-        ▶ M3.7 Closure Review
+        ✅ M3.7
+
+M4.1 architecture after implementation
+TaskDecision
+     │
+     │
+     │       ExecutionFeedback
+     │               │
+     └───────┬───────┘
+             │
+             ▼
+        M4.2 Evaluator
+             │
+             ▼
+   DecisionEffectiveness
+        [M4.1 contract]
+
+**M4.2 resulting boundary**
+                    M1
+                TaskDecision
+                     │
+                     │
+                     ├───────────────┐
+                     │               │
+                     ▼               │
+                  Runtime            │
+                     │               │
+                     ▼               │
+             ExecutionFeedback      │
+                     │               │
+                     └───────┬───────┘
+                             ▼
+               DecisionEffectivenessEvaluator
+                             │
+                             ▼
+                 DecisionEffectiveness
+                             │
+                             ▼
+                    M4.3 Experience
+
+Current M4 progress
+M4.1  Decision Effectiveness Contract          ✅
+M4.2  Effectiveness Evaluation Boundary        ✅
+M4.3  Decision Experience Contract             ▶ next
+M4.4  Experience Normalization
+M4.5  Experience Repository Boundary
+M4.6  Feedback-to-Experience Pipeline
+M4.7  Learning Consumption Boundary
+M4.8  Architecture Review & Closure
+
+**Resulting M4 flow**
+
+After M4.3:
+
+TaskDecision
+      │
+      ▼
+Execution
+      │
+      ▼
+ExecutionFeedback
+      │
+      ▼
+DecisionEffectivenessEvaluator
+      │
+      ▼
+DecisionEffectiveness
+      │
+      └──────────────┐
+                     │
+TaskDecision ────────┤
+ExecutionFeedback ───┤
+                     ▼
+          DecisionExperienceBuilder
+                     │
+                     ▼
+             DecisionExperience
+
+**M4.4 architectural result**
+DecisionExperience
+      │
+      ▼
+ExperienceNormalizer
+      │
+      ▼
+NormalizedDecisionExperience
+      │
+      ├── provenance
+      │     context_id
+      │     correlation_id
+      │     execution_id
+      │
+      └── semantic features
+            action
+            confidence
+            normalized signals
+            effectiveness
+            normalized dimensions
+                  │
+                  ▼
+            comparison_key
+
+**Current M4 progress**
+M4.1  Decision Effectiveness Contract       ✅
+M4.2  Effectiveness Evaluation Boundary     ✅
+M4.3  Decision Experience Contract          ✅
+M4.4  Experience Normalization              ✅
+M4.5  Experience Repository Boundary        ▶ next
+M4.6  Feedback-to-Experience Pipeline
+M4.7  Learning Consumption Boundary
+M4.8  Architecture Review & Closure
+
+**M4.5 architecture after implementation**
+DecisionExperience
+       │
+       ▼
+ExperienceNormalizer
+       │
+       ▼
+NormalizedDecisionExperience
+       │
+       ▼
+┌────────────────────────────────┐
+│ ExperienceRepository           │
+│                                │
+│ add                            │
+│ get by provenance              │
+│ exact comparison-key lookup    │
+│ list                           │
+└───────────────┬────────────────┘
+                │
+        implementation boundary
+                │
+       ┌────────▼─────────┐
+       │ InMemory         │
+       │ Reference Adapter│
+       └──────────────────┘
+
+Future:
+SQLite / database / other adapter
+        only if justified
+
+**M4.6 architectural result**
+                    M3 / M4 INPUT
+                         │
+          ┌──────────────┴──────────────┐
+          │                             │
+     TaskDecision                ExecutionFeedback
+          │                             │
+          └──────────────┬──────────────┘
+                         ▼
+            DecisionEffectivenessEvaluator
+                         │
+                         ▼
+              DecisionEffectiveness
+                         │
+                         ▼
+             DecisionExperienceBuilder
+                         │
+                         ▼
+                DecisionExperience
+                         │
+                         ▼
+                ExperienceNormalizer
+                         │
+                         ▼
+           NormalizedDecisionExperience
+                         │
+                         ▼
+                ExperienceRepository
+                
+**M4.7 architectural result**
+                  WRITE SIDE
+
+TaskDecision
+     +
+ExecutionFeedback
+      │
+      ▼
+FeedbackExperiencePipeline
+      │
+      ▼
+NormalizedDecisionExperience
+      │
+      ▼
+ExperienceRepository
+      │
+      │
+      │
+      ▼
+                  READ SIDE
+
+ExperienceRepository
+      │
+      ▼
+LearningExperienceConsumer
+      │
+      ▼
+ExperienceLearningContext
+      │
+      ▼
+Future Intelligence

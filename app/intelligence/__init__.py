@@ -24,6 +24,32 @@ from .execution_feedback import (
     FeedbackSignal,
 )
 from .feedback_consumer import FeedbackConsumer, FeedbackSeverity, IntelligenceFeedback
+from .decision_effectiveness import (
+    DecisionEffectiveness,
+    EffectivenessDimension,
+    EffectivenessStatus,
+)
+from .effectiveness_evaluator import DecisionEffectivenessEvaluator
+from .decision_experience import DecisionExperience, DecisionExperienceBuilder
+from .experience_normalization import (
+    ExperienceNormalizer,
+    NormalizedDecisionExperience,
+)
+from .experience_repository import (
+    ExperienceRepository,
+    experience_provenance_key,
+)
+from .in_memory_experience_repository import (
+    InMemoryExperienceRepository,
+)
+from .feedback_experience_pipeline import (
+    FeedbackExperiencePipeline,
+    FeedbackExperienceResult,
+)
+from .experience_learning import (
+    ExperienceLearningContext,
+    LearningExperienceConsumer,
+)
 
 __all__ = [
     "ConstraintAwarePlannerHandoff",
@@ -56,4 +82,19 @@ __all__ = [
     "FeedbackConsumer",
     "FeedbackSeverity",
     "IntelligenceFeedback",
+    "DecisionEffectiveness",
+    "EffectivenessDimension",
+    "EffectivenessStatus",
+    "DecisionEffectivenessEvaluator",
+    "DecisionExperience",
+    "DecisionExperienceBuilder",
+    "ExperienceNormalizer",
+    "NormalizedDecisionExperience",
+    "ExperienceRepository",
+    "InMemoryExperienceRepository",
+    "experience_provenance_key",
+    "FeedbackExperiencePipeline",
+    "FeedbackExperienceResult",
+    "ExperienceLearningContext",
+    "LearningExperienceConsumer",
 ]
