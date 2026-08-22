@@ -2894,3 +2894,62 @@ ExperienceInformedDecision
 DecisionExplanationBuilder
         ↓
 DecisionExplanation
+
+**M6 Closure**
+Milestone closure
+| Milestone | Capability                             | Status |
+| --------- | -------------------------------------- | ------ |
+| M6.1      | Adaptation Eligibility Contract        | ✅      |
+| M6.2      | Adaptation Eligibility Evaluation      | ✅      |
+| M6.3      | Adaptation Decision Contract           | ✅      |
+| M6.4      | Adaptive Intelligence Policy           | ✅      |
+| M6.5      | Adaptation Explainability & Provenance | ✅      |
+| M6.6      | Adaptive Policy Composition Boundary   | ✅      |
+| M6.7      | Architecture Review & Closure          | ✅      |
+
+Final M6 architecture
+M5
+ExperienceInformedDecision
+        ↓
+AdaptationEligibilityEvaluator
+        ↓
+AdaptationEligibility
+        ↓
+AdaptiveIntelligencePolicy
+        ↓
+AdaptationDecision
+        ↓
+AdaptationExplanationBuilder
+        ↓
+AdaptationExplanation
+        ↓
+AdaptivePolicyCompositionBoundary
+        ↓
+AdaptivePolicyOutcome
+
+**Architectural maturity after M6**
+DECIDE
+  ↓
+EXECUTE
+  ↓
+OBSERVE
+  ↓
+EVALUATE
+  ↓
+BUILD EXPERIENCE
+  ↓
+READ HISTORY
+  ↓
+INTERPRET HISTORY
+  ↓
+SUPPORT DECISION
+  ↓
+APPLY BOUNDED POLICY
+  ↓
+EVALUATE ADAPTATION ELIGIBILITY
+  ↓
+CREATE ADAPTATION INTENT
+  ↓
+EXPLAIN
+  ↓
+HAND OFF

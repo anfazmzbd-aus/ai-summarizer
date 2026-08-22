@@ -78,6 +78,28 @@ from .decision_explanation import (
     DecisionExplanation,
     DecisionExplanationBuilder,
 )
+from .adaptation_eligibility import (
+    AdaptationEligibility,
+    AdaptationEligibilityStatus,
+)
+from .adaptation_eligibility_evaluator import (
+    AdaptationEligibilityEvaluator,
+)
+from .adaptation_decision import (
+    AdaptationDecision,
+    AdaptationDisposition,
+)
+from .adaptive_intelligence_policy import (
+    AdaptiveIntelligencePolicy,
+)
+from .adaptation_explanation import (
+    AdaptationExplanation,
+    AdaptationExplanationBuilder,
+)
+from .adaptive_policy_outcome import (
+    AdaptivePolicyCompositionBoundary,
+    AdaptivePolicyOutcome,
+)
 
 __all__ = [
     "ConstraintAwarePlannerHandoff",
@@ -141,4 +163,14 @@ __all__ = [
     "ExperienceEvidenceBuilder",
     "DecisionExplanation",
     "DecisionExplanationBuilder",
+    "AdaptationEligibility",
+    "AdaptationEligibilityStatus",
+    "AdaptationEligibilityEvaluator",
+    "AdaptationDecision",
+    "AdaptationDisposition",
+    "AdaptiveIntelligencePolicy",
+    "AdaptationExplanation",
+    "AdaptationExplanationBuilder",
+    "AdaptivePolicyCompositionBoundary",
+    "AdaptivePolicyOutcome",
 ]
