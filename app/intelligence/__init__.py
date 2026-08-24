@@ -100,6 +100,32 @@ from .adaptive_policy_outcome import (
     AdaptivePolicyCompositionBoundary,
     AdaptivePolicyOutcome,
 )
+from .orchestration_directive import (
+    OrchestrationDirective,
+    OrchestrationDisposition,
+)
+from .orchestration_translation_policy import (
+    OrchestrationTranslationPolicy,
+)
+from .orchestration_directive_guard import (
+    DirectiveValidationStatus,
+    OrchestrationDirectiveGuard,
+    OrchestrationDirectiveValidation,
+)
+from .intelligence_orchestration_handoff import (
+    IntelligenceOrchestrationHandoff,
+    IntelligenceOrchestrationHandoffBoundary,
+)
+from .execution_integration import (
+    ExecutionIntegrationDirective,
+    ExecutionIntegrationMode,
+    ExistingExecutionIntegrationAdapter,
+)
+from .integration_explanation import (
+    IntegrationExplanation,
+    IntegrationExplanationBuilder,
+)
+
 
 __all__ = [
     "ConstraintAwarePlannerHandoff",
@@ -173,4 +199,17 @@ __all__ = [
     "AdaptationExplanationBuilder",
     "AdaptivePolicyCompositionBoundary",
     "AdaptivePolicyOutcome",
+    "OrchestrationDirective",
+    "OrchestrationDisposition",
+    "OrchestrationTranslationPolicy",
+    "DirectiveValidationStatus",
+    "OrchestrationDirectiveGuard",
+    "OrchestrationDirectiveValidation",
+    "IntelligenceOrchestrationHandoff",
+    "IntelligenceOrchestrationHandoffBoundary",
+    "ExecutionIntegrationDirective",
+    "ExecutionIntegrationMode",
+    "ExistingExecutionIntegrationAdapter",
+    "IntegrationExplanation",
+    "IntegrationExplanationBuilder",
 ]

@@ -2953,3 +2953,152 @@ CREATE ADAPTATION INTENT
 EXPLAIN
   ↓
 HAND OFF
+
+** V10 M7 — Intelligence Orchestration Integration **
+Core M7 architecture
+                    ┌─────────────────────┐
+                    │       M5/M6         │
+                    │ Intelligence Layer  │
+                    └─────────┬───────────┘
+                              │
+                              ▼
+                   AdaptivePolicyOutcome
+                              │
+                              ▼
+              ┌───────────────────────────┐
+              │ Orchestration Policy      │
+              │ Translation Boundary      │
+              └─────────────┬─────────────┘
+                            │
+                            ▼
+                 OrchestrationDirective
+                            │
+                            ▼
+              ┌───────────────────────────┐
+              │ Directive Guard /         │
+              │ Validation Boundary       │
+              └─────────────┬─────────────┘
+                            │
+                            ▼
+              ValidatedOrchestrationIntent
+                            │
+                            ▼
+               Existing execution boundary
+
+M7 milestone plan
+| Milestone| Scope                                               |
+|----------|-----------------------------------------------------|
+| **M7.1** | Orchestration Directive Contract                    |
+| **M7.2** | Adaptive Outcome → Orchestration Translation Policy |
+| **M7.3** | Orchestration Directive Validation / Guard Boundary |
+| **M7.4** | Intelligence-to-Orchestration Handoff Contract      |
+| **M7.5** | Existing Execution Integration Adapter              |
+| **M7.6** | Integration Explainability, Safety & Boundary Tests |
+| **M7.7** | Architecture Review & M7 Closure                    |
+
+Resulting architecture
+After M7.4:
+M6
+AdaptivePolicyOutcome
+        ↓
+M7.2
+OrchestrationTranslationPolicy
+        ↓
+OrchestrationDirective
+        ↓
+M7.3
+OrchestrationDirectiveGuard
+        ↓
+OrchestrationDirectiveValidation
+        ↓
+M7.4
+IntelligenceOrchestrationHandoffBoundary
+        ↓
+IntelligenceOrchestrationHandoff
+        │
+        │ execution-facing boundary
+        ▼
+M7.5
+
+**M7 Milestone closure**
+| Milestone | Capability                                   | Status |
+| --------- | -------------------------------------------- | ------ |
+| M7.1      | Orchestration Directive Contract             | ✅      |
+| M7.2      | Adaptive Outcome → Orchestration Translation | ✅      |
+| M7.3      | Directive Validation / Guard Boundary        | ✅      |
+| M7.4      | Intelligence-to-Orchestration Handoff        | ✅      |
+| M7.5      | Existing Execution Integration Adapter       | ✅      |
+| M7.6      | Integration Explainability & Safety          | ✅      |
+| M7.7      | Architecture Review & Closure                | ✅      |
+
+**Final M7 architecture**
+M6
+AdaptivePolicyOutcome
+        ↓
+OrchestrationTranslationPolicy
+        ↓
+OrchestrationDirective
+        ↓
+OrchestrationDirectiveGuard
+        ↓
+OrchestrationDirectiveValidation
+        ↓
+IntelligenceOrchestrationHandoffBoundary
+        ↓
+IntelligenceOrchestrationHandoff
+        ↓
+ExistingExecutionIntegrationAdapter
+        ↓
+ExecutionIntegrationDirective
+        ↓
+IntegrationExplanationBuilder
+        ↓
+IntegrationExplanation
+
+**Existing execution preservation review**
+PRESERVE
+→ preserve existing behavior
+
+ADVISORY
+→ preserve existing behavior
+
+CONSTRAINED
+→ preserve existing behavior
+   + bounded constraint requirement
+
+REVIEW
+→ preserve existing behavior
+   + review requirement
+
+**Architectural maturity after M7**
+
+The V10 intelligence loop is now:
+DECIDE
+  ↓
+EXECUTE
+  ↓
+OBSERVE
+  ↓
+EVALUATE
+  ↓
+BUILD EXPERIENCE
+  ↓
+READ HISTORY
+  ↓
+INTERPRET
+  ↓
+SUPPORT DECISION
+  ↓
+APPLY BOUNDED POLICY
+  ↓
+CREATE ADAPTATION INTENT
+  ↓
+TRANSLATE TO ORCHESTRATION
+  ↓
+VALIDATE AUTHORITY
+  ↓
+HAND OFF
+  ↓
+PRODUCE EXECUTION-NEUTRAL GUIDANCE
+
+**M7 — CLOSED**
