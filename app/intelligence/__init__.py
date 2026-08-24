@@ -125,6 +125,26 @@ from .integration_explanation import (
     IntegrationExplanation,
     IntegrationExplanationBuilder,
 )
+from .intelligence_trace import IntelligenceTrace
+from .intelligence_trace_builder import (
+    IntelligenceTraceBuilder,
+)
+from .observability_summary import (
+    IntelligenceObservabilityStatus,
+    IntelligenceObservabilitySummary,
+)
+from .observability_evaluator import (
+    IntelligenceObservabilityEvaluator,
+)
+from .observability_event import (
+    IntelligenceObservabilityEvent,
+    IntelligenceObservabilitySeverity,
+    ObservabilityEventBuilder,
+)
+from .observability_integration import (
+    IntelligenceObservabilityIntegrationBoundary,
+    IntelligenceObservabilitySnapshot,
+)
 
 
 __all__ = [
@@ -212,4 +232,14 @@ __all__ = [
     "ExistingExecutionIntegrationAdapter",
     "IntegrationExplanation",
     "IntegrationExplanationBuilder",
+    "IntelligenceTrace",
+    "IntelligenceTraceBuilder",
+    "IntelligenceObservabilityStatus",
+    "IntelligenceObservabilitySummary",
+    "IntelligenceObservabilityEvaluator",
+    "IntelligenceObservabilityEvent",
+    "IntelligenceObservabilitySeverity",
+    "ObservabilityEventBuilder",
+    "IntelligenceObservabilityIntegrationBoundary",
+    "IntelligenceObservabilitySnapshot",
 ]

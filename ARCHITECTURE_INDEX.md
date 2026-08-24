@@ -3102,3 +3102,96 @@ HAND OFF
 PRODUCE EXECUTION-NEUTRAL GUIDANCE
 
 **M7 — CLOSED**
+
+**Remaining V10 path**
+M1  Intelligence Foundation                    ✅
+M2  Intelligence → Execution                   ✅
+M3  Execution → Intelligence Feedback          ✅
+M4  Effectiveness & Experience                 ✅
+M5  Experience-Informed Decision Support       ✅
+M6  Controlled Adaptive Intelligence Policy    ✅
+M7  Intelligence Orchestration Integration     ✅
+
+M8  Intelligence Observability & Explainability ◀ CURRENT
+M9  Intelligence Hardening & Evaluation
+M10 V10 Integration / Release Closure
+
+** M8  Intelligence Observability & Explainability **
+
+**M8.1 — Intelligence Trace Contract is COMPLETE.**
+The new observability boundary is now established:
+DecisionExplanation
+        +
+AdaptationExplanation
+        +
+IntegrationExplanation
+        ↓
+IntelligenceTrace
+
+**M8.7 — Architecture Review & M8 Closure**
+Milestone closure
+| Milestone | Capability                                         | Status |
+| --------- | -------------------------------------------------- | ------ |
+| M8.1      | Intelligence Trace Contract                        | ✅      |
+| M8.2      | Intelligence Trace Builder / Provenance Validation | ✅      |
+| M8.3      | Observability Summary Contract                     | ✅      |
+| M8.4      | Observability Summary Evaluation                   | ✅      |
+| M8.5      | Observability Event / Diagnostic Boundary          | ✅      |
+| M8.6      | Explainability Integration & Safety                | ✅      |
+| M8.7      | Architecture Review & Closure                      | ✅      |
+
+**Final M8 architecture**
+DecisionExplanation
+        +
+AdaptationExplanation
+        +
+IntegrationExplanation
+        ↓
+IntelligenceTraceBuilder
+        ↓
+IntelligenceTrace
+        ↓
+IntelligenceObservabilityEvaluator
+        ↓
+IntelligenceObservabilitySummary
+        ↓
+ObservabilityEventBuilder
+        ↓
+IntelligenceObservabilityEvent
+        ↓
+IntelligenceObservabilityIntegrationBoundary
+        ↓
+IntelligenceObservabilitySnapshot
+
+**M8 architectural maturity**
+DECIDE
+  ↓
+EXECUTE
+  ↓
+OBSERVE
+  ↓
+EVALUATE
+  ↓
+BUILD EXPERIENCE
+  ↓
+USE HISTORICAL EVIDENCE
+  ↓
+SUPPORT DECISION
+  ↓
+ADAPT
+  ↓
+TRANSLATE
+  ↓
+GUARD
+  ↓
+HAND OFF
+  ↓
+INTEGRATE
+  ↓
+TRACE
+  ↓
+SUMMARIZE
+  ↓
+DIAGNOSE
+  ↓
+OBSERVE
