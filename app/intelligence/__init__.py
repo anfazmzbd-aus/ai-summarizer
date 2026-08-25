@@ -145,7 +145,35 @@ from .observability_integration import (
     IntelligenceObservabilityIntegrationBoundary,
     IntelligenceObservabilitySnapshot,
 )
-
+from .intelligence_invariant import (
+    IntelligenceInvariant,
+    IntelligenceInvariantCategory,
+    IntelligenceInvariantSeverity,
+    InvariantEvaluationResult,
+)
+from .invariant_evaluator import (
+    IntelligenceInvariantEvaluator,
+)
+from .lifecycle_scenario import (
+    CanonicalLifecycleScenarios,
+    LifecycleScenario,
+    LifecycleScenarioKind,
+)
+from .lifecycle_scenario_evaluator import (
+    LifecycleScenarioEvaluator,
+    LifecycleScenarioResult,
+)
+from .boundary_stress import (
+    BoundaryStressCase,
+    BoundaryStressCategory,
+    BoundaryStressEvaluator,
+    BoundaryStressResult,
+)
+from .hardening_report import (
+    IntelligenceHardeningReport,
+    IntelligenceHardeningReportBuilder,
+    IntelligenceHardeningStatus,
+)
 
 __all__ = [
     "ConstraintAwarePlannerHandoff",
@@ -242,4 +270,21 @@ __all__ = [
     "ObservabilityEventBuilder",
     "IntelligenceObservabilityIntegrationBoundary",
     "IntelligenceObservabilitySnapshot",
+    "IntelligenceInvariant",
+    "IntelligenceInvariantCategory",
+    "IntelligenceInvariantSeverity",
+    "InvariantEvaluationResult",
+    "IntelligenceInvariantEvaluator",
+    "CanonicalLifecycleScenarios",
+    "LifecycleScenario",
+    "LifecycleScenarioKind",
+    "LifecycleScenarioEvaluator",
+    "LifecycleScenarioResult",
+    "BoundaryStressCase",
+    "BoundaryStressCategory",
+    "BoundaryStressEvaluator",
+    "BoundaryStressResult",
+    "IntelligenceHardeningReport",
+    "IntelligenceHardeningReportBuilder",
+    "IntelligenceHardeningStatus",
 ]

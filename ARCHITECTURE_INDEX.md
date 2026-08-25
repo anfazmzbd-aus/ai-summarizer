@@ -3195,3 +3195,117 @@ SUMMARIZE
 DIAGNOSE
   ↓
 OBSERVE
+
+Remaining V10 path
+M1   Intelligence Foundation                    ✅
+M2   Intelligence → Execution                   ✅
+M3   Execution Feedback                         ✅
+M4   Effectiveness & Experience                 ✅
+M5   Experience-Informed Decision Support       ✅
+M6   Controlled Adaptive Policy                 ✅
+M7   Orchestration Integration                  ✅
+M8   Observability & Explainability             ✅
+
+M9   Intelligence Hardening & Evaluation        ◀ CURRENT
+M10  V10 Integration / Release Closure
+
+**Proposed M9 architecture**
+Existing V10 Lifecycle
+        ↓
+IntelligenceInvariantEvaluator
+        ↓
+InvariantEvaluationResult
+        ↓
+LifecycleScenarioEvaluator
+        ↓
+LifecycleEvaluationReport
+        ↓
+HardeningValidationBoundary
+        ↓
+IntelligenceHardeningResult
+
+**Proposed M9 milestones**
+Milestone	Scope
+M9.1	        Intelligence Invariant Contract
+M9.2	        Invariant Evaluation Engine
+M9.3	        Lifecycle Scenario Contract & Matrix
+M9.4	        End-to-End Lifecycle Scenario Evaluation
+M9.5	        Failure Semantics & Boundary Stress
+M9.6	        Hardening Integration / Evaluation Report
+M9.7	        Architecture Review & M9 Closure
+
+**M9 architecture after M9.5**
+Canonical scenarios
+        ↓
+LifecycleScenarioEvaluator
+        ↓
+valid lifecycle evaluation
+
+                    +
+
+Adversarial state
+        ↓
+Existing guards / contracts
+        ↓
+BoundaryStressEvaluator
+        ↓
+failure-semantics evaluation
+
+**M9 Closure**
+Final M9 architecture
+Canonical Invariants
+        ↓
+IntelligenceInvariantEvaluator
+        ↓
+InvariantEvaluationResult[]
+
+Canonical Lifecycle Scenarios
+        ↓
+LifecycleScenarioEvaluator
+        ↓
+LifecycleScenarioResult[]
+
+Adversarial Boundary Cases
+        ↓
+BoundaryStressEvaluator
+        ↓
+BoundaryStressResult[]
+
+                 ↓
+IntelligenceHardeningReportBuilder
+                 ↓
+IntelligenceHardeningReport
+                 ↓
+             PASSED / FAILED
+
+Architectural maturity after M9
+V10 now has:
+BUILD INTELLIGENCE
+        ↓
+BOUND INTELLIGENCE
+        ↓
+LEARN FROM EXPERIENCE
+        ↓
+ADAPT SAFELY
+        ↓
+TRANSLATE TO ORCHESTRATION
+        ↓
+GUARD AUTHORITY
+        ↓
+INTEGRATE WITHOUT RUNTIME COUPLING
+        ↓
+EXPLAIN
+        ↓
+OBSERVE
+        ↓
+HARDEN
+        ↓
+CERTIFY INTERNAL INVARIANTS
+M9 closure baseline
+M9.1  Intelligence Invariant Contract                    ✅
+M9.2  Invariant Evaluation Engine                       ✅
+M9.3  Lifecycle Scenario Contract / Canonical Matrix    ✅
+M9.4  End-to-End Lifecycle Scenario Evaluation          ✅
+M9.5  Failure Semantics / Boundary Stress               ✅
+M9.6  Hardening Integration / Evaluation Report         ✅
+M9.7  Architecture Review / Closure                     ✅
