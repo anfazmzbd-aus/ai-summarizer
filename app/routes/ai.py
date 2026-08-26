@@ -6,9 +6,9 @@ from __future__ import annotations
 
 from fastapi import APIRouter
 
-from app.ai import SummarizationRequest
-from app.api.dependencies import (
-    build_summarization_service,
+from app.core.application_contracts import SummarizationApplicationRequest
+from app.api.application import (
+    build_summarization_application,
 )
 from app.api.schemas import (
     SummarizeRequest,
@@ -29,10 +29,10 @@ async def summarize(
     request: SummarizeRequest,
 ) -> SummarizeResponse:
 
-    service = build_summarization_service()
+    application = build_summarization_application()
 
-    result = await service.summarize(
-        SummarizationRequest(
+    result = await application.summarize(
+        SummarizationApplicationRequest(
             text=request.text,
             provider=request.provider,
             model=request.model,
