@@ -2,17 +2,17 @@
 
 An enterprise-grade, **Agentic AI Document Processing and Summarization Platform** built on top of FastAPI and designed as a deterministic, contract-driven, and parallel-safe DAG execution runtime. 
 
-AI-Summarizer has evolved from a simple monolithic script into a highly sophisticated **Agentic AI Workflow Engine** capable of dynamic routing, robust error isolation, event-driven observability, and advanced summarization strategies (such as hierarchical map-reduce and context preservation).
+AI-Summarizer has evolved from a simple monolithic script into a highly sophisticated **Agentic AI Workflow Engine** and **Intelligent Summarization Orchestrator** capable of dynamic planning, context preservation, quality-aware adaptive execution, and resilient error recovery.
 
 ---
 
-## 🚀 Current Version: V9.2.0 (Milestone 4 Frozen)
+## 🚀 Current Version: V9.3.0 (Intelligent Summarization Orchestration - Frozen)
 
-The platform is currently at **V9.2.0**, with **695 passing tests** and full compliance with `black`, `ruff`, and `pre-commit` quality gates.
-* **Non-Live Test Suite:** 672 passed, 9 deselected.
+The platform is currently at **V9.3.0**, with **1,084 passing tests** and full compliance with `black`, `ruff`, and `pre-commit` quality gates.
+* **Non-Live Test Suite:** 1,084 passed, 9 deselected.
 * **Live Integration Suite:** 9 passed, skipped when credentials are absent.
-* **Milestone 4 (Map-Reduce Summarization Strategy):** Complete and frozen.
-* **Milestone 5 (Context-Preserving Aggregation):** In progress.
+* **Milestones (M1 – M10):** All completed, validated, and frozen.
+* **Release Baseline Commit:** `7ce3317` (Git tag: `v9.3.0`).
 
 ---
 
@@ -50,6 +50,12 @@ AI-Summarizer implements a robust, layered Clean Architecture:
                   ┌──────────────────────────────────┐
                   │    Token-Aware Text Chunking     │
                   │  (DeterministicTokenCounter)     │
+                  └────────────────┬─────────────────┘
+                                   │
+                                   ▼
+                  ┌──────────────────────────────────┐
+                  │   INTELLIGENT PLANNER & PROFILE  │
+                  │  (SummarizationPlanner / M1-M5)  │
                   └────────────────┬─────────────────┘
                                    │
                                    ▼
@@ -110,8 +116,21 @@ AI-Summarizer implements a robust, layered Clean Architecture:
 ```
 
 ### The Two-Phase Pipeline
-1. **Phase A (Pre-DAG Preprocessing - Non-DAG):** Performs token-aware text chunking, normalization, summary pre-computation, and semantic planning/routing. These are deterministic transformers, completely separated from the DAG scheduling core to avoid graph contamination.
+1. **Phase A (Pre-DAG Preprocessing - Non-DAG):** Performs token-aware text chunking, document profiling, semantic intent routing, cost/token optimization, summary pre-computation, and strategy planning. These are deterministic, offline-capable transformers completely separated from the DAG scheduling core to avoid graph contamination.
 2. **Phase B (DAG Engine - Graph Core):** Constructs a pure dependency graph containing only analytical nodes (e.g., `insights`, `trends`, `risks`, `recommendations`). This graph is validated for cycles and executed layer-by-layer concurrently.
+
+---
+
+## 🏛️ Future V10.0 Closed-Loop Adaptive Architecture
+
+The next major evolution of the platform (**V10.0**) turns the intelligent summarization orchestrator into a **self-evaluating and continuously adaptive intelligence platform** organized into **six major architectural planes**:
+
+1.  **Experience / API Plane:** Handles external client contracts, request/response models, and real-time streaming updates.
+2.  **Planning / Optimization Plane:** Implements experience-informed planning, utilizing historical cost, latency, and quality telemetry to make optimal strategic decisions.
+3.  **Execution Plane:** Coordinates step execution, node isolation, parallel layer concurrent scheduling, and node-level checkpoint/recovery state models.
+4.  **Knowledge / Context Plane:** Provides persistent cross-execution memory, session-scoped aggregates, document embeddings, and standardized RAG indexing.
+5.  **Evaluation Plane:** Focuses on continuous automated quality scoring (relevance, completeness, accuracy, hallucination vectors) as a core feedback system.
+6.  **Observability & Governance Plane:** Tracks high-resolution OpenTelemetry metrics, Prometheus endpoints, and enforces tenant quota policies (cost limits, token budgets).
 
 ---
 
@@ -150,6 +169,19 @@ A centralized decorated registry (`@register_agent`) allows dynamic discovery of
 * **Timeout & Graceful Cancellation:** Implements cooperative cancellation tokens and execution timeout enforcement across nodes.
 * **Execution Cache:** Caches execution results to prevent redundant calls to expensive LLMs for duplicate content.
 * **Checkpoint & Recovery:** Automatically persists states at layer-level checkpoints, allowing failed or interrupted executions to resume exactly where they failed.
+
+### 6. Intelligent Summarization & Planning (V9.3)
+V9.3 shifts the system from static execution to a dynamic, quality-aware closed-loop intelligence engine:
+*   **Intelligent Summarization Planner (M1):** Introduces an autonomous planning layer above strategy selection, producing an immutable `SummarizationPlan` prior to execution.
+*   **Document Intelligence & Profiling (M2):** Automatically inspects text to extract structural/lexical indicators (character/token counts, unique words, paragraph count, sentence indicators).
+*   **Intent-Aware Routing (M3):** Semantic classification of document intents (e.g., technical reports, business presentations, research papers, meeting notes) to guide custom planning strategies.
+*   **Adaptive Strategy Planning (M4):** Dynamically adjusts chunk boundaries, target strategies (Direct vs. Map-Reduce), and execution branches based on the document profile.
+*   **Cost & Latency Optimization (M5):** Optimizes parameter weights against budget ceilings and real-time latency thresholds without provider coupling.
+*   **Quality Evaluation Layer (M6):** Deterministic, model-independent quality scoring covering completeness, density, and semantic accuracy.
+*   **Quality-Aware Adaptive Execution (M7):** Closed-loop execution flow where completed summaries are assessed against minimum quality thresholds, triggering recursive strategy adjustments if gates fail.
+*   **Resilience & Bounded Fallback (M8):** Resolves processing errors through bounded, deterministic fallback chains, preserving state metadata and chunk-level data provenance.
+*   **Intelligent Streaming Integration (M9):** Decouples delivery from execution, piping planning metadata, strategy shifts, and retry events directly to client streaming listeners.
+*   **Evaluation-Driven Hardening (M10):** A comprehensive cross-layer evaluation harness verifying cross-layer metadata, token propagation, and regression-safe performance.
 
 ---
 
@@ -204,6 +236,14 @@ ai-summarizer/
 │   │   ├── runtime_manager.py            # Orchestrates execution context & lifecycle
 │   │   ├── runtime_session.py            # Aggregate session data container
 │   │   └── runtime_context.py            # State metadata during lifecycle
+│   ├── summarization/                    # Long-document processing and intelligence
+│   │   ├── chunking/                     # Token-aware lexical segmenter
+│   │   ├── intelligence/                 # Document profiling and metrics
+│   │   ├── planning/                     # Summarization plans and optimizers
+│   │   ├── quality/                      # Quality evaluation engines
+│   │   ├── quality_adaptive/             # Adaptive execution loops
+│   │   ├── resilience/                   # Failure recovery and fallback policies
+│   │   └── streaming/                    # Metadata-rich event streaming
 │   ├── orchestration/
 │   │   ├── agents/
 │   │   │   ├── summary.py                # summary_agent (V8 legacy / V9 AI-mode)
@@ -317,7 +357,7 @@ To ensure the integrity of the runtime, you can execute the extensive test suite
 ```bash
 pytest -m "not live" -q
 ```
-*Expected Output:* ~672 passed, 9 deselected (0.00s network calls).
+*Expected Output:* ~1084 passed, 9 deselected (0.00s network calls).
 
 **Run Live Integration Tests (API Key Required):**
 Set up your `.env` credentials, then run:
@@ -340,12 +380,19 @@ The platform follows a clear progression roadmap:
 * **V7.8:** Production Runtime Abstraction (Context, Sessions, EventBus, Observability) ✅
 * **V9.0:** AI Integration Framework (PromptOS, LLM Abstraction, Mock/OpenAI providers) ✅
 * **V9.1:** Provider Configuration & Live Validation (OpenRouter API integration, exception classifications) ✅
-* **V9.2 (Current):** Advanced Summarization (Token-aware Chunking, Hierarchical Summary Trees, Map-Reduce workflows) 🚧
-* **V9.3:** Prompt Intelligence (Prompt evaluations, token optimizers, versioning diagnostics)
-* **V9.4:** Production Retrieval Augmented Generation (Document embeddings, Vector DB backends, citation generation, source verification)
-* **V9.5:** Multi-Agent Intelligence (Planner, Researcher, Fact-checker, Critic, Synthesizer agents)
-* **V9.6:** Autonomous Agentic Runtime (Autonomous planning, tool call execution, long-term memory-aware execution, reflection loops)
-* **V10.0:** Distributed Enterprise Platform (Worker pooling, queues, multi-tenant horizontal scaling, gRPC remote adapters, human-in-the-loop review)
+* **V9.2:** Advanced Summarization (Token-aware Chunking, Hierarchical Summary Trees, Map-Reduce workflows) ✅
+* **V9.3:** Prompt & Orchestration Intelligence (Planner, Doc Profile, Quality Evaluation, Fallback, Streaming) ✅
+* **V10.0 (Current planning phase):** Adaptive Intelligence Platform (Closed-Loop Experience-Informed Planning, Persistent Knowledge Base, Cross-Execution Memory, Self-Optimization) 🚧
+  * *M1 — V10 Architecture Foundation:* Contract validation, experience models, provenance extensions. ✅
+  * *M2 — Persistent Experience Registry:* Database trackers for execution latencies, token consumption, and quality results.
+  * *M3 — Context & Knowledge Integration:* Cross-execution memory registries and semantic data retrieval models.
+  * *M4 — Experience-Informed Strategic Planner:* Upgrading the planner to exploit historical cost/latency/quality experience.
+  * *M5 — Dynamic Evaluation Control Plane:* Live evaluation checks acting as production gates.
+  * *M6 — Self-Optimization Engine:* Dynamic optimization of token budgets, chunking sizes, and provider routing based on telemetry.
+  * *M7 — Grounded Intelligence & Verification:* Multi-source verification, automatic citation mapping, and hallucination vector checks.
+  * *M8 — Bounded Agentic Reflection Loops:* Autonomous reflection, agentic critique, and recursive self-correction boundaries.
+  * *M9 — Multi-Document Intelligence:* Graph-based synthesis across collections of documents.
+  * *M10 — V10 Hardening & Enterprise Governance:* Quality gates, chaos engineering/failure injection, and tenant quota controls.
 
 ---
 
@@ -358,6 +405,18 @@ Contributions are highly encouraged! Please ensure all pull requests strictly fo
 4. **Test-First Cadence:** No new feature is considered merged until its unit tests pass with 100% reliability.
 
 ---
+
+## Current Architecture Version
+
+V10.0 — Bounded Intelligence Architecture
+
+V10 establishes bounded experience learning, adaptive decision support,
+orchestration integration, explainability, observability, hardening, and
+release certification.
+
+See [`docs/v10/`](docs/v10/) for the V10 architecture and release baseline.
+
+The complete standalone application target remains V12.0.0.
 
 ## 📄 License
 

@@ -3309,3 +3309,71 @@ M9.4  End-to-End Lifecycle Scenario Evaluation          ✅
 M9.5  Failure Semantics / Boundary Stress               ✅
 M9.6  Hardening Integration / Evaluation Report         ✅
 M9.7  Architecture Review / Closure                     ✅
+
+# **M10  Integration, Certification & Release**
+**Proposed M10 milestones**
+I recommend six milestones plus final closure:
+Milestone	Scope
+M10.1	V10 Capability Manifest / Release Contract
+M10.2	Architecture-Wide Certification Evaluator
+M10.3	Full V10 Integration Scenario Matrix
+M10.4	Compatibility & Regression Boundary Review
+M10.5	Release Documentation & Architecture Baseline
+M10.6	Release Certification Report
+M10.7	Final V10 Architecture Review & v10.0.0 Release Closure
+
+**V10 M10.4 — Compatibility & Regression Boundary**
+M10.4 now shifts from intelligence architecture correctness to a different release question:
+
+        **Has V10 remained additive and compatible with the execution, runtime, provider, summarization, resilience, and streaming architecture established before V10? **
+
+**Compatibility boundary**
+Lock these compatibility domains:
+
+V7_EXECUTION
+V8_RUNTIME
+V9_PROVIDER
+V9_SUMMARIZATION
+V9_RESILIENCE
+V9_STREAMING
+V10_INTELLIGENCE
+
+Their architectural ownership remains:
+
+V7 execution
+    → graph / scheduler / executor semantics
+
+V8 runtime
+    → workers / queues / retry / policy / telemetry
+
+V9 provider
+    → provider abstraction and real LLM integration
+
+V9 summarization
+    → chunking / map-reduce / hierarchical / strategies
+
+V9 resilience
+    → quality-aware fallback and resilience
+
+V9 streaming
+    → streaming summarization behavior
+
+V10 intelligence
+    → bounded intelligence layered above existing behavior
+
+**M10.4 architecture**
+Compatibility domain declarations
+        ↓
+V10CompatibilityManifest
+
+Regression evidence
+        ↓
+V10CompatibilityEvidence
+
+Manifest + Evidence
+        ↓
+V10CompatibilityEvaluator
+        ↓
+V10CompatibilityResult
+        ↓
+COMPATIBLE / INCOMPATIBLE

@@ -174,6 +174,42 @@ from .hardening_report import (
     IntelligenceHardeningReportBuilder,
     IntelligenceHardeningStatus,
 )
+from .capability_manifest import (
+    CanonicalV10CapabilityManifest,
+    V10ArchitectureStatus,
+    V10CapabilityManifest,
+    V10MilestoneCapability,
+)
+from .architecture_certification import (
+    V10ArchitectureCertification,
+    V10ArchitectureCertificationEvaluator,
+    V10ArchitectureCertificationStatus,
+)
+from .v10_integration_scenario import (
+    CanonicalV10IntegrationScenarios,
+    V10IntegrationScenario,
+    V10IntegrationScenarioKind,
+)
+from .v10_integration_evaluator import (
+    V10IntegrationScenarioEvaluator,
+    V10IntegrationScenarioResult,
+)
+from .compatibility_boundary import (
+    CanonicalV10CompatibilityManifest,
+    V10CompatibilityDomain,
+    V10CompatibilityEvidence,
+    V10CompatibilityEvaluator,
+    V10CompatibilityManifest,
+    V10CompatibilityRequirement,
+    V10CompatibilityResult,
+    V10CompatibilityStatus,
+)
+from .release_certification import (
+    V10ReleaseCertificationReport,
+    V10ReleaseCertificationReportBuilder,
+    V10ReleaseReadinessStatus,
+    V10ReleaseValidationEvidence,
+)
 
 __all__ = [
     "ConstraintAwarePlannerHandoff",
@@ -287,4 +323,28 @@ __all__ = [
     "IntelligenceHardeningReport",
     "IntelligenceHardeningReportBuilder",
     "IntelligenceHardeningStatus",
+    "CanonicalV10CapabilityManifest",
+    "V10ArchitectureStatus",
+    "V10CapabilityManifest",
+    "V10MilestoneCapability",
+    "V10ArchitectureCertification",
+    "V10ArchitectureCertificationEvaluator",
+    "V10ArchitectureCertificationStatus",
+    "CanonicalV10IntegrationScenarios",
+    "V10IntegrationScenario",
+    "V10IntegrationScenarioKind",
+    "V10IntegrationScenarioEvaluator",
+    "V10IntegrationScenarioResult",
+    "CanonicalV10CompatibilityManifest",
+    "V10CompatibilityDomain",
+    "V10CompatibilityEvidence",
+    "V10CompatibilityEvaluator",
+    "V10CompatibilityManifest",
+    "V10CompatibilityRequirement",
+    "V10CompatibilityResult",
+    "V10CompatibilityStatus",
+    "V10ReleaseCertificationReport",
+    "V10ReleaseCertificationReportBuilder",
+    "V10ReleaseReadinessStatus",
+    "V10ReleaseValidationEvidence",
 ]
