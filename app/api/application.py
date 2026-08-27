@@ -11,6 +11,15 @@ from app.core.application_contracts import (
     SummarizationApplicationRequest,
     SummarizationApplicationResult,
 )
+from app.core.summarization_pipeline_adapter import (
+    AsyncSummarizationPipelineAdapter,
+)
+from app.core.summarization_pipeline_factory import (
+    build_summarization_pipeline_adapter,
+)
+from app.core.application_metadata import (
+    SummarizationExecutionMetadata,
+)
 
 
 class SummarizationApplication:
@@ -24,36 +33,62 @@ class SummarizationApplication:
     def __init__(
         self,
         service: SummarizationService,
+        pipeline: AsyncSummarizationPipelineAdapter,
     ) -> None:
         self._service = service
+        self._pipeline = pipeline
 
     async def summarize(
         self,
         request: SummarizationApplicationRequest,
     ) -> SummarizationApplicationResult:
-        """Execute summarization through the current V10 service."""
+        """Execute summarization through the canonical V9 pipeline."""
+        prompt_tokens = 0
+        completion_tokens = 0
+        resolved_model = request.model or ""
 
-        if request.prompt_name is None:
-            service_request = SummarizationRequest(
-                text=request.text,
-                provider=request.provider,
-                model=request.model,
-            )
-        else:
-            service_request = SummarizationRequest(
-                text=request.text,
-                provider=request.provider,
-                model=request.model,
-                prompt_name=request.prompt_name,
+        async def summarize_text(text: str) -> str:
+            nonlocal prompt_tokens
+            nonlocal completion_tokens
+            nonlocal resolved_model
+            if request.prompt_name is None:
+                service_request = SummarizationRequest(
+                    text=text,
+                    provider=request.provider,
+                    model=request.model,
+                )
+            else:
+                service_request = SummarizationRequest(
+                    text=text,
+                    provider=request.provider,
+                    model=request.model,
+                    prompt_name=request.prompt_name,
+                )
+
+            service_result = await self._service.summarize(
+                service_request,
             )
 
-        result = await self._service.summarize(service_request)
+            prompt_tokens += service_result.prompt_tokens
+            completion_tokens += service_result.completion_tokens
+            resolved_model = service_result.model
+
+            return service_result.summary
+
+        pipeline_result = await self._pipeline.run(
+            request.text,
+            summarize_text,
+        )
 
         return SummarizationApplicationResult(
-            summary=result.summary,
-            model=result.model,
-            prompt_tokens=result.prompt_tokens,
-            completion_tokens=result.completion_tokens,
+            summary=pipeline_result.summary,
+            model=resolved_model,
+            prompt_tokens=prompt_tokens,
+            completion_tokens=completion_tokens,
+            metadata=SummarizationExecutionMetadata(
+                strategy=pipeline_result.selection.strategy.value,
+                chunk_count=pipeline_result.chunk_count,
+            ),
         )
 
 
@@ -62,4 +97,5 @@ def build_summarization_application() -> SummarizationApplication:
 
     return SummarizationApplication(
         build_summarization_service(),
+        build_summarization_pipeline_adapter(),
     )

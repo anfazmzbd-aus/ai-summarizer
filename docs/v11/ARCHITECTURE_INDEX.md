@@ -41,8 +41,77 @@ M1.4  Application-level request/result contracts
 M1.5  Read-only integration metadata boundary
 M1.6  Certification + repository checkpoint
 
-
 ## V11 M2 — Application Service & Summarization Pipeline Integration
+    M2.1 — V9 SummarizationPipeline Async Integration Boundary
+    Target:
+
+        SummarizationApplication
+                ↓
+        AsyncSummarizationPipelineAdapter
+                ↓
+        existing V9 SummarizationPipeline
+                ↓
+        TextChunker
+        SummarizationPlanner
+        StrategySelector
+        StrategyExecutor
+                ↓
+        async summarizer callback
+                ↓
+        existing canonical service/provider
+
+    V11 M2.2 — Canonical Application → V9 Pipeline Composition.
+        The flow becomes:
+        /api/v1/summarize
+            ↓
+        SummarizationApplication
+            ↓
+        AsyncSummarizationPipelineAdapter
+            ↓
+        V9 SummarizationPipeline
+            ↓
+        DIRECT / MAP_REDUCE / HIERARCHICAL
+            ↓
+        existing async SummarizationService
+            ↓
+        provider/runtime
+    V11 M2.3 — Medium/Long Text Strategy Integration & Usage Accounting.
+    V11 M2.4 — Canonical API Real-Text Strategy Integration
+        HTTP POST /api/v1/summarize
+                ↓
+        app.routes.ai
+                ↓
+        SummarizationApplication
+                ↓
+        AsyncSummarizationPipelineAdapter
+                ↓
+        V9 pipeline
+                ↓
+        DIRECT / MAP_REDUCE / HIERARCHICAL
+                ↓
+        deterministic service
+                ↓
+        HTTP response
+    M2.5 — Pipeline Failure Propagation & Application Error Boundary.
+    Target behavior:
+        provider/service failure
+                ↓
+        pipeline callback
+                ↓
+        AsyncSummarizationPipelineAdapter
+                ↓
+        SummarizationApplication
+                ↓
+        API error boundary
+
+M2 has now proven:
+    M2.1  Async bridge around existing V9 pipeline
+    M2.2  SummarizationApplication → V9 pipeline composition
+    M2.3  DIRECT / MAP_REDUCE / HIERARCHICAL + usage accounting
+    M2.4  Real canonical HTTP path with deterministic real-text inputs
+    M2.5  Failure propagation without premature resilience behavior
+    M2.6  Certification + checkpoint
+
 ## V11 M3 — V10 Intelligence Integration into Real Summarization Flow
 ## V11 M4 — Frontend / API / Real-Text E2E Integration
 ## V11 M5 — Long Document / Strategy / Streaming Integration
