@@ -1,0 +1,27 @@
+Continue the AI Summarizer from the existing local repository at `E:\Projects\ai-summarizer`.
+
+Treat `v11.0.0-m2` / commit `627bb730157d9d42d2ff78abce13a9660dd6c14b` as the frozen starting checkpoint.
+
+Before editing:
+1. Read `AGENTS.md`.
+2. Read `docs/v10/` and `docs/v11/`.
+3. Inspect the current canonical application/pipeline implementation.
+4. Inspect the actual V10 intelligence contracts and orchestration handoff.
+5. Run `git status`, `git rev-parse HEAD`, and the relevant baseline tests.
+
+Begin V11 M3.1 only: Application -> V10 IntelligenceContext / validated handoff integration boundary.
+
+Requirements:
+- preserve all V10 authority invariants;
+- start execution-neutral;
+- do not wire CONSTRAINED execution changes yet;
+- do not redesign V10;
+- do not let V10 directly call providers or execution engines;
+- reuse existing V7/V8/V9/V10 architecture;
+- add focused tests;
+- run `pytest app/tests/intelligence -q` if intelligence is affected;
+- run `pytest -m "not live" -q`;
+- run `pre-commit run --all-files`;
+- run `git diff --check`;
+- report exact files changed and exact test results;
+- do not commit/tag until M3.1 is reviewed.
