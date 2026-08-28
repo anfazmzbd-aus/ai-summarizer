@@ -294,3 +294,44 @@ Before implementing a milestone:
 7. report exact files changed and exact test results.
 
 If existing architecture tests contradict a proposed change, investigate the repository contract first. Do not weaken architecture tests merely to make a change pass.
+
+## Python environment — mandatory
+
+This repository has an established and validated Python 3.11 virtual
+environment:
+
+`E:\Projects\ai-summarizer\venv311`
+
+This environment is authoritative for local development and validation.
+
+Do not use system Python installations such as:
+
+`C:\Python314\python.exe`
+
+Do not create another virtual environment.
+
+Do not install project dependencies into system Python.
+
+Do not upgrade, recreate, or modify `venv311` unless explicitly approved.
+
+For deterministic agent execution, prefer invoking the virtual-environment
+executables directly rather than relying on shell activation:
+
+```powershell
+.\venv311\Scripts\python.exe -m pytest <focused-test> -q
+.\venv311\Scripts\python.exe -m pytest app/tests/intelligence -q
+.\venv311\Scripts\python.exe -m pytest -m "not live" -q
+.\venv311\Scripts\pre-commit.exe run --all-files
+.\venv311\Scripts\python.exe -m black --check .
+.\venv311\Scripts\python.exe -m ruff check .
+
+## Pre-commit execution under Codex
+
+Codex must use a repository-local pre-commit cache rather than the default
+user-profile cache.
+
+For every pre-commit command, set:
+
+```powershell
+$env:PRE_COMMIT_HOME = "$PWD\.cache\pre-commit"
+.\venv311\Scripts\pre-commit.exe run --all-files

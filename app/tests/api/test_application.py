@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from uuid import uuid4
+
 import pytest
 
 from app.ai import (
@@ -15,6 +17,7 @@ from app.api.application import (
 from app.core.application_contracts import (
     SummarizationApplicationRequest,
 )
+from app.core.intelligence_integration import ApplicationIntelligenceResult
 from app.core.summarization_pipeline_factory import (
     build_summarization_pipeline_adapter,
 )
@@ -269,6 +272,27 @@ class StubSummarizationService:
         )
 
 
+class StubApplicationIntelligenceBoundary:
+    def __init__(self) -> None:
+        self.request: SummarizationApplicationRequest | None = None
+        self.result = ApplicationIntelligenceResult(
+            context_id=uuid4(),
+            correlation_id=uuid4(),
+            action="summarize",
+            mode="preserve",
+            execution_change_authorized=False,
+            review_required=False,
+            reasons=("existing execution behavior remains unchanged",),
+        )
+
+    def evaluate(
+        self,
+        request: SummarizationApplicationRequest,
+    ) -> ApplicationIntelligenceResult:
+        self.request = request
+        return self.result
+
+
 @pytest.mark.anyio
 async def test_application_executes_pipeline_through_existing_service() -> None:
     service = StubSummarizationService()
@@ -364,3 +388,31 @@ async def test_application_populates_pipeline_metadata() -> None:
     assert result.prompt_tokens == 10
     assert result.completion_tokens == 5
     assert result.total_tokens == 15
+
+
+@pytest.mark.anyio
+async def test_application_consumes_only_application_intelligence_projection() -> None:
+    service = StubSummarizationService()
+    intelligence = StubApplicationIntelligenceBoundary()
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        build_summarization_pipeline_adapter(),
+        intelligence,  # type: ignore[arg-type]
+    )
+
+    result = await application.summarize(
+        SummarizationApplicationRequest(
+            text="Application intelligence boundary test.",
+            provider="fake",
+            model="demo",
+        )
+    )
+
+    assert intelligence.request is not None
+    assert result.metadata.intelligence_mode == "preserve"
+    assert result.metadata.attributes["intelligence_context_id"] == str(
+        intelligence.result.context_id
+    )
+    assert result.metadata.attributes["intelligence_correlation_id"] == str(
+        intelligence.result.correlation_id
+    )

@@ -38,10 +38,10 @@ def test_route_does_not_construct_summarization_service_directly():
     assert "SummarizationService(" not in source
 
 
-def test_application_boundary_does_not_own_pipeline_or_intelligence_yet():
+def test_application_boundary_composes_pipeline_and_intelligence_adapters():
     source = APPLICATION_FILE.read_text(encoding="utf-8")
 
-    assert "app.summarization" not in source
+    assert "app.core.intelligence_integration" in source
     assert "app.intelligence" not in source
     assert "app.providers" not in source
     assert "app.runtime" not in source

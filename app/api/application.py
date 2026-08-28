@@ -20,29 +20,33 @@ from app.core.summarization_pipeline_factory import (
 from app.core.application_metadata import (
     SummarizationExecutionMetadata,
 )
+from app.core.intelligence_integration import ApplicationIntelligenceBoundary
 
 
 class SummarizationApplication:
     """
     Stable application boundary for the canonical V11 summarization path.
 
-    M1 preserves existing V10 summarization behavior while isolating the
-    public API from implementation-specific summarization contracts.
+    M3.1 composes the execution-neutral V10 intelligence handoff while
+    isolating the public API from implementation-specific contracts.
     """
 
     def __init__(
         self,
         service: SummarizationService,
         pipeline: AsyncSummarizationPipelineAdapter,
+        intelligence: ApplicationIntelligenceBoundary | None = None,
     ) -> None:
         self._service = service
         self._pipeline = pipeline
+        self._intelligence = intelligence or ApplicationIntelligenceBoundary()
 
     async def summarize(
         self,
         request: SummarizationApplicationRequest,
     ) -> SummarizationApplicationResult:
         """Execute summarization through the canonical V9 pipeline."""
+        intelligence_result = self._intelligence.evaluate(request)
         prompt_tokens = 0
         completion_tokens = 0
         resolved_model = request.model or ""
@@ -88,6 +92,13 @@ class SummarizationApplication:
             metadata=SummarizationExecutionMetadata(
                 strategy=pipeline_result.selection.strategy.value,
                 chunk_count=pipeline_result.chunk_count,
+                intelligence_mode=intelligence_result.mode,
+                attributes={
+                    "intelligence_context_id": str(intelligence_result.context_id),
+                    "intelligence_correlation_id": str(
+                        intelligence_result.correlation_id
+                    ),
+                },
             ),
         )
 
