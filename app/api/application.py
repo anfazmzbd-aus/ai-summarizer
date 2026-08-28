@@ -20,7 +20,14 @@ from app.core.summarization_pipeline_factory import (
 from app.core.application_metadata import (
     SummarizationExecutionMetadata,
 )
-from app.core.intelligence_integration import ApplicationIntelligenceBoundary
+from app.core.intelligence_integration import (
+    ApplicationIntelligenceBoundary,
+    ApplicationIntelligenceResult,
+)
+
+
+class ApplicationReviewRequiredError(RuntimeError):
+    """Raised when intelligence requires review before summarization."""
 
 
 class SummarizationApplication:
@@ -47,6 +54,13 @@ class SummarizationApplication:
     ) -> SummarizationApplicationResult:
         """Execute summarization through the canonical V9 pipeline."""
         intelligence_result = self._intelligence.evaluate(request)
+        self._validate_intelligence_result(intelligence_result)
+
+        if intelligence_result.mode == "review":
+            raise ApplicationReviewRequiredError(
+                "summarization requires intelligence review before execution"
+            )
+
         prompt_tokens = 0
         completion_tokens = 0
         resolved_model = request.model or ""
@@ -101,6 +115,32 @@ class SummarizationApplication:
                 },
             ),
         )
+
+    @staticmethod
+    def _validate_intelligence_result(
+        result: ApplicationIntelligenceResult,
+    ) -> None:
+        """Validate application semantics before allowing pipeline execution."""
+        if not isinstance(result, ApplicationIntelligenceResult):
+            raise TypeError(
+                "intelligence.evaluate must return an " "ApplicationIntelligenceResult"
+            )
+
+        if result.mode not in {"preserve", "advisory", "review"}:
+            raise ValueError(
+                "unsupported intelligence mode for M3.2 application semantics"
+            )
+
+        if result.execution_change_authorized:
+            raise ValueError(
+                "M3.2 application semantics cannot authorize execution changes"
+            )
+
+        expected_review_required = result.mode == "review"
+        if result.review_required is not expected_review_required:
+            raise ValueError(
+                "intelligence review_required must match the application mode"
+            )
 
 
 def build_summarization_application() -> SummarizationApplication:

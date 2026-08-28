@@ -11,6 +11,7 @@ from app.ai import (
     SummarizationResponse,
 )
 from app.api.application import (
+    ApplicationReviewRequiredError,
     SummarizationApplication,
     build_summarization_application,
 )
@@ -293,6 +294,23 @@ class StubApplicationIntelligenceBoundary:
         return self.result
 
 
+def make_intelligence_result(
+    mode: str,
+    *,
+    execution_change_authorized: bool = False,
+    review_required: bool = False,
+) -> ApplicationIntelligenceResult:
+    return ApplicationIntelligenceResult(
+        context_id=uuid4(),
+        correlation_id=uuid4(),
+        action="summarize",
+        mode=mode,
+        execution_change_authorized=execution_change_authorized,
+        review_required=review_required,
+        reasons=(f"{mode} application semantics",),
+    )
+
+
 @pytest.mark.anyio
 async def test_application_executes_pipeline_through_existing_service() -> None:
     service = StubSummarizationService()
@@ -416,3 +434,91 @@ async def test_application_consumes_only_application_intelligence_projection() -
     assert result.metadata.attributes["intelligence_correlation_id"] == str(
         intelligence.result.correlation_id
     )
+
+
+@pytest.mark.anyio
+@pytest.mark.parametrize("mode", ["preserve", "advisory"])
+async def test_application_executes_for_non_review_intelligence_modes(
+    mode: str,
+) -> None:
+    service = StubSummarizationService()
+    intelligence = StubApplicationIntelligenceBoundary()
+    intelligence.result = make_intelligence_result(mode)
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        build_summarization_pipeline_adapter(),
+        intelligence,  # type: ignore[arg-type]
+    )
+
+    result = await application.summarize(
+        SummarizationApplicationRequest(text="Non-review semantics.")
+    )
+
+    assert result.summary == "stub summary"
+    assert service.received_request is not None
+    assert result.metadata.intelligence_mode == mode
+
+
+@pytest.mark.anyio
+async def test_application_stops_before_execution_when_review_is_required() -> None:
+    service = StubSummarizationService()
+    intelligence = StubApplicationIntelligenceBoundary()
+    intelligence.result = make_intelligence_result(
+        "review",
+        review_required=True,
+    )
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        build_summarization_pipeline_adapter(),
+        intelligence,  # type: ignore[arg-type]
+    )
+
+    with pytest.raises(
+        ApplicationReviewRequiredError, match="requires intelligence review"
+    ):
+        await application.summarize(
+            SummarizationApplicationRequest(text="Review first.")
+        )
+
+    assert service.received_request is None
+
+
+@pytest.mark.anyio
+async def test_application_rejects_execution_authority_in_m3_2() -> None:
+    service = StubSummarizationService()
+    intelligence = StubApplicationIntelligenceBoundary()
+    intelligence.result = make_intelligence_result(
+        "advisory",
+        execution_change_authorized=True,
+    )
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        build_summarization_pipeline_adapter(),
+        intelligence,  # type: ignore[arg-type]
+    )
+
+    with pytest.raises(ValueError, match="cannot authorize execution changes"):
+        await application.summarize(
+            SummarizationApplicationRequest(text="Invalid authority.")
+        )
+
+    assert service.received_request is None
+
+
+@pytest.mark.anyio
+async def test_application_rejects_constrained_mode_until_m3_3() -> None:
+    service = StubSummarizationService()
+    intelligence = StubApplicationIntelligenceBoundary()
+    intelligence.result = make_intelligence_result("constrained")
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        build_summarization_pipeline_adapter(),
+        intelligence,  # type: ignore[arg-type]
+    )
+
+    with pytest.raises(ValueError, match="unsupported intelligence mode"):
+        await application.summarize(
+            SummarizationApplicationRequest(text="Constrained later.")
+        )
+
+    assert service.received_request is None
