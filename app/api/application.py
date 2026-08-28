@@ -126,14 +126,26 @@ class SummarizationApplication:
                 "intelligence.evaluate must return an " "ApplicationIntelligenceResult"
             )
 
-        if result.mode not in {"preserve", "advisory", "review"}:
+        if result.mode not in {"preserve", "advisory", "constrained", "review"}:
+            raise ValueError("unsupported intelligence mode for application semantics")
+
+        if result.mode == "constrained":
+            if not result.execution_change_authorized:
+                raise ValueError(
+                    "CONSTRAINED intelligence mode requires execution change authority"
+                )
+            if not result.bounded_constraint_required:
+                raise ValueError(
+                    "CONSTRAINED intelligence mode requires bounded constraints"
+                )
+        elif result.execution_change_authorized:
             raise ValueError(
-                "unsupported intelligence mode for M3.2 application semantics"
+                "only CONSTRAINED intelligence mode can authorize execution changes"
             )
 
-        if result.execution_change_authorized:
+        if result.mode != "constrained" and result.bounded_constraint_required:
             raise ValueError(
-                "M3.2 application semantics cannot authorize execution changes"
+                "only CONSTRAINED intelligence mode can require bounded constraints"
             )
 
         expected_review_required = result.mode == "review"

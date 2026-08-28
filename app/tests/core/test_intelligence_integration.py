@@ -18,6 +18,7 @@ def test_application_boundary_returns_validated_execution_neutral_result() -> No
     assert result.action == "summarize"
     assert result.mode == "preserve"
     assert result.execution_change_authorized is False
+    assert result.bounded_constraint_required is False
     assert result.review_required is False
     assert "existing execution behavior remains unchanged" in result.reasons
 

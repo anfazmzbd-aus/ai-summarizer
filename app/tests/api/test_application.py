@@ -282,6 +282,7 @@ class StubApplicationIntelligenceBoundary:
             action="summarize",
             mode="preserve",
             execution_change_authorized=False,
+            bounded_constraint_required=False,
             review_required=False,
             reasons=("existing execution behavior remains unchanged",),
         )
@@ -298,6 +299,7 @@ def make_intelligence_result(
     mode: str,
     *,
     execution_change_authorized: bool = False,
+    bounded_constraint_required: bool = False,
     review_required: bool = False,
 ) -> ApplicationIntelligenceResult:
     return ApplicationIntelligenceResult(
@@ -306,6 +308,7 @@ def make_intelligence_result(
         action="summarize",
         mode=mode,
         execution_change_authorized=execution_change_authorized,
+        bounded_constraint_required=bounded_constraint_required,
         review_required=review_required,
         reasons=(f"{mode} application semantics",),
     )
@@ -484,7 +487,7 @@ async def test_application_stops_before_execution_when_review_is_required() -> N
 
 
 @pytest.mark.anyio
-async def test_application_rejects_execution_authority_in_m3_2() -> None:
+async def test_application_rejects_authority_outside_constrained_mode() -> None:
     service = StubSummarizationService()
     intelligence = StubApplicationIntelligenceBoundary()
     intelligence.result = make_intelligence_result(
@@ -497,7 +500,7 @@ async def test_application_rejects_execution_authority_in_m3_2() -> None:
         intelligence,  # type: ignore[arg-type]
     )
 
-    with pytest.raises(ValueError, match="cannot authorize execution changes"):
+    with pytest.raises(ValueError, match="only CONSTRAINED intelligence mode"):
         await application.summarize(
             SummarizationApplicationRequest(text="Invalid authority.")
         )
@@ -506,7 +509,7 @@ async def test_application_rejects_execution_authority_in_m3_2() -> None:
 
 
 @pytest.mark.anyio
-async def test_application_rejects_constrained_mode_until_m3_3() -> None:
+async def test_application_requires_authority_for_constrained_mode() -> None:
     service = StubSummarizationService()
     intelligence = StubApplicationIntelligenceBoundary()
     intelligence.result = make_intelligence_result("constrained")
@@ -516,9 +519,57 @@ async def test_application_rejects_constrained_mode_until_m3_3() -> None:
         intelligence,  # type: ignore[arg-type]
     )
 
-    with pytest.raises(ValueError, match="unsupported intelligence mode"):
+    with pytest.raises(ValueError, match="requires execution change authority"):
         await application.summarize(
             SummarizationApplicationRequest(text="Constrained later.")
+        )
+
+    assert service.received_request is None
+
+
+@pytest.mark.anyio
+async def test_application_accepts_validated_constrained_translation() -> None:
+    service = StubSummarizationService()
+    intelligence = StubApplicationIntelligenceBoundary()
+    intelligence.result = make_intelligence_result(
+        "constrained",
+        execution_change_authorized=True,
+        bounded_constraint_required=True,
+    )
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        build_summarization_pipeline_adapter(),
+        intelligence,  # type: ignore[arg-type]
+    )
+
+    result = await application.summarize(
+        SummarizationApplicationRequest(text="Constrained translation.")
+    )
+
+    assert result.summary == "stub summary"
+    assert service.received_request is not None
+    assert result.metadata.intelligence_mode == "constrained"
+
+
+@pytest.mark.anyio
+async def test_application_rejects_constrained_mode_without_bounded_constraint() -> (
+    None
+):
+    service = StubSummarizationService()
+    intelligence = StubApplicationIntelligenceBoundary()
+    intelligence.result = make_intelligence_result(
+        "constrained",
+        execution_change_authorized=True,
+    )
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        build_summarization_pipeline_adapter(),
+        intelligence,  # type: ignore[arg-type]
+    )
+
+    with pytest.raises(ValueError, match="requires bounded constraints"):
+        await application.summarize(
+            SummarizationApplicationRequest(text="Missing constraint.")
         )
 
     assert service.received_request is None

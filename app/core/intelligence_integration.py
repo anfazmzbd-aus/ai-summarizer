@@ -41,6 +41,7 @@ class ApplicationIntelligenceResult:
     action: str
     mode: str
     execution_change_authorized: bool
+    bounded_constraint_required: bool
     review_required: bool
     reasons: tuple[str, ...]
 
@@ -50,8 +51,9 @@ class ApplicationIntelligenceBoundary:
 
     M3.1 intentionally supplies no historical evidence or execution
     constraints, so the V10 lifecycle resolves to PRESERVE.  The application
-    receives only the validated, execution-neutral projection below; later
-    milestones may add explicitly authorized semantics at this boundary.
+    receives only the validated projection below.  M3.3 carries the existing
+    V10 bounded-constraint decision across this boundary without exposing V10
+    contracts or applying provider/runtime changes.
     """
 
     def evaluate(
@@ -123,6 +125,7 @@ class ApplicationIntelligenceBoundary:
             action=integration.action.value,
             mode=integration.mode.value,
             execution_change_authorized=integration.execution_change_authorized,
+            bounded_constraint_required=integration.bounded_constraint_required,
             review_required=integration.review_required,
             reasons=integration.reasons,
         )
