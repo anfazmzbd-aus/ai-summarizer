@@ -276,6 +276,7 @@ class StubSummarizationService:
 class StubApplicationIntelligenceBoundary:
     def __init__(self) -> None:
         self.request: SummarizationApplicationRequest | None = None
+        self.evaluate_count = 0
         self.result = ApplicationIntelligenceResult(
             context_id=uuid4(),
             correlation_id=uuid4(),
@@ -292,6 +293,7 @@ class StubApplicationIntelligenceBoundary:
         request: SummarizationApplicationRequest,
     ) -> ApplicationIntelligenceResult:
         self.request = request
+        self.evaluate_count += 1
         return self.result
 
 
@@ -409,6 +411,44 @@ async def test_application_populates_pipeline_metadata() -> None:
     assert result.prompt_tokens == 10
     assert result.completion_tokens == 5
     assert result.total_tokens == 15
+
+
+@pytest.mark.anyio
+async def test_application_records_post_execution_observation_and_feedback() -> None:
+    service = StubSummarizationService()
+    application = make_application(service)  # type: ignore[arg-type]
+
+    result = await application.summarize(
+        SummarizationApplicationRequest(
+            text="Record what happened after execution.",
+            provider="fake",
+            model="demo",
+        )
+    )
+
+    attributes = result.metadata.attributes
+    assert attributes["execution_id"]
+    assert attributes["execution_outcome"] == "success"
+    assert attributes["execution_evaluation_status"] == "unknown"
+    assert attributes["execution_feedback_signals"] == "success,evaluation_unknown"
+
+
+@pytest.mark.anyio
+async def test_execution_feedback_does_not_reenter_intelligence_boundary() -> None:
+    service = StubSummarizationService()
+    intelligence = StubApplicationIntelligenceBoundary()
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        build_summarization_pipeline_adapter(),
+        intelligence,  # type: ignore[arg-type]
+    )
+
+    await application.summarize(
+        SummarizationApplicationRequest(text="Feedback is descriptive only.")
+    )
+
+    assert intelligence.request is not None
+    assert intelligence.evaluate_count == 1
 
 
 @pytest.mark.anyio

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from time import perf_counter
+
 from app.ai import (
     SummarizationRequest,
     SummarizationService,
@@ -23,6 +25,9 @@ from app.core.application_metadata import (
 from app.core.intelligence_integration import (
     ApplicationIntelligenceBoundary,
     ApplicationIntelligenceResult,
+)
+from app.core.execution_feedback_integration import (
+    build_execution_feedback_metadata,
 )
 
 
@@ -93,9 +98,19 @@ class SummarizationApplication:
 
             return service_result.summary
 
+        start_time = perf_counter()
         pipeline_result = await self._pipeline.run(
             request.text,
             summarize_text,
+        )
+
+        execution_metadata = build_execution_feedback_metadata(
+            context_id=intelligence_result.context_id,
+            correlation_id=intelligence_result.correlation_id,
+            strategy=pipeline_result.selection.strategy.value,
+            chunk_count=pipeline_result.chunk_count,
+            token_count=pipeline_result.token_count,
+            started_at=start_time,
         )
 
         return SummarizationApplicationResult(
@@ -112,6 +127,7 @@ class SummarizationApplication:
                     "intelligence_correlation_id": str(
                         intelligence_result.correlation_id
                     ),
+                    **execution_metadata,
                 },
             ),
         )
