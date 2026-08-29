@@ -44,6 +44,12 @@ class ApplicationIntelligenceResult:
     bounded_constraint_required: bool
     review_required: bool
     reasons: tuple[str, ...]
+    trace_id: str
+    explainability_summary: str
+    observability_status: str
+    diagnostic_code: str
+    diagnostic_message: str
+    reason_count: int
 
 
 class ApplicationIntelligenceBoundary:
@@ -119,6 +125,31 @@ class ApplicationIntelligenceBoundary:
             raise ValueError("V10 handoff must have valid directive validation")
 
         integration = ExistingExecutionIntegrationAdapter().adapt(handoff)
+        mode = integration.mode.value
+        observability = {
+            "preserve": (
+                "normal",
+                "INTELLIGENCE_NORMAL",
+                "intelligence lifecycle completed with normal execution-preserving behavior",
+            ),
+            "advisory": (
+                "advisory",
+                "INTELLIGENCE_ADVISORY",
+                "intelligence lifecycle includes advisory historical context",
+            ),
+            "constrained": (
+                "constrained",
+                "INTELLIGENCE_CONSTRAINED",
+                "intelligence lifecycle requires approved bounded execution constraints",
+            ),
+            "review": (
+                "review_required",
+                "INTELLIGENCE_REVIEW_REQUIRED",
+                "intelligence lifecycle requires review-oriented handling",
+            ),
+        }
+        observability_status, diagnostic_code, diagnostic_message = observability[mode]
+        reasons = integration.reasons
         return ApplicationIntelligenceResult(
             context_id=integration.context_id,
             correlation_id=integration.correlation_id,
@@ -127,7 +158,13 @@ class ApplicationIntelligenceBoundary:
             execution_change_authorized=integration.execution_change_authorized,
             bounded_constraint_required=integration.bounded_constraint_required,
             review_required=integration.review_required,
-            reasons=integration.reasons,
+            reasons=reasons,
+            trace_id=str(integration.context_id),
+            explainability_summary="; ".join(reasons),
+            observability_status=observability_status,
+            diagnostic_code=diagnostic_code,
+            diagnostic_message=diagnostic_message,
+            reason_count=len(reasons),
         )
 
 

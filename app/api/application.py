@@ -122,11 +122,21 @@ class SummarizationApplication:
                 strategy=pipeline_result.selection.strategy.value,
                 chunk_count=pipeline_result.chunk_count,
                 intelligence_mode=intelligence_result.mode,
+                trace_id=intelligence_result.trace_id,
+                explainability_summary=intelligence_result.explainability_summary,
                 attributes={
                     "intelligence_context_id": str(intelligence_result.context_id),
                     "intelligence_correlation_id": str(
                         intelligence_result.correlation_id
                     ),
+                    "intelligence_observability_status": (
+                        intelligence_result.observability_status
+                    ),
+                    "intelligence_diagnostic_code": intelligence_result.diagnostic_code,
+                    "intelligence_diagnostic_message": (
+                        intelligence_result.diagnostic_message
+                    ),
+                    "intelligence_reason_count": str(intelligence_result.reason_count),
                     **execution_metadata,
                 },
             ),

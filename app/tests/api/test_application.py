@@ -286,6 +286,14 @@ class StubApplicationIntelligenceBoundary:
             bounded_constraint_required=False,
             review_required=False,
             reasons=("existing execution behavior remains unchanged",),
+            trace_id="trace-id",
+            explainability_summary="existing execution behavior remains unchanged",
+            observability_status="normal",
+            diagnostic_code="INTELLIGENCE_NORMAL",
+            diagnostic_message=(
+                "intelligence lifecycle completed with normal execution-preserving behavior"
+            ),
+            reason_count=1,
         )
 
     def evaluate(
@@ -313,6 +321,12 @@ def make_intelligence_result(
         bounded_constraint_required=bounded_constraint_required,
         review_required=review_required,
         reasons=(f"{mode} application semantics",),
+        trace_id="trace-id",
+        explainability_summary=f"{mode} application semantics",
+        observability_status="normal",
+        diagnostic_code="INTELLIGENCE_NORMAL",
+        diagnostic_message="test intelligence semantics",
+        reason_count=1,
     )
 
 
@@ -339,6 +353,30 @@ async def test_application_executes_pipeline_through_existing_service() -> None:
     assert result.prompt_tokens == 10
     assert result.completion_tokens == 5
     assert result.total_tokens == 15
+
+
+@pytest.mark.anyio
+async def test_application_exposes_read_only_intelligence_explainability_metadata() -> (
+    None
+):
+    service = StubSummarizationService()
+    application = make_application(service)  # type: ignore[arg-type]
+
+    result = await application.summarize(
+        SummarizationApplicationRequest(text="Explain the completed lifecycle.")
+    )
+
+    assert result.metadata.trace_id
+    assert (
+        result.metadata.trace_id
+        == result.metadata.attributes["intelligence_context_id"]
+    )
+    assert result.metadata.explainability_summary
+    assert result.metadata.attributes["intelligence_observability_status"] == "normal"
+    assert result.metadata.attributes["intelligence_diagnostic_code"] == (
+        "INTELLIGENCE_NORMAL"
+    )
+    assert int(result.metadata.attributes["intelligence_reason_count"]) > 0
 
 
 @pytest.mark.anyio
