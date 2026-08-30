@@ -109,4 +109,4 @@ def test_legacy_frontend_is_explicitly_outside_the_canonical_v11_product_path():
 
     assert 'action="/summarize"' in legacy_template
     assert 'action="/api/v1/summarize"' not in legacy_template
-    assert not any(getattr(route, "path", None) == "/" for route in app.routes)
+    assert any(getattr(route, "path", None) == "/" for route in app.routes)

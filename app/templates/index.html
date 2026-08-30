@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Summarizer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main class="container">
+    <h1>AI Text Summarizer</h1>
+
+    <form id="summaryForm">
+        <label for="inputText">Text to summarize</label>
+        <textarea
+            id="inputText"
+            name="text"
+            rows="10"
+            placeholder="Paste your text here..."
+            required
+        ></textarea>
+        <button type="submit">Summarize</button>
+    </form>
+
+    <p id="status" class="loading hidden" role="status"></p>
+    <section id="result" class="result-box hidden" aria-live="polite">
+        <h2>Summary</h2>
+        <p id="summaryText"></p>
+    </section>
+    <p id="error" class="hidden" role="alert"></p>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>
