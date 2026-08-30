@@ -91,13 +91,13 @@ def test_realistic_text_uses_canonical_application_product_flow(monkeypatch) -> 
     )
 
     assert response.status_code == 200
-    assert response.json() == {
-        "summary": f"deterministic summary: {REALISTIC_TEXT}",
-        "model": "m4-1-demo",
-        "prompt_tokens": 7,
-        "completion_tokens": 3,
-        "total_tokens": 10,
-    }
+    body = response.json()
+    assert body["summary"] == f"deterministic summary: {REALISTIC_TEXT}"
+    assert body["model"] == "m4-1-demo"
+    assert body["prompt_tokens"] == 7
+    assert body["completion_tokens"] == 3
+    assert body["total_tokens"] == 10
+    assert body["metadata"]["strategy"] == "direct"
     assert len(service.requests) == 1
     assert service.requests[0].text == REALISTIC_TEXT
 

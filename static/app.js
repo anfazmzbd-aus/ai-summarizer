@@ -25,7 +25,11 @@ summaryForm.addEventListener("submit", async (event) => {
         });
 
         if (!response.ok) {
-            throw new Error("The summarization request failed.");
+            const payload = await response.json().catch(() => ({}));
+            throw new Error(
+                payload.detail?.error?.message ||
+                "The summarization request failed."
+            );
         }
 
         const payload = await response.json();
