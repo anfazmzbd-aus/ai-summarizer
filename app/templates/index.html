@@ -23,10 +23,27 @@
     </form>
 
     <p id="status" class="loading hidden" role="status"></p>
-    <section id="result" class="result-box hidden" aria-live="polite">
-        <h2>Summary</h2>
-        <p id="summaryText"></p>
-    </section>
+        <section id="result" class="result-box hidden" aria-live="polite">
+            <h2>Summary</h2>
+            <p id="summaryText"></p>
+
+            <div id="executionDetails">
+                <h3>Execution details</h3>
+                <dl>
+                    <dt>Strategy</dt>
+                    <dd id="strategyValue">—</dd>
+
+                    <dt>Chunks</dt>
+                    <dd id="chunkCountValue">—</dd>
+
+                    <dt>Intelligence</dt>
+                    <dd id="intelligenceModeValue">—</dd>
+
+                    <dt>Observability</dt>
+                    <dd id="observabilityStatusValue">—</dd>
+                </dl>
+            </div>
+        </section>
     <p id="error" class="hidden" role="alert"></p>
 </main>
 <script src="/static/app.js"></script>

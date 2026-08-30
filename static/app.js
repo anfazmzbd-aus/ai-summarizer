@@ -4,6 +4,12 @@ const status = document.getElementById("status");
 const result = document.getElementById("result");
 const summaryText = document.getElementById("summaryText");
 const error = document.getElementById("error");
+const strategyValue = document.getElementById("strategyValue");
+const chunkCountValue = document.getElementById("chunkCountValue");
+const intelligenceModeValue = document.getElementById("intelligenceModeValue");
+const observabilityStatusValue = document.getElementById(
+    "observabilityStatusValue"
+);
 
 summaryForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -33,8 +39,17 @@ summaryForm.addEventListener("submit", async (event) => {
         }
 
         const payload = await response.json();
+        const metadata = payload.metadata || {};
+
         summaryText.textContent = payload.summary;
-        result.classList.remove("hidden");
+
+        strategyValue.textContent = metadata.strategy || "—";
+        chunkCountValue.textContent = metadata.chunk_count ?? "—";
+        intelligenceModeValue.textContent = metadata.intelligence_mode || "—";
+        observabilityStatusValue.textContent =
+            metadata.observability_status || "—";
+
+        result.classList.remove("hidden");s
     } catch (requestError) {
         error.textContent = requestError.message;
         error.classList.remove("hidden");
