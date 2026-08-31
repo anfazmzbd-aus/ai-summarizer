@@ -20,7 +20,7 @@ from __future__ import annotations
 
 import os
 import time
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 import pytest
 from fastapi.testclient import TestClient
 
@@ -31,16 +31,22 @@ from app.providers.factory import ProviderFactory
 from app.providers.runtime import ProviderRuntime
 from app.services.summarize_service import SummarizeService
 
-load_dotenv()
 
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-OPENROUTER_MODEL = os.getenv(
-    "OPENROUTER_MODEL",
-    "openai/gpt-5-mini",
+_dotenv = dotenv_values(".env")
+
+
+OPENROUTER_API_KEY = (
+    os.getenv("OPENROUTER_API_KEY") or _dotenv.get("OPENROUTER_API_KEY") or ""
 )
-OPENROUTER_BASE_URL = os.getenv(
-    "OPENROUTER_BASE_URL",
-    "https://openrouter.ai/api/v1",
+
+OPENROUTER_BASE_URL = (
+    os.getenv("OPENROUTER_BASE_URL")
+    or _dotenv.get("OPENROUTER_BASE_URL")
+    or "https://openrouter.ai/api/v1"
+)
+
+OPENROUTER_MODEL = (
+    os.getenv("OPENROUTER_MODEL") or _dotenv.get("OPENROUTER_MODEL") or "openai/gpt-5"
 )
 
 pytestmark = [

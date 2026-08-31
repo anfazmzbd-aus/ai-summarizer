@@ -1,5 +1,5 @@
 import os
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 import pytest
 
 from app.providers.config import ProviderType
@@ -11,18 +11,22 @@ from app.providers.models import (
 )
 from app.providers.runtime import ProviderRuntime
 
-load_dotenv()
 
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+_dotenv = dotenv_values(".env")
 
-OPENROUTER_BASE_URL = os.getenv(
-    "OPENROUTER_BASE_URL",
-    "https://openrouter.ai/api/v1",
+
+OPENROUTER_API_KEY = (
+    os.getenv("OPENROUTER_API_KEY") or _dotenv.get("OPENROUTER_API_KEY") or ""
 )
 
-OPENROUTER_MODEL = os.getenv(
-    "OPENROUTER_MODEL",
-    "openai/gpt-5",
+OPENROUTER_BASE_URL = (
+    os.getenv("OPENROUTER_BASE_URL")
+    or _dotenv.get("OPENROUTER_BASE_URL")
+    or "https://openrouter.ai/api/v1"
+)
+
+OPENROUTER_MODEL = (
+    os.getenv("OPENROUTER_MODEL") or _dotenv.get("OPENROUTER_MODEL") or "openai/gpt-5"
 )
 
 pytestmark = [

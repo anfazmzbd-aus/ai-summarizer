@@ -61,6 +61,8 @@ def build_summarization_service() -> SummarizationService:
     providers = AIProviderRegistry()
 
     if settings.provider.lower() == "openai":
+        if not settings.api_key.strip():
+            raise ValueError("OPENAI_API_KEY is required when AI_PROVIDER=openai")
 
         providers.register(
             OpenAIProvider(
@@ -73,9 +75,11 @@ def build_summarization_service() -> SummarizationService:
             )
         )
 
-    else:
-
+    elif settings.provider.lower() == "fake":
         providers.register(FakeProvider())
+
+    else:
+        raise ValueError(f"unsupported AI provider: {settings.provider}")
 
     runtime = AIRuntimeService(
         PromptEngine(

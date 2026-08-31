@@ -6,37 +6,47 @@ from __future__ import annotations
 
 import os
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass(slots=True)
 class AISettings:
 
-    provider: str = os.getenv(
-        "AI_PROVIDER",
-        "fake",
-    )
-
-    api_key: str = os.getenv(
-        "OPENAI_API_KEY",
-        "",
-    )
-
-    model: str = os.getenv(
-        "OPENAI_MODEL",
-        "gpt-5-mini",
-    )
-
-    base_url: str | None = (
-        os.getenv(
-            "OPENAI_BASE_URL",
+    provider: str = field(
+        default_factory=lambda: os.getenv(
+            "AI_PROVIDER",
+            "fake",
         )
-        or None
     )
 
-    organization: str | None = (
-        os.getenv(
-            "OPENAI_ORGANIZATION",
+    api_key: str = field(
+        default_factory=lambda: os.getenv(
+            "OPENAI_API_KEY",
+            "",
         )
-        or None
+    )
+
+    model: str = field(
+        default_factory=lambda: os.getenv(
+            "OPENAI_MODEL",
+            "gpt-5-mini",
+        )
+    )
+
+    base_url: str | None = field(
+        default_factory=lambda: (
+            os.getenv(
+                "OPENAI_BASE_URL",
+            )
+            or None
+        )
+    )
+
+    organization: str | None = field(
+        default_factory=lambda: (
+            os.getenv(
+                "OPENAI_ORGANIZATION",
+            )
+            or None
+        )
     )
