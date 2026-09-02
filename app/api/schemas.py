@@ -43,6 +43,10 @@ class SummarizeMetadata(BaseModel):
     diagnostic_code: str | None = None
     diagnostic_message: str | None = None
 
+    recovery_occurred: bool | None = None
+    recovery_action: str | None = None
+    recovery_strategy: str | None = None
+
 
 class SummarizeError(BaseModel):
     """Stable product-facing error details."""

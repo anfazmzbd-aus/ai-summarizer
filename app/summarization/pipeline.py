@@ -27,6 +27,12 @@ from app.summarization.strategies.models import (
 from app.summarization.strategies.selector import SummarizationStrategySelector
 from app.summarization.intelligence import SummarizationIntent
 
+from app.summarization.resilience.executor import ResilientExecutionPlanner
+from app.summarization.resilience.integration import (
+    ResilientStrategyExecutionBoundary,
+)
+from app.summarization.resilience.models import FallbackDecision
+
 
 @dataclass(frozen=True)
 class SummarizationPipelineResult:
@@ -39,6 +45,9 @@ class SummarizationPipelineResult:
     execution: StrategyExecutionResult
     chunk_count: int
     token_count: int
+    recovery_occurred: bool = False
+    recovery_action: str | None = None
+    recovery_strategy: str | None = None
 
     def __post_init__(self) -> None:
         if not isinstance(self.summary, str):
@@ -52,6 +61,20 @@ class SummarizationPipelineResult:
 
         if self.execution.content != self.summary:
             raise ValueError("summary must match execution content")
+
+        if not isinstance(self.recovery_occurred, bool):
+            raise TypeError("recovery_occurred must be a bool")
+
+        if not self.recovery_occurred:
+            if self.recovery_action is not None:
+                raise ValueError(
+                    "recovery_action must be None when recovery did not occur"
+                )
+
+            if self.recovery_strategy is not None:
+                raise ValueError(
+                    "recovery_strategy must be None when recovery did not occur"
+                )
 
 
 class SummarizationPipeline:
@@ -72,6 +95,12 @@ class SummarizationPipeline:
         self._chunker = chunker
         self._selector = selector or SummarizationStrategySelector()
         self._executor = executor or StrategyExecutor()
+
+        self._resilient_executor = ResilientStrategyExecutionBoundary(
+            executor=self._executor,
+            resilience_planner=ResilientExecutionPlanner(),
+        )
+
         self._planner = planner or SummarizationPlanner(
             chunker=self._chunker,
             selector=self._selector,
@@ -109,11 +138,18 @@ class SummarizationPipeline:
 
         plan = self._planner.plan(text, intent=intent)
 
-        execution = self._executor.execute(
-            plan.strategy,
-            plan.chunks,
-            summarize,
+        recovery_result = self._resilient_executor.execute_with_recovery_result(
+            strategy=plan.strategy,
+            chunks=plan.chunks,
+            summarize=summarize,
         )
+
+        if isinstance(recovery_result, FallbackDecision):
+            raise RuntimeError(
+                "summarization strategy execution terminated without a result"
+            )
+
+        execution = recovery_result.execution
 
         return SummarizationPipelineResult(
             summary=execution.content,
@@ -121,4 +157,15 @@ class SummarizationPipeline:
             execution=execution,
             chunk_count=plan.chunk_count,
             token_count=plan.token_count,
+            recovery_occurred=recovery_result.recovery_occurred,
+            recovery_action=(
+                recovery_result.recovery_action.value
+                if recovery_result.recovery_action is not None
+                else None
+            ),
+            recovery_strategy=(
+                recovery_result.recovery_strategy.value
+                if recovery_result.recovery_strategy is not None
+                else None
+            ),
         )

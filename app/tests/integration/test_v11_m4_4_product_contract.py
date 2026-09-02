@@ -72,6 +72,9 @@ def test_success_projects_product_fields_and_read_only_metadata(monkeypatch) -> 
             "observability_status": "normal",
             "diagnostic_code": "INTELLIGENCE_NORMAL",
             "diagnostic_message": "safe default",
+            "recovery_occurred": False,
+            "recovery_action": None,
+            "recovery_strategy": None,
         },
     }
     assert "provider_secret" not in response.text
@@ -99,6 +102,9 @@ def test_optional_metadata_absence_is_safe(monkeypatch) -> None:
         "observability_status": None,
         "diagnostic_code": None,
         "diagnostic_message": None,
+        "recovery_occurred": False,
+        "recovery_action": None,
+        "recovery_strategy": None,
     }
 
 

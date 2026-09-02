@@ -19,6 +19,14 @@ from app.summarization.strategies.models import (
 from app.summarization.strategies.selector import (
     SummarizationStrategySelector,
 )
+from app.summarization.strategies.execution import StrategyExecutor
+from app.summarization.strategies.models import (
+    StrategyExecutionResult,
+)
+from app.summarization.resilience.executor import ResilientExecutionPlanner
+from app.summarization.resilience.integration import (
+    ResilientStrategyExecutionBoundary,
+)
 
 
 def summarize(text: str) -> str:
@@ -389,3 +397,256 @@ def test_pipeline_result_is_immutable():
         AttributeError,
     ):
         result.summary = "changed"  # type: ignore[misc]
+
+
+def test_pipeline_executes_bounded_fallback_recovery() -> None:
+    executed_strategies: list[SummarizationStrategyType] = []
+
+    class RecordingStrategyExecutor(StrategyExecutor):
+        def execute(
+            self,
+            strategy,
+            chunks,
+            summarize,
+        ):
+            executed_strategies.append(strategy)
+
+            if strategy is SummarizationStrategyType.HIERARCHICAL:
+                raise RuntimeError("hierarchical failure")
+
+            return super().execute(
+                strategy,
+                chunks,
+                summarize,
+            )
+
+    pipeline = SummarizationPipeline(
+        chunker=TextChunker(),
+        executor=RecordingStrategyExecutor(),
+    )
+
+    text = "Long document content. " * 5000
+
+    result = pipeline.run(
+        text,
+        summarize=lambda value: f"summary:{value}",
+    )
+
+    assert isinstance(
+        result.execution,
+        StrategyExecutionResult,
+    )
+
+    assert executed_strategies == [
+        SummarizationStrategyType.HIERARCHICAL,
+        SummarizationStrategyType.MAP_REDUCE,
+    ]
+
+
+def test_pipeline_executes_bounded_retry_recovery() -> None:
+    executed_strategies: list[SummarizationStrategyType] = []
+
+    class RecordingStrategyExecutor(StrategyExecutor):
+        def execute(
+            self,
+            strategy,
+            chunks,
+            summarize,
+        ):
+            executed_strategies.append(strategy)
+
+            if len(executed_strategies) == 1:
+                raise RuntimeError("first direct execution failure")
+
+            return super().execute(
+                strategy,
+                chunks,
+                summarize,
+            )
+
+    pipeline = SummarizationPipeline(
+        chunker=TextChunker(),
+        executor=RecordingStrategyExecutor(),
+    )
+
+    result = pipeline.run(
+        "Short source text.",
+        summarize=lambda value: f"summary:{value}",
+    )
+
+    assert isinstance(
+        result.execution,
+        StrategyExecutionResult,
+    )
+
+    assert executed_strategies == [
+        SummarizationStrategyType.DIRECT,
+        SummarizationStrategyType.DIRECT,
+    ]
+
+
+def test_pipeline_fails_closed_on_terminate_decision() -> None:
+    class AlwaysFailingExecutor(StrategyExecutor):
+        def execute(
+            self,
+            strategy,
+            chunks,
+            summarize,
+        ):
+            raise RuntimeError("terminal failure")
+
+    class SingleAttemptResiliencePlanner(ResilientExecutionPlanner):
+        def __init__(self) -> None:
+            super().__init__(max_attempts=1)
+
+    pipeline = SummarizationPipeline(
+        chunker=TextChunker(),
+        executor=AlwaysFailingExecutor(),
+    )
+
+    pipeline._resilient_executor = ResilientStrategyExecutionBoundary(
+        executor=pipeline._executor,
+        resilience_planner=SingleAttemptResiliencePlanner(),
+    )
+
+    with pytest.raises(
+        RuntimeError,
+        match="summarization strategy execution terminated without a result",
+    ):
+        pipeline.run(
+            "Short source text.",
+            summarize=lambda value: value,
+        )
+
+
+def test_pipeline_does_not_retry_summarizer_timeout() -> None:
+    summarize_calls = 0
+
+    def timeout_summarize(text: str) -> str:
+        nonlocal summarize_calls
+        summarize_calls += 1
+        raise TimeoutError("provider timeout")
+
+    pipeline = SummarizationPipeline(
+        chunker=TextChunker(),
+    )
+
+    with pytest.raises(
+        TimeoutError,
+        match="provider timeout",
+    ):
+        pipeline.run(
+            "Short source text.",
+            summarize=timeout_summarize,
+        )
+
+    assert summarize_calls == 1
+
+
+def test_pipeline_reports_successful_fallback_recovery_metadata() -> None:
+    class RecoveringStrategyExecutor(StrategyExecutor):
+        def execute(
+            self,
+            strategy,
+            chunks,
+            summarize,
+        ):
+            if strategy is SummarizationStrategyType.HIERARCHICAL:
+                raise RuntimeError("hierarchical failure")
+
+            return super().execute(
+                strategy,
+                chunks,
+                summarize,
+            )
+
+    pipeline = SummarizationPipeline(
+        chunker=TextChunker(),
+        executor=RecoveringStrategyExecutor(),
+    )
+
+    result = pipeline.run(
+        "Long document content. " * 5000,
+        summarize=lambda value: f"summary:{value}",
+    )
+
+    assert result.recovery_occurred is True
+    assert result.recovery_action == "fallback"
+    assert result.recovery_strategy == "map_reduce"
+
+
+def test_pipeline_reports_successful_retry_recovery_metadata() -> None:
+    execution_count = 0
+
+    class RetryOnceStrategyExecutor(StrategyExecutor):
+        def execute(
+            self,
+            strategy,
+            chunks,
+            summarize,
+        ):
+            nonlocal execution_count
+            execution_count += 1
+
+            if execution_count == 1:
+                raise RuntimeError("initial direct execution failure")
+
+            return super().execute(
+                strategy,
+                chunks,
+                summarize,
+            )
+
+    pipeline = SummarizationPipeline(
+        chunker=TextChunker(),
+        executor=RetryOnceStrategyExecutor(),
+    )
+
+    result = pipeline.run(
+        "short source text",
+        summarize=lambda text: f"summary: {text}",
+    )
+
+    assert execution_count == 2
+
+    assert result.selection.strategy is SummarizationStrategyType.DIRECT
+    assert result.recovery_occurred is True
+    assert result.recovery_action == "retry"
+    assert result.recovery_strategy == "direct"
+
+
+def test_pipeline_reports_no_recovery_metadata_for_normal_success() -> None:
+    execution_count = 0
+
+    class RecordingStrategyExecutor(StrategyExecutor):
+        def execute(
+            self,
+            strategy,
+            chunks,
+            summarize,
+        ):
+            nonlocal execution_count
+            execution_count += 1
+
+            return super().execute(
+                strategy,
+                chunks,
+                summarize,
+            )
+
+    pipeline = SummarizationPipeline(
+        chunker=TextChunker(),
+        executor=RecordingStrategyExecutor(),
+    )
+
+    result = pipeline.run(
+        "short source text",
+        summarize=lambda text: f"summary: {text}",
+    )
+
+    assert execution_count == 1
+
+    assert result.selection.strategy is SummarizationStrategyType.DIRECT
+    assert result.recovery_occurred is False
+    assert result.recovery_action is None
+    assert result.recovery_strategy is None

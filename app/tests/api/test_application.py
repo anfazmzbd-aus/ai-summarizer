@@ -29,9 +29,13 @@ from app.core.summarization_pipeline_adapter import (
 from app.summarization.chunking.models import ChunkingConfig
 from app.summarization.chunking.text_chunker import TextChunker
 from app.summarization.pipeline import SummarizationPipeline
-from app.summarization.strategies.models import StrategySelectionConfig
 from app.summarization.strategies.selector import (
     SummarizationStrategySelector,
+)
+from app.summarization.strategies.execution import StrategyExecutor
+from app.summarization.strategies.models import (
+    StrategySelectionConfig,
+    SummarizationStrategyType,
 )
 
 
@@ -121,6 +125,84 @@ async def test_application_executes_hierarchical_through_existing_service() -> N
 
     assert len(service.received_requests) > 1
 
+    assert result.prompt_tokens == (len(service.received_requests) * 10)
+    assert result.completion_tokens == (len(service.received_requests) * 5)
+    assert result.total_tokens == (result.prompt_tokens + result.completion_tokens)
+
+
+@pytest.mark.anyio
+async def test_application_returns_success_after_bounded_strategy_recovery() -> None:
+    executed_strategies: list[SummarizationStrategyType] = []
+
+    class RecoveringStrategyExecutor(StrategyExecutor):
+        def execute(
+            self,
+            strategy,
+            chunks,
+            summarize,
+        ):
+            executed_strategies.append(strategy)
+
+            if strategy is SummarizationStrategyType.HIERARCHICAL:
+                raise RuntimeError("internal hierarchical failure")
+
+            return super().execute(
+                strategy,
+                chunks,
+                summarize,
+            )
+
+    service = StubSummarizationService()
+
+    chunker = TextChunker(
+        ChunkingConfig(
+            max_tokens=2,
+            overlap_tokens=0,
+        )
+    )
+
+    selector = SummarizationStrategySelector(
+        StrategySelectionConfig(
+            direct_max_tokens=2,
+            map_reduce_max_tokens=4,
+        )
+    )
+
+    pipeline = AsyncSummarizationPipelineAdapter(
+        SummarizationPipeline(
+            chunker=chunker,
+            selector=selector,
+            executor=RecoveringStrategyExecutor(),
+        )
+    )
+
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        pipeline,
+    )
+
+    result = await application.summarize(
+        SummarizationApplicationRequest(
+            text="one two three four five six seven eight",
+            provider="fake",
+            model="demo",
+        )
+    )
+
+    assert isinstance(
+        result.summary,
+        str,
+    )
+    assert result.summary
+
+    assert result.metadata.strategy == "hierarchical"
+
+    assert executed_strategies == [
+        SummarizationStrategyType.HIERARCHICAL,
+        SummarizationStrategyType.MAP_REDUCE,
+    ]
+
+    assert len(service.received_requests) > 0
     assert result.prompt_tokens == (len(service.received_requests) * 10)
     assert result.completion_tokens == (len(service.received_requests) * 5)
     assert result.total_tokens == (result.prompt_tokens + result.completion_tokens)
@@ -651,3 +733,119 @@ async def test_application_rejects_constrained_mode_without_bounded_constraint()
         )
 
     assert service.received_request is None
+
+
+@pytest.mark.anyio
+async def test_application_projects_product_safe_recovery_metadata() -> None:
+    class RecoveringStrategyExecutor(StrategyExecutor):
+        def execute(
+            self,
+            strategy,
+            chunks,
+            summarize,
+        ):
+            if strategy is SummarizationStrategyType.HIERARCHICAL:
+                raise RuntimeError("internal hierarchical failure")
+
+            return super().execute(
+                strategy,
+                chunks,
+                summarize,
+            )
+
+    service = StubSummarizationService()
+
+    chunker = TextChunker(
+        ChunkingConfig(
+            max_tokens=2,
+            overlap_tokens=0,
+        )
+    )
+
+    selector = SummarizationStrategySelector(
+        StrategySelectionConfig(
+            direct_max_tokens=2,
+            map_reduce_max_tokens=4,
+        )
+    )
+
+    pipeline = AsyncSummarizationPipelineAdapter(
+        SummarizationPipeline(
+            chunker=chunker,
+            selector=selector,
+            executor=RecoveringStrategyExecutor(),
+        )
+    )
+
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        pipeline,
+    )
+
+    result = await application.summarize(
+        SummarizationApplicationRequest(
+            text="one two three four five six seven eight",
+            provider="fake",
+            model="demo",
+        )
+    )
+
+    assert result.metadata.strategy == "hierarchical"
+
+    attributes = result.metadata.attributes
+
+    assert attributes["recovery_occurred"] == "true"
+    assert attributes["recovery_action"] == "fallback"
+    assert attributes["recovery_strategy"] == "map_reduce"
+
+
+@pytest.mark.anyio
+async def test_application_projects_no_recovery_metadata_for_normal_success() -> None:
+    service = StubSummarizationService()
+
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        build_summarization_pipeline_adapter(),
+    )
+
+    result = await application.summarize(
+        SummarizationApplicationRequest(
+            text="short source text",
+            provider="fake",
+            model="demo",
+        )
+    )
+
+    attributes = result.metadata.attributes
+
+    assert attributes["recovery_occurred"] == "false"
+    assert attributes["recovery_action"] == ""
+    assert attributes["recovery_strategy"] == ""
+
+
+@pytest.mark.anyio
+async def test_application_does_not_apply_strategy_recovery_to_provider_failure() -> (
+    None
+):
+    service = FailingSummarizationService(
+        "provider failure",
+    )
+
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        build_summarization_pipeline_adapter(),
+    )
+
+    with pytest.raises(
+        RuntimeError,
+        match="provider failure",
+    ):
+        await application.summarize(
+            SummarizationApplicationRequest(
+                text="short source text",
+                provider="fake",
+                model="demo",
+            )
+        )
+
+    assert len(service.requests) == 1

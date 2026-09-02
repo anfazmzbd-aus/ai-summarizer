@@ -188,3 +188,30 @@ async def test_adapter_does_not_swallow_summarizer_failure() -> None:
         )
 
     assert calls == 1
+
+
+@pytest.mark.anyio
+async def test_adapter_does_not_retry_summarizer_timeout() -> None:
+    summarize_calls = 0
+
+    async def timeout_summarize(text: str) -> str:
+        nonlocal summarize_calls
+        summarize_calls += 1
+        raise TimeoutError("provider timeout")
+
+    adapter = AsyncSummarizationPipelineAdapter(
+        SummarizationPipeline(
+            chunker=TextChunker(),
+        )
+    )
+
+    with pytest.raises(
+        TimeoutError,
+        match="provider timeout",
+    ):
+        await adapter.run(
+            text="Short source text.",
+            summarize=timeout_summarize,
+        )
+
+    assert summarize_calls == 1

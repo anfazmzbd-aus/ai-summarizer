@@ -82,6 +82,13 @@ async def summarize(
             diagnostic_message=result.metadata.attributes.get(
                 "intelligence_diagnostic_message"
             ),
+            recovery_occurred=(
+                result.metadata.attributes.get("recovery_occurred") == "true"
+            ),
+            recovery_action=(result.metadata.attributes.get("recovery_action") or None),
+            recovery_strategy=(
+                result.metadata.attributes.get("recovery_strategy") or None
+            ),
         ),
     )
 

@@ -132,11 +132,16 @@ class SummarizationApplication:
                     "intelligence_observability_status": (
                         intelligence_result.observability_status
                     ),
-                    "intelligence_diagnostic_code": intelligence_result.diagnostic_code,
+                    "intelligence_diagnostic_code": (
+                        intelligence_result.diagnostic_code
+                    ),
                     "intelligence_diagnostic_message": (
                         intelligence_result.diagnostic_message
                     ),
                     "intelligence_reason_count": str(intelligence_result.reason_count),
+                    "recovery_occurred": str(pipeline_result.recovery_occurred).lower(),
+                    "recovery_action": pipeline_result.recovery_action or "",
+                    "recovery_strategy": pipeline_result.recovery_strategy or "",
                     **execution_metadata,
                 },
             ),
