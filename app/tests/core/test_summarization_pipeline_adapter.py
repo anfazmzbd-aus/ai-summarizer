@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pytest
+import asyncio
 
 from app.core.summarization_pipeline_adapter import (
     AsyncSummarizationPipelineAdapter,
@@ -16,6 +17,9 @@ from app.summarization.strategies.models import (
 )
 from app.summarization.strategies.selector import (
     SummarizationStrategySelector,
+)
+from app.core.summarization_pipeline_factory import (
+    build_summarization_pipeline_adapter,
 )
 
 
@@ -215,3 +219,155 @@ async def test_adapter_does_not_retry_summarizer_timeout() -> None:
         )
 
     assert summarize_calls == 1
+
+
+@pytest.mark.anyio
+async def test_adapter_supports_concurrent_independent_requests() -> None:
+    adapter = build_summarization_pipeline_adapter()
+
+    calls: list[str] = []
+
+    async def summarize(source: str) -> str:
+        calls.append(source)
+
+        await asyncio.sleep(0)
+
+        return f"summary:{source}"
+
+    results = await asyncio.gather(
+        adapter.run(
+            "first source",
+            summarize,
+        ),
+        adapter.run(
+            "second source",
+            summarize,
+        ),
+        adapter.run(
+            "third source",
+            summarize,
+        ),
+    )
+
+    assert len(results) == 3
+
+    assert all(result.summary for result in results)
+
+    assert all(result.execution.content == result.summary for result in results)
+
+    assert len(calls) == 3
+
+    assert set(calls) == {
+        "first source",
+        "second source",
+        "third source",
+    }
+
+
+@pytest.mark.anyio
+async def test_adapter_preserves_request_isolation_under_interleaving() -> None:
+    adapter = build_summarization_pipeline_adapter()
+
+    delays = {
+        "slow source": 0.03,
+        "medium source": 0.02,
+        "fast source": 0.01,
+    }
+
+    async def summarize(source: str) -> str:
+        await asyncio.sleep(delays[source])
+        return f"summary:{source}"
+
+    slow_result, medium_result, fast_result = await asyncio.gather(
+        adapter.run(
+            "slow source",
+            summarize,
+        ),
+        adapter.run(
+            "medium source",
+            summarize,
+        ),
+        adapter.run(
+            "fast source",
+            summarize,
+        ),
+    )
+
+    assert slow_result.summary == "summary:slow source"
+    assert medium_result.summary == "summary:medium source"
+    assert fast_result.summary == "summary:fast source"
+
+    assert slow_result.execution.content == slow_result.summary
+    assert medium_result.execution.content == medium_result.summary
+    assert fast_result.execution.content == fast_result.summary
+
+
+@pytest.mark.anyio
+async def test_adapter_isolates_failure_between_concurrent_requests() -> None:
+    adapter = build_summarization_pipeline_adapter()
+
+    async def summarize(source: str) -> str:
+        await asyncio.sleep(0)
+
+        if source == "failing source":
+            raise RuntimeError("isolated failure")
+
+        return f"summary:{source}"
+
+    results = await asyncio.gather(
+        adapter.run(
+            "first source",
+            summarize,
+        ),
+        adapter.run(
+            "failing source",
+            summarize,
+        ),
+        adapter.run(
+            "third source",
+            summarize,
+        ),
+        return_exceptions=True,
+    )
+
+    first_result, failed_result, third_result = results
+
+    assert first_result.summary == "summary:first source"
+    assert isinstance(failed_result, RuntimeError)
+    assert str(failed_result) == "isolated failure"
+    assert third_result.summary == "summary:third source"
+
+    assert first_result.execution.content == first_result.summary
+    assert third_result.execution.content == third_result.summary
+
+
+@pytest.mark.anyio
+async def test_adapter_remains_stable_across_repeated_concurrent_batches() -> None:
+    adapter = build_summarization_pipeline_adapter()
+
+    async def summarize(source: str) -> str:
+        await asyncio.sleep(0)
+        return f"summary:{source}"
+
+    for batch in range(5):
+        sources = [
+            f"batch-{batch}-source-1",
+            f"batch-{batch}-source-2",
+            f"batch-{batch}-source-3",
+        ]
+
+        results = await asyncio.gather(
+            *(
+                adapter.run(
+                    source,
+                    summarize,
+                )
+                for source in sources
+            )
+        )
+
+        assert [result.summary for result in results] == [
+            f"summary:{source}" for source in sources
+        ]
+
+        assert all(result.execution.content == result.summary for result in results)

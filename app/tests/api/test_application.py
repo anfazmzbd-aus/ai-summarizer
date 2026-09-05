@@ -5,6 +5,7 @@ from __future__ import annotations
 from uuid import uuid4
 
 import pytest
+import asyncio
 
 from app.ai import (
     SummarizationRequest,
@@ -206,6 +207,111 @@ async def test_application_returns_success_after_bounded_strategy_recovery() -> 
     assert result.prompt_tokens == (len(service.received_requests) * 10)
     assert result.completion_tokens == (len(service.received_requests) * 5)
     assert result.total_tokens == (result.prompt_tokens + result.completion_tokens)
+
+
+@pytest.mark.anyio
+async def test_application_repeated_bounded_recovery_remains_stable() -> None:
+    executed_strategies: list[SummarizationStrategyType] = []
+
+    class RecoveringStrategyExecutor(StrategyExecutor):
+        def execute(
+            self,
+            strategy,
+            chunks,
+            summarize,
+        ):
+            executed_strategies.append(strategy)
+
+            if strategy is SummarizationStrategyType.HIERARCHICAL:
+                raise RuntimeError("internal hierarchical failure")
+
+            return super().execute(
+                strategy,
+                chunks,
+                summarize,
+            )
+
+    service = StubSummarizationService()
+
+    chunker = TextChunker(
+        ChunkingConfig(
+            max_tokens=2,
+            overlap_tokens=0,
+        )
+    )
+
+    selector = SummarizationStrategySelector(
+        StrategySelectionConfig(
+            direct_max_tokens=2,
+            map_reduce_max_tokens=4,
+        )
+    )
+
+    pipeline = AsyncSummarizationPipelineAdapter(
+        SummarizationPipeline(
+            chunker=chunker,
+            selector=selector,
+            executor=RecoveringStrategyExecutor(),
+        )
+    )
+
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        pipeline,
+    )
+
+    results = []
+
+    for _ in range(5):
+        result = await application.summarize(
+            SummarizationApplicationRequest(
+                text="one two three four five six seven eight",
+                provider="fake",
+                model="demo",
+            )
+        )
+
+        results.append(result)
+
+    assert (
+        executed_strategies
+        == [
+            SummarizationStrategyType.HIERARCHICAL,
+            SummarizationStrategyType.MAP_REDUCE,
+        ]
+        * 5
+    )
+
+    assert all(result.metadata.strategy == "hierarchical" for result in results)
+
+    assert all(
+        result.metadata.attributes["recovery_occurred"] == "true" for result in results
+    )
+
+    assert all(
+        result.metadata.attributes["recovery_action"] == "fallback"
+        for result in results
+    )
+
+    assert all(
+        result.metadata.attributes["recovery_strategy"] == "map_reduce"
+        for result in results
+    )
+
+    assert all(result.summary == results[0].summary for result in results)
+
+    assert all(result.prompt_tokens == results[0].prompt_tokens for result in results)
+
+    assert all(
+        result.completion_tokens == results[0].completion_tokens for result in results
+    )
+
+    assert all(result.total_tokens == results[0].total_tokens for result in results)
+
+    assert all(
+        result.total_tokens == result.prompt_tokens + result.completion_tokens
+        for result in results
+    )
 
 
 @pytest.mark.anyio
@@ -849,3 +955,288 @@ async def test_application_does_not_apply_strategy_recovery_to_provider_failure(
         )
 
     assert len(service.requests) == 1
+
+
+@pytest.mark.anyio
+async def test_application_preserves_concurrent_request_isolation() -> None:
+    class ConcurrentSummarizationService:
+        def __init__(self) -> None:
+            self.received_requests: list[SummarizationRequest] = []
+
+        async def summarize(
+            self,
+            request: SummarizationRequest,
+        ) -> SummarizationResponse:
+            self.received_requests.append(request)
+
+            delays = {
+                "model-slow": 0.03,
+                "model-medium": 0.02,
+                "model-fast": 0.01,
+            }
+
+            await asyncio.sleep(delays[request.model])
+
+            return SummarizationResponse(
+                summary=f"summary:{request.text}",
+                prompt="stub prompt",
+                model=request.model,
+                prompt_tokens={
+                    "model-slow": 11,
+                    "model-medium": 22,
+                    "model-fast": 33,
+                }[request.model],
+                completion_tokens={
+                    "model-slow": 1,
+                    "model-medium": 2,
+                    "model-fast": 3,
+                }[request.model],
+            )
+
+    service = ConcurrentSummarizationService()
+
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        build_summarization_pipeline_adapter(),
+    )
+
+    slow_result, medium_result, fast_result = await asyncio.gather(
+        application.summarize(
+            SummarizationApplicationRequest(
+                text="slow source",
+                provider="fake",
+                model="model-slow",
+            )
+        ),
+        application.summarize(
+            SummarizationApplicationRequest(
+                text="medium source",
+                provider="fake",
+                model="model-medium",
+            )
+        ),
+        application.summarize(
+            SummarizationApplicationRequest(
+                text="fast source",
+                provider="fake",
+                model="model-fast",
+            )
+        ),
+    )
+
+    assert slow_result.summary == "summary:slow source"
+    assert slow_result.model == "model-slow"
+    assert slow_result.prompt_tokens == 11
+    assert slow_result.completion_tokens == 1
+
+    assert medium_result.summary == "summary:medium source"
+    assert medium_result.model == "model-medium"
+    assert medium_result.prompt_tokens == 22
+    assert medium_result.completion_tokens == 2
+
+    assert fast_result.summary == "summary:fast source"
+    assert fast_result.model == "model-fast"
+    assert fast_result.prompt_tokens == 33
+    assert fast_result.completion_tokens == 3
+
+    assert len(service.received_requests) == 3
+
+    assert {(request.text, request.model) for request in service.received_requests} == {
+        ("slow source", "model-slow"),
+        ("medium source", "model-medium"),
+        ("fast source", "model-fast"),
+    }
+
+
+@pytest.mark.anyio
+async def test_application_isolates_failure_between_concurrent_requests() -> None:
+    class MixedOutcomeSummarizationService:
+        async def summarize(
+            self,
+            request: SummarizationRequest,
+        ) -> SummarizationResponse:
+            await asyncio.sleep(0)
+
+            if request.text == "failing source":
+                raise RuntimeError("isolated provider failure")
+
+            return SummarizationResponse(
+                summary=f"summary:{request.text}",
+                prompt="stub prompt",
+                model=request.model,
+                prompt_tokens=10,
+                completion_tokens=5,
+            )
+
+    application = SummarizationApplication(
+        MixedOutcomeSummarizationService(),  # type: ignore[arg-type]
+        build_summarization_pipeline_adapter(),
+    )
+
+    results = await asyncio.gather(
+        application.summarize(
+            SummarizationApplicationRequest(
+                text="first source",
+                provider="fake",
+                model="model-one",
+            )
+        ),
+        application.summarize(
+            SummarizationApplicationRequest(
+                text="failing source",
+                provider="fake",
+                model="model-fail",
+            )
+        ),
+        application.summarize(
+            SummarizationApplicationRequest(
+                text="third source",
+                provider="fake",
+                model="model-three",
+            )
+        ),
+        return_exceptions=True,
+    )
+
+    first_result, failed_result, third_result = results
+
+    assert first_result.summary == "summary:first source"
+    assert first_result.model == "model-one"
+
+    assert isinstance(failed_result, RuntimeError)
+    assert str(failed_result) == "isolated provider failure"
+
+    assert third_result.summary == "summary:third source"
+    assert third_result.model == "model-three"
+
+
+@pytest.mark.anyio
+async def test_application_repeated_large_hierarchical_requests_remain_stable() -> None:
+    service = StubSummarizationService()
+
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        make_test_pipeline(
+            max_tokens=8,
+            direct_max_tokens=8,
+            map_reduce_max_tokens=16,
+        ),
+    )
+
+    text = " ".join(f"token-{index}" for index in range(128))
+
+    results = []
+
+    for _ in range(5):
+        result = await application.summarize(
+            SummarizationApplicationRequest(
+                text=text,
+                provider="fake",
+                model="reliability-model",
+            )
+        )
+
+        results.append(result)
+
+    assert all(result.metadata.strategy == "hierarchical" for result in results)
+
+    assert all(
+        result.metadata.chunk_count == results[0].metadata.chunk_count
+        for result in results
+    )
+
+    assert results[0].metadata.chunk_count > 1
+
+    assert all(result.summary == results[0].summary for result in results)
+
+    assert all(result.model == "reliability-model" for result in results)
+
+    assert all(result.prompt_tokens == results[0].prompt_tokens for result in results)
+
+    assert all(
+        result.completion_tokens == results[0].completion_tokens for result in results
+    )
+
+    assert all(result.total_tokens == results[0].total_tokens for result in results)
+
+    assert all(
+        result.total_tokens == result.prompt_tokens + result.completion_tokens
+        for result in results
+    )
+
+
+@pytest.mark.anyio
+async def test_application_remains_usable_after_sequential_provider_failure() -> None:
+    class SequentialMixedOutcomeSummarizationService:
+        def __init__(self) -> None:
+            self.requests: list[SummarizationRequest] = []
+
+        async def summarize(
+            self,
+            request: SummarizationRequest,
+        ) -> SummarizationResponse:
+            self.requests.append(request)
+
+            if request.text == "failing source":
+                raise RuntimeError("isolated provider failure")
+
+            return SummarizationResponse(
+                summary=f"summary:{request.text}",
+                prompt="stub prompt",
+                model=request.model,
+                prompt_tokens=10,
+                completion_tokens=5,
+            )
+
+    service = SequentialMixedOutcomeSummarizationService()
+
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        build_summarization_pipeline_adapter(),
+    )
+
+    first_result = await application.summarize(
+        SummarizationApplicationRequest(
+            text="first source",
+            provider="fake",
+            model="model-one",
+        )
+    )
+
+    with pytest.raises(
+        RuntimeError,
+        match="isolated provider failure",
+    ):
+        await application.summarize(
+            SummarizationApplicationRequest(
+                text="failing source",
+                provider="fake",
+                model="model-fail",
+            )
+        )
+
+    third_result = await application.summarize(
+        SummarizationApplicationRequest(
+            text="third source",
+            provider="fake",
+            model="model-three",
+        )
+    )
+
+    assert first_result.summary == "summary:first source"
+    assert first_result.model == "model-one"
+    assert first_result.prompt_tokens == 10
+    assert first_result.completion_tokens == 5
+    assert first_result.total_tokens == 15
+
+    assert third_result.summary == "summary:third source"
+    assert third_result.model == "model-three"
+    assert third_result.prompt_tokens == 10
+    assert third_result.completion_tokens == 5
+    assert third_result.total_tokens == 15
+
+    assert [(request.text, request.model) for request in service.requests] == [
+        ("first source", "model-one"),
+        ("failing source", "model-fail"),
+        ("third source", "model-three"),
+    ]

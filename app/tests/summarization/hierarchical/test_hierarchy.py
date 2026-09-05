@@ -310,3 +310,43 @@ def test_maximum_levels_is_enforced():
         match="maximum_levels",
     ):
         builder.build(chunks)
+
+
+def test_large_hierarchy_terminates_with_bounded_depth():
+    chunk_count = 256
+
+    chunks = make_chunks(chunk_count)
+
+    config = HierarchyConfig(
+        max_children_per_node=4,
+        maximum_levels=16,
+    )
+
+    builder = HierarchyBuilder(config)
+
+    root = builder.build(chunks)
+
+    assert root is not None
+
+    assert root.level == 4
+    assert root.source_chunk_indexes == tuple(range(chunk_count))
+
+    def walk(node: SummaryNode) -> list[SummaryNode]:
+        nodes = [node]
+
+        for child in node.children:
+            nodes.extend(walk(child))
+
+        return nodes
+
+    nodes = walk(root)
+
+    leaves = [node for node in nodes if node.is_leaf]
+
+    assert len(leaves) == chunk_count
+
+    assert max(node.level for node in nodes) < config.maximum_levels
+
+    assert tuple(
+        index for leaf in leaves for index in leaf.source_chunk_indexes
+    ) == tuple(range(chunk_count))

@@ -386,3 +386,34 @@ def test_no_runtime_or_provider_imports_are_required():
     assert ChunkingConfig is not None
     assert DeterministicTokenCounter is not None
     assert TextChunker is not None
+
+
+def test_large_document_chunking_is_bounded_and_complete():
+    token_count = 4_096
+    max_tokens = 128
+
+    text = " ".join(f"token{i}" for i in range(token_count))
+
+    config = ChunkingConfig(
+        max_tokens=max_tokens,
+        overlap_tokens=0,
+        preserve_boundaries=False,
+    )
+
+    chunks = TextChunker(config).chunk(text)
+
+    expected_chunk_count = token_count // max_tokens
+
+    assert len(chunks) == expected_chunk_count
+    assert [chunk.index for chunk in chunks] == list(range(expected_chunk_count))
+
+    assert all(chunk.token_count == max_tokens for chunk in chunks)
+
+    assert sum(chunk.token_count for chunk in chunks) == token_count
+
+    assert chunks[0].start_offset == 0
+    assert chunks[-1].end_offset == len(text)
+
+    for previous, current in zip(chunks, chunks[1:]):
+        assert current.start_offset > previous.start_offset
+        assert current.end_offset > previous.end_offset

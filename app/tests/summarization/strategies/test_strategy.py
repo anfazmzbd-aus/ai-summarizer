@@ -134,3 +134,90 @@ def test_hierarchical_strategy_empty_input():
 
     assert result.content == ""
     assert result.metadata["chunk_count"] == 0
+
+
+def test_map_reduce_call_amplification_is_bounded_by_chunk_count():
+    chunk_count = 128
+
+    chunks = [make_chunk(index, f"chunk-{index}") for index in range(chunk_count)]
+
+    calls: list[str] = []
+
+    def recording_summarize(text: str) -> str:
+        calls.append(text)
+        return f"summary:{text}"
+
+    result = MapReduceSummarizationStrategy().execute(
+        chunks,
+        recording_summarize,
+    )
+
+    assert result is not None
+
+    assert len(calls) == chunk_count + 1
+
+    assert calls[:chunk_count] == [chunk.text for chunk in chunks]
+
+    reduce_input = calls[-1]
+
+    for chunk in chunks:
+        assert f"summary:{chunk.text}" in reduce_input
+
+
+def test_hierarchical_call_amplification_is_bounded_by_chunk_count():
+    chunk_count = 128
+
+    chunks = [make_chunk(index, f"chunk-{index}") for index in range(chunk_count)]
+
+    calls: list[str] = []
+
+    def recording_summarize(text: str) -> str:
+        calls.append(text)
+        return f"summary:{text}"
+
+    result = HierarchicalSummarizationStrategy().execute(
+        chunks,
+        recording_summarize,
+    )
+
+    assert result is not None
+    assert result.strategy.value == "hierarchical"
+    assert result.metadata["chunk_count"] == chunk_count
+
+    expected_call_count = (2 * chunk_count) - 1
+
+    assert len(calls) == expected_call_count
+
+    assert calls[:chunk_count] == [chunk.text for chunk in chunks]
+
+
+def test_repeated_large_hierarchical_execution_is_deterministic_and_stateless():
+    chunk_count = 128
+
+    chunks = [make_chunk(index, f"chunk-{index}") for index in range(chunk_count)]
+
+    strategy = HierarchicalSummarizationStrategy()
+
+    results = []
+    call_counts = []
+
+    for _ in range(5):
+        calls: list[str] = []
+
+        def recording_summarize(text: str) -> str:
+            calls.append(text)
+            return f"summary:{text}"
+
+        result = strategy.execute(
+            chunks,
+            recording_summarize,
+        )
+
+        results.append(result)
+        call_counts.append(len(calls))
+
+    expected_call_count = (2 * chunk_count) - 1
+
+    assert all(result == results[0] for result in results)
+
+    assert call_counts == [expected_call_count] * 5
