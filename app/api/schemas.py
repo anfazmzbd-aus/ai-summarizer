@@ -4,7 +4,7 @@ API schemas.
 
 from __future__ import annotations
 
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
 
 class SummarizeRequest(BaseModel):
@@ -14,6 +14,13 @@ class SummarizeRequest(BaseModel):
     provider: str = "fake"
 
     model: str = "demo"
+
+    @field_validator("text")
+    @classmethod
+    def validate_text(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("text must not be empty")
+        return value
 
 
 class SummarizeResponse(BaseModel):
