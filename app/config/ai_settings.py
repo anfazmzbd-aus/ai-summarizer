@@ -23,7 +23,8 @@ class AISettings:
         default_factory=lambda: os.getenv(
             "OPENAI_API_KEY",
             "",
-        )
+        ),
+        repr=False,
     )
 
     model: str = field(
