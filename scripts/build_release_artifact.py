@@ -9,21 +9,41 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
-EXCLUDED_PATHS = {
-    "logs/agent_system.log",
+ROOT_FILES = {
+    ".env.example",
+    "CHANGELOG.md",
+    "README.md",
+    "requirements.txt",
 }
 
-EXCLUDED_PREFIXES = (
-    ".github/",
-    ".vscode/",
-    "app/tests/",
-    "docs/v7",
-    "docs/v8",
-    "docs/v9",
-    "docs/v10",
-    "docs/v11",
-    "transition/",
+ALLOWED_PREFIXES = (
+    "app/",
+    "docs/v12/",
+    "static/",
 )
+
+ALLOWED_SCRIPT_FILES = {
+    "scripts/build_release_artifact.py",
+    "scripts/validate_runtime.py",
+}
+
+EXCLUDED_APP_PREFIXES = (
+    "app/tests/",
+    "app/legacy/",
+)
+
+EXCLUDED_FILE_SUFFIXES = (
+    ".pyc",
+    ".pyo",
+)
+
+# ZIP timestamps cannot represent dates before 1980.
+# A fixed timestamp makes release construction independent of
+# source-file mtimes.
+DETERMINISTIC_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
+
+# Regular file permissions: rw-r--r--
+DETERMINISTIC_EXTERNAL_ATTR = 0o100644 << 16
 
 
 def tracked_files() -> list[str]:
@@ -35,19 +55,32 @@ def tracked_files() -> list[str]:
         text=True,
     )
 
-    return [line.strip() for line in result.stdout.splitlines() if line.strip()]
+    return [
+        line.strip().replace("\\", "/")
+        for line in result.stdout.splitlines()
+        if line.strip()
+    ]
 
 
 def should_include(relative_path: str) -> bool:
     normalized = relative_path.replace("\\", "/")
 
-    if normalized in EXCLUDED_PATHS:
+    if normalized in ROOT_FILES:
+        return True
+
+    if normalized in ALLOWED_SCRIPT_FILES:
+        return True
+
+    if normalized.startswith(EXCLUDED_APP_PREFIXES):
         return False
 
-    if normalized.startswith(EXCLUDED_PREFIXES):
+    if normalized.endswith(EXCLUDED_FILE_SUFFIXES):
         return False
 
-    return True
+    if normalized.startswith(ALLOWED_PREFIXES):
+        return True
+
+    return False
 
 
 def calculate_sha256(path: Path) -> str:
@@ -60,32 +93,52 @@ def calculate_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _write_deterministic_file(
+    archive: zipfile.ZipFile,
+    source: Path,
+    archive_name: str,
+) -> None:
+    info = zipfile.ZipInfo(
+        filename=archive_name,
+        date_time=DETERMINISTIC_TIMESTAMP,
+    )
+    info.compress_type = zipfile.ZIP_DEFLATED
+    info.external_attr = DETERMINISTIC_EXTERNAL_ATTR
+    info.create_system = 3
+
+    archive.writestr(
+        info,
+        source.read_bytes(),
+    )
+
+
 def build(version: str, output_directory: Path) -> tuple[Path, Path]:
     output_directory.mkdir(parents=True, exist_ok=True)
 
     artifact_name = f"ai-summarizer-v{version}.zip"
     artifact_path = output_directory / artifact_name
 
-    files = [
+    files = sorted(
         relative_path
         for relative_path in tracked_files()
         if should_include(relative_path)
-    ]
+    )
 
     with zipfile.ZipFile(
         artifact_path,
         mode="w",
         compression=zipfile.ZIP_DEFLATED,
     ) as archive:
-        for relative_path in sorted(files):
+        for relative_path in files:
             source = PROJECT_ROOT / relative_path
 
             if not source.is_file():
                 continue
 
-            archive.write(
-                source,
-                arcname=f"ai-summarizer-v{version}/{relative_path}",
+            _write_deterministic_file(
+                archive=archive,
+                source=source,
+                archive_name=(f"ai-summarizer-v{version}/{relative_path}"),
             )
 
     checksum = calculate_sha256(artifact_path)
@@ -101,13 +154,13 @@ def build(version: str, output_directory: Path) -> tuple[Path, Path]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Build the certified AI Summarizer source release artifact."
+        description=("Build the certified AI Summarizer source release artifact.")
     )
 
     parser.add_argument(
         "--version",
         required=True,
-        help="Release version, for example 12.0.0-m4",
+        help="Release version, for example 12.0.0-m5",
     )
 
     parser.add_argument(
