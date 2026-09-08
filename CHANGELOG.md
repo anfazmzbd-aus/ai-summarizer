@@ -4,6 +4,146 @@ All notable changes to the AI Summarizer project will be documented in this file
 
 ---
 
+# V12.0.0 — Production Certification & Standalone Release
+
+Status: Release certification in progress
+
+Final publication: Pending V12 M6 and M7
+
+## Overview
+
+V12.0.0 is the production-certification and standalone-release phase of AI Summarizer.
+
+V12 does not introduce a new application architecture. It stabilizes, secures, operationalizes, documents, packages, and certifies the application architecture completed through V11.
+
+## Added
+
+* V12 release governance and scope-freeze contract.
+* Production certification matrix.
+* Release-blocker classification policy.
+* V12 functional, regression, integration, security, configuration, operational, deployment, packaging, clean-install, documentation, release-candidate, artifact, and release-identity certification domains.
+* Public product-boundary certification tests.
+* V12 security-boundary certification tests.
+* Deterministic standalone release-artifact builder.
+* SHA-256 release-artifact checksum generation.
+* Standalone packaging certification tests.
+* Production installation documentation.
+* Production configuration documentation.
+* Operations documentation.
+* Troubleshooting documentation.
+* V12 release notes.
+* OpenRouter usage guidance through the certified OpenAI-compatible provider path.
+
+## Changed
+
+* Public summarization requests now reject empty and whitespace-only text.
+* API-key values are excluded from normal `AISettings` representation.
+* Primary README documentation has been aligned with the V12 certified runtime and standalone release.
+* Production startup documentation now uses:
+
+```text
+uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+rather than the development reloader.
+
+* Runtime documentation now identifies `fake` and `openai` as the certified `AI_PROVIDER` values.
+* Historical direct `mock` and `openrouter` provider examples are no longer presented as certified V12 provider values.
+* `.env.example` is documented as a configuration template rather than an automatically loaded production configuration file.
+
+## Certified
+
+Completed V12 certification milestones:
+
+```text
+M1 — Baseline & Release-Candidate Governance
+M2 — Production Stabilization & Regression Certification
+M3 — Security & Operational Certification
+M4 — Production Deployment & Standalone Packaging
+```
+
+Current milestone:
+
+```text
+M5 — Documentation & Release Readiness
+```
+
+Certified domains through M4:
+
+```text
+CERT-FUNC     PASS
+CERT-REG      PASS
+CERT-INT      PASS
+CERT-SEC      PASS
+CERT-CONF     PASS
+CERT-OPS      PASS
+CERT-DEP      PASS
+CERT-PKG      PASS
+CERT-CLEAN    PASS
+```
+
+`CERT-DOC` remains pending until M5 final documentation validation completes.
+
+## Packaging
+
+The V12 standalone distribution format is a deterministic, versioned source ZIP generated from Git-tracked release source.
+
+Final artifact naming convention:
+
+```text
+ai-summarizer-v12.0.0.zip
+```
+
+Certified release artifacts are accompanied by SHA-256 checksums.
+
+The release excludes development/runtime state including local virtual environments, `.env`, caches, logs, runtime databases, IDE state, and other machine-local files.
+
+## Runtime
+
+Certified runtime family:
+
+```text
+Python 3.11
+```
+
+Clean-install certification was performed using Python 3.11.9.
+
+## Providers
+
+Certified `AI_PROVIDER` values:
+
+```text
+fake
+openai
+```
+
+OpenRouter remains usable through the `openai` provider path with:
+
+```text
+OPENAI_BASE_URL=https://openrouter.ai/api/v1
+```
+
+and appropriate OpenRouter credentials and model configuration.
+
+## Release Status
+
+The final:
+
+```text
+v12.0.0
+```
+
+release has not yet been published.
+
+Final publication requires successful completion of:
+
+```text
+M6 — Release Candidate Certification
+M7 — Final V12.0.0 Production Release
+```
+
+---
+
 # V1.0 - Initial Summarizer
 
 ## Features
