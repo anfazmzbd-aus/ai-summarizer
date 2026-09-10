@@ -8,7 +8,7 @@ All notable changes to the AI Summarizer project will be documented in this file
 
 Status: Release certification in progress
 
-Final publication: Pending V12 M6 and M7
+Final publication: Pending V12 M7
 
 ## Overview
 
@@ -80,9 +80,8 @@ CERT-OPS      PASS
 CERT-DEP      PASS
 CERT-PKG      PASS
 CERT-CLEAN    PASS
+CERT-DOC      PASS
 ```
-
-`CERT-DOC` remains pending until M5 final documentation validation completes.
 
 ## Packaging
 

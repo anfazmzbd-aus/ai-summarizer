@@ -418,9 +418,15 @@ M5 — Documentation & Release Readiness
 
 Remaining before final release:
 
-```text
-M6 — Release Candidate Certification
-M7 — Final V12.0.0 Production Release
+```
+
+Release-candidate certification is complete at `v12.0.0-rc1`.
+
+Remaining before final release:
+
+- M7 — Final V12.0.0 Production Release
+
+The final `v12.0.0` tag and standalone artifact are created only after M7 final-release certification completes.
 ```
 
 ---

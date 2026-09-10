@@ -49,7 +49,7 @@ summaryForm.addEventListener("submit", async (event) => {
         observabilityStatusValue.textContent =
             metadata.observability_status || "—";
 
-        result.classList.remove("hidden");s
+        result.classList.remove("hidden");
     } catch (requestError) {
         error.textContent = requestError.message;
         error.classList.remove("hidden");

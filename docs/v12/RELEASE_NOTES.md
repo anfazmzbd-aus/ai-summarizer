@@ -6,8 +6,8 @@
 Product: AI Summarizer
 Release: V12.0.0
 Release Program: Production Certification & Standalone Release
-Current Phase: M5 — Documentation & Release Readiness
-Final Release Status: Pending M6 and M7 certification
+Current Phase: M7 — Final V12.0.0 Production Release
+Final Release Status: M6 complete; M7 final-release certification in progress
 ```
 
 V12.0.0 is the final production-certification and standalone-release phase of the current AI Summarizer roadmap.
@@ -192,7 +192,7 @@ v12.0.0-m4
 Status:
 
 ```text
-IN PROGRESS
+COMPLETE
 ```
 
 Documentation now covers:
@@ -214,7 +214,7 @@ Documentation now covers:
 M5 closes:
 
 ```text
-CERT-DOC
+COMPLETE
 ```
 
 only after documentation validation and final M5 certification complete.
@@ -226,7 +226,7 @@ only after documentation validation and final M5 certification complete.
 Status:
 
 ```text
-NOT STARTED
+COMPLETE
 ```
 
 M6 will establish and certify the release candidate eligible for final V12 publication.
@@ -244,10 +244,10 @@ v12.0.0-rc1
 Status:
 
 ```text
-NOT STARTED
+IN PROGRESS
 ```
 
-M7 will verify final version, source, tag, artifact, documentation, and release identity before publishing:
+M7 verifies final version, source, tag, artifact, documentation, and release identity before publishing:
 
 ```text
 v12.0.0
@@ -620,10 +620,10 @@ CERT-OPS      PASS
 CERT-DEP      PASS
 CERT-PKG      PASS
 CERT-CLEAN    PASS
-CERT-DOC      PENDING M5 FINAL VALIDATION
-CERT-RC       NOT STARTED
-CERT-ART      PENDING M6/M7
-CERT-ID       PENDING M6/M7
+CERT-DOC      PASS
+CERT-RC       PASS
+CERT-ART      PASS — RC1; final artifact verification pending M7
+CERT-ID       PASS — RC1; final identity verification pending M7
 CERT-FINAL    NOT STARTED
 ```
 
@@ -657,9 +657,9 @@ V12 M1    COMPLETE
 V12 M2    COMPLETE
 V12 M3    COMPLETE
 V12 M4    COMPLETE
-V12 M5    IN PROGRESS
-V12 M6    NOT STARTED
-V12 M7    NOT STARTED
+V12 M5    COMPLETE
+V12 M6    COMPLETE
+V12 M7    IN PROGRESS
 
 Final v12.0.0 production release:
 NOT YET PUBLISHED
