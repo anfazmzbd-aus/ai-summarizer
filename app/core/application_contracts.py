@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from app.core.application_metadata import SummarizationExecutionMetadata
+from app.core.product_options import SummaryLength, SummaryType
 
 
 @dataclass(frozen=True)
@@ -19,6 +20,10 @@ class SummarizationApplicationRequest:
     provider: str | None = None
     model: str | None = None
     prompt_name: str | None = None
+
+    summary_type: SummaryType = SummaryType.GENERAL
+    summary_length: SummaryLength = SummaryLength.MEDIUM
+    instructions: str | None = None
 
 
 @dataclass(frozen=True)

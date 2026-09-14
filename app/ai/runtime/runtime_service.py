@@ -35,6 +35,7 @@ class AIRuntimeService:
 
         prompt = self._prompt_engine.render(
             request.prompt_name,
+            version=request.prompt_version,
             **request.variables,
         )
 

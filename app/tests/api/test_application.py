@@ -726,6 +726,7 @@ async def test_application_executes_for_non_review_intelligence_modes(
     assert result.summary == "stub summary"
     assert service.received_request is not None
     assert result.metadata.intelligence_mode == mode
+    assert service.received_request.prompt_version == "2.0.0"
 
 
 @pytest.mark.anyio

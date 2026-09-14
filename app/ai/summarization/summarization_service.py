@@ -34,8 +34,12 @@ class SummarizationService:
             AIRuntimeRequest(
                 provider=request.provider,
                 prompt_name=request.prompt_name,
+                prompt_version=request.prompt_version,
                 model=request.model,
                 variables={
+                    "summary_instruction": request.summary_instruction,
+                    "length_instruction": request.length_instruction,
+                    "additional_instruction": request.additional_instruction,
                     "text": request.text,
                 },
             )

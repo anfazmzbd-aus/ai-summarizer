@@ -17,4 +17,6 @@ class AIRuntimeRequest:
 
     model: str
 
+    prompt_version: str = "1.0"
+
     variables: dict[str, Any] = field(default_factory=dict)

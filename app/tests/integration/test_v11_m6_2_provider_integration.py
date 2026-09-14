@@ -43,8 +43,17 @@ def _build_provider_backed_service() -> SummarizationService:
     prompt_registry.register(
         PromptTemplate(
             name="summary",
-            version="1.0",
-            template="Summarize the following text:\n\n{text}",
+            version="2.0.0",
+            template=(
+                "You are a professional summarization assistant.\n"
+                "Produce an accurate summary of the supplied source.\n"
+                "Preserve important facts and do not introduce unsupported "
+                "information.\n\n"
+                "Summary objective:\n{summary_instruction}\n\n"
+                "Length:\n{length_instruction}\n\n"
+                "Additional user guidance:\n{additional_instruction}\n\n"
+                "Source:\n{text}"
+            ),
         )
     )
 
@@ -110,8 +119,17 @@ async def test_canonical_application_honors_requested_provider_selection() -> No
     prompt_registry.register(
         PromptTemplate(
             name="summary",
-            version="1.0",
-            template="Summarize the following text:\n\n{text}",
+            version="2.0.0",
+            template=(
+                "You are a professional summarization assistant.\n"
+                "Produce an accurate summary of the supplied source.\n"
+                "Preserve important facts and do not introduce unsupported "
+                "information.\n\n"
+                "Summary objective:\n{summary_instruction}\n\n"
+                "Length:\n{length_instruction}\n\n"
+                "Additional user guidance:\n{additional_instruction}\n\n"
+                "Source:\n{text}"
+            ),
         )
     )
 

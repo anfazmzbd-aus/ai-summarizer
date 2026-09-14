@@ -40,6 +40,9 @@ async def summarize(
                 text=request.text,
                 provider=request.provider,
                 model=request.model,
+                summary_type=request.summary_type,
+                summary_length=request.summary_length,
+                instructions=request.instructions,
             )
         )
     except ApplicationReviewRequiredError:

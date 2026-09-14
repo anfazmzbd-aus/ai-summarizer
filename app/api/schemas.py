@@ -6,6 +6,8 @@ from __future__ import annotations
 
 from pydantic import BaseModel, field_validator
 
+from app.core.product_options import SummaryLength, SummaryType
+
 
 class SummarizeRequest(BaseModel):
 
@@ -15,12 +17,34 @@ class SummarizeRequest(BaseModel):
 
     model: str = "demo"
 
+    summary_type: SummaryType = SummaryType.GENERAL
+
+    summary_length: SummaryLength = SummaryLength.MEDIUM
+
+    instructions: str | None = None
+
     @field_validator("text")
     @classmethod
     def validate_text(cls, value: str) -> str:
         if not value.strip():
             raise ValueError("text must not be empty")
         return value
+
+    @field_validator("instructions")
+    @classmethod
+    def validate_instructions(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+
+        normalized = value.strip()
+
+        if not normalized:
+            return None
+
+        if len(normalized) > 2000:
+            raise ValueError("instructions must not exceed 2000 characters")
+
+        return normalized
 
 
 class SummarizeResponse(BaseModel):

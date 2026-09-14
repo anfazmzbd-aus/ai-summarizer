@@ -29,6 +29,10 @@ from app.core.intelligence_integration import (
 from app.core.execution_feedback_integration import (
     build_execution_feedback_metadata,
 )
+from app.core.product_options import (
+    resolve_length_instruction,
+    resolve_summary_profile,
+)
 
 
 class ApplicationReviewRequiredError(RuntimeError):
@@ -69,6 +73,9 @@ class SummarizationApplication:
         prompt_tokens = 0
         completion_tokens = 0
         resolved_model = request.model or ""
+        summary_profile = resolve_summary_profile(request.summary_type)
+        length_instruction = resolve_length_instruction(request.summary_length)
+        additional_instruction = request.instructions or "No additional instructions."
 
         async def summarize_text(text: str) -> str:
             nonlocal prompt_tokens
@@ -79,13 +86,20 @@ class SummarizationApplication:
                     text=text,
                     provider=request.provider,
                     model=request.model,
+                    prompt_version="2.0.0",
+                    summary_instruction=summary_profile.instruction,
+                    length_instruction=length_instruction,
+                    additional_instruction=additional_instruction,
                 )
             else:
                 service_request = SummarizationRequest(
                     text=text,
                     provider=request.provider,
                     model=request.model,
-                    prompt_name=request.prompt_name,
+                    prompt_version="2.0.0",
+                    summary_instruction=summary_profile.instruction,
+                    length_instruction=length_instruction,
+                    additional_instruction=additional_instruction,
                 )
 
             service_result = await self._service.summarize(
@@ -102,6 +116,7 @@ class SummarizationApplication:
         pipeline_result = await self._pipeline.run(
             request.text,
             summarize_text,
+            intent=summary_profile.intent,
         )
 
         execution_metadata = build_execution_feedback_metadata(
