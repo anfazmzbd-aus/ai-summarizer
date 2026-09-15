@@ -79,3 +79,29 @@ def test_technical_maps_to_technical_intent() -> None:
 def test_length_instructions_are_non_empty() -> None:
     for summary_length in SummaryLength:
         assert resolve_length_instruction(summary_length).strip()
+
+
+def test_every_summary_profile_has_matching_intent_value():
+    for summary_type in SummaryType:
+        profile = resolve_summary_profile(summary_type)
+
+        assert profile.intent.value == summary_type.value
+
+
+def test_summary_profile_instructions_are_non_empty():
+    for summary_type in SummaryType:
+        assert resolve_summary_profile(summary_type).instruction.strip()
+
+
+def test_every_summary_profile_matches_product_type_value() -> None:
+    for summary_type in SummaryType:
+        profile = resolve_summary_profile(summary_type)
+
+        assert profile.intent.value == summary_type.value
+
+
+def test_every_summary_profile_has_non_empty_instruction() -> None:
+    for summary_type in SummaryType:
+        profile = resolve_summary_profile(summary_type)
+
+        assert profile.instruction.strip()

@@ -29,6 +29,7 @@ from app.core.summarization_pipeline_adapter import (
 )
 from app.summarization.chunking.models import ChunkingConfig
 from app.summarization.chunking.text_chunker import TextChunker
+from app.summarization.intelligence.intent import SummarizationIntent
 from app.summarization.pipeline import SummarizationPipeline
 from app.summarization.strategies.selector import (
     SummarizationStrategySelector,
@@ -37,6 +38,10 @@ from app.summarization.strategies.execution import StrategyExecutor
 from app.summarization.strategies.models import (
     StrategySelectionConfig,
     SummarizationStrategyType,
+)
+from app.core.product_options import (
+    SummaryLength,
+    SummaryType,
 )
 
 
@@ -1241,3 +1246,69 @@ async def test_application_remains_usable_after_sequential_provider_failure() ->
         ("failing source", "model-fail"),
         ("third source", "model-three"),
     ]
+
+
+@pytest.mark.anyio
+async def test_application_maps_product_options_to_execution_semantics(
+    monkeypatch,
+) -> None:
+    service = StubSummarizationService()
+
+    pipeline = build_summarization_pipeline_adapter()
+
+    captured_intent = None
+
+    original_run = pipeline.run
+
+    async def capture_run(
+        text,
+        summarize,
+        *,
+        intent=None,
+    ):
+        nonlocal captured_intent
+        captured_intent = intent
+
+        return await original_run(
+            text,
+            summarize,
+            intent=intent,
+        )
+
+    monkeypatch.setattr(
+        pipeline,
+        "run",
+        capture_run,
+    )
+
+    application = SummarizationApplication(
+        service,  # type: ignore[arg-type]
+        pipeline,
+    )
+
+    result = await application.summarize(
+        SummarizationApplicationRequest(
+            text="Quarterly revenue increased while operating costs declined.",
+            provider="fake",
+            model="demo",
+            summary_type=SummaryType.EXECUTIVE,
+            summary_length=SummaryLength.DETAILED,
+            instructions="Focus on business impact.",
+        )
+    )
+
+    assert result.summary == "stub summary"
+
+    assert captured_intent is SummarizationIntent.EXECUTIVE
+
+    assert service.received_request is not None
+
+    assert service.received_request.prompt_version == "2.0.0"
+
+    assert "executive" in service.received_request.summary_instruction.lower()
+
+    assert "comprehensive" in service.received_request.length_instruction.lower()
+
+    assert (
+        service.received_request.additional_instruction == "Focus on business impact."
+    )

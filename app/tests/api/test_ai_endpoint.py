@@ -736,3 +736,311 @@ def test_endpoint_repeated_recovery_responses_remain_stable(
     assert all("RuntimeError" not in response.text for response in responses)
 
     assert all("FallbackDecision" not in response.text for response in responses)
+
+
+def test_endpoint_normalizes_whitespace_only_instructions_to_none(
+    monkeypatch,
+) -> None:
+    captured_instructions = "not-called"
+
+    class StubApplication:
+        async def summarize(self, request):
+            nonlocal captured_instructions
+            captured_instructions = request.instructions
+
+            return SimpleNamespace(
+                summary="summary",
+                model="demo",
+                prompt_tokens=10,
+                completion_tokens=5,
+                total_tokens=15,
+                metadata=SimpleNamespace(
+                    strategy="direct",
+                    chunk_count=1,
+                    intelligence_mode="preserve",
+                    trace_id="trace-id",
+                    explainability_summary="execution preserved",
+                    attributes={},
+                ),
+            )
+
+    monkeypatch.setattr(
+        ai_routes,
+        "build_summarization_application",
+        lambda: StubApplication(),
+    )
+
+    app = FastAPI()
+    app.include_router(router)
+    client = TestClient(app)
+
+    response = client.post(
+        "/api/v1/summarize",
+        json={
+            "text": "Hello World",
+            "instructions": "   ",
+        },
+    )
+
+    assert response.status_code == 200
+    assert captured_instructions is None
+
+
+def test_endpoint_trims_instructions(
+    monkeypatch,
+) -> None:
+    captured_instructions = None
+
+    class StubApplication:
+        async def summarize(self, request):
+            nonlocal captured_instructions
+            captured_instructions = request.instructions
+
+            return SimpleNamespace(
+                summary="summary",
+                model="demo",
+                prompt_tokens=10,
+                completion_tokens=5,
+                total_tokens=15,
+                metadata=SimpleNamespace(
+                    strategy="direct",
+                    chunk_count=1,
+                    intelligence_mode="preserve",
+                    trace_id="trace-id",
+                    explainability_summary="execution preserved",
+                    attributes={},
+                ),
+            )
+
+    monkeypatch.setattr(
+        ai_routes,
+        "build_summarization_application",
+        lambda: StubApplication(),
+    )
+
+    app = FastAPI()
+    app.include_router(router)
+    client = TestClient(app)
+
+    response = client.post(
+        "/api/v1/summarize",
+        json={
+            "text": "Hello World",
+            "instructions": "  Focus on business impact.  ",
+        },
+    )
+
+    assert response.status_code == 200
+    assert captured_instructions == "Focus on business impact."
+
+
+def test_endpoint_accepts_instructions_at_2000_character_limit(
+    monkeypatch,
+) -> None:
+    captured_instructions = None
+    instructions = "x" * 2000
+
+    class StubApplication:
+        async def summarize(self, request):
+            nonlocal captured_instructions
+            captured_instructions = request.instructions
+
+            return SimpleNamespace(
+                summary="summary",
+                model="demo",
+                prompt_tokens=10,
+                completion_tokens=5,
+                total_tokens=15,
+                metadata=SimpleNamespace(
+                    strategy="direct",
+                    chunk_count=1,
+                    intelligence_mode="preserve",
+                    trace_id="trace-id",
+                    explainability_summary="execution preserved",
+                    attributes={},
+                ),
+            )
+
+    monkeypatch.setattr(
+        ai_routes,
+        "build_summarization_application",
+        lambda: StubApplication(),
+    )
+
+    app = FastAPI()
+    app.include_router(router)
+    client = TestClient(app)
+
+    response = client.post(
+        "/api/v1/summarize",
+        json={
+            "text": "Hello World",
+            "instructions": instructions,
+        },
+    )
+
+    assert response.status_code == 200
+    assert captured_instructions == instructions
+    assert len(captured_instructions) == 2000
+
+
+def test_endpoint_rejects_instructions_over_2000_characters() -> None:
+    app = FastAPI()
+    app.include_router(router)
+    client = TestClient(app)
+
+    response = client.post(
+        "/api/v1/summarize",
+        json={
+            "text": "Hello World",
+            "instructions": "x" * 2001,
+        },
+    )
+
+    assert response.status_code == 422
+
+
+def test_endpoint_preserves_v12_request_compatibility(
+    monkeypatch,
+) -> None:
+    captured_request = None
+
+    class StubApplication:
+        async def summarize(self, request):
+            nonlocal captured_request
+            captured_request = request
+
+            return SimpleNamespace(
+                summary="summary",
+                model="demo",
+                prompt_tokens=10,
+                completion_tokens=5,
+                total_tokens=15,
+                metadata=SimpleNamespace(
+                    strategy="direct",
+                    chunk_count=1,
+                    intelligence_mode="preserve",
+                    trace_id="trace-id",
+                    explainability_summary="execution preserved",
+                    attributes={},
+                ),
+            )
+
+    monkeypatch.setattr(
+        ai_routes,
+        "build_summarization_application",
+        lambda: StubApplication(),
+    )
+
+    app = FastAPI()
+    app.include_router(router)
+    client = TestClient(app)
+
+    response = client.post(
+        "/api/v1/summarize",
+        json={
+            "text": "Hello World",
+            "provider": "fake",
+            "model": "demo",
+        },
+    )
+
+    assert response.status_code == 200
+
+    assert captured_request is not None
+
+    assert captured_request.text == "Hello World"
+    assert captured_request.provider == "fake"
+    assert captured_request.model == "demo"
+
+    assert captured_request.summary_type.value == "general"
+    assert captured_request.summary_length.value == "medium"
+    assert captured_request.instructions is None
+
+
+def test_endpoint_accepts_v13_product_options(
+    monkeypatch,
+) -> None:
+    captured_request = None
+
+    class StubApplication:
+        async def summarize(self, request):
+            nonlocal captured_request
+            captured_request = request
+
+            return SimpleNamespace(
+                summary="executive summary",
+                model="demo",
+                prompt_tokens=10,
+                completion_tokens=5,
+                total_tokens=15,
+                metadata=SimpleNamespace(
+                    strategy="direct",
+                    chunk_count=1,
+                    intelligence_mode="preserve",
+                    trace_id="trace-id",
+                    explainability_summary="execution preserved",
+                    attributes={},
+                ),
+            )
+
+    monkeypatch.setattr(
+        ai_routes,
+        "build_summarization_application",
+        lambda: StubApplication(),
+    )
+
+    app = FastAPI()
+    app.include_router(router)
+    client = TestClient(app)
+
+    response = client.post(
+        "/api/v1/summarize",
+        json={
+            "text": "Hello World",
+            "provider": "fake",
+            "model": "demo",
+            "summary_type": "executive",
+            "summary_length": "short",
+            "instructions": "Focus on business impact.",
+        },
+    )
+
+    assert response.status_code == 200
+
+    assert captured_request is not None
+    assert captured_request.summary_type.value == "executive"
+    assert captured_request.summary_length.value == "short"
+    assert captured_request.instructions == "Focus on business impact."
+
+
+def test_endpoint_rejects_invalid_summary_type() -> None:
+    app = FastAPI()
+    app.include_router(router)
+    client = TestClient(app)
+
+    response = client.post(
+        "/api/v1/summarize",
+        json={
+            "text": "Hello World",
+            "summary_type": "invalid",
+        },
+    )
+
+    assert response.status_code == 422
+
+
+def test_endpoint_rejects_invalid_summary_length() -> None:
+    app = FastAPI()
+    app.include_router(router)
+    client = TestClient(app)
+
+    response = client.post(
+        "/api/v1/summarize",
+        json={
+            "text": "Hello World",
+            "summary_length": "invalid",
+        },
+    )
+
+    assert response.status_code == 422
