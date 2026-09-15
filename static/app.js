@@ -2,6 +2,7 @@ const summaryForm = document.getElementById("summaryForm");
 const inputText = document.getElementById("inputText");
 const status = document.getElementById("status");
 const result = document.getElementById("result");
+const resultEmpty = document.getElementById("resultEmpty");
 const summaryText = document.getElementById("summaryText");
 const error = document.getElementById("error");
 const strategyValue = document.getElementById("strategyValue");
@@ -49,6 +50,7 @@ summaryForm.addEventListener("submit", async (event) => {
         observabilityStatusValue.textContent =
             metadata.observability_status || "—";
 
+        resultEmpty.classList.add("hidden");
         result.classList.remove("hidden");
     } catch (requestError) {
         error.textContent = requestError.message;

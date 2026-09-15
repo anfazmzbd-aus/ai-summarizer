@@ -3,49 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Text Summarizer</title>
+
+    <meta
+        name="description"
+        content="AI Summarizer helps you turn source text into a clear, useful summary."
+    >
+
+    <title>AI Summarizer</title>
+
     <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
-<main class="container">
-    <h1>AI Text Summarizer</h1>
+<div class="app-shell">
 
-    <form id="summaryForm">
-        <label for="inputText">Text to summarize</label>
-        <textarea
-            id="inputText"
-            name="text"
-            rows="10"
-            placeholder="Paste your text here..."
-            required
-        ></textarea>
-        <button type="submit">Summarize</button>
-    </form>
+    <header class="app-header">
+        <div class="header-content">
+            <a class="brand" href="/" aria-label="AI Summarizer home">
+                <span class="brand-mark" aria-hidden="true">AI</span>
 
-    <p id="status" class="loading hidden" role="status"></p>
-        <section id="result" class="result-box hidden" aria-live="polite">
-            <h2>Summary</h2>
-            <p id="summaryText"></p>
+                <span class="brand-copy">
+                    <span class="brand-name">AI Summarizer</span>
+                    <span class="brand-subtitle">Focused summaries from your content</span>
+                </span>
+            </a>
 
-            <div id="executionDetails">
-                <h3>Execution details</h3>
-                <dl>
-                    <dt>Strategy</dt>
-                    <dd id="strategyValue">—</dd>
+            <span class="version-badge" aria-label="Application version 13">
+                V13
+            </span>
+        </div>
+    </header>
 
-                    <dt>Chunks</dt>
-                    <dd id="chunkCountValue">—</dd>
+    <main class="container" id="mainContent">
 
-                    <dt>Intelligence</dt>
-                    <dd id="intelligenceModeValue">—</dd>
+        <section class="workspace-intro" aria-labelledby="workspaceTitle">
+            <p class="eyebrow">Summarization workspace</p>
 
-                    <dt>Observability</dt>
-                    <dd id="observabilityStatusValue">—</dd>
-                </dl>
-            </div>
+            <h1 id="workspaceTitle">
+                Turn long content into a useful summary.
+            </h1>
+
+            <p class="workspace-description">
+                Paste your source text, generate a summary, and review the
+                result in one focused workspace.
+            </p>
         </section>
-    <p id="error" class="hidden" role="alert"></p>
-</main>
+
+        <div class="workspace">
+
+            <section
+                class="workspace-panel input-panel"
+                aria-labelledby="sourceHeading"
+            >
+                <div class="panel-header">
+                    <div>
+                        <p class="panel-kicker">Input</p>
+                        <h2 id="sourceHeading">Source text</h2>
+                    </div>
+                </div>
+
+                <form id="summaryForm" class="summary-form">
+                    <div class="field-group">
+                        <label for="inputText">
+                            Text to summarize
+                        </label>
+
+                        <p class="field-help" id="inputTextHelp">
+                            Paste the content you want AI Summarizer to process.
+                        </p>
+
+                        <textarea
+                            id="inputText"
+                            name="text"
+                            rows="14"
+                            placeholder="Paste your text here..."
+                            aria-describedby="inputTextHelp"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button
+                            id="summarizeButton"
+                            type="submit"
+                            class="primary-button"
+                        >
+                            Summarize
+                        </button>
+                    </div>
+                </form>
+
+                <p
+                    id="status"
+                    class="status-message loading hidden"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+                <p
+                    id="error"
+                    class="error-message hidden"
+                    role="alert"
+                ></p>
+            </section>
+
+            <section
+                class="workspace-panel result-panel"
+                aria-labelledby="summaryHeading"
+            >
+                <div class="panel-header">
+                    <div>
+                        <p class="panel-kicker">Output</p>
+                        <h2 id="summaryHeading">Summary</h2>
+                    </div>
+                </div>
+
+                <div
+                    id="resultEmpty"
+                    class="result-empty"
+                >
+                    <div class="empty-state-icon" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <p class="empty-state-title">
+                        Your summary will appear here.
+                    </p>
+
+                    <p class="empty-state-description">
+                        Add source text and select Summarize to get started.
+                    </p>
+                </div>
+
+                <article
+                    id="result"
+                    class="result-box hidden"
+                    aria-live="polite"
+                >
+                    <div class="summary-content">
+                        <p id="summaryText"></p>
+                    </div>
+
+                    <div
+                        id="executionDetails"
+                        class="execution-details"
+                    >
+                        <h3>Execution details</h3>
+
+                        <dl>
+                            <div class="detail-item">
+                                <dt>Strategy</dt>
+                                <dd id="strategyValue">—</dd>
+                            </div>
+
+                            <div class="detail-item">
+                                <dt>Chunks</dt>
+                                <dd id="chunkCountValue">—</dd>
+                            </div>
+
+                            <div class="detail-item">
+                                <dt>Intelligence</dt>
+                                <dd id="intelligenceModeValue">—</dd>
+                            </div>
+
+                            <div class="detail-item">
+                                <dt>Observability</dt>
+                                <dd id="observabilityStatusValue">—</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <div class="footer-content">
+            <span>AI Summarizer</span>
+            <span class="footer-separator" aria-hidden="true">•</span>
+            <span>V13 Product Development</span>
+        </div>
+    </footer>
+
+</div>
+
 <script src="/static/app.js"></script>
 </body>
 </html>
