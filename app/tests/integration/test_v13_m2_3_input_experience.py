@@ -20,7 +20,7 @@ def get_frontend_javascript() -> str:
 
     assert response.status_code == 200
 
-    return response.text
+    return response.text.replace("\r\n", "\n")
 
 
 def get_frontend_stylesheet() -> str:
@@ -93,8 +93,10 @@ def test_javascript_handles_singular_and_plural_metric_labels() -> None:
 def test_javascript_disables_submit_for_whitespace_only_input() -> None:
     javascript = get_frontend_javascript()
 
-    assert "const normalizedValue = value.trim();" in javascript
-    assert "summarizeButton.disabled = normalizedValue.length === 0;" in javascript
+    assert "function hasValidInput()" in javascript
+    assert "inputText.value.trim().length > 0" in javascript
+    assert "function updateSubmitEligibility()" in javascript
+    assert "!hasValidInput()" in javascript
 
 
 def test_submit_guard_rejects_effectively_empty_input() -> None:
@@ -143,4 +145,4 @@ def test_m2_3_preserves_result_workspace_behavior() -> None:
 def test_m2_3_initializes_input_state_on_page_load() -> None:
     javascript = get_frontend_javascript()
 
-    assert javascript.strip().endswith("updateInputState();")
+    assert "updateInputState();" in javascript

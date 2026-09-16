@@ -596,6 +596,44 @@ textarea:disabled {
     opacity: 0.58;
 }
 
+/*
+ * Processing controls
+ */
+
+.primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: var(--space-2);
+}
+
+.button-spinner {
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-top-color: var(--color-text-on-primary);
+    border-radius: var(--radius-pill);
+
+    animation: button-spin 700ms linear infinite;
+}
+
+@keyframes button-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+body[data-ui-state="loading"] textarea {
+    background: var(--color-surface-subtle);
+}
+
+body[data-ui-state="loading"] .input-metrics {
+    opacity: 0.75;
+}
 
 /*
  * Status messages

@@ -114,7 +114,15 @@
                                 class="primary-button"
                                 disabled
                             >
-                                Summarize
+                                <span
+                                    id="buttonSpinner"
+                                    class="button-spinner hidden"
+                                    aria-hidden="true"
+                                ></span>
+
+                                <span id="buttonLabel">
+                                    Summarize
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -122,9 +130,10 @@
 
                 <p
                     id="status"
-                    class="status-message loading hidden"
+                    class="status-message hidden"
                     role="status"
                     aria-live="polite"
+                    aria-atomic="true"
                 ></p>
 
                 <p

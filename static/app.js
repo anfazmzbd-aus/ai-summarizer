@@ -1,6 +1,8 @@
 const summaryForm = document.getElementById("summaryForm");
 const inputText = document.getElementById("inputText");
 const summarizeButton = document.getElementById("summarizeButton");
+const buttonSpinner = document.getElementById("buttonSpinner");
+const buttonLabel = document.getElementById("buttonLabel");
 
 const inputMetrics = document.getElementById("inputMetrics");
 const wordCount = document.getElementById("wordCount");
@@ -26,6 +28,17 @@ const observabilityStatusValue = document.getElementById(
 );
 
 
+const UI_STATE = Object.freeze({
+    IDLE: "idle",
+    LOADING: "loading",
+    SUCCESS: "success",
+    ERROR: "error",
+});
+
+
+let currentState = UI_STATE.IDLE;
+
+
 function countWords(value) {
     const normalizedValue = value.trim();
 
@@ -42,9 +55,20 @@ function updateMetricLabel(element, count, singular, plural) {
 }
 
 
+function hasValidInput() {
+    return inputText.value.trim().length > 0;
+}
+
+
+function updateSubmitEligibility() {
+    summarizeButton.disabled =
+        currentState === UI_STATE.LOADING ||
+        !hasValidInput();
+}
+
+
 function updateInputState() {
     const value = inputText.value;
-    const normalizedValue = value.trim();
 
     const words = countWords(value);
     const characters = value.length;
@@ -66,7 +90,97 @@ function updateInputState() {
         "characters"
     );
 
-    summarizeButton.disabled = normalizedValue.length === 0;
+    updateSubmitEligibility();
+}
+
+
+function hideStatus() {
+    status.textContent = "";
+    status.classList.add("hidden");
+}
+
+
+function hideError() {
+    error.textContent = "";
+    error.classList.add("hidden");
+}
+
+
+function showEmptyResult() {
+    result.classList.add("hidden");
+    resultEmpty.classList.remove("hidden");
+}
+
+
+function showResult() {
+    resultEmpty.classList.add("hidden");
+    result.classList.remove("hidden");
+}
+
+
+function setLoadingButton(isLoading) {
+    buttonLabel.textContent = isLoading
+        ? "Summarizing..."
+        : "Summarize";
+
+    buttonSpinner.classList.toggle(
+        "hidden",
+        !isLoading
+    );
+}
+
+
+function setUIState(nextState, message = "") {
+    currentState = nextState;
+
+    document.body.dataset.uiState = nextState;
+
+    if (nextState === UI_STATE.IDLE) {
+        hideStatus();
+        hideError();
+        showEmptyResult();
+        setLoadingButton(false);
+    }
+
+    if (nextState === UI_STATE.LOADING) {
+        hideError();
+
+        status.textContent =
+            message || "Generating summary...";
+
+        status.classList.remove("hidden");
+
+        /*
+         * Preserve a previous successful result while a new request
+         * runs. For the first request, the empty state remains visible.
+         */
+        setLoadingButton(true);
+    }
+
+    if (nextState === UI_STATE.SUCCESS) {
+        hideStatus();
+        hideError();
+        showResult();
+        setLoadingButton(false);
+    }
+
+    if (nextState === UI_STATE.ERROR) {
+        hideStatus();
+
+        error.textContent =
+            message || "The summarization request failed.";
+
+        error.classList.remove("hidden");
+
+        /*
+         * A previous successful result remains available after a failed
+         * regeneration. If there is no previous result, the empty state
+         * remains visible.
+         */
+        setLoadingButton(false);
+    }
+
+    updateSubmitEligibility();
 }
 
 
@@ -76,6 +190,10 @@ inputText.addEventListener("input", updateInputState);
 summaryForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    if (currentState === UI_STATE.LOADING) {
+        return;
+    }
+
     const normalizedText = inputText.value.trim();
 
     if (!normalizedText) {
@@ -84,11 +202,10 @@ summaryForm.addEventListener("submit", async (event) => {
         return;
     }
 
-    status.textContent = "Generating summary...";
-    status.classList.remove("hidden");
-
-    result.classList.add("hidden");
-    error.classList.add("hidden");
+    setUIState(
+        UI_STATE.LOADING,
+        "Generating summary..."
+    );
 
     try {
         const response = await fetch("/api/v1/summarize", {
@@ -131,19 +248,17 @@ summaryForm.addEventListener("submit", async (event) => {
         observabilityStatusValue.textContent =
             metadata.observability_status || "—";
 
-        resultEmpty.classList.add("hidden");
-        result.classList.remove("hidden");
+        setUIState(UI_STATE.SUCCESS);
     } catch (requestError) {
-        error.textContent =
+        const message =
             requestError instanceof Error
                 ? requestError.message
                 : "The summarization request failed.";
 
-        error.classList.remove("hidden");
-    } finally {
-        status.classList.add("hidden");
+        setUIState(UI_STATE.ERROR, message);
     }
 });
 
 
 updateInputState();
+setUIState(UI_STATE.IDLE);
