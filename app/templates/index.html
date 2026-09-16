@@ -143,75 +143,100 @@
                 ></p>
             </section>
 
-            <section
-                class="workspace-panel result-panel"
-                aria-labelledby="summaryHeading"
+            <div
+                id="resultEmpty"
+                class="result-empty"
             >
-                <div class="panel-header">
-                    <div>
-                        <p class="panel-kicker">Output</p>
-                        <h2 id="summaryHeading">Summary</h2>
+                <div
+                    class="result-empty-icon"
+                    aria-hidden="true"
+                >
+                    <span></span>
+                </div>
+
+                <h2>Your summary will appear here</h2>
+
+                <p>
+                    Add source text and select Summarize to generate a result.
+                </p>
+            </div>
+
+            <div
+                id="result"
+                class="result-workspace hidden"
+                aria-labelledby="resultHeading"
+            >
+                <div class="result-header">
+                    <div class="result-heading-group">
+                        <p class="result-eyebrow">
+                            Generated result
+                        </p>
+
+                        <h2 id="resultHeading">
+                            Summary
+                        </h2>
+                    </div>
+
+                    <div
+                        id="resultStatus"
+                        class="result-status"
+                        role="status"
+                        aria-live="polite"
+                    >
+                        <span
+                            class="result-status-indicator"
+                            aria-hidden="true"
+                        ></span>
+
+                        <span>Ready</span>
                     </div>
                 </div>
 
                 <div
-                    id="resultEmpty"
-                    class="result-empty"
+                    id="summaryContent"
+                    class="summary-content"
+                    tabindex="0"
                 >
-                    <div class="empty-state-icon" aria-hidden="true">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-
-                    <p class="empty-state-title">
-                        Your summary will appear here.
-                    </p>
-
-                    <p class="empty-state-description">
-                        Add source text and select Summarize to get started.
-                    </p>
+                    <p id="summaryText"></p>
                 </div>
 
-                <article
-                    id="result"
-                    class="result-box hidden"
-                    aria-live="polite"
+                <section
+                    class="processing-details"
+                    aria-labelledby="processingDetailsHeading"
                 >
-                    <div class="summary-content">
-                        <p id="summaryText"></p>
+                    <div class="processing-details-header">
+                        <h3 id="processingDetailsHeading">
+                            Processing details
+                        </h3>
+
+                        <p>
+                            Technical information about this summary.
+                        </p>
                     </div>
 
-                    <div
-                        id="executionDetails"
-                        class="execution-details"
-                    >
-                        <h3>Execution details</h3>
+                    <dl class="metadata-grid">
+                        <div class="metadata-item">
+                            <dt>Strategy</dt>
+                            <dd id="strategyValue">—</dd>
+                        </div>
 
-                        <dl>
-                            <div class="detail-item">
-                                <dt>Strategy</dt>
-                                <dd id="strategyValue">—</dd>
-                            </div>
+                        <div class="metadata-item">
+                            <dt>Chunks</dt>
+                            <dd id="chunkCountValue">—</dd>
+                        </div>
 
-                            <div class="detail-item">
-                                <dt>Chunks</dt>
-                                <dd id="chunkCountValue">—</dd>
-                            </div>
+                        <div class="metadata-item">
+                            <dt>Intelligence</dt>
+                            <dd id="intelligenceModeValue">—</dd>
+                        </div>
 
-                            <div class="detail-item">
-                                <dt>Intelligence</dt>
-                                <dd id="intelligenceModeValue">—</dd>
-                            </div>
-
-                            <div class="detail-item">
-                                <dt>Observability</dt>
-                                <dd id="observabilityStatusValue">—</dd>
-                            </div>
-                        </dl>
-                    </div>
-                </article>
-            </section>
+                        <div class="metadata-item">
+                            <dt>Observability</dt>
+                            <dd id="observabilityStatusValue">—</dd>
+                        </div>
+                    </dl>
+                </section>
+            </div>
 
         </div>
     </main>

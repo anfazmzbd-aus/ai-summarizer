@@ -16,6 +16,7 @@ const status = document.getElementById("status");
 const result = document.getElementById("result");
 const resultEmpty = document.getElementById("resultEmpty");
 const summaryText = document.getElementById("summaryText");
+const summaryContent = document.getElementById("summaryContent");
 const error = document.getElementById("error");
 
 const strategyValue = document.getElementById("strategyValue");
@@ -249,6 +250,7 @@ summaryForm.addEventListener("submit", async (event) => {
             metadata.observability_status || "—";
 
         setUIState(UI_STATE.SUCCESS);
+        summaryContent.focus();
     } catch (requestError) {
         const message =
             requestError instanceof Error
