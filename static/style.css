@@ -745,20 +745,6 @@ body[data-ui-state="loading"] .input-metrics {
     flex: 1;
 }
 
-.summary-content {
-    color: #283448;
-
-    line-height: var(--line-height-reading);
-
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-}
-
-.summary-content p {
-    margin: 0;
-}
-
-
 /*
  * Execution metadata
  */
