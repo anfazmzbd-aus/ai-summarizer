@@ -82,14 +82,41 @@
                         ></textarea>
                     </div>
 
-                    <div class="form-actions">
-                        <button
-                            id="summarizeButton"
-                            type="submit"
-                            class="primary-button"
+                    <div class="input-toolbar">
+                        <div
+                            id="inputMetrics"
+                            class="input-metrics"
+                            aria-live="polite"
+                            aria-atomic="true"
                         >
-                            Summarize
-                        </button>
+                            <span>
+                                <strong id="wordCount">0</strong>
+                                <span id="wordCountLabel">words</span>
+                            </span>
+
+                            <span
+                                class="metric-separator"
+                                aria-hidden="true"
+                            >
+                                •
+                            </span>
+
+                            <span>
+                                <strong id="characterCount">0</strong>
+                                <span id="characterCountLabel">characters</span>
+                            </span>
+                        </div>
+
+                        <div class="form-actions">
+                            <button
+                                id="summarizeButton"
+                                type="submit"
+                                class="primary-button"
+                                disabled
+                            >
+                                Summarize
+                            </button>
+                        </div>
                     </div>
                 </form>
 
