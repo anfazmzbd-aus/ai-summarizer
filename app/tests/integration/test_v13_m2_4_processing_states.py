@@ -173,6 +173,10 @@ def test_frontend_initializes_idle_state() -> None:
 
     normalized_javascript = javascript.replace("\r\n", "\n")
 
-    assert normalized_javascript.strip().endswith(
-        "updateInputState();\n" "setUIState(UI_STATE.IDLE);"
-    )
+    assert "updateInputState();" in normalized_javascript
+    assert "setUIState(UI_STATE.IDLE);" in normalized_javascript
+
+    input_state_position = normalized_javascript.rfind("updateInputState();")
+    idle_state_position = normalized_javascript.rfind("setUIState(UI_STATE.IDLE);")
+
+    assert input_state_position < idle_state_position

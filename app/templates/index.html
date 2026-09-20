@@ -107,6 +107,118 @@
                             </span>
                         </div>
 
+                        <div class="summary-options">
+                            <div class="form-field">
+                                <label for="summaryType">
+                                    Summary type
+                                </label>
+
+                                <select
+                                    id="summaryType"
+                                    name="summary_type"
+                                    aria-describedby="summaryTypeHelp"
+                                >
+                                    <option value="general" selected>
+                                        General
+                                    </option>
+                                    <option value="executive">
+                                        Executive
+                                    </option>
+                                    <option value="key_points">
+                                        Key Points
+                                    </option>
+                                    <option value="action_items">
+                                        Action Items
+                                    </option>
+                                    <option value="findings">
+                                        Findings
+                                    </option>
+                                    <option value="insights">
+                                        Insights
+                                    </option>
+                                    <option value="technical">
+                                        Technical
+                                    </option>
+                                </select>
+
+                                <p
+                                    id="summaryTypeHelp"
+                                    class="field-help"
+                                >
+                                    Choose what the summary should emphasize.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="summaryLength">
+                                Summary length
+                            </label>
+
+                            <select
+                                id="summaryLength"
+                                name="summary_length"
+                                aria-describedby="summaryLengthHelp"
+                            >
+                                <option value="short">
+                                    Short
+                                </option>
+                                <option value="medium" selected>
+                                    Medium
+                                </option>
+                                <option value="detailed">
+                                    Detailed
+                                </option>
+                            </select>
+
+                            <p
+                                id="summaryLengthHelp"
+                                class="field-help"
+                            >
+                                Choose how much detail the summary should contain.
+                            </p>
+
+                            <details class="advanced-options">
+                                <summary>Advanced options</summary>
+
+                                <div class="advanced-options-content">
+                                    <div class="form-field">
+                                        <label for="customInstructions">
+                                            Custom instructions
+                                        </label>
+
+                                        <textarea
+                                            id="customInstructions"
+                                            name="instructions"
+                                            rows="4"
+                                            maxlength="2000"
+                                            aria-describedby="customInstructionsHelp customInstructionsCount"
+                                            placeholder="For example: Focus on risks, decisions, and next steps."
+                                        ></textarea>
+
+                                        <div class="field-support">
+                                            <p
+                                                id="customInstructionsHelp"
+                                                class="field-help"
+                                            >
+                                                Add optional guidance for this summary.
+                                            </p>
+
+                                            <p
+                                                id="customInstructionsCount"
+                                                class="field-count"
+                                                aria-live="polite"
+                                                aria-atomic="true"
+                                            >
+                                                0 / 2000
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+
+                        </div>
+
                         <div class="form-actions">
                             <button
                                 id="summarizeButton"

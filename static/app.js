@@ -27,6 +27,11 @@ const intelligenceModeValue = document.getElementById(
 const observabilityStatusValue = document.getElementById(
     "observabilityStatusValue"
 );
+const summaryType =
+    document.getElementById("summaryType");
+
+const summaryLength =
+    document.getElementById("summaryLength");
 
 
 const UI_STATE = Object.freeze({
@@ -35,6 +40,13 @@ const UI_STATE = Object.freeze({
     SUCCESS: "success",
     ERROR: "error",
 });
+
+
+const customInstructions =
+    document.getElementById("customInstructions");
+
+const customInstructionsCount =
+    document.getElementById("customInstructionsCount");
 
 
 let currentState = UI_STATE.IDLE;
@@ -48,6 +60,12 @@ function countWords(value) {
     }
 
     return normalizedValue.split(/\s+/u).length;
+}
+
+
+function updateInstructionsCount() {
+    customInstructionsCount.textContent =
+        `${customInstructions.value.length} / 2000`;
 }
 
 
@@ -187,6 +205,10 @@ function setUIState(nextState, message = "") {
 
 inputText.addEventListener("input", updateInputState);
 
+customInstructions.addEventListener(
+    "input",
+    updateInstructionsCount
+);
 
 summaryForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -218,6 +240,9 @@ summaryForm.addEventListener("submit", async (event) => {
                 text: normalizedText,
                 provider: "fake",
                 model: "demo",
+                summary_type: summaryType.value,
+                summary_length: summaryLength.value,
+                instructions: customInstructions.value.trim() || null,
             }),
         });
 
@@ -262,5 +287,8 @@ summaryForm.addEventListener("submit", async (event) => {
 });
 
 
+
+
 updateInputState();
+updateInstructionsCount();
 setUIState(UI_STATE.IDLE);
