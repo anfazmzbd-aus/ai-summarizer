@@ -17,6 +17,8 @@ class SummarizeRequest(BaseModel):
 
     model: str = "demo"
 
+    product_model: str | None = None
+
     summary_type: SummaryType = SummaryType.GENERAL
 
     summary_length: SummaryLength = SummaryLength.MEDIUM
@@ -29,6 +31,22 @@ class SummarizeRequest(BaseModel):
         if not value.strip():
             raise ValueError("text must not be empty")
         return value
+
+    @field_validator("product_model")
+    @classmethod
+    def validate_product_model(
+        cls,
+        value: str | None,
+    ) -> str | None:
+        if value is None:
+            return None
+
+        normalized = value.strip()
+
+        if not normalized:
+            raise ValueError("product_model must not be empty")
+
+        return normalized
 
     @field_validator("instructions")
     @classmethod

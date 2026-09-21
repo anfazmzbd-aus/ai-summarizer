@@ -24,11 +24,16 @@
 
                 <span class="brand-copy">
                     <span class="brand-name">AI Summarizer</span>
-                    <span class="brand-subtitle">Focused summaries from your content</span>
+                    <span class="brand-subtitle">
+                        Focused summaries from your content
+                    </span>
                 </span>
             </a>
 
-            <span class="version-badge" aria-label="Application version 13">
+            <span
+                class="version-badge"
+                aria-label="Application version 13"
+            >
                 V13
             </span>
         </div>
@@ -36,7 +41,10 @@
 
     <main class="container" id="mainContent">
 
-        <section class="workspace-intro" aria-labelledby="workspaceTitle">
+        <section
+            class="workspace-intro"
+            aria-labelledby="workspaceTitle"
+        >
             <p class="eyebrow">Summarization workspace</p>
 
             <h1 id="workspaceTitle">
@@ -63,91 +71,100 @@
                 </div>
 
                 <form id="summaryForm" class="summary-form">
+
                     <div class="field-group">
                         <label for="inputText">
                             Text to summarize
                         </label>
 
-                        <p class="field-help" id="inputTextHelp">
+                        <p
+                            class="field-help"
+                            id="inputTextHelp"
+                        >
                             Paste the content you want AI Summarizer to process.
                         </p>
 
                         <textarea
                             id="inputText"
                             name="text"
-                            rows="14"
+                            rows="10"
                             placeholder="Paste your text here..."
                             aria-describedby="inputTextHelp"
                             required
                         ></textarea>
                     </div>
 
-                    <div class="input-toolbar">
-                        <div
-                            id="inputMetrics"
-                            class="input-metrics"
-                            aria-live="polite"
-                            aria-atomic="true"
+                    <div
+                        id="inputMetrics"
+                        class="input-metrics"
+                        aria-live="polite"
+                        aria-atomic="true"
+                    >
+                        <span>
+                            <strong id="wordCount">0</strong>
+                            <span id="wordCountLabel">words</span>
+                        </span>
+
+                        <span
+                            class="metric-separator"
+                            aria-hidden="true"
                         >
-                            <span>
-                                <strong id="wordCount">0</strong>
-                                <span id="wordCountLabel">words</span>
-                            </span>
+                            •
+                        </span>
 
-                            <span
-                                class="metric-separator"
-                                aria-hidden="true"
+                        <span>
+                            <strong id="characterCount">0</strong>
+                            <span id="characterCountLabel">characters</span>
+                        </span>
+                    </div>
+
+                    <div class="summary-options">
+
+                        <div class="form-field">
+                            <label for="summaryType">
+                                Summary type
+                            </label>
+
+                            <select
+                                id="summaryType"
+                                name="summary_type"
+                                aria-describedby="summaryTypeHelp"
                             >
-                                •
-                            </span>
+                                <option value="general" selected>
+                                    General
+                                </option>
 
-                            <span>
-                                <strong id="characterCount">0</strong>
-                                <span id="characterCountLabel">characters</span>
-                            </span>
-                        </div>
+                                <option value="executive">
+                                    Executive
+                                </option>
 
-                        <div class="summary-options">
-                            <div class="form-field">
-                                <label for="summaryType">
-                                    Summary type
-                                </label>
+                                <option value="key_points">
+                                    Key Points
+                                </option>
 
-                                <select
-                                    id="summaryType"
-                                    name="summary_type"
-                                    aria-describedby="summaryTypeHelp"
-                                >
-                                    <option value="general" selected>
-                                        General
-                                    </option>
-                                    <option value="executive">
-                                        Executive
-                                    </option>
-                                    <option value="key_points">
-                                        Key Points
-                                    </option>
-                                    <option value="action_items">
-                                        Action Items
-                                    </option>
-                                    <option value="findings">
-                                        Findings
-                                    </option>
-                                    <option value="insights">
-                                        Insights
-                                    </option>
-                                    <option value="technical">
-                                        Technical
-                                    </option>
-                                </select>
+                                <option value="action_items">
+                                    Action Items
+                                </option>
 
-                                <p
-                                    id="summaryTypeHelp"
-                                    class="field-help"
-                                >
-                                    Choose what the summary should emphasize.
-                                </p>
-                            </div>
+                                <option value="findings">
+                                    Findings
+                                </option>
+
+                                <option value="insights">
+                                    Insights
+                                </option>
+
+                                <option value="technical">
+                                    Technical
+                                </option>
+                            </select>
+
+                            <p
+                                id="summaryTypeHelp"
+                                class="field-help"
+                            >
+                                Choose what the summary should emphasize.
+                            </p>
                         </div>
 
                         <div class="form-field">
@@ -163,9 +180,11 @@
                                 <option value="short">
                                     Short
                                 </option>
+
                                 <option value="medium" selected>
                                     Medium
                                 </option>
+
                                 <option value="detailed">
                                     Detailed
                                 </option>
@@ -175,50 +194,92 @@
                                 id="summaryLengthHelp"
                                 class="field-help"
                             >
-                                Choose how much detail the summary should contain.
+                                Choose how much detail the summary should
+                                contain.
                             </p>
-
-                            <details class="advanced-options">
-                                <summary>Advanced options</summary>
-
-                                <div class="advanced-options-content">
-                                    <div class="form-field">
-                                        <label for="customInstructions">
-                                            Custom instructions
-                                        </label>
-
-                                        <textarea
-                                            id="customInstructions"
-                                            name="instructions"
-                                            rows="4"
-                                            maxlength="2000"
-                                            aria-describedby="customInstructionsHelp customInstructionsCount"
-                                            placeholder="For example: Focus on risks, decisions, and next steps."
-                                        ></textarea>
-
-                                        <div class="field-support">
-                                            <p
-                                                id="customInstructionsHelp"
-                                                class="field-help"
-                                            >
-                                                Add optional guidance for this summary.
-                                            </p>
-
-                                            <p
-                                                id="customInstructionsCount"
-                                                class="field-count"
-                                                aria-live="polite"
-                                                aria-atomic="true"
-                                            >
-                                                0 / 2000
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </details>
-
                         </div>
 
+                        <div class="form-field">
+                            <label for="modelSelection">
+                                AI model
+                            </label>
+
+                            <select
+                                id="modelSelection"
+                                name="product_model"
+                                aria-describedby="modelSelectionHelp modelSelectionStatus"
+                                disabled
+                            >
+                                <option
+                                    value=""
+                                    selected
+                                >
+                                    Loading models...
+                                </option>
+                            </select>
+
+                            <p
+                                id="modelSelectionHelp"
+                                class="field-help"
+                            >
+                                Choose from the models approved for this
+                                application.
+                            </p>
+
+                            <p
+                                id="modelSelectionStatus"
+                                class="field-help"
+                                role="status"
+                                aria-live="polite"
+                                aria-atomic="true"
+                            >
+                                Loading available models...
+                            </p>
+                        </div>
+
+                        <details class="advanced-options">
+                            <summary>Advanced options</summary>
+
+                            <div class="advanced-options-content">
+                                <div class="form-field">
+                                    <label for="customInstructions">
+                                        Custom instructions
+                                    </label>
+
+                                    <textarea
+                                        id="customInstructions"
+                                        name="instructions"
+                                        rows="4"
+                                        maxlength="2000"
+                                        aria-describedby="customInstructionsHelp customInstructionsCount"
+                                        placeholder="For example: Focus on risks, decisions, and next steps."
+                                    ></textarea>
+
+                                    <div class="field-support">
+                                        <p
+                                            id="customInstructionsHelp"
+                                            class="field-help"
+                                        >
+                                            Add optional guidance for this
+                                            summary.
+                                        </p>
+
+                                        <p
+                                            id="customInstructionsCount"
+                                            class="field-count"
+                                            aria-live="polite"
+                                            aria-atomic="true"
+                                        >
+                                            0 / 2000
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                    </div>
+
+                    <div class="input-toolbar">
                         <div class="form-actions">
                             <button
                                 id="summarizeButton"
@@ -356,7 +417,12 @@
     <footer class="app-footer">
         <div class="footer-content">
             <span>AI Summarizer</span>
-            <span class="footer-separator" aria-hidden="true">•</span>
+            <span
+                class="footer-separator"
+                aria-hidden="true"
+            >
+                •
+            </span>
             <span>V13 Product Development</span>
         </div>
     </footer>

@@ -1214,3 +1214,256 @@ body[data-ui-state="loading"] .input-metrics {
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
 }
+
+
+/*
+ * V13 M4 viewport-density refinement
+ *
+ * Keep the complete desktop summarization workflow visible within a
+ * practical laptop viewport while preserving responsive behavior.
+ */
+
+@media (min-width: 821px) {
+    :root {
+        --header-height: 56px;
+    }
+
+    .header-content {
+        width: min(
+            var(--content-width),
+            calc(100% - var(--space-10))
+        );
+    }
+
+    .brand-mark {
+        width: 34px;
+        height: 34px;
+    }
+
+    .container {
+        width: min(
+            var(--content-width),
+            calc(100% - var(--space-10))
+        );
+
+        padding:
+            calc(var(--space-6) + var(--space-1))
+            0
+            var(--space-6);
+    }
+
+    .workspace-intro {
+        margin-bottom: var(--space-5);
+    }
+
+    .workspace-intro h1 {
+        max-width: 760px;
+
+        font-size: clamp(
+            1.9rem,
+            3vw,
+            2.6rem
+        );
+    }
+
+    .workspace-description {
+        margin-top: var(--space-2);
+    }
+
+    .workspace {
+        gap: var(--space-5);
+    }
+
+    .workspace-panel {
+        min-height: 0;
+
+        padding:
+            var(--space-5)
+            var(--space-6);
+    }
+
+    .panel-header {
+        min-height: 0;
+
+        margin-bottom: var(--space-4);
+        padding-bottom: var(--space-3);
+    }
+
+    .summary-form {
+        gap: var(--space-3);
+    }
+
+    .field-group label {
+        margin-bottom: var(--space-1);
+    }
+
+    .field-help {
+        margin-bottom: var(--space-2);
+    }
+
+    #inputText {
+        min-height: 210px;
+        height: clamp(210px, 28vh, 260px);
+
+        padding: var(--space-3);
+    }
+
+    .input-metrics {
+        min-height: 20px;
+    }
+
+    .summary-options {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        align-items: start;
+
+        gap: var(--space-3);
+    }
+
+    .summary-options > .form-field {
+        min-width: 0;
+    }
+
+    .summary-options .form-field {
+        gap: var(--space-1);
+    }
+
+    .summary-options .form-field select {
+        min-height: 40px;
+
+        padding:
+            var(--space-2)
+            var(--space-3);
+    }
+
+    .summary-options .field-help {
+        font-size: var(--font-size-xs);
+        line-height: 1.35;
+    }
+
+    .advanced-options {
+        grid-column: 1 / -1;
+
+        padding-top: var(--space-3);
+    }
+
+    .advanced-options-content {
+        padding-top: var(--space-3);
+    }
+
+    .advanced-options textarea {
+        min-height: 6rem;
+    }
+
+    .input-toolbar {
+        min-height: 40px;
+
+        justify-content: flex-end;
+
+        gap: var(--space-3);
+    }
+
+    .primary-button {
+        min-height: 40px;
+
+        padding:
+            var(--space-2)
+            var(--space-5);
+    }
+
+    .result-empty {
+        min-height: 0;
+        height: 100%;
+
+        padding: var(--space-6);
+    }
+
+    .app-footer {
+        margin-top: auto;
+    }
+
+    .footer-content {
+        width: min(
+            var(--content-width),
+            calc(100% - var(--space-10))
+        );
+
+        min-height: 48px;
+    }
+}
+
+
+@media (min-width: 821px) and (max-height: 800px) {
+    .container {
+        padding:
+            var(--space-4)
+            0;
+    }
+
+    .workspace-intro {
+        margin-bottom: var(--space-4);
+    }
+
+    .workspace-intro .eyebrow {
+        margin-bottom: var(--space-1);
+    }
+
+    .workspace-intro h1 {
+        font-size: 1.85rem;
+    }
+
+    .workspace-description {
+        margin-top: var(--space-1);
+
+        font-size: var(--font-size-sm);
+    }
+
+    .workspace-panel {
+        padding:
+            var(--space-4)
+            var(--space-5);
+    }
+
+    .panel-header {
+        margin-bottom: var(--space-3);
+        padding-bottom: var(--space-2);
+    }
+
+    #inputText {
+        min-height: 180px;
+        height: 23vh;
+    }
+
+    .summary-form {
+        gap: var(--space-2);
+    }
+
+    .summary-options {
+        gap: var(--space-2);
+    }
+
+    .summary-options .field-help {
+        margin-bottom: 0;
+    }
+
+    .advanced-options {
+        padding-top: var(--space-2);
+    }
+
+    .footer-content {
+        min-height: 42px;
+    }
+}
+
+
+@media (min-width: 821px) and (max-width: 1040px) {
+    .summary-options {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .summary-options > .form-field:last-of-type {
+        grid-column: 1 / -1;
+    }
+}

@@ -21,17 +21,32 @@ const error = document.getElementById("error");
 
 const strategyValue = document.getElementById("strategyValue");
 const chunkCountValue = document.getElementById("chunkCountValue");
+
 const intelligenceModeValue = document.getElementById(
     "intelligenceModeValue"
 );
+
 const observabilityStatusValue = document.getElementById(
     "observabilityStatusValue"
 );
+
 const summaryType =
     document.getElementById("summaryType");
 
 const summaryLength =
     document.getElementById("summaryLength");
+
+const modelSelection =
+    document.getElementById("modelSelection");
+
+const modelSelectionStatus =
+    document.getElementById("modelSelectionStatus");
+
+const customInstructions =
+    document.getElementById("customInstructions");
+
+const customInstructionsCount =
+    document.getElementById("customInstructionsCount");
 
 
 const UI_STATE = Object.freeze({
@@ -42,14 +57,15 @@ const UI_STATE = Object.freeze({
 });
 
 
-const customInstructions =
-    document.getElementById("customInstructions");
-
-const customInstructionsCount =
-    document.getElementById("customInstructionsCount");
+const MODEL_STATE = Object.freeze({
+    LOADING: "loading",
+    READY: "ready",
+    ERROR: "error",
+});
 
 
 let currentState = UI_STATE.IDLE;
+let currentModelState = MODEL_STATE.LOADING;
 
 
 function countWords(value) {
@@ -69,8 +85,14 @@ function updateInstructionsCount() {
 }
 
 
-function updateMetricLabel(element, count, singular, plural) {
-    element.textContent = count === 1 ? singular : plural;
+function updateMetricLabel(
+    element,
+    count,
+    singular,
+    plural
+) {
+    element.textContent =
+        count === 1 ? singular : plural;
 }
 
 
@@ -79,10 +101,19 @@ function hasValidInput() {
 }
 
 
+function hasAvailableModel() {
+    return (
+        currentModelState === MODEL_STATE.READY &&
+        modelSelection.value.trim().length > 0
+    );
+}
+
+
 function updateSubmitEligibility() {
     summarizeButton.disabled =
         currentState === UI_STATE.LOADING ||
-        !hasValidInput();
+        !hasValidInput() ||
+        !hasAvailableModel();
 }
 
 
@@ -203,92 +234,259 @@ function setUIState(nextState, message = "") {
 }
 
 
+function setModelState(nextState, message) {
+    currentModelState = nextState;
+
+    if (nextState === MODEL_STATE.LOADING) {
+        modelSelection.disabled = true;
+        modelSelectionStatus.textContent =
+            message || "Loading available models...";
+    }
+
+    if (nextState === MODEL_STATE.READY) {
+        modelSelection.disabled = false;
+        modelSelectionStatus.textContent =
+            message || "Model options are ready.";
+    }
+
+    if (nextState === MODEL_STATE.ERROR) {
+        modelSelection.disabled = true;
+        modelSelectionStatus.textContent =
+            message || "Model options are unavailable.";
+    }
+
+    updateSubmitEligibility();
+}
+
+
+function clearModelOptions() {
+    modelSelection.replaceChildren();
+}
+
+
+function createModelOption(model) {
+    const option = document.createElement("option");
+
+    option.value = model.id;
+    option.textContent = model.label;
+
+    if (model.is_default) {
+        option.selected = true;
+    }
+
+    return option;
+}
+
+
+function populateModelOptions(models) {
+    clearModelOptions();
+
+    for (const model of models) {
+        modelSelection.appendChild(
+            createModelOption(model)
+        );
+    }
+}
+
+
+function isValidPublicModel(model) {
+    return (
+        model !== null &&
+        typeof model === "object" &&
+        typeof model.id === "string" &&
+        model.id.trim().length > 0 &&
+        typeof model.label === "string" &&
+        model.label.trim().length > 0 &&
+        typeof model.is_default === "boolean"
+    );
+}
+
+
+function validateProductModels(models) {
+    if (!Array.isArray(models) || models.length === 0) {
+        return false;
+    }
+
+    if (!models.every(isValidPublicModel)) {
+        return false;
+    }
+
+    const defaults = models.filter(
+        (model) => model.is_default
+    );
+
+    return defaults.length === 1;
+}
+
+
+async function loadProductModels() {
+    setModelState(
+        MODEL_STATE.LOADING,
+        "Loading available models..."
+    );
+
+    try {
+        const response = await fetch(
+            "/api/v1/product-config",
+            {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                },
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(
+                "Product configuration could not be loaded."
+            );
+        }
+
+        const payload = await response.json();
+        const models = payload.models;
+
+        if (!validateProductModels(models)) {
+            throw new Error(
+                "Product configuration is invalid."
+            );
+        }
+
+        populateModelOptions(models);
+
+        setModelState(
+            MODEL_STATE.READY,
+            "Model options are ready."
+        );
+    } catch (configurationError) {
+        clearModelOptions();
+
+        const unavailableOption =
+            document.createElement("option");
+
+        unavailableOption.value = "";
+        unavailableOption.textContent =
+            "Models unavailable";
+
+        modelSelection.appendChild(
+            unavailableOption
+        );
+
+        setModelState(
+            MODEL_STATE.ERROR,
+            "Model options are unavailable."
+        );
+    }
+}
+
+
 inputText.addEventListener("input", updateInputState);
+
 
 customInstructions.addEventListener(
     "input",
     updateInstructionsCount
 );
 
-summaryForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
 
-    if (currentState === UI_STATE.LOADING) {
-        return;
-    }
+modelSelection.addEventListener(
+    "change",
+    updateSubmitEligibility
+);
 
-    const normalizedText = inputText.value.trim();
 
-    if (!normalizedText) {
-        updateInputState();
-        inputText.focus();
-        return;
-    }
+summaryForm.addEventListener(
+    "submit",
+    async (event) => {
+        event.preventDefault();
 
-    setUIState(
+        if (currentState === UI_STATE.LOADING) {
+            return;
+        }
+
+        const normalizedText = inputText.value.trim();
+
+        if (!normalizedText) {
+            updateInputState();
+            inputText.focus();
+            return;
+        }
+
+        if (!hasAvailableModel()) {
+            modelSelection.focus();
+            return;
+        }
+
+        setUIState(
         UI_STATE.LOADING,
         "Generating summary..."
     );
 
-    try {
-        const response = await fetch("/api/v1/summarize", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                text: normalizedText,
-                provider: "fake",
-                model: "demo",
-                summary_type: summaryType.value,
-                summary_length: summaryLength.value,
-                instructions: customInstructions.value.trim() || null,
-            }),
-        });
+        try {
+            /*
+            * Product model options are loaded from the public
+            * configuration endpoint. The selected product model ID is
+            * resolved to its approved private runtime mapping by the
+            * server before canonical summarization executes.
+            */
+            const response = await fetch("/api/v1/summarize", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    text: normalizedText,
+                    provider: "fake",
+                    model: "demo",
+                    product_model: modelSelection.value,
+                    summary_type: summaryType.value,
+                    summary_length: summaryLength.value,
+                    instructions: customInstructions.value.trim() || null,
+                }),
+            });
 
-        if (!response.ok) {
-            const payload = await response
-                .json()
-                .catch(() => ({}));
+            if (!response.ok) {
+                const payload = await response
+                    .json()
+                    .catch(() => ({}));
 
-            throw new Error(
-                payload.detail?.error?.message ||
-                "The summarization request failed."
-            );
+                throw new Error(
+                    payload.detail?.error?.message ||
+                    "The summarization request failed."
+                );
+            }
+
+            const payload = await response.json();
+            const metadata = payload.metadata || {};
+
+            summaryText.textContent = payload.summary;
+
+            strategyValue.textContent =
+                metadata.strategy || "—";
+
+            chunkCountValue.textContent =
+                metadata.chunk_count ?? "—";
+
+            intelligenceModeValue.textContent =
+                metadata.intelligence_mode || "—";
+
+            observabilityStatusValue.textContent =
+                metadata.observability_status || "—";
+
+            setUIState(UI_STATE.SUCCESS);
+            summaryContent.focus();
+        } catch (requestError) {
+            const message =
+                requestError instanceof Error
+                    ? requestError.message
+                    : "The summarization request failed.";
+
+            setUIState(UI_STATE.ERROR, message);
         }
-
-        const payload = await response.json();
-        const metadata = payload.metadata || {};
-
-        summaryText.textContent = payload.summary;
-
-        strategyValue.textContent =
-            metadata.strategy || "—";
-
-        chunkCountValue.textContent =
-            metadata.chunk_count ?? "—";
-
-        intelligenceModeValue.textContent =
-            metadata.intelligence_mode || "—";
-
-        observabilityStatusValue.textContent =
-            metadata.observability_status || "—";
-
-        setUIState(UI_STATE.SUCCESS);
-        summaryContent.focus();
-    } catch (requestError) {
-        const message =
-            requestError instanceof Error
-                ? requestError.message
-                : "The summarization request failed.";
-
-        setUIState(UI_STATE.ERROR, message);
     }
-});
-
-
+);
 
 
 updateInputState();
 updateInstructionsCount();
 setUIState(UI_STATE.IDLE);
+loadProductModels();

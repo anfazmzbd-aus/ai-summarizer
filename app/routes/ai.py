@@ -6,7 +6,6 @@ from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException
 
-from app.core.application_contracts import SummarizationApplicationRequest
 from app.api.application import (
     ApplicationReviewRequiredError,
     build_summarization_application,
@@ -18,6 +17,9 @@ from app.api.schemas import (
     SummarizeRequest,
     SummarizeResponse,
 )
+from app.core.application_contracts import SummarizationApplicationRequest
+from app.core.product_model_catalogue import build_product_model_catalogue
+
 
 router = APIRouter(
     prefix="/api/v1",
@@ -34,12 +36,22 @@ async def summarize(
 ) -> SummarizeResponse:
 
     try:
+        provider = request.provider
+        model = request.model
+
+        if request.product_model is not None:
+            catalogue = build_product_model_catalogue()
+            product_model = catalogue.resolve(request.product_model)
+
+            provider = product_model.provider
+            model = product_model.model
+
         application = build_summarization_application()
         result = await application.summarize(
             SummarizationApplicationRequest(
                 text=request.text,
-                provider=request.provider,
-                model=request.model,
+                provider=provider,
+                model=model,
                 summary_type=request.summary_type,
                 summary_length=request.summary_length,
                 instructions=request.instructions,
@@ -107,6 +119,9 @@ def _product_error(
     return HTTPException(
         status_code=status_code,
         detail=SummarizeErrorResponse(
-            error=SummarizeError(code=code, message=message)
+            error=SummarizeError(
+                code=code,
+                message=message,
+            )
         ).model_dump(),
     )
