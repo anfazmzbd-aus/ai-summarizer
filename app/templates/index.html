@@ -72,6 +72,74 @@
 
                 <form id="summaryForm" class="summary-form">
 
+                    <section
+                        id="fileIngestion"
+                        class="file-ingestion"
+                        aria-labelledby="fileIngestionHeading"
+                    >
+                        <div class="file-ingestion-heading">
+                            <div>
+                                <h3 id="fileIngestionHeading">Add a document</h3>
+                                <p>Upload a TXT or PDF file, or drag and drop it here.</p>
+                            </div>
+
+                            <button
+                                id="chooseFileButton"
+                                type="button"
+                                class="secondary-button"
+                            >
+                                Choose file
+                            </button>
+                        </div>
+
+                        <input
+                            id="fileInput"
+                            class="visually-hidden"
+                            type="file"
+                            accept=".txt,.pdf,text/plain,application/pdf"
+                            aria-describedby="fileIngestionHelp"
+                        >
+
+                        <div
+                            id="fileDropZone"
+                            class="file-drop-zone"
+                            tabindex="0"
+                            role="button"
+                            aria-label="Upload TXT or PDF file"
+                            aria-describedby="fileIngestionHelp"
+                        >
+                            <strong>Drop a document here</strong>
+                            <span>or choose a TXT or PDF file</span>
+                        </div>
+
+                        <p id="fileIngestionHelp" class="field-help file-ingestion-help">
+                            Maximum file size: 10 MiB. Extracted text replaces the current source text.
+                        </p>
+
+                        <div
+                            id="fileStatus"
+                            class="file-status hidden"
+                            role="status"
+                            aria-live="polite"
+                            aria-atomic="true"
+                        >
+                            <span id="fileStatusText"></span>
+                            <button
+                                id="clearFileButton"
+                                type="button"
+                                class="text-button"
+                            >
+                                Clear file
+                            </button>
+                        </div>
+
+                        <p
+                            id="fileError"
+                            class="file-error hidden"
+                            role="alert"
+                        ></p>
+                    </section>
+
                     <div class="field-group">
                         <label for="inputText">
                             Text to summarize
@@ -81,7 +149,7 @@
                             class="field-help"
                             id="inputTextHelp"
                         >
-                            Paste the content you want AI Summarizer to process.
+                            Paste content or upload a TXT or PDF document to summarize.
                         </p>
 
                         <textarea

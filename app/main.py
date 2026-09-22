@@ -14,6 +14,7 @@ from app.api.v1.execution_playground import router as playground_router
 from app.routes.frontend import router as frontend_router
 from fastapi.staticfiles import StaticFiles
 from app.routes.product_config import router as product_config_router
+from app.routes.file_extraction import router as file_extraction_router
 
 
 from pathlib import Path
@@ -36,3 +37,5 @@ app.include_router(ai_router)
 app.include_router(frontend_router)
 
 app.include_router(product_config_router)
+
+app.include_router(file_extraction_router)

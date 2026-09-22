@@ -49,6 +49,21 @@ const customInstructionsCount =
     document.getElementById("customInstructionsCount");
 
 
+const fileInput = document.getElementById("fileInput");
+const chooseFileButton = document.getElementById("chooseFileButton");
+const fileDropZone = document.getElementById("fileDropZone");
+const fileStatus = document.getElementById("fileStatus");
+const fileStatusText = document.getElementById("fileStatusText");
+const fileError = document.getElementById("fileError");
+const clearFileButton = document.getElementById("clearFileButton");
+
+const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024;
+const SUPPORTED_FILE_EXTENSIONS = Object.freeze([".txt", ".pdf"]);
+
+let fileExtractionInProgress = false;
+let currentFileName = null;
+
+
 const UI_STATE = Object.freeze({
     IDLE: "idle",
     LOADING: "loading",
@@ -112,6 +127,7 @@ function hasAvailableModel() {
 function updateSubmitEligibility() {
     summarizeButton.disabled =
         currentState === UI_STATE.LOADING ||
+        fileExtractionInProgress ||
         !hasValidInput() ||
         !hasAvailableModel();
 }
@@ -379,6 +395,311 @@ async function loadProductModels() {
 }
 
 
+function getFileExtension(fileName) {
+    const normalized = fileName.trim().toLowerCase();
+
+    for (const extension of SUPPORTED_FILE_EXTENSIONS) {
+        if (normalized.endsWith(extension)) {
+            return extension;
+        }
+    }
+
+    return "";
+}
+
+
+function isSupportedFile(file) {
+    return (
+        file instanceof File &&
+        getFileExtension(file.name) !== ""
+    );
+}
+
+
+function setFileExtractionState(isLoading) {
+    fileExtractionInProgress = isLoading;
+
+    fileInput.disabled = isLoading;
+    chooseFileButton.disabled = isLoading;
+    clearFileButton.disabled = isLoading;
+
+    fileDropZone.classList.toggle(
+        "is-disabled",
+        isLoading
+    );
+
+    fileDropZone.setAttribute(
+        "aria-disabled",
+        String(isLoading)
+    );
+
+    updateSubmitEligibility();
+}
+
+
+function hideFileError() {
+    fileError.textContent = "";
+    fileError.classList.add("hidden");
+}
+
+
+function showFileError(message) {
+    fileError.textContent = message;
+    fileError.classList.remove("hidden");
+}
+
+
+function showFileStatus(message) {
+    fileStatusText.textContent = message;
+    fileStatus.classList.remove("hidden");
+}
+
+
+function clearFileStatus() {
+    currentFileName = null;
+    fileStatusText.textContent = "";
+    fileStatus.classList.add("hidden");
+    fileInput.value = "";
+}
+
+
+function resetFileSelection() {
+    clearFileStatus();
+    hideFileError();
+}
+
+
+function formatFileSize(sizeBytes) {
+    if (sizeBytes < 1024) {
+        return `${sizeBytes} B`;
+    }
+
+    const kibibytes = sizeBytes / 1024;
+
+    if (kibibytes < 1024) {
+        return `${kibibytes.toFixed(1)} KiB`;
+    }
+
+    return `${(kibibytes / 1024).toFixed(1)} MiB`;
+}
+
+
+function buildFileStatusMessage(fileMetadata) {
+    const parts = [
+        fileMetadata.name,
+        formatFileSize(fileMetadata.size_bytes),
+    ];
+
+    if (
+        fileMetadata.type === "pdf" &&
+        Number.isInteger(fileMetadata.page_count)
+    ) {
+        const pageLabel =
+            fileMetadata.page_count === 1
+                ? "page"
+                : "pages";
+
+        parts.push(
+            `${fileMetadata.page_count} ${pageLabel}`
+        );
+    }
+
+    return parts.join(" • ");
+}
+
+
+async function extractFile(file) {
+    hideFileError();
+
+    if (!isSupportedFile(file)) {
+        showFileError(
+            "Choose a TXT or PDF file."
+        );
+        return;
+    }
+
+    if (file.size > MAX_FILE_SIZE_BYTES) {
+        showFileError(
+            "The uploaded file exceeds the maximum allowed size."
+        );
+        return;
+    }
+
+    setFileExtractionState(true);
+    showFileStatus(`Extracting ${file.name}...`);
+
+    try {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const response = await fetch(
+            "/api/v1/files/extract",
+            {
+                method: "POST",
+                body: formData,
+            }
+        );
+
+        const payload = await response
+            .json()
+            .catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(
+                typeof payload.detail === "string"
+                    ? payload.detail
+                    : "The document could not be processed."
+            );
+        }
+
+        if (
+            typeof payload.text !== "string" ||
+            payload.text.trim().length === 0 ||
+            payload.file === null ||
+            typeof payload.file !== "object" ||
+            typeof payload.file.name !== "string" ||
+            typeof payload.file.type !== "string" ||
+            typeof payload.file.size_bytes !== "number"
+        ) {
+            throw new Error(
+                "The document extraction response is invalid."
+            );
+        }
+
+        inputText.value = payload.text;
+        currentFileName = payload.file.name;
+
+        showFileStatus(
+            buildFileStatusMessage(payload.file)
+        );
+
+        updateInputState();
+        inputText.focus();
+    } catch (extractionError) {
+        clearFileStatus();
+
+        const message =
+            extractionError instanceof Error
+                ? extractionError.message
+                : "The document could not be processed.";
+
+        showFileError(message);
+    } finally {
+        setFileExtractionState(false);
+    }
+}
+
+
+function handleSelectedFiles(files) {
+    if (
+        fileExtractionInProgress ||
+        !files ||
+        files.length === 0
+    ) {
+        return;
+    }
+
+    if (files.length > 1) {
+        showFileError(
+            "Upload one document at a time."
+        );
+        return;
+    }
+
+    extractFile(files[0]);
+}
+
+
+chooseFileButton.addEventListener(
+    "click",
+    () => {
+        if (!fileExtractionInProgress) {
+            fileInput.click();
+        }
+    }
+);
+
+
+fileInput.addEventListener(
+    "change",
+    () => {
+        handleSelectedFiles(fileInput.files);
+    }
+);
+
+
+fileDropZone.addEventListener(
+    "click",
+    () => {
+        if (!fileExtractionInProgress) {
+            fileInput.click();
+        }
+    }
+);
+
+
+fileDropZone.addEventListener(
+    "keydown",
+    (event) => {
+        if (
+            !fileExtractionInProgress &&
+            (event.key === "Enter" || event.key === " ")
+        ) {
+            event.preventDefault();
+            fileInput.click();
+        }
+    }
+);
+
+
+for (const eventName of ["dragenter", "dragover"]) {
+    fileDropZone.addEventListener(
+        eventName,
+        (event) => {
+            event.preventDefault();
+
+            if (!fileExtractionInProgress) {
+                fileDropZone.classList.add("is-dragging");
+            }
+        }
+    );
+}
+
+
+for (const eventName of ["dragleave", "drop"]) {
+    fileDropZone.addEventListener(
+        eventName,
+        (event) => {
+            event.preventDefault();
+            fileDropZone.classList.remove("is-dragging");
+        }
+    );
+}
+
+
+fileDropZone.addEventListener(
+    "drop",
+    (event) => {
+        if (fileExtractionInProgress) {
+            return;
+        }
+
+        handleSelectedFiles(
+            event.dataTransfer?.files
+        );
+    }
+);
+
+
+clearFileButton.addEventListener(
+    "click",
+    () => {
+        resetFileSelection();
+        inputText.focus();
+    }
+);
+
+
 inputText.addEventListener("input", updateInputState);
 
 
@@ -423,11 +744,11 @@ summaryForm.addEventListener(
 
         try {
             /*
-            * Product model options are loaded from the public
-            * configuration endpoint. The selected product model ID is
-            * resolved to its approved private runtime mapping by the
-            * server before canonical summarization executes.
-            */
+             * Product model options are loaded from the public
+             * configuration endpoint. The selected product model ID is
+             * resolved to its approved private runtime mapping by the
+             * server before canonical summarization executes.
+             */
             const response = await fetch("/api/v1/summarize", {
                 method: "POST",
                 headers: {
