@@ -1719,3 +1719,75 @@ body[data-ui-state="loading"] .input-metrics {
         flex-direction: column;
     }
 }
+
+
+/*
+ * V13 M6.2 Result actions
+ */
+
+.result-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.result-action-button {
+    flex-shrink: 0;
+}
+
+.result-action-status {
+    min-height: 1.25rem;
+
+    color: var(--color-text-muted);
+
+    font-size: var(--font-size-sm);
+}
+
+@media (max-width: 520px) {
+    .result-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .result-action-button {
+        width: 100%;
+    }
+}
+
+/*
+ * V13 M6.5 Collapsible result details
+ */
+
+.result-details {
+    margin: 0;
+}
+
+.result-details > summary {
+    width: fit-content;
+
+    cursor: pointer;
+
+    color: var(--color-text);
+
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+}
+
+.result-details > summary:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+    border-radius: var(--radius-sm);
+}
+
+.processing-details-content {
+    padding-top: var(--space-3);
+}
+
+.processing-details-content > p {
+    margin: 0 0 var(--space-4);
+
+    color: var(--color-text-muted);
+
+    font-size: var(--font-size-sm);
+}

@@ -304,12 +304,17 @@ def test_submit_eligibility_includes_model_availability():
 def test_model_change_updates_submit_eligibility():
     script = read_script()
 
-    expected = """modelSelection.addEventListener(
-    "change",
-    updateSubmitEligibility
-);"""
+    listener_start = script.index("modelSelection.addEventListener(")
 
-    assert expected in script
+    listener_end = script.index(
+        ");",
+        listener_start,
+    )
+
+    listener = script[listener_start : listener_end + 2]
+
+    assert '"change"' in listener
+    assert "updateSubmitEligibility();" in listener
 
 
 def test_submission_guards_against_unavailable_model():

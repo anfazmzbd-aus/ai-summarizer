@@ -17,6 +17,14 @@ const result = document.getElementById("result");
 const resultEmpty = document.getElementById("resultEmpty");
 const summaryText = document.getElementById("summaryText");
 const summaryContent = document.getElementById("summaryContent");
+const copySummaryButton = document.getElementById("copySummaryButton");
+const downloadSummaryButton = document.getElementById(
+    "downloadSummaryButton"
+);
+const regenerateSummaryButton = document.getElementById(
+    "regenerateSummaryButton"
+);
+const copySummaryStatus = document.getElementById("copySummaryStatus");
 const error = document.getElementById("error");
 
 const strategyValue = document.getElementById("strategyValue");
@@ -157,6 +165,7 @@ function updateInputState() {
     );
 
     updateSubmitEligibility();
+    updateResultActionEligibility();
 }
 
 
@@ -210,6 +219,7 @@ function setUIState(nextState, message = "") {
 
     if (nextState === UI_STATE.LOADING) {
         hideError();
+        setCopySummaryStatus("");
 
         status.textContent =
             message || "Generating summary...";
@@ -247,6 +257,7 @@ function setUIState(nextState, message = "") {
     }
 
     updateSubmitEligibility();
+    updateResultActionEligibility();
 }
 
 
@@ -272,6 +283,7 @@ function setModelState(nextState, message) {
     }
 
     updateSubmitEligibility();
+    updateResultActionEligibility();
 }
 
 
@@ -434,6 +446,7 @@ function setFileExtractionState(isLoading) {
     );
 
     updateSubmitEligibility();
+    updateResultActionEligibility();
 }
 
 
@@ -711,7 +724,143 @@ customInstructions.addEventListener(
 
 modelSelection.addEventListener(
     "change",
-    updateSubmitEligibility
+    () => {
+        updateSubmitEligibility();
+        updateResultActionEligibility();
+    }
+);
+
+
+function hasSummaryResult() {
+    return summaryText.textContent.trim().length > 0;
+}
+
+
+function updateResultActionEligibility() {
+    const actionsDisabled =
+        currentState === UI_STATE.LOADING ||
+        !hasSummaryResult();
+
+    copySummaryButton.disabled = actionsDisabled;
+    downloadSummaryButton.disabled = actionsDisabled;
+    regenerateSummaryButton.disabled =
+        actionsDisabled || fileExtractionInProgress ||
+        !hasValidInput() ||
+        !hasAvailableModel();
+}
+
+
+function setCopySummaryStatus(message) {
+    copySummaryStatus.textContent = message;
+}
+
+
+async function copySummary() {
+    if (
+        currentState === UI_STATE.LOADING ||
+        !hasSummaryResult()
+    ) {
+        return;
+    }
+
+    setCopySummaryStatus("");
+
+    try {
+        await navigator.clipboard.writeText(
+            summaryText.textContent
+        );
+
+        setCopySummaryStatus("Summary copied.");
+    } catch (copyError) {
+        setCopySummaryStatus(
+            "Summary could not be copied."
+        );
+    }
+}
+
+
+copySummaryButton.addEventListener(
+    "click",
+    copySummary
+);
+
+
+function padTimestampPart(value) {
+    return String(value).padStart(2, "0");
+}
+
+
+function buildSummaryDownloadFileName(date = new Date()) {
+    const day = padTimestampPart(date.getDate());
+    const month = padTimestampPart(date.getMonth() + 1);
+    const year = date.getFullYear();
+    const hours = padTimestampPart(date.getHours());
+    const minutes = padTimestampPart(date.getMinutes());
+    const seconds = padTimestampPart(date.getSeconds());
+
+    return (
+        `ai-summary-${day}-${month}-${year}-` +
+        `${hours}${minutes}${seconds}.txt`
+    );
+}
+
+
+function downloadSummary() {
+    if (
+        currentState === UI_STATE.LOADING ||
+        !hasSummaryResult()
+    ) {
+        return;
+    }
+
+    const summary = summaryText.textContent;
+    const blob = new Blob(
+        [summary],
+        { type: "text/plain;charset=utf-8" }
+    );
+
+    const objectUrl = URL.createObjectURL(blob);
+    const downloadLink = document.createElement("a");
+
+    downloadLink.href = objectUrl;
+    downloadLink.download = buildSummaryDownloadFileName();
+    downloadLink.hidden = true;
+
+    document.body.appendChild(downloadLink);
+
+    try {
+        downloadLink.click();
+    } finally {
+        downloadLink.remove();
+        URL.revokeObjectURL(objectUrl);
+    }
+}
+
+
+downloadSummaryButton.addEventListener(
+    "click",
+    downloadSummary
+);
+
+
+function regenerateSummary() {
+    if (
+        currentState === UI_STATE.LOADING ||
+        fileExtractionInProgress ||
+        !hasSummaryResult() ||
+        !hasValidInput() ||
+        !hasAvailableModel()
+    ) {
+        return;
+    }
+
+    summaryForm.requestSubmit();
+}
+
+
+regenerateSummaryButton.addEventListener(
+    "click",
+    regenerateSummary
 );
 
 
@@ -793,6 +942,7 @@ summaryForm.addEventListener(
             observabilityStatusValue.textContent =
                 metadata.observability_status || "—";
 
+            setCopySummaryStatus("");
             setUIState(UI_STATE.SUCCESS);
             summaryContent.focus();
         } catch (requestError) {

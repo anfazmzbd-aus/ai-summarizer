@@ -441,41 +441,83 @@
                     <p id="summaryText"></p>
                 </div>
 
+                <div
+                    class="result-actions"
+                    aria-label="Summary actions"
+                >
+                    <button
+                        id="copySummaryButton"
+                        type="button"
+                        class="secondary-button result-action-button"
+                        disabled
+                    >
+                        Copy summary
+                    </button>
+
+                    <button
+                        id="downloadSummaryButton"
+                        type="button"
+                        class="secondary-button result-action-button"
+                        disabled
+                    >
+                        Download TXT
+                    </button>
+
+                    <button
+                        id="regenerateSummaryButton"
+                        type="button"
+                        class="secondary-button result-action-button"
+                        disabled
+                    >
+                        Regenerate
+                    </button>
+
+                    <span
+                        id="copySummaryStatus"
+                        class="result-action-status"
+                        role="status"
+                        aria-live="polite"
+                        aria-atomic="true"
+                    ></span>
+                </div>
+
                 <section
                     class="processing-details"
                     aria-labelledby="processingDetailsHeading"
                 >
-                    <div class="processing-details-header">
-                        <h3 id="processingDetailsHeading">
+                    <details class="result-details">
+                        <summary id="processingDetailsHeading">
                             Processing details
-                        </h3>
+                        </summary>
 
-                        <p>
-                            Technical information about this summary.
-                        </p>
-                    </div>
+                        <div class="processing-details-content">
+                            <p class="processing-details-description">
+                                Technical information about this summary.
+                            </p>
 
-                    <dl class="metadata-grid">
-                        <div class="metadata-item">
-                            <dt>Strategy</dt>
-                            <dd id="strategyValue">—</dd>
+                            <dl class="metadata-grid">
+                                <div class="metadata-item">
+                                    <dt>Strategy</dt>
+                                    <dd id="strategyValue">—</dd>
+                                </div>
+
+                                <div class="metadata-item">
+                                    <dt>Chunks</dt>
+                                    <dd id="chunkCountValue">—</dd>
+                                </div>
+
+                                <div class="metadata-item">
+                                    <dt>Intelligence</dt>
+                                    <dd id="intelligenceModeValue">—</dd>
+                                </div>
+
+                                <div class="metadata-item">
+                                    <dt>Observability</dt>
+                                    <dd id="observabilityStatusValue">—</dd>
+                                </div>
+                            </dl>
                         </div>
-
-                        <div class="metadata-item">
-                            <dt>Chunks</dt>
-                            <dd id="chunkCountValue">—</dd>
-                        </div>
-
-                        <div class="metadata-item">
-                            <dt>Intelligence</dt>
-                            <dd id="intelligenceModeValue">—</dd>
-                        </div>
-
-                        <div class="metadata-item">
-                            <dt>Observability</dt>
-                            <dd id="observabilityStatusValue">—</dd>
-                        </div>
-                    </dl>
+                    </details>
                 </section>
             </div>
 
