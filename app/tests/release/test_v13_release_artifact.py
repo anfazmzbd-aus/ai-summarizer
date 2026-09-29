@@ -75,12 +75,19 @@ def test_release_includes_environment_example():
 def test_release_includes_product_documentation():
     assert should_include("README.md") is True
     assert should_include("CHANGELOG.md") is True
-    assert should_include("docs/v12/V12_GOVERNANCE.md") is True
-    assert should_include("docs/v12/INSTALLATION.md") is True
-    assert should_include("docs/v12/CONFIGURATION.md") is True
-    assert should_include("docs/v12/OPERATIONS.md") is True
-    assert should_include("docs/v12/TROUBLESHOOTING.md") is True
-    assert should_include("docs/v12/RELEASE_NOTES.md") is True
+
+    assert should_include("docs/v13/M7_CERTIFICATION_RECORD.md") is True
+
+    assert should_include("docs/v13/M8_CERTIFICATION_RECORD.md") is True
+
+
+def test_release_excludes_historical_v12_documentation():
+    assert should_include("docs/v12/INSTALLATION.md") is False
+    assert should_include("docs/v12/CONFIGURATION.md") is False
+    assert should_include("docs/v12/OPERATIONS.md") is False
+    assert should_include("docs/v12/TROUBLESHOOTING.md") is False
+    assert should_include("docs/v12/RELEASE_NOTES.md") is False
+    assert should_include("docs/v12/V12_GOVERNANCE.md") is False
 
 
 def test_release_includes_release_and_runtime_scripts():
@@ -98,11 +105,11 @@ def test_built_artifact_enforces_release_boundary(
     tmp_path: Path,
 ):
     artifact_path, checksum_path = build(
-        version="12.0.0-test",
+        version="13.0.0-rc1-test",
         output_directory=tmp_path,
     )
 
-    prefix = "ai-summarizer-v12.0.0-test/"
+    prefix = "ai-summarizer-v13.0.0-rc1-test/"
 
     with zipfile.ZipFile(artifact_path) as archive:
         names = set(archive.namelist())
@@ -113,7 +120,8 @@ def test_built_artifact_enforces_release_boundary(
     assert f"{prefix}requirements.txt" in names
     assert f"{prefix}app/main.py" in names
     assert f"{prefix}static/app.js" in names
-    assert f"{prefix}docs/v12/V12_GOVERNANCE.md" in names
+    assert f"{prefix}docs/v13/M8_CERTIFICATION_RECORD.md" in names
+    assert f"{prefix}docs/v12/V12_GOVERNANCE.md" not in names
 
     assert f"{prefix}summaries.db" not in names
     assert f"{prefix}requirements-dev.txt" not in names
@@ -140,13 +148,12 @@ def test_release_build_is_reproducible(
     second_directory = tmp_path / "second"
 
     first_artifact, _ = build(
-        version="12.0.0-test",
+        version="13.0.0-rc1-test",
         output_directory=first_directory,
     )
     second_artifact, _ = build(
-        version="12.0.0-test",
+        version="13.0.0-rc1-test",
         output_directory=second_directory,
     )
-
     assert first_artifact.read_bytes() == second_artifact.read_bytes()
     assert calculate_sha256(first_artifact) == calculate_sha256(second_artifact)

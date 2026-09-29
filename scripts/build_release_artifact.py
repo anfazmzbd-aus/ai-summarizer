@@ -18,7 +18,7 @@ ROOT_FILES = {
 
 ALLOWED_PREFIXES = (
     "app/",
-    "docs/v12/",
+    "docs/v13/",
     "static/",
 )
 
