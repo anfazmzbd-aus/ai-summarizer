@@ -1215,6 +1215,12 @@ body[data-ui-state="loading"] .input-metrics {
     font-size: var(--font-size-sm);
 }
 
+.result-details summary:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+
+    border-radius: var(--radius-sm);
+}
 
 /*
  * V13 M4 viewport-density refinement

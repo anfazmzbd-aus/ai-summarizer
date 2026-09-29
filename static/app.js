@@ -926,6 +926,16 @@ summaryForm.addEventListener(
             }
 
             const payload = await response.json();
+
+            if (
+                typeof payload.summary !== "string" ||
+                payload.summary.trim().length === 0
+            ) {
+                throw new Error(
+                    "The summarization response is invalid."
+                );
+            }
+
             const metadata = payload.metadata || {};
 
             summaryText.textContent = payload.summary;
