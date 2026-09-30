@@ -4,6 +4,69 @@ All notable changes to the AI Summarizer project will be documented in this file
 
 ---
 
+# V13.0.0 — Product Experience & Release Certification
+
+Status: Release certification in progress
+
+Current candidate: `13.0.0-rc1`
+
+Final publication: Pending V13 M9.8/M9.9 certification
+
+## Overview
+
+V13 turns the certified standalone architecture into a practical product experience without introducing a second summarization architecture. It preserves the canonical application, bounded-intelligence, V9 pipeline, and provider/runtime boundaries.
+
+## Added
+
+* Modern responsive product frontend and accessibility hardening.
+* Summary types: General, Executive, Key Points, Action Items, Findings, Insights, and Technical.
+* Summary lengths: Short, Medium, and Detailed.
+* Approved product-model catalogue and safe model selection.
+* Optional custom instructions.
+* TXT and PDF ingestion through a bounded extraction API.
+* Result workspace with copy, UTF-8 TXT download, regenerate, and collapsible processing details.
+* V13 product, integration, hardening, packaging, clean-install, browser, and controlled real-provider certification.
+
+## Changed
+
+* Product-facing documentation now identifies V13 as the active release program.
+* Release packaging includes current `docs/v13/` material and excludes historical V12 release documentation from the V13 artifact.
+* Successful HTTP 200 responses with missing/blank summary content are treated as failures rather than overwriting a valid result.
+* Result actions use explicit eligibility rules during loading, extraction, invalid input, and unavailable-model states.
+
+## Preserved Architecture
+
+```text
+Frontend / product API
+  -> canonical SummarizationApplication
+  -> bounded intelligence
+  -> existing V9 summarization pipeline
+  -> runtime/provider boundary
+  -> product-safe response + metadata
+```
+
+OpenRouter remains an OpenAI-compatible endpoint configuration using `AI_PROVIDER=openai`; `AI_PROVIDER=openrouter` is not introduced.
+
+## M9 Certification Status
+
+```text
+M9.1  Release Baseline & Certification Matrix        COMPLETE
+M9.2  Release Identity & Version Certification       COMPLETE
+M9.3  Final Functional / Regression Certification    COMPLETE
+M9.4  Packaging & Release Artifact Certification     CERTIFIED
+M9.5  Clean-Install / Runtime / Browser Certification CERTIFIED
+M9.6  Controlled Real-Provider Certification         CERTIFIED
+M9.7  Release Documentation & Operational Readiness  IN PROGRESS
+M9.8  Release Candidate Certification                PENDING
+M9.9  Final v13.0.0 Release                          PENDING
+```
+
+Latest M9.6 post-live offline regression: `5372 passed, 10 deselected`.
+
+Final `v13.0.0` publication remains pending M9.8/M9.9.
+
+---
+
 # V12.0.0 — Production Certification & Standalone Release
 
 Status: Release certification in progress

@@ -2,139 +2,69 @@
 
 AI Summarizer is a production-oriented FastAPI application for deterministic and provider-backed text summarization.
 
-The application combines a stable summarization pipeline, bounded intelligence, long-document strategies, provider abstraction, runtime reliability controls, and a web/API product surface.
-
 The current release program is:
 
 ```text
-V12.0.0 — Production Certification & Standalone Release
+V13.0.0 — Product Experience & Release Certification
+Current candidate identity: 13.0.0-rc1
 ```
 
-V12 is feature-frozen. Its purpose is to certify, secure, operationalize, document, package, and release the application architecture completed through V11.
-
-The final `v12.0.0` release is created only after V12 release-candidate and final-release certification complete.
-
----
+V13 preserves the certified canonical architecture established through V11 and production-certified in V12. It adds the practical product experience: summarization controls, approved model selection, TXT/PDF ingestion, result-workspace actions, accessibility hardening, and final V13 release certification.
 
 ## Supported Environment
 
-The certified runtime is:
-
-```text
-Python 3.11
-```
-
-V12 clean-install certification was performed with:
-
-```text
-Python 3.11.9
-```
-
-Python 3.14 is not part of the certified V12 runtime baseline.
-
----
+Certified runtime family: Python 3.11. V13 clean-install certification was performed with Python 3.11.9. Python 3.14 is not part of the certified V13 runtime baseline.
 
 ## Quick Start
 
 ### Windows PowerShell
 
-Create a clean virtual environment explicitly using Python 3.11:
-
 ```powershell
 py -3.11 -m venv .venv
-```
-
-Activate it:
-
-```powershell
 .\.venv\Scripts\Activate.ps1
-```
-
-Verify the interpreter:
-
-```powershell
 python --version
-```
-
-Expected:
-
-```text
-Python 3.11.x
-```
-
-Upgrade pip:
-
-```powershell
 python -m pip install --upgrade pip
-```
-
-Install runtime dependencies:
-
-```powershell
 pip install -r requirements.txt
-```
-
-Configure deterministic offline operation:
-
-```powershell
 $env:AI_PROVIDER = "fake"
 $env:OPENAI_MODEL = "demo"
-```
-
-Start the application:
-
-```powershell
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-Open:
+Open `http://127.0.0.1:8000/`. API documentation is available at `http://127.0.0.1:8000/docs`.
+
+## Product Surface
+
+V13 supports paste-text summarization and TXT/PDF file ingestion. Product controls include General, Executive, Key Points, Action Items, Findings, Insights, and Technical summary types; Short, Medium, and Detailed lengths; approved product-model selection; and optional custom instructions.
+
+The result workspace supports copy, UTF-8 TXT download, regenerate using the current source and controls, and collapsible processing details. File extraction never starts summarization automatically. Failed extraction preserves the current source, and failed regeneration/summarization preserves an existing successful result where applicable.
+
+V13 does not add history, accounts/authentication, persistence, DOCX ingestion, OCR, arbitrary provider selection, advanced analytics, or a second summarization pipeline.
+
+## Canonical Architecture
 
 ```text
-Application: http://127.0.0.1:8000/
-API documentation: http://127.0.0.1:8000/docs
+Frontend / product API
+  -> canonical SummarizationApplication
+  -> bounded intelligence
+  -> existing V9 summarization pipeline
+  -> runtime/provider boundary
+  -> product-safe response + metadata
 ```
 
-Stop the application with:
-
-```text
-Ctrl+C
-```
-
----
+`POST /api/v1/summarize` is the canonical summarization endpoint. File extraction rejoins this same summarization path; it does not create a parallel summarization implementation.
 
 ## Supported Providers
 
-The certified V12 application configuration supports:
+Certified `AI_PROVIDER` values are:
 
 ```text
 fake
 openai
 ```
 
-### `fake`
+`fake` is deterministic and intended for offline validation, smoke testing, demonstrations, and release certification.
 
-`fake` is the deterministic offline provider.
-
-It is suitable for:
-
-* installation validation,
-* smoke testing,
-* demonstrations,
-* local operation without external API access,
-* release certification.
-
-Example:
-
-```powershell
-$env:AI_PROVIDER = "fake"
-$env:OPENAI_MODEL = "demo"
-```
-
-### `openai`
-
-`openai` enables live OpenAI-compatible provider execution through the application's certified provider boundary.
-
-Example:
+For live OpenAI-compatible operation:
 
 ```powershell
 $env:AI_PROVIDER = "openai"
@@ -142,42 +72,9 @@ $env:OPENAI_API_KEY = "<your-api-key>"
 $env:OPENAI_MODEL = "<supported-model>"
 ```
 
-Optional configuration:
+Optional values are `OPENAI_BASE_URL` and `OPENAI_ORGANIZATION`.
 
-```powershell
-$env:OPENAI_BASE_URL = "<optional-compatible-endpoint>"
-$env:OPENAI_ORGANIZATION = "<optional-organization>"
-```
-
-Never commit real API keys or secrets to source control.
-
-See:
-
-```text
-docs/v12/CONFIGURATION.md
-```
-
-for the full configuration contract.
-
----
-
-## Configuration Variables
-
-The certified runtime configuration surface is:
-
-```text
-AI_PROVIDER
-OPENAI_API_KEY
-OPENAI_MODEL
-OPENAI_BASE_URL
-OPENAI_ORGANIZATION
-```
-
-### OpenRouter via the OpenAI-Compatible Endpoint
-
-OpenRouter can be used through the certified `openai` provider path by configuring its OpenAI-compatible API endpoint.
-
-Example:
+OpenRouter is supported as an OpenAI-compatible endpoint configuration, not as a separate provider value:
 
 ```powershell
 $env:AI_PROVIDER = "openai"
@@ -186,251 +83,62 @@ $env:OPENAI_BASE_URL = "https://openrouter.ai/api/v1"
 $env:OPENAI_MODEL = "<openrouter-model-identifier>"
 ```
 
-OpenRouter is therefore an endpoint configuration of the V12 `openai` provider path rather than a separate `AI_PROVIDER` value.
+Do not configure `AI_PROVIDER=openrouter`. Never commit API keys or other secrets.
 
-Do not configure:
+See `docs/v13/CONFIGURATION.md` for the complete configuration contract.
 
-```text
-AI_PROVIDER=openrouter
-```
+## File Ingestion
 
-unless a future certified release explicitly adds that provider value.
-
-
-The supplied:
-
-```text
-.env.example
-```
-
-is a configuration reference/template.
-
-The canonical V12 application does not require automatic `.env` loading for production startup. Set environment variables using your operating system, shell, process manager, deployment environment, or another approved secret/configuration mechanism.
-
----
-
-## Using the Application
-
-### Web interface
-
-Open:
-
-```text
-http://127.0.0.1:8000/
-```
-
-Enter text and submit it for summarization.
-
-### REST API
-
-Endpoint:
-
-```text
-POST /api/v1/summarize
-```
-
-Example PowerShell request:
-
-```powershell
-$body = @{
-    text = "AI Summarizer provides a certified standalone summarization application."
-    provider = "fake"
-    model = "demo"
-} | ConvertTo-Json
-
-Invoke-RestMethod `
-    -Uri http://127.0.0.1:8000/api/v1/summarize `
-    -Method Post `
-    -ContentType "application/json" `
-    -Body $body
-```
-
-A successful response contains the generated summary, model identity, token usage, and canonical execution metadata.
-
----
-
-## Installation Documentation
-
-For a complete clean-install procedure, see:
-
-```text
-docs/v12/INSTALLATION.md
-```
-
-The standalone release must not depend on:
-
-* the original development virtual environment,
-* developer-specific paths,
-* hidden local files,
-* IDE configuration,
-* undocumented environment variables,
-* historical project chat instructions,
-* undocumented manual fixes.
-
----
+V13 accepts TXT and PDF uploads up to 10 MiB through the certified extraction boundary. TXT content is decoded as UTF-8 with BOM handling and normalized before use. PDF extraction uses the certified PDF dependency; encrypted PDFs and PDFs without extractable text are rejected. DOCX and OCR are outside V13 scope.
 
 ## Production Startup
-
-The certified V12 production startup command is:
 
 ```powershell
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-The development reloader:
-
-```text
---reload
-```
-
-is intentionally not part of the certified production startup contract.
-
----
+`--reload` is a development option and is not part of the certified production startup contract.
 
 ## Validation
 
-After startup, validate the root application:
-
 ```powershell
-Invoke-WebRequest `
-    http://127.0.0.1:8000/ `
-    -UseBasicParsing
+Invoke-WebRequest http://127.0.0.1:8000/ -UseBasicParsing
+Invoke-WebRequest http://127.0.0.1:8000/docs -UseBasicParsing
 ```
 
-Expected:
+Expected status: HTTP 200.
 
-```text
-HTTP 200
-```
-
-Validate API documentation:
-
-```powershell
-Invoke-WebRequest `
-    http://127.0.0.1:8000/docs `
-    -UseBasicParsing
-```
-
-Expected:
-
-```text
-HTTP 200
-```
-
-Then execute a representative summarization request using the `fake` provider.
-
----
-
-## Testing
-
-Development and certification testing should be performed from the repository rather than from the minimal standalone runtime artifact.
-
-Run the standard non-live regression suite:
+Development/certification validation is run from the repository:
 
 ```powershell
 pytest -m "not live" -q
-```
-
-Run quality gates:
-
-```powershell
 pre-commit run --all-files
 git diff --check
 ```
 
-Live-provider tests remain separately controlled because they require external credentials and provider access.
-
----
+Live-provider tests are separately controlled and require explicit opt-in.
 
 ## Release Artifact
 
-The V12 standalone distribution format is a versioned source ZIP.
+The V13 standalone distribution is a deterministic versioned source ZIP with a SHA-256 checksum. Release-candidate naming is `ai-summarizer-v13.0.0-rc1.zip`; final naming is `ai-summarizer-v13.0.0.zip`.
 
-Final naming convention:
+The artifact contains runtime source, static assets, runtime dependencies, configuration template, and current V13 release documentation. Development/test state, credentials, caches, runtime databases, IDE state, historical release documentation, and other machine-local material are excluded by the release builder.
 
-```text
-ai-summarizer-v12.0.0.zip
-```
+## Documentation
 
-A SHA-256 checksum accompanies the certified distributable artifact.
+Authoritative current documentation is under `docs/v13/`:
 
-The release artifact contains the runtime source, required static assets, runtime dependency definition, configuration template, and current V12 release documentation while excluding development/runtime state that is not required by the standalone product.
+- `INSTALLATION.md`
+- `CONFIGURATION.md`
+- `OPERATIONS.md`
+- `TROUBLESHOOTING.md`
+- `RELEASE_NOTES.md`
+- `M9_CERTIFICATION_RECORD.md`
 
----
+Historical documentation under `docs/v10/`, `docs/v11/`, and `docs/v12/` remains historical evidence and must not be rewritten as current V13 documentation.
 
-## Release Documentation
+## Current Release Status
 
-Authoritative V12 production documentation is maintained under:
+M1 through M8 are frozen. M9.1 through M9.7 are complete/certified. M9.8 release-candidate certification is next, followed by M9.9 final `v13.0.0` release.
 
-```text
-docs/v12/
-```
-
-Key documents include:
-
-```text
-INSTALLATION.md
-CONFIGURATION.md
-OPERATIONS.md
-TROUBLESHOOTING.md
-RELEASE_NOTES.md
-```
-
-Certification and governance records in the same directory provide auditable production-readiness evidence.
-
----
-
-## Architecture and Scope
-
-The canonical application architecture established in V11 is frozen during V12.
-
-V12 does not introduce new:
-
-* summarization architecture,
-* provider architecture,
-* bounded-intelligence architecture,
-* application boundaries,
-* orchestration architecture,
-* product features,
-* UI expansion,
-* experimental integrations.
-
-V12 work is limited to production stabilization, security, operational readiness, packaging, documentation, certification, and release integrity.
-
----
-
-## Current Certification Status
-
-Completed:
-
-```text
-M1 — Baseline & Release-Candidate Governance
-M2 — Production Stabilization & Regression Certification
-M3 — Security & Operational Certification
-M4 — Production Deployment & Standalone Packaging
-```
-
-Current:
-
-```text
-M5 — Documentation & Release Readiness
-```
-
-Remaining before final release:
-
-```
-
-Release-candidate certification is complete at `v12.0.0-rc1`.
-
-Remaining before final release:
-
-- M7 — Final V12.0.0 Production Release
-
-The final `v12.0.0` tag and standalone artifact are created only after M7 final-release certification completes.
-```
-
----
-
-## License
-
-See the repository license file for the applicable project license terms.
+No final `v13.0.0` release claim should be made until M9.8 and M9.9 complete.

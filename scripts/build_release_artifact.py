@@ -160,7 +160,7 @@ def main() -> None:
     parser.add_argument(
         "--version",
         required=True,
-        help="Release version, for example 12.0.0-m5",
+        help="Release version, for example 13.0.0-rc1",
     )
 
     parser.add_argument(
