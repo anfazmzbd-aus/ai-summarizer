@@ -24,7 +24,7 @@ Release-candidate identity/packaging checkpoint commit: `0ef2b7f95a6e4f65e9a7376
 
 ## M9.5 — Clean-Install / Runtime / Browser Certification
 
-Status: CERTIFIED. The RC artifact was extracted into a clean location and installed into a fresh Python 3.11.9 virtual environment. `pip check` reported no broken requirements. Application identity was `13.0.0-rc1`. Direct `app` import and FastAPI application import passed. Packaged startup passed. `/`, `/docs`, and `/api/v1/product-config` returned successfully. Browser certification, TXT ingestion, and PDF ingestion passed. An initial runtime-validator failure was transient/nonreproducible; the exact command subsequently passed along with direct imports, packaged startup and HTTP validation, so no release defect was classified.
+Status: CERTIFIED. The RC artifact was extracted into a clean location and installed into a fresh Python 3.11.9 virtual environment. `pip check` reported no broken requirements. Application identity was `13.0.0-rc1`. Direct `app` import and FastAPI application import passed. Packaged startup passed. `/`, `/docs`, and `/api/v1/product-config` returned successfully. Browser certification, TXT ingestion, and PDF ingestion passed. An initial runtime-validator failure appeared nonreproducible during M9.5 and no defect was classified at that stage. M9.8 later reproduced the standalone-script failure conclusively in a fresh artifact, classified it as `RUNTIME-V13-001`, corrected it, added regression protection, and recertified the corrected packaged validator.
 
 ## M9.6 — Controlled Real-Provider Certification
 
@@ -36,9 +36,23 @@ Status: COMPLETE. Active product documentation has been migrated to V13 while hi
 
 Because documentation is part of the release artifact, M9.7 invalidates the previous RC ZIP/checksum as final RC evidence. M9.8 must rebuild the RC artifact, establish a new deterministic checksum, rerun relevant packaging/clean-artifact smoke validation, and certify the exact candidate.
 
-## Remaining
+## M9.8 — Release Candidate Certification
 
-M9.8 — Release Candidate Certification: PENDING.
+Status: CERTIFIED. The post-M9.7 RC was rebuilt from the documented source state and subjected to deterministic packaging, artifact-boundary, clean-install, runtime, HTTP/API, file-ingestion, and browser certification.
+
+During clean-artifact certification, `RUNTIME-V13-001` was conclusively reproduced: direct execution of `python scripts/validate_runtime.py` failed because the standalone script did not establish the project root on `sys.path`. The finding was classified P1 release-blocking. The validator was corrected to derive the project root from its own file location and regression coverage was added. Correction commit: `906dabdf44bb3994bfcd15f158b2d0debf4967d9`.
+
+Post-correction validation passed: runtime-validator regression 1 passed; release suite 31 passed; full non-live regression 5373 passed with 10 live tests deselected; pre-commit passed; and `git diff --check` passed. Two independent corrected RC builds were byte-for-byte identical with SHA-256 `F2AB3A94284DB9B49F2B551DB32170B026FAA126CBB38CA1602CB3AE04485B98`.
+
+The corrected artifact contained 495 normalized release entries, with zero entries outside the expected release root, zero historical V12 documentation entries, zero prohibited-content findings, and zero missing required files. The preserved artifact copy matched the build SHA-256 exactly.
+
+The corrected artifact was then extracted into a fresh location and installed into a fresh production virtual environment. `pip check` reported no broken requirements. Packaged identity was `13.0.0-rc1`. Direct `app` import, FastAPI import, standalone runtime validation, and runtime validation from outside the release working directory with `PYTHONPATH` removed all passed. `/` and `/docs` returned HTTP 200. `/api/v1/product-config` exposed only product-safe model fields. Canonical fake-provider summarization returned a nonblank result. TXT extraction passed. PDF extraction passed with nonblank extracted text from a 32-page PDF. Browser certification passed.
+
+`RUNTIME-V13-001` is CLOSED. Open P0/P1 release findings from M9.8: zero.
+
+The SHA-256 above identifies the corrected M9.8 validation artifact. Because this certification record is itself packaged release content, this documentation-only M9.8 update necessarily changes the subsequent RC artifact hash. The final documented RC must therefore be rebuilt deterministically and its exact artifact identity and release boundary reverified before the RC tag is created. No application/runtime behavior is changed by this documentation update.
+
+## Remaining
 
 M9.9 — Final v13.0.0 Release & Remote Verification: PENDING.
 

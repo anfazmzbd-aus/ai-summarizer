@@ -53,7 +53,7 @@ Latest post-live non-live regression: `5372 passed, 10 deselected`.
 
 ## Distribution
 
-Release candidate: `ai-summarizer-v13.0.0-rc1.zip`. Final release: `ai-summarizer-v13.0.0.zip`. Certified artifacts are accompanied by SHA-256 checksums. The final RC artifact/checksum will be rebuilt after M9.7 documentation changes and certified during M9.8.
+Release candidate: `ai-summarizer-v13.0.0-rc1.zip`. Final release: `ai-summarizer-v13.0.0.zip`. Certified artifacts are accompanied by SHA-256 checksums. M9.8 candidate validation is complete. The documented RC artifact/checksum is rebuilt after the M9.8 certification-record update and its exact identity is reverified before the RC tag is created.
 
 ## Scope Boundaries
 
@@ -61,4 +61,4 @@ V13 does not add DOCX/OCR, history, accounts/authentication, persistence, advanc
 
 ## Status
 
-M9.7 is complete. M9.8 release-candidate certification is next. M9.9 final `v13.0.0` publication remains pending. No final-release claim is valid until M9.8 and M9.9 complete.
+M9.8 release-candidate validation is complete. The documented RC artifact must be rebuilt and its exact identity reverified before the RC tag is created. M9.9 final `v13.0.0` publication remains pending. No final-release claim is valid until M9.9 completes.
