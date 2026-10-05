@@ -2,7 +2,8 @@
 
 Status: IN PROGRESS
 
-Application identity during M9.2-M9.8: `13.0.0-rc1`
+Application identity during M9.2-M9.8: `13.0.0-rc1`.
+Application identity during M9.9 final certification: `13.0.0`.
 
 ## M9.1 — Release Baseline & Certification Matrix
 
@@ -52,8 +53,8 @@ The corrected artifact was then extracted into a fresh location and installed in
 
 The SHA-256 above identifies the corrected M9.8 validation artifact. Because this certification record is itself packaged release content, this documentation-only M9.8 update necessarily changes the subsequent RC artifact hash. The final documented RC must therefore be rebuilt deterministically and its exact artifact identity and release boundary reverified before the RC tag is created. No application/runtime behavior is changed by this documentation update.
 
-## Remaining
+## M9.9 — Final v13.0.0 Release & Remote Verification
 
-M9.9 — Final v13.0.0 Release & Remote Verification: PENDING.
+Status: IN PROGRESS. M9.9 begins from the certified `v13.0.0-rc1` source/tag identity at commit `37859f241349a06edf0aa59f37e2f77873798114`. The active application identity is promoted to final `13.0.0` for final artifact, runtime, release, and remote-identity certification. Final publication has not yet occurred.
 
 Final identity requirement: local HEAD = local `v13.0.0^{}` = remote `main` = remote `v13.0.0^{}`, with all mandatory release gates passing, P0/P1 findings zero, and architecture exceptions zero.

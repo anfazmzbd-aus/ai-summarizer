@@ -1,4 +1,4 @@
-"""V13 M9.2 release identity certification."""
+"""V13 M9.9 final release identity certification."""
 
 from pathlib import Path
 
@@ -16,14 +16,20 @@ def read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
-def test_application_release_candidate_identity():
-    assert __version__ == "13.0.0-rc1"
+def test_application_final_release_identity():
+    assert __version__ == "13.0.0"
 
 
-def test_version_module_contains_release_candidate_identity():
+def test_version_module_contains_final_release_identity():
     content = read(VERSION_FILE)
 
-    assert '__version__ = "13.0.0-rc1"' in content
+    assert '__version__ = "13.0.0"' in content
+
+
+def test_version_module_has_no_active_release_candidate_identity():
+    content = read(VERSION_FILE)
+
+    assert '__version__ = "13.0.0-rc1"' not in content
 
 
 def test_version_module_has_no_active_v12_identity():
@@ -57,13 +63,9 @@ def test_release_builder_requires_version_argument():
     assert '"--version"' in source
 
 
-def test_release_candidate_identity_is_not_final_release_identity():
-    assert __version__ != "13.0.0"
+def test_final_release_identity_has_no_rc_suffix():
+    assert "-rc" not in __version__
 
 
-def test_release_identity_has_no_milestone_suffix():
+def test_final_release_identity_has_no_milestone_suffix():
     assert "-m" not in __version__
-
-
-def test_release_candidate_uses_rc1_suffix():
-    assert __version__.endswith("-rc1")

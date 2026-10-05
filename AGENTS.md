@@ -11,7 +11,7 @@ Frozen major baselines:
 - V12.0.0 — Production Certification / Standalone Release — COMPLETE and FROZEN
 - V13.0.0 — Product Experience & Release Certification — IN PROGRESS
 
-Current application identity during M9.2-M9.8: `13.0.0-rc1`. Final identity becomes `13.0.0` only during M9.9 after final certification.
+The certified M9.2-M9.8 release-candidate identity is `13.0.0-rc1`. During M9.9 the active application identity is `13.0.0` while final artifact and remote release certification are completed.
 
 ## Current authoritative repository state
 
@@ -58,7 +58,7 @@ Deferred/excluded: DOCX, OCR, history, authentication/accounts, persistence, adv
 
 ## Current milestone
 
-M9.1-M9.7 are complete/certified. M9.8 Release Candidate Certification is current. M9.9 Final v13.0.0 Release remains pending. No new features are permitted in M9.
+M9.1-M9.8 are complete/certified. M9.9 Final v13.0.0 Release & Remote Verification is current. No new features are permitted in M9.
 
 Any source change after certification evidence requires defect classification, the smallest correction, affected certification rerun, full non-live regression, and recertification.
 
@@ -75,7 +75,7 @@ git status
 
 Live tests remain explicitly marked `live` and require deliberate `--run-live`/approved execution. Do not spend provider credits during routine validation.
 
-Latest post-M9.6 non-live baseline: `5372 passed, 10 deselected`.
+Latest M9.8 non-live baseline: `5373 passed, 10 deselected`.
 
 ## Python environment
 

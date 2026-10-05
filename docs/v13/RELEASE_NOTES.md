@@ -5,9 +5,9 @@
 ```text
 Product: AI Summarizer
 Release: V13.0.0
-Current candidate identity: 13.0.0-rc1
-Current phase: M9.8 — Release Candidate Certification
-Final release status: NOT YET PUBLISHED
+Current release identity: 13.0.0
+Current phase: M9.9 — Final v13.0.0 Release & Remote Verification
+Final release status: CERTIFICATION IN PROGRESS
 ```
 
 V13 converts the certified standalone application into a practical, polished user product while preserving the canonical architecture established through V11 and certified in V12.
@@ -61,4 +61,4 @@ V13 does not add DOCX/OCR, history, accounts/authentication, persistence, advanc
 
 ## Status
 
-M9.8 release-candidate validation is complete. The documented RC artifact must be rebuilt and its exact identity reverified before the RC tag is created. M9.9 final `v13.0.0` publication remains pending. No final-release claim is valid until M9.9 completes.
+M9.8 release-candidate certification is complete and the certified `v13.0.0-rc1` tag is frozen. M9.9 final `v13.0.0` release certification is in progress. Final publication remains pending exact final-artifact certification and local/remote final-tag verification.

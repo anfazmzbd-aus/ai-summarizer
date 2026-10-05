@@ -6,7 +6,7 @@ The current release program is:
 
 ```text
 V13.0.0 — Product Experience & Release Certification
-Current candidate identity: 13.0.0-rc1
+Current release identity: 13.0.0
 ```
 
 V13 preserves the certified canonical architecture established through V11 and production-certified in V12. It adds the practical product experience: summarization controls, approved model selection, TXT/PDF ingestion, result-workspace actions, accessibility hardening, and final V13 release certification.
@@ -139,6 +139,6 @@ Historical documentation under `docs/v10/`, `docs/v11/`, and `docs/v12/` remains
 
 ## Current Release Status
 
-M1 through M8 are frozen. M9.1 through M9.7 are complete/certified. M9.8 release-candidate certification is next, followed by M9.9 final `v13.0.0` release.
+M1 through M8 are frozen. M9.1 through M9.8 are complete/certified. M9.9 final `v13.0.0` release certification is in progress.
 
-No final `v13.0.0` release claim should be made until M9.8 and M9.9 complete.
+Application identity is `13.0.0`, but final publication is not complete until the M9.9 final artifact and local/remote release identity are certified.
