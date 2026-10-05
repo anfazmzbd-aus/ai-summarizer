@@ -6,11 +6,11 @@ All notable changes to the AI Summarizer project will be documented in this file
 
 # V13.0.0 — Product Experience & Release Certification
 
-Status: Final release certification in progress
+Status: Pre-publication certification complete
 
 Current identity: `13.0.0`
 
-Final publication: Pending V13 M9.9 artifact and remote identity certification
+Final publication: Pending exact final artifact certification and local/remote v13.0.0 identity verification
 
 ## Overview
 
@@ -58,12 +58,12 @@ M9.5  Clean-Install / Runtime / Browser Certification CERTIFIED
 M9.6  Controlled Real-Provider Certification         CERTIFIED
 M9.7  Release Documentation & Operational Readiness  COMPLETE
 M9.8  Release Candidate Certification                CERTIFIED
-M9.9  Final v13.0.0 Release                          IN PROGRESS
+M9.9  Final v13.0.0 Release                          PRE-PUBLICATION CERTIFIED
 ```
 
-Latest M9.8 full non-live regression: `5373 passed, 10 deselected`.
+Latest M9.9 full non-live regression: `5373 passed, 10 deselected`.
 
-Final `v13.0.0` publication remains pending M9.9 final artifact and remote identity certification.
+M9.9 pre-publication validation is complete. Final `v13.0.0` publication remains pending the exact documented artifact rebuild, final packaged verification, annotated final tag, push, and remote identity verification.
 
 ---
 

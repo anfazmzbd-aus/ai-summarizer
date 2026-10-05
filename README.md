@@ -139,6 +139,6 @@ Historical documentation under `docs/v10/`, `docs/v11/`, and `docs/v12/` remains
 
 ## Current Release Status
 
-M1 through M8 are frozen. M9.1 through M9.8 are complete/certified. M9.9 final `v13.0.0` release certification is in progress.
+M1 through M8 are frozen. M9.1 through M9.8 are complete/certified. M9.9 final `v13.0.0` pre-publication certification is complete.
 
-Application identity is `13.0.0`, but final publication is not complete until the M9.9 final artifact and local/remote release identity are certified.
+Application identity is `13.0.0`. Pre-publication validation is complete; final publication remains pending the exact final artifact rebuild, final packaged verification, annotated `v13.0.0` tag, and local/remote release-identity verification.

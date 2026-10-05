@@ -55,6 +55,22 @@ The SHA-256 above identifies the corrected M9.8 validation artifact. Because thi
 
 ## M9.9 — Final v13.0.0 Release & Remote Verification
 
-Status: IN PROGRESS. M9.9 begins from the certified `v13.0.0-rc1` source/tag identity at commit `37859f241349a06edf0aa59f37e2f77873798114`. The active application identity is promoted to final `13.0.0` for final artifact, runtime, release, and remote-identity certification. Final publication has not yet occurred.
+Status: PRE-PUBLICATION CERTIFIED. M9.9 began from the certified `v13.0.0-rc1` source/tag identity at commit `37859f241349a06edf0aa59f37e2f77873798114`. Final application identity `13.0.0` was established at source checkpoint commit `72ca5722c154911e7a6120dc96e1b561584d61e8`.
+
+The M9.9 validation artifact was built twice from that checkpoint and was byte-for-byte deterministic. SHA-256: `828760DA37ED6B5A3ED742C6210758A1E6A66AB451702A85377EEADAD17CC975`. The archive contained 495 entries with zero paths outside the expected release root, zero historical V12 release documentation, zero prohibited content, and zero missing required release files. An exact validation copy was preserved outside the repository and its SHA-256 was independently reverified.
+
+The validation artifact was extracted into a fresh location and installed into a fresh production virtual environment. `pip check` reported no broken requirements. Packaged application identity was `13.0.0`. Direct `app` import, FastAPI import, standalone runtime validation, and runtime validation from outside the release working directory with `PYTHONPATH` removed all passed.
+
+Packaged Uvicorn startup passed. `/` and `/docs` returned HTTP 200. `/api/v1/product-config` exposed only the approved public product-model fields and exactly one default model. Canonical fake-provider summarization returned a nonblank result with the expected packaged runtime metadata.
+
+TXT extraction passed through the public multipart extraction boundary. PDF extraction passed using the known-good `AIForAll-Week8.pdf` certification fixture with 32 pages and nonblank extracted text.
+
+Packaged browser certification passed for application load/version, paste-and-summarize, result workspace and console sanity, Copy, UTF-8 TXT Download, Regenerate, Processing details, TXT browser upload, PDF browser upload, responsive behavior, focus visibility, and product sanity. The certification server was then cleanly stopped.
+
+M9.9 release identity tests passed: 11 tests. Release regression passed: 31 tests. Full non-live regression passed: `5373 passed, 10 deselected`. Pre-commit passed and `git diff --check` passed. Open P0/P1 release findings: zero. New architecture exceptions: zero.
+
+The SHA-256 above identifies the immutable M9.9 pre-publication validation artifact. Because this certification record and the associated release-status documentation are themselves packaged release content, this documentation-only checkpoint necessarily changes the subsequent final artifact hash. The exact final distributable must therefore be rebuilt deterministically from the documentation checkpoint, its release boundary and packaged runtime reverified, and its exact SHA-256 preserved before the final `v13.0.0` tag is created.
+
+Final publication has not yet occurred. Publication requires the exact final artifact certification, annotated `v13.0.0` tag creation, push of `main` and the final tag, and verification that local HEAD, local final-tag dereference, remote `main`, and remote final-tag dereference all identify the same certified commit.
 
 Final identity requirement: local HEAD = local `v13.0.0^{}` = remote `main` = remote `v13.0.0^{}`, with all mandatory release gates passing, P0/P1 findings zero, and architecture exceptions zero.

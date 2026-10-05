@@ -58,7 +58,7 @@ Deferred/excluded: DOCX, OCR, history, authentication/accounts, persistence, adv
 
 ## Current milestone
 
-M9.1-M9.8 are complete/certified. M9.9 Final v13.0.0 Release & Remote Verification is current. No new features are permitted in M9.
+M9.1-M9.8 are complete/certified. M9.9 pre-publication certification is complete; exact final artifact and local/remote v13.0.0 release-identity certification remain. No new features are permitted in M9.
 
 Any source change after certification evidence requires defect classification, the smallest correction, affected certification rerun, full non-live regression, and recertification.
 
@@ -75,7 +75,7 @@ git status
 
 Live tests remain explicitly marked `live` and require deliberate `--run-live`/approved execution. Do not spend provider credits during routine validation.
 
-Latest M9.8 non-live baseline: `5373 passed, 10 deselected`.
+Latest M9.9 non-live baseline: `5373 passed, 10 deselected`.
 
 ## Python environment
 
